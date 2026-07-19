@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
+import CourseDetail from './pages/CourseDetail';
+import Watch from './pages/Watch';
 import Settings from './pages/Settings';
 import Offline from './pages/Offline';
 import { BookOpen, Settings as SettingsIcon, WifiOff } from 'lucide-react';
@@ -40,6 +42,8 @@ export default function App() {
         <main className="flex-1 overflow-y-auto">
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/courses/:courseId" element={<CourseDetail />} />
+            <Route path="/courses/:courseId/lessons/:lessonId" element={<Watch />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/offline" element={<Offline />} />
             <Route path="*" element={<Dashboard />} />
