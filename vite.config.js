@@ -15,15 +15,17 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+      includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png', 'logo.png', 'logo.svg'],
       manifest: {
-        name: 'FocusFlow Personal Learning',
+        name: 'FocusFlow — Personal Learning',
         short_name: 'FocusFlow',
-        description: 'Distraction-free, local-first learning PWA dashboard',
-        theme_color: '#09090b',
+        description: 'Distraction-free, local-first personal learning dashboard',
+        theme_color: '#d97736',
         background_color: '#09090b',
         display: 'standalone',
-        orientation: 'portrait',
+        start_url: '/',
+        scope: '/',
+        orientation: 'any',
         icons: [
           {
             src: 'pwa-192x192.png',

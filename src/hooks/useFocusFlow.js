@@ -143,8 +143,33 @@ export function useFocusFlow() {
       lessonId,
       completed,
       watchTime: Math.round(seconds),
-      lastWatched: now
+      lastWatched: now,
+      updatedAt: now
     });
+  }
+
+  /**
+   * Finds the most recently watched lesson for a specific course.
+   * Used to enable YouTube-style per-catalog "resume" tracking.
+   * @param {string} courseId Course ID.
+   * @returns {Promise<{lessonId: string} | null>}
+   */
+  async function getLastWatchedLesson(courseId) {
+    const lastProgress = await db.progress
+      .where('courseId')
+      .equals(courseId)
+      .filter(p => (p.watchTime || 0) > 0)
+      .sortBy('lastWatched');
+
+    if (lastProgress && lastProgress.length > 0) {
+      // Most recent is last after sortBy
+      const last = lastProgress[lastProgress.length - 1];
+      if (!last.completed) {
+        return { lessonId: last.lessonId, watchTime: last.watchTime };
+      }
+      // If completed, find first incomplete instead
+    }
+    return null;
   }
 
   /**
@@ -168,6 +193,7 @@ export function useFocusFlow() {
     isInitializing,
     getCourseProgress,
     getContinueLearningPath,
+    getLastWatchedLesson,
     saveProgress,
     importCourse,
     resetDatabase: () => db.resetDatabase(),

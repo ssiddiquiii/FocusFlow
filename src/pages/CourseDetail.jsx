@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useFocusFlow } from '../hooks/useFocusFlow';
-import { ArrowLeft, Play, CheckCircle2, Circle, Clock } from 'lucide-react';
+import { ArrowLeft, Play, CheckCircle2, Circle, Clock, RotateCcw } from 'lucide-react';
 import { buttonVariants } from '../components/ui/button';
 
 /**
@@ -12,10 +12,11 @@ import { buttonVariants } from '../components/ui/button';
 export default function CourseDetail() {
   const { courseId } = useParams();
   const navigate = useNavigate();
-  const { courses, lessons, progressList, getCourseProgress } = useFocusFlow();
+  const { courses, lessons, progressList, getCourseProgress, getLastWatchedLesson } = useFocusFlow();
 
   const [courseProgress, setCourseProgress] = useState(0);
   const [expandedDesc, setExpandedDesc] = useState(false);
+  const [lastWatched, setLastWatched] = useState(null);
 
   // Retrieve matching course
   const course = courses.find(c => c.id === courseId);
@@ -27,6 +28,7 @@ export default function CourseDetail() {
   useEffect(() => {
     if (courseId) {
       getCourseProgress(courseId).then(progress => setCourseProgress(progress));
+      getLastWatchedLesson(courseId).then(lw => setLastWatched(lw));
     }
   }, [courseId, progressList]);
 
@@ -39,11 +41,16 @@ export default function CourseDetail() {
     );
   }
 
-  // Find the first uncompleted lesson to "Resume"
-  const firstIncompleteLesson = courseLessons.find(lesson => {
-    const progress = progressList.find(p => p.id === `${courseId}_${lesson.id}`);
-    return !progress || !progress.completed;
-  }) || courseLessons[0];
+  // Resume target: last in-progress video first, then first incomplete, then first lesson
+  const resumeLesson = (() => {
+    if (lastWatched) {
+      return courseLessons.find(l => l.id === lastWatched.lessonId);
+    }
+    return courseLessons.find(lesson => {
+      const progress = progressList.find(p => p.id === `${courseId}_${lesson.id}`);
+      return !progress || !progress.completed;
+    }) || courseLessons[0];
+  })();
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
@@ -85,13 +92,13 @@ export default function CourseDetail() {
         </div>
 
         {/* Continue Learning Button */}
-        {firstIncompleteLesson && (
+        {resumeLesson && (
           <button
-            onClick={() => navigate(`/courses/${courseId}/lessons/${firstIncompleteLesson.id}`)}
+            onClick={() => navigate(`/courses/${courseId}/lessons/${resumeLesson.id}`)}
             className="w-full md:w-auto px-6 py-4 rounded-xl font-semibold bg-gradient-to-r from-primary to-accent hover:opacity-90 active:scale-95 transition text-white shadow-lg shadow-primary/25 flex items-center justify-center gap-3"
           >
-            <Play size={18} fill="currentColor" />
-            <span>{courseProgress > 0 ? 'Resume Course' : 'Start Course'}</span>
+            {lastWatched ? <RotateCcw size={18} /> : <Play size={18} fill="currentColor" />}
+            <span>{lastWatched ? 'Resume Last Video' : courseProgress > 0 ? 'Resume Course' : 'Start Course'}</span>
           </button>
         )}
       </div>
@@ -129,11 +136,16 @@ export default function CourseDetail() {
             const progress = progressList.find(p => p.id === `${courseId}_${lesson.id}`);
             const isCompleted = progress ? progress.completed : false;
 
+            const isLastWatched = lastWatched && lesson.id === lastWatched.lessonId;
+            const watchTimePercent = isLastWatched && lesson.durationSeconds > 0
+              ? Math.round((lastWatched.watchTime / lesson.durationSeconds) * 100)
+              : null;
+
             return (
               <Link 
                 key={lesson.id}
                 to={`/courses/${courseId}/lessons/${lesson.id}`}
-                className="py-4 px-3 flex items-center justify-between hover:bg-zinc-900/50 transition group rounded-lg"
+                className={`py-4 px-3 flex items-center justify-between hover:bg-zinc-900/50 transition group rounded-lg ${isLastWatched ? 'bg-primary/5 border border-primary/20' : ''}`}
               >
                 <div className="flex items-center gap-4">
                   {/* Status Indicator */}
@@ -150,10 +162,19 @@ export default function CourseDetail() {
                     <span className="text-sm font-medium text-zinc-200 group-hover:text-white transition">
                       {lesson.title}
                     </span>
+                    {/* In-progress mini progress bar */}
+                    {isLastWatched && watchTimePercent !== null && (
+                      <div className="mt-1.5 w-32 h-1 bg-zinc-800 rounded-full overflow-hidden">
+                        <div className="h-full bg-primary rounded-full" style={{ width: `${watchTimePercent}%` }} />
+                      </div>
+                    )}
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4 text-zinc-500 text-xs">
+                  {isLastWatched && (
+                    <span className="text-[10px] font-bold text-primary uppercase tracking-wider">In Progress</span>
+                  )}
                   <span className="flex items-center gap-1">
                     <Clock size={12} />
                     <span>{lesson.duration}</span>

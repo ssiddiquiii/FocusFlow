@@ -11,7 +11,7 @@ export const useUIStore = create((set) => ({
   seekRequestTime: null, // Set to a timestamp in seconds to trigger player seek
   
   // Sidebar collapsed state
-  sidebarCollapsed: false,
+  sidebarCollapsed: true,
   
   // Importer state
   isImporting: false,

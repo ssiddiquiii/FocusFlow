@@ -152,7 +152,7 @@ export default function Dashboard() {
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
-                  <span className="absolute bottom-4 left-4 px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase rounded bg-black/60 text-zinc-300 border border-zinc-700/50">
+                  <span className="absolute bottom-6 left-6 px-1.5 py-0.5 text-[9px] font-bold tracking-widest uppercase rounded bg-black/70 text-zinc-300 border border-zinc-700/50 shadow-md">
                     {course.type === 'youtube' ? 'YouTube' : 'Udemy'}
                   </span>
                 </div>

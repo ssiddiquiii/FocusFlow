@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useFocusFlow } from '../hooks/useFocusFlow';
 import { useUIStore } from '../hooks/useUIStore';
-import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX, Gauge } from 'lucide-react';
+import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX, Gauge, Type } from 'lucide-react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/FocusFlowDB';
 
@@ -56,6 +56,11 @@ export default function Watch() {
   const [playerMuted, setPlayerMuted] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [captionsEnabled, setCaptionsEnabled] = useState(false);
+  
+  // Auto-hide controls state
+  const [isControlsVisible, setIsControlsVisible] = useState(true);
+  const mouseTimerRef = useRef(null);
 
   // Retrieve course and lesson metadata
   const course = courses.find(c => c.id === courseId);
@@ -110,12 +115,28 @@ export default function Watch() {
     const currentProgress = progressList.find(p => p.id === `${courseId}_${lessonId}`);
     const resumeSeconds = currentProgress && !currentProgress.completed ? Math.max(0, currentProgress.watchTime - 2) : 0;
 
+    const forceCaptionsOff = (player) => {
+      try {
+        player.unloadModule('captions');
+        player.unloadModule('cc');
+        player.setOption('captions', 'track', {});
+        player.setOption('captions', 'reload', true);
+      } catch (_) {}
+      setCaptionsEnabled(false);
+    };
+
     const onPlayerReady = (event) => {
       const player = event.target;
       setYtPlayer(player);
       setPlayerDuration(player.getDuration());
       setPlayerMuted(player.isMuted());
       player.setPlaybackRate(playbackSpeed);
+
+      // Force captions OFF immediately
+      forceCaptionsOff(player);
+      // Also force off after a short delay (YouTube sometimes re-enables after ready)
+      setTimeout(() => forceCaptionsOff(player), 500);
+      setTimeout(() => forceCaptionsOff(player), 1500);
 
       player.seekTo(resumeSeconds, true);
       player.playVideo();
@@ -154,6 +175,8 @@ export default function Watch() {
       if (state === window.YT.PlayerState.PLAYING) {
         setIsPlaying(true);
         startProgressTracking(event.target);
+        // Force captions off again when playback actually starts
+        forceCaptionsOff(event.target);
       } else {
         setIsPlaying(false);
         stopProgressTracking();
@@ -222,6 +245,78 @@ export default function Watch() {
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
 
+  // Keyboard controls
+  useEffect(() => {
+    if (!isPlayerTriggered) return;
+
+    const handleKeyDown = (e) => {
+      // Don't hijack shortcuts when user is typing in inputs/textareas
+      const tag = e.target.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+
+      switch (e.key) {
+        case ' ':
+        case 'k':
+        case 'K':
+          e.preventDefault();
+          if (ytPlayer) {
+            if (isPlaying) ytPlayer.pauseVideo();
+            else ytPlayer.playVideo();
+          }
+          break;
+        case 'ArrowLeft':
+        case 'j':
+        case 'J':
+          e.preventDefault();
+          if (ytPlayer) {
+            const t = Math.max(0, ytPlayer.getCurrentTime() - 5);
+            ytPlayer.seekTo(t, true);
+            setPlayerCurrentTime(t);
+          }
+          break;
+        case 'ArrowRight':
+        case 'l':
+        case 'L':
+          e.preventDefault();
+          if (ytPlayer) {
+            const t = Math.min(playerDuration, ytPlayer.getCurrentTime() + 5);
+            ytPlayer.seekTo(t, true);
+            setPlayerCurrentTime(t);
+          }
+          break;
+        case 'm':
+        case 'M':
+          e.preventDefault();
+          if (ytPlayer) {
+            if (playerMuted) { ytPlayer.unMute(); setPlayerMuted(false); }
+            else { ytPlayer.mute(); setPlayerMuted(true); }
+          }
+          break;
+        case 'f':
+        case 'F':
+          e.preventDefault();
+          if (playerContainerRef.current) {
+            if (!document.fullscreenElement) playerContainerRef.current.requestFullscreen();
+            else document.exitFullscreen();
+          }
+          break;
+        case 'c':
+        case 'C':
+          e.preventDefault();
+          if (ytPlayer) {
+            if (captionsEnabled) { ytPlayer.unloadModule('captions'); setCaptionsEnabled(false); }
+            else { ytPlayer.loadModule('captions'); setCaptionsEnabled(true); }
+          }
+          break;
+        default:
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [ytPlayer, isPlaying, playerMuted, playerDuration, captionsEnabled, isPlayerTriggered]);
+
   if (!lesson || !course) {
     return (
       <div className="p-8 text-center">
@@ -276,6 +371,32 @@ export default function Watch() {
     } else {
       document.exitFullscreen();
     }
+  };
+
+  // Toggle CC (Captions)
+  const handleCCToggle = () => {
+    if (!ytPlayer) return;
+    if (captionsEnabled) {
+      ytPlayer.unloadModule('captions');
+      setCaptionsEnabled(false);
+    } else {
+      ytPlayer.loadModule('captions');
+      setCaptionsEnabled(true);
+    }
+  };
+
+  // Mouse idle detection for controls — hide quickly when mouse stops
+  const handleMouseMove = () => {
+    setIsControlsVisible(true);
+    if (mouseTimerRef.current) clearTimeout(mouseTimerRef.current);
+    mouseTimerRef.current = setTimeout(() => {
+      if (isPlaying) setIsControlsVisible(false);
+    }, 800);
+  };
+
+  const handleMouseLeave = () => {
+    if (mouseTimerRef.current) clearTimeout(mouseTimerRef.current);
+    if (isPlaying) setIsControlsVisible(false);
   };
 
   // Click seek timeline
@@ -347,11 +468,14 @@ export default function Watch() {
           </div>
         </div>
 
-        {/* Player Container: STRICT 16:9 ASPECT-RATIO WITH ZERO VERTICAL BLACK BARS */}
-        <div 
-          ref={playerContainerRef} 
-          className="w-full aspect-video relative bg-black flex-shrink-0 group/player border-b border-border"
-        >
+        {/* Player Container: Framed YouTube-style container with rounded borders */}
+        <div className="w-full max-w-5xl mx-auto mt-6 px-6">
+          <div 
+            ref={playerContainerRef} 
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className={`w-full aspect-video relative bg-[#1E1E1E] rounded-2xl overflow-hidden shadow-2xl flex-shrink-0 group/player border border-border ${!isControlsVisible && isPlaying ? 'cursor-none' : ''}`}
+          >
           {lesson.type === 'youtube' ? (
             <div className="w-full h-full relative">
               {/* Play-on-Click Lazy Load Thumbnail Placeholder */}
@@ -381,13 +505,13 @@ export default function Watch() {
               {isPlayerTriggered && (
                 <div 
                   onClick={handlePlayPause}
-                  className="w-full h-[calc(100%-48px)] absolute inset-x-0 top-0 cursor-pointer z-10 bg-transparent"
+                  className={`w-full h-[calc(100%-48px)] absolute inset-x-0 top-0 z-10 bg-transparent ${!isControlsVisible && isPlaying ? 'cursor-none' : 'cursor-pointer'}`}
                 />
               )}
 
               {/* Custom Controls Bar overlay */}
               {isPlayerTriggered && (
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/90 to-transparent p-4 flex flex-col gap-3 z-20 opacity-0 group-hover/player:opacity-100 transition-opacity duration-300">
+                <div className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/90 to-transparent p-4 flex flex-col gap-3 z-20 transition-opacity duration-300 ${isControlsVisible || !isPlaying ? 'opacity-100' : 'opacity-0'}`}>
                   
                   {/* Seek Timeline */}
                   <div 
@@ -436,15 +560,25 @@ export default function Watch() {
                       </span>
                     </div>
 
-                    {/* Fullscreen Button */}
-                    <button 
-                      onClick={handleFullscreenToggle}
-                      className="p-1 text-zinc-300 hover:text-white transition cursor-pointer"
-                    >
-                      <Maximize size={16} />
-                    </button>
-                  </div>
+                    <div className="flex items-center gap-4">
+                      {/* CC / Captions Button */}
+                      <button 
+                        onClick={handleCCToggle}
+                        className={`p-1.5 transition cursor-pointer rounded flex items-center gap-1 ${captionsEnabled ? 'text-white bg-primary/20 border-b-2 border-primary' : 'text-zinc-400 hover:text-white'}`}
+                        title="Toggle Captions (CC)"
+                      >
+                        <Type size={16} />
+                      </button>
 
+                      {/* Fullscreen Button */}
+                      <button 
+                        onClick={handleFullscreenToggle}
+                        className="p-1 text-zinc-300 hover:text-white transition cursor-pointer"
+                      >
+                        <Maximize size={16} />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -479,10 +613,11 @@ export default function Watch() {
               </button>
             </div>
           )}
+          </div>
         </div>
 
         {/* Video details & interactive workspaces directly below player */}
-        <div className="p-6 space-y-6 max-w-4xl w-full">
+        <div className="px-6 py-6 space-y-6 max-w-5xl w-full mx-auto">
           <div className="space-y-2 border-b border-border pb-4">
             <h1 className="text-2xl font-bold text-white tracking-tight">{lesson.title}</h1>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-500">
@@ -525,12 +660,12 @@ export default function Watch() {
               {activeTab === 'notes' && lesson.type === 'youtube' && (
                 <div className="space-y-6">
                   {/* Form Input */}
-                  <form onSubmit={handleSaveNote} className="flex gap-3 items-start">
+                  <form onSubmit={handleSaveNote} className="flex gap-3 items-center">
                     <textarea
                       value={noteContent}
                       onChange={(e) => setNoteContent(e.target.value)}
                       placeholder="Type a timestamped note... (Press Enter to Save)"
-                      className="flex-1 min-h-[50px] p-3 bg-zinc-900 border border-border rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-primary transition resize-none"
+                      className="flex-1 h-[50px] p-3 bg-zinc-900 border border-border rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-primary transition resize-none"
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                           e.preventDefault();

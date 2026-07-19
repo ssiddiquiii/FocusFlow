@@ -26,74 +26,82 @@ function AppContent() {
     <div className="flex min-h-screen bg-background text-foreground">
       {/* Collapsible Sidebar Navigation */}
       <aside 
-        className={`border-r border-border bg-zinc-950 flex flex-col p-4 transition-all duration-300 relative ${
-          sidebarCollapsed ? 'w-20' : 'w-64'
+        className={`border-r border-border bg-zinc-950 flex flex-col transition-all duration-300 relative ${
+          sidebarCollapsed ? 'w-[72px]' : 'w-60'
         }`}
       >
-        {/* Toggle Collapse Button */}
-        <button
-          onClick={toggleSidebar}
-          className="absolute -right-3.5 top-6 w-7 h-7 rounded-full bg-zinc-900 border border-border flex items-center justify-center text-zinc-400 hover:text-white hover:border-primary/50 transition z-20 cursor-pointer"
-        >
-          {sidebarCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
-        </button>
-
-        {/* Sidebar Header */}
-        <div className={`mb-8 px-2 flex items-center gap-3 ${sidebarCollapsed ? 'justify-center' : 'justify-start'}`}>
-          <img 
-            src="/logo.svg" 
-            alt="FocusFlow Logo" 
-            className="w-8 h-8 rounded-lg shadow-md shadow-primary/20 flex-shrink-0 select-none"
-          />
-          {!sidebarCollapsed && (
+        {/* Sidebar Header with Hamburger & Logo */}
+        <div className="flex items-center h-16 mb-2">
+          <div className="w-[72px] flex items-center justify-center flex-shrink-0">
+            <button
+              onClick={toggleSidebar}
+              className="p-2 rounded-full hover:bg-zinc-800 text-white transition flex-shrink-0 cursor-pointer"
+              title="Toggle Sidebar"
+            >
+              <Menu size={22} />
+            </button>
+          </div>
+          
+          <div className={`flex items-center gap-2 overflow-hidden transition-all duration-300 ${sidebarCollapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}>
+            <img
+              src="/logo.svg"
+              alt="FocusFlow"
+              className="w-8 h-8 flex-shrink-0 select-none"
+            />
             <div className="flex flex-col min-w-0">
-              <h2 className="font-bold tracking-wider text-sm text-white leading-none">FocusFlow</h2>
-              <span className="text-[9px] text-zinc-500 uppercase tracking-widest font-semibold mt-1">
-                Local Learning
-              </span>
+              <h2 className="font-bold tracking-tight text-sm text-white leading-none whitespace-nowrap">FocusFlow</h2>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Navigation Items */}
-        <nav className="flex-1 space-y-2">
+        <nav className={`flex-1 space-y-1 overflow-y-auto ${sidebarCollapsed ? 'px-1.5' : 'px-3'}`}>
           <Link 
             to="/" 
-            title={sidebarCollapsed ? "Dashboard" : ""}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition ${
+            className={`flex items-center w-full rounded-xl transition ${
+              sidebarCollapsed 
+                ? 'flex-col justify-center py-4 gap-1' 
+                : 'flex-row px-3 py-2.5 gap-4'
+            } ${
               isActive('/') 
-                ? 'bg-primary/10 text-primary border border-primary/20' 
-                : 'text-zinc-400 hover:bg-zinc-900 hover:text-white border border-transparent'
-            } ${sidebarCollapsed ? 'justify-center' : ''}`}
+                ? 'bg-zinc-800 font-medium text-white' 
+                : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'
+            }`}
           >
-            <BookOpen size={18} />
-            {!sidebarCollapsed && <span className="text-sm font-medium">Dashboard</span>}
+            <BookOpen size={sidebarCollapsed ? 22 : 20} className={isActive('/') ? 'text-primary' : ''} />
+            <span className={sidebarCollapsed ? 'text-[9px] text-center w-full truncate px-1' : 'text-sm'}>Dashboard</span>
           </Link>
           
           <Link 
             to="/settings" 
-            title={sidebarCollapsed ? "Settings" : ""}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition ${
+            className={`flex items-center w-full rounded-xl transition ${
+              sidebarCollapsed 
+                ? 'flex-col justify-center py-4 gap-1' 
+                : 'flex-row px-3 py-2.5 gap-4'
+            } ${
               isActive('/settings') 
-                ? 'bg-primary/10 text-primary border border-primary/20' 
-                : 'text-zinc-400 hover:bg-zinc-900 hover:text-white border border-transparent'
-            } ${sidebarCollapsed ? 'justify-center' : ''}`}
+                ? 'bg-zinc-800 font-medium text-white' 
+                : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'
+            }`}
           >
-            <SettingsIcon size={18} />
-            {!sidebarCollapsed && <span className="text-sm font-medium">Settings</span>}
+            <SettingsIcon size={sidebarCollapsed ? 22 : 20} className={isActive('/settings') ? 'text-primary' : ''} />
+            <span className={sidebarCollapsed ? 'text-[9px] text-center w-full truncate px-1' : 'text-sm'}>Settings</span>
           </Link>
 
           <Link 
             to="/offline" 
-            title={sidebarCollapsed ? "Offline Info" : ""}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition ${
+            className={`flex items-center w-full rounded-xl transition ${
+              sidebarCollapsed 
+                ? 'flex-col justify-center py-4 gap-1' 
+                : 'flex-row px-3 py-2.5 gap-4'
+            } ${
               isActive('/offline') 
-                ? 'bg-primary/10 text-primary border border-primary/20' 
-                : 'text-zinc-400 hover:bg-zinc-900 hover:text-white border border-transparent'
-            } ${sidebarCollapsed ? 'justify-center' : ''}`}
+                ? 'bg-zinc-800 font-medium text-white' 
+                : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'
+            }`}
           >
-            <WifiOff size={18} />
-            {!sidebarCollapsed && <span className="text-sm font-medium">Offline Info</span>}
+            <WifiOff size={sidebarCollapsed ? 22 : 20} className={isActive('/offline') ? 'text-primary' : ''} />
+            <span className={sidebarCollapsed ? 'text-[9px] text-center w-full truncate px-1' : 'text-sm'}>Offline</span>
           </Link>
         </nav>
       </aside>

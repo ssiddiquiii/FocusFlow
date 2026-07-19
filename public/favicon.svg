@@ -1,31 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <defs>
-    <!-- Background Soft Radial Glow -->
-    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#22201d" />
-      <stop offset="100%" stop-color="#181715" />
-    </radialGradient>
-    
-    <!-- Terracotta and Gold Accent Gradient for the Play Symbol -->
-    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#e5a93b" />   <!-- Claude Amber Gold -->
-      <stop offset="100%" stop-color="#d97736" /> <!-- Claude Terracotta Peach -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#111111"/>
     </linearGradient>
-
-    <!-- Cream Soft Flow Pathway Gradient -->
-    <linearGradient id="flowGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#999083" stop-opacity="0.3" />
-      <stop offset="100%" stop-color="#eadecc" stop-opacity="0.9" />
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8903a"/>
+      <stop offset="100%" stop-color="#d97736"/>
     </linearGradient>
   </defs>
 
-  <!-- Smooth Rounded Base Canvas -->
-  <rect width="512" height="512" rx="128" fill="url(#bgGlow)" />
+  <!-- Dark rounded background -->
+  <rect width="32" height="32" rx="8" fill="url(#bg)"/>
 
-  <!-- Flowing Curve representing "Learning Flow" path -->
-  <path d="M 120 380 Q 220 180 392 250" fill="none" stroke="url(#flowGrad)" stroke-width="24" stroke-linecap="round" />
-  <path d="M 160 410 Q 256 220 392 360" fill="none" stroke="url(#flowGrad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="6,12" />
+  <!-- Bottom accent glow bar -->
+  <rect x="0" y="28" width="32" height="4" rx="0" fill="url(#accent)" opacity="0.85"/>
+  <rect x="0" y="26" width="32" height="6" rx="0" fill="url(#accent)" opacity="0.15"/>
 
-  <!-- Play Symbol representing "Focus Watch" trigger -->
-  <polygon points="210,176 366,256 210,336" fill="url(#primaryGrad)" filter="drop-shadow(0px 8px 24px rgba(217, 119, 54, 0.4))" />
+  <!-- Play triangle icon — centered -->
+  <polygon
+    points="12,9 12,23 24,16"
+    fill="url(#accent)"
+  />
 </svg>
