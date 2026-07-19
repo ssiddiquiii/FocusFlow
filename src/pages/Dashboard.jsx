@@ -58,6 +58,19 @@ export default function Dashboard() {
     }
   };
 
+  const sortedCourses = [...courses].sort((a, b) => {
+    const progressA = progressList.filter(p => p.courseId === a.id);
+    const maxTimeA = progressA.length > 0 ? Math.max(...progressA.map(p => p.updatedAt || 0)) : 0;
+
+    const progressB = progressList.filter(p => p.courseId === b.id);
+    const maxTimeB = progressB.length > 0 ? Math.max(...progressB.map(p => p.updatedAt || 0)) : 0;
+
+    if (maxTimeA !== maxTimeB) {
+      return maxTimeB - maxTimeA;
+    }
+    return a.title.localeCompare(b.title);
+  });
+
   return (
     <div className="p-8 max-w-6xl mx-auto space-y-12">
       {/* Welcome Header & Stats Grid */}
@@ -122,8 +135,8 @@ export default function Dashboard() {
       <div className="space-y-6">
         <h2 className="text-2xl font-bold text-white tracking-tight">Your Learning Catalog</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {courses.map((course) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {sortedCourses.map((course) => {
             const progress = courseProgressMap[course.id] || 0;
 
             return (
@@ -132,7 +145,7 @@ export default function Dashboard() {
                 className="glass-panel rounded-2xl overflow-hidden flex flex-col hover:border-primary/30 transition duration-300 group"
               >
                 {/* Course Header Thumbnail */}
-                <div className="h-44 relative bg-zinc-900 overflow-hidden">
+                <div className="aspect-video relative bg-zinc-900 overflow-hidden">
                   <img 
                     src={course.thumbnailUrl} 
                     alt={course.title} 
