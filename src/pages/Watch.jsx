@@ -2,9 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useFocusFlow } from '../hooks/useFocusFlow';
 import { useUIStore } from '../hooks/useUIStore';
-import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX } from 'lucide-react';
+import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX, Gauge } from 'lucide-react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/FocusFlowDB';
+
+const SPEED_OPTIONS = [0.5, 1, 1.25, 1.5, 2];
 
 /**
  * Formats a duration in seconds to standard MM:SS or HH:MM:SS string.
@@ -27,6 +29,7 @@ function formatSeconds(totalSeconds) {
  * Custom Interactive Watch Player View.
  * Wraps official YouTube IFrame Player API with custom controls
  * to eliminate "More Videos" overlays, recommendation links, and ad clicks.
+ * Features a lazy-load play-on-click thumbnail placeholder and speed controls.
  * @returns {React.JSX.Element}
  */
 export default function Watch() {
@@ -43,17 +46,19 @@ export default function Watch() {
   const [noteContent, setNoteContent] = useState('');
   const [ytPlayer, setYtPlayer] = useState(null);
   
+  // Lazy Loading / Click-to-Play State
+  const [isPlayerTriggered, setIsPlayerTriggered] = useState(false);
+
   // Custom Player states
   const [playerCurrentTime, setPlayerCurrentTime] = useState(0);
   const [playerDuration, setPlayerDuration] = useState(0);
   const [playerMuted, setPlayerMuted] = useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // Retrieve course
+  // Retrieve course and lesson metadata
   const course = courses.find(c => c.id === courseId);
-  // Retrieve lesson
   const lesson = lessons.find(l => l.courseId === courseId && l.id === lessonId);
-  // Retrieve all lessons in course sorted by index
   const courseLessons = lessons
     .filter(l => l.courseId === courseId)
     .sort((a, b) => a.index - b.index);
@@ -63,32 +68,47 @@ export default function Watch() {
     db.notes.where({ courseId, lessonId }).sortBy('timestamp')
   , [courseId, lessonId]) || [];
 
+  // Reset play states when navigating to a new lesson
   useEffect(() => {
     if (lessonId) {
       setActiveLessonId(lessonId);
       setPlayerCurrentTime(0);
       setPlayerDuration(0);
+      setIsPlayerTriggered(false); // require click on new lesson
+      setPlaybackSpeed(1);
     }
   }, [lessonId]);
 
   // Handle player seek trigger changes from Zustand store
   useEffect(() => {
     if (ytPlayer && seekRequestTime !== null) {
-      ytPlayer.seekTo(seekRequestTime, true);
-      ytPlayer.playVideo();
+      // If player wasn't initialized yet, trigger it
+      if (!isPlayerTriggered) {
+        setIsPlayerTriggered(true);
+        // Wait for player to load before seeking
+        setTimeout(() => {
+          if (ytPlayer) {
+            ytPlayer.seekTo(seekRequestTime, true);
+            ytPlayer.playVideo();
+          }
+        }, 1000);
+      } else {
+        ytPlayer.seekTo(seekRequestTime, true);
+        ytPlayer.playVideo();
+      }
       triggerPlayerSeek(null);
     }
-  }, [seekRequestTime, ytPlayer]);
+  }, [seekRequestTime, ytPlayer, isPlayerTriggered]);
 
   // YouTube IFrame Player API Initialization
+  // Runs ONLY after the user clicks the play/thumbnail overlay (isPlayerTriggered === true)
   useEffect(() => {
-    if (!lesson || lesson.type !== 'youtube') return;
+    if (!lesson || lesson.type !== 'youtube' || !isPlayerTriggered) return;
 
     let playerInstance = null;
     let progressTimer = null;
     let uiSyncTimer = null;
 
-    // Retrieve previous watch position to resume
     const currentProgress = progressList.find(p => p.id === `${courseId}_${lessonId}`);
     const resumeSeconds = currentProgress && !currentProgress.completed ? Math.max(0, currentProgress.watchTime - 2) : 0;
 
@@ -97,10 +117,11 @@ export default function Watch() {
       setYtPlayer(player);
       setPlayerDuration(player.getDuration());
       setPlayerMuted(player.isMuted());
+      player.setPlaybackRate(playbackSpeed);
 
-      if (resumeSeconds > 0) {
-        player.seekTo(resumeSeconds, true);
-      }
+      // Auto-start video when user clicked the thumbnail placeholder
+      player.seekTo(resumeSeconds, true);
+      player.playVideo();
     };
 
     const startProgressTracking = (player) => {
@@ -113,9 +134,8 @@ export default function Watch() {
           const isCompleted = (currentTime / duration) >= 0.90;
           saveProgress(courseId, lessonId, currentTime, isCompleted);
         }
-      }, 10000); // save state every 10 seconds
+      }, 10000);
 
-      // Fast UI interval (100ms) to update custom seekbar position smoothly
       uiSyncTimer = setInterval(() => {
         setPlayerCurrentTime(player.getCurrentTime());
       }, 100);
@@ -141,7 +161,6 @@ export default function Watch() {
         setIsPlaying(false);
         stopProgressTracking();
         
-        // Save state immediately on pause
         if (state === window.YT.PlayerState.PAUSED) {
           const currentTime = event.target.getCurrentTime();
           const duration = event.target.getDuration();
@@ -149,7 +168,6 @@ export default function Watch() {
           saveProgress(courseId, lessonId, currentTime, isCompleted);
         }
 
-        // Mark completed when video ends
         if (state === window.YT.PlayerState.ENDED) {
           const duration = event.target.getDuration();
           saveProgress(courseId, lessonId, duration, true);
@@ -163,12 +181,13 @@ export default function Watch() {
         width: '100%',
         videoId: lessonId,
         playerVars: {
-          rel: 0, // Disable related videos
-          iv_load_policy: 3, // Disable annotations
-          modestbranding: 1, // Minimize logo presence
-          controls: 0, // Hide native controls to eliminate overlays and "More videos" button
-          disablekb: 1, // Disable keyboard controls to prevent cheating
-          fs: 0 // Disable native full-screen button
+          rel: 0,
+          iv_load_policy: 3,
+          modestbranding: 1,
+          controls: 0, // hide native controls to avoid "More videos"
+          disablekb: 1,
+          fs: 0,
+          cc_load_policy: 0 // Disable captions by default
         },
         events: {
           onReady: onPlayerReady,
@@ -195,9 +214,9 @@ export default function Watch() {
       setYtPlayer(null);
       setIsPlaying(false);
     };
-  }, [lessonId, courseId]);
+  }, [lessonId, courseId, isPlayerTriggered]);
 
-  // Handle document fullscreen state sync
+  // Sync fullscreen state
   useEffect(() => {
     const handleFullscreenChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
@@ -215,7 +234,7 @@ export default function Watch() {
     );
   }
 
-  // Toggle play/pause safely via transparent overlay
+  // Toggle play/pause
   const handlePlayPause = () => {
     if (!ytPlayer) return;
     if (isPlaying) {
@@ -237,21 +256,32 @@ export default function Watch() {
     }
   };
 
-  // Custom Fullscreen handler
+  // Cycle speed (0.5x -> 1x -> 1.25x -> 1.5x -> 2x)
+  const handleSpeedCycle = () => {
+    if (!ytPlayer) return;
+    const currentIndex = SPEED_OPTIONS.indexOf(playbackSpeed);
+    const nextIndex = (currentIndex + 1) % SPEED_OPTIONS.length;
+    const nextSpeed = SPEED_OPTIONS[nextIndex];
+    
+    ytPlayer.setPlaybackRate(nextSpeed);
+    setPlaybackSpeed(nextSpeed);
+  };
+
+  // Toggle Fullscreen
   const handleFullscreenToggle = () => {
     const container = playerContainerRef.current;
     if (!container) return;
 
     if (!document.fullscreenElement) {
       container.requestFullscreen().catch((err) => {
-        console.error('Error entering fullscreen mode:', err);
+        console.error('Fullscreen Error:', err);
       });
     } else {
       document.exitFullscreen();
     }
   };
 
-  // Custom Progress bar click-seeking
+  // Click seek timeline
   const handleProgressBarClick = (e) => {
     if (!ytPlayer || !progressBarRef.current || playerDuration === 0) return;
     
@@ -265,7 +295,7 @@ export default function Watch() {
     setPlayerCurrentTime(seekSeconds);
   };
 
-  // Handle manual Udemy completion toggle
+  // Udemy toggle
   const udemyProgress = progressList.find(p => p.id === `${courseId}_${lessonId}`);
   const isUdemyCompleted = udemyProgress ? udemyProgress.completed : false;
 
@@ -300,7 +330,6 @@ export default function Watch() {
     await db.notes.delete(id);
   };
 
-  // Calculate seek percentage
   const progressPercent = playerDuration > 0 ? (playerCurrentTime / playerDuration) * 100 : 0;
 
   return (
@@ -327,67 +356,99 @@ export default function Watch() {
         >
           {lesson.type === 'youtube' ? (
             <div className="w-full h-full relative">
-              {/* YouTube Iframe element */}
-              <div id="yt-player-iframe" className="w-full h-full absolute inset-0 pointer-events-none" />
+              {/* Play-on-Click Lazy Load Thumbnail Placeholder */}
+              {!isPlayerTriggered ? (
+                <div 
+                  onClick={() => setIsPlayerTriggered(true)}
+                  className="w-full h-full absolute inset-0 cursor-pointer flex items-center justify-center bg-zinc-900 group/thumb z-10"
+                >
+                  <img 
+                    src={lesson.thumbnailUrl} 
+                    alt={lesson.title} 
+                    className="w-full h-full object-cover opacity-75 group-hover/thumb:scale-[1.02] transition duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/40 group-hover/thumb:bg-black/30 transition duration-300" />
+                  
+                  {/* Glowing Play Circle */}
+                  <div className="w-20 h-20 rounded-full flex items-center justify-center bg-primary text-white border-2 border-white/20 shadow-2xl shadow-primary/45 group-hover/thumb:scale-110 transition duration-300 absolute z-20">
+                    <Play size={32} fill="currentColor" className="ml-1" />
+                  </div>
+                </div>
+              ) : (
+                /* YouTube Iframe element */
+                <div id="yt-player-iframe" className="w-full h-full absolute inset-0 pointer-events-none" />
+              )}
 
               {/* Transparent pointer-events overlay */}
-              {/* Prevents user from clicking into YouTube overlays, title screens, or logos */}
-              <div 
-                onClick={handlePlayPause}
-                className="w-full h-[calc(100%-48px)] absolute inset-x-0 top-0 cursor-pointer z-10 bg-transparent"
-              />
+              {isPlayerTriggered && (
+                <div 
+                  onClick={handlePlayPause}
+                  className="w-full h-[calc(100%-48px)] absolute inset-x-0 top-0 cursor-pointer z-10 bg-transparent"
+                />
+              )}
 
               {/* Custom Controls Bar overlay */}
-              {/* Shows up on hover or when paused */}
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 flex flex-col gap-3 z-20 opacity-0 group-hover/player:opacity-100 transition-opacity duration-300">
-                
-                {/* Seek Timeline */}
-                <div 
-                  ref={progressBarRef}
-                  onClick={handleProgressBarClick}
-                  className="w-full h-1.5 bg-zinc-800 rounded-full cursor-pointer relative overflow-hidden group/timeline hover:h-2 transition-all"
-                >
+              {isPlayerTriggered && (
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/90 to-transparent p-4 flex flex-col gap-3 z-20 opacity-0 group-hover/player:opacity-100 transition-opacity duration-300">
+                  
+                  {/* Seek Timeline */}
                   <div 
-                    className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-75"
-                    style={{ width: `${progressPercent}%` }}
-                  />
-                </div>
-
-                {/* Control Actions Row */}
-                <div className="flex items-center justify-between text-white text-xs">
-                  <div className="flex items-center gap-4">
-                    {/* Play/Pause Button */}
-                    <button 
-                      onClick={handlePlayPause} 
-                      className="p-1 text-zinc-300 hover:text-white transition cursor-pointer"
-                    >
-                      {isPlaying ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
-                    </button>
-
-                    {/* Mute Button */}
-                    <button 
-                      onClick={handleMuteToggle}
-                      className="p-1 text-zinc-300 hover:text-white transition cursor-pointer"
-                    >
-                      {playerMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-                    </button>
-
-                    {/* Elapsed Time */}
-                    <span className="font-semibold text-zinc-400 select-none">
-                      {formatSeconds(playerCurrentTime)} / {formatSeconds(playerDuration)}
-                    </span>
+                    ref={progressBarRef}
+                    onClick={handleProgressBarClick}
+                    className="w-full h-1.5 bg-zinc-800 rounded-full cursor-pointer relative overflow-hidden group/timeline hover:h-2 transition-all"
+                  >
+                    <div 
+                      className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-75"
+                      style={{ width: `${progressPercent}%` }}
+                    />
                   </div>
 
-                  {/* Fullscreen Button */}
-                  <button 
-                    onClick={handleFullscreenToggle}
-                    className="p-1 text-zinc-300 hover:text-white transition cursor-pointer"
-                  >
-                    <Maximize size={16} />
-                  </button>
-                </div>
+                  {/* Control Actions Row */}
+                  <div className="flex items-center justify-between text-white text-xs">
+                    <div className="flex items-center gap-4">
+                      {/* Play/Pause Button */}
+                      <button 
+                        onClick={handlePlayPause} 
+                        className="p-1 text-zinc-300 hover:text-white transition cursor-pointer"
+                      >
+                        {isPlaying ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
+                      </button>
 
-              </div>
+                      {/* Mute Button */}
+                      <button 
+                        onClick={handleMuteToggle}
+                        className="p-1 text-zinc-300 hover:text-white transition cursor-pointer"
+                      >
+                        {playerMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                      </button>
+
+                      {/* Speed Cycle Button */}
+                      <button
+                        onClick={handleSpeedCycle}
+                        className="px-2 py-1 rounded bg-zinc-800 border border-border text-[10px] font-bold text-zinc-300 hover:text-white transition cursor-pointer flex items-center gap-1"
+                        title="Change Playback Speed"
+                      >
+                        <Gauge size={12} />
+                        <span>{playbackSpeed === 1 ? 'Normal' : `${playbackSpeed}x`}</span>
+                      </button>
+
+                      {/* Elapsed Time */}
+                      <span className="font-semibold text-zinc-400 select-none">
+                        {formatSeconds(playerCurrentTime)} / {formatSeconds(playerDuration)}
+                      </span>
+                    </div>
+
+                    {/* Fullscreen Button */}
+                    <button 
+                      onClick={handleFullscreenToggle}
+                      className="p-1 text-zinc-300 hover:text-white transition cursor-pointer"
+                    >
+                      <Maximize size={16} />
+                    </button>
+                  </div>
+
+                </div>
+              )}
             </div>
           ) : (
             // Manual Udemy course content tracker shell

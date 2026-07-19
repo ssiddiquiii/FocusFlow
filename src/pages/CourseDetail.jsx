@@ -64,7 +64,7 @@ export default function CourseDetail() {
         </div>
         
         <div className="flex-1 space-y-4">
-          <span className="px-2.5 py-1 text-xs font-semibold uppercase tracking-wider rounded bg-primary/20 text-primary border border-primary/30">
+          <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded bg-primary/15 text-primary border border-primary/20 mb-3 select-none">
             {course.type === 'youtube' ? 'YouTube Course' : 'Udemy manual'}
           </span>
           <h1 className="text-3xl font-bold text-white tracking-tight">{course.title}</h1>

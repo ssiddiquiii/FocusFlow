@@ -39,16 +39,19 @@ function AppContent() {
         </button>
 
         {/* Sidebar Header */}
-        <div className={`mb-8 px-2 flex flex-col ${sidebarCollapsed ? 'items-center' : 'items-start'}`}>
-          <h2 className={`font-bold tracking-wider text-primary transition-all ${
-            sidebarCollapsed ? 'text-lg' : 'text-2xl'
-          }`}>
-            {sidebarCollapsed ? 'FF' : 'FocusFlow'}
-          </h2>
+        <div className={`mb-8 px-2 flex items-center gap-3 ${sidebarCollapsed ? 'justify-center' : 'justify-start'}`}>
+          <img 
+            src="/logo.svg" 
+            alt="FocusFlow Logo" 
+            className="w-8 h-8 rounded-lg shadow-md shadow-primary/20 flex-shrink-0 select-none"
+          />
           {!sidebarCollapsed && (
-            <span className="text-[10px] text-zinc-500 uppercase tracking-widest font-semibold block mt-0.5 animate-fade-in">
-              Local Learning Shell
-            </span>
+            <div className="flex flex-col min-w-0">
+              <h2 className="font-bold tracking-wider text-sm text-white leading-none">FocusFlow</h2>
+              <span className="text-[9px] text-zinc-500 uppercase tracking-widest font-semibold mt-1">
+                Local Learning
+              </span>
+            </div>
           )}
         </div>
 
