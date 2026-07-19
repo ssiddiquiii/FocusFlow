@@ -1,0 +1,355 @@
+{
+  "courses": [
+    {
+      "id": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+      "title": "Chai aur JavaScript",
+      "description": "Complete JavaScript series from fundamentals to advanced ES6+ features, DOM manipulation, and asynchronous programming by Hitesh Choudhary.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?q=80&w=400",
+      "channelName": "Chai aur Code",
+      "type": "youtube",
+      "udemyUrl": ""
+    },
+    {
+      "id": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
+      "title": "Chai aur React",
+      "description": "Project-based ReactJS series covering Hooks, Context API, state management (Redux Toolkit), and building production-grade web applications.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=400",
+      "channelName": "Chai aur Code",
+      "type": "youtube",
+      "udemyUrl": ""
+    },
+    {
+      "id": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
+      "title": "Chai aur Backend",
+      "description": "Production-grade backend engineering with Node.js, Express, MongoDB, JWT authentication, file uploads with Multer, and robust data modeling.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400",
+      "channelName": "Chai aur Code",
+      "type": "youtube",
+      "udemyUrl": ""
+    },
+    {
+      "id": "udemy-agentic-ai",
+      "title": "Agentic AI Cohort",
+      "description": "Hitesh Choudhary's cohort course on Agentic AI, LangChain, crewAI, and building custom LLM agents. (Track progress manually).",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400",
+      "channelName": "Hitesh Choudhary",
+      "type": "udemy",
+      "udemyUrl": "https://www.udemy.com/course/agentic-ai-hitesh-choudhary/"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "2md414",
+      "courseId": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+      "title": "Chai aur Javascript | Introduction",
+      "description": "Welcome to the complete JavaScript series. We start our journey from zero to advanced concepts.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?q=80&w=400",
+      "duration": "14:20",
+      "index": 1,
+      "type": "youtube"
+    },
+    {
+      "id": "A3p8VpM_H3Y",
+      "courseId": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+      "title": "Variables and Constants in JavaScript",
+      "description": "Understanding let, const, and var in modern JavaScript environments.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?q=80&w=400",
+      "duration": "18:45",
+      "index": 2,
+      "type": "youtube"
+    },
+    {
+      "id": "nC_X7sV2J4k",
+      "courseId": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+      "title": "Datatypes and ECMA Standards",
+      "description": "Exploring primitive types, symbols, objects, and ECMAScript specifications.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?q=80&w=400",
+      "duration": "22:10",
+      "index": 3,
+      "type": "youtube"
+    },
+    {
+      "id": "XkF2md414aA",
+      "courseId": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+      "title": "Datatype Conversion Confusion",
+      "description": "Mastering implicit coercion, explicit casting, and weird JS behaviors.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?q=80&w=400",
+      "duration": "25:30",
+      "index": 4,
+      "type": "youtube"
+    },
+    {
+      "id": "e_zM_5Xg38A",
+      "courseId": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+      "title": "Comparison of Datatypes",
+      "description": "Strict equality (===) vs abstract equality (==), null/undefined comparison edge cases.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?q=80&w=400",
+      "duration": "16:15",
+      "index": 5,
+      "type": "youtube"
+    },
+    {
+      "id": "fo9eF2mdX4Y",
+      "courseId": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+      "title": "Strings in Modern JavaScript",
+      "description": "Template literals, string methods, slice, substring, split, and clean formatting.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?q=80&w=400",
+      "duration": "28:40",
+      "index": 6,
+      "type": "youtube"
+    },
+    {
+      "id": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37-7",
+      "courseId": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+      "title": "Nums and Maths in JS",
+      "description": "Number parsing, precision, decimal handling, and Math.random() usage.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?q=80&w=400",
+      "duration": "19:55",
+      "index": 7,
+      "type": "youtube"
+    },
+    {
+      "id": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37-8",
+      "courseId": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+      "title": "Dates and Time in Depth",
+      "description": "Working with JS Date objects, timestamps, formatting, and internationalization.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?q=80&w=400",
+      "duration": "24:12",
+      "index": 8,
+      "type": "youtube"
+    },
+    {
+      "id": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37-9",
+      "courseId": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+      "title": "Arrays in JavaScript - Part 1",
+      "description": "Understanding arrays, mutability, push, pop, shift, unshift, slice vs splice.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?q=80&w=400",
+      "duration": "21:30",
+      "index": 9,
+      "type": "youtube"
+    },
+    {
+      "id": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37-10",
+      "courseId": "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+      "title": "Objects in JavaScript - Part 1",
+      "description": "Object literals, keys, symbols as keys, freezing objects, nested properties.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?q=80&w=400",
+      "duration": "30:05",
+      "index": 10,
+      "type": "youtube"
+    },
+
+    {
+      "id": "e_zM_5Xg38React1",
+      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
+      "title": "Chai aur React | Introduction",
+      "description": "Welcome to the project-based React series. We discuss the roadmap, single-page architectures, and SPA flow.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=400",
+      "duration": "12:15",
+      "index": 1,
+      "type": "youtube"
+    },
+    {
+      "id": "k8Xn2g7Hn7M",
+      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
+      "title": "Create React App with Vite",
+      "description": "Initializing React apps the modern way using Vite, comparison with Create-React-App.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=400",
+      "duration": "16:40",
+      "index": 2,
+      "type": "youtube"
+    },
+    {
+      "id": "nC_X7sV2J4React",
+      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
+      "title": "Understanding the React Flow and Structure",
+      "description": "Analyzing main.jsx, App.jsx, index.html, and how React bootstraps.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=400",
+      "duration": "20:15",
+      "index": 3,
+      "type": "youtube"
+    },
+    {
+      "id": "XkF2md414React",
+      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
+      "title": "Create your own React Library and Render",
+      "description": "Writing a custom renderer to understand how React creates DOM nodes from objects.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=400",
+      "duration": "28:50",
+      "index": 4,
+      "type": "youtube"
+    },
+    {
+      "id": "e_zM_5Xg38React5",
+      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
+      "title": "Why we need hooks in React",
+      "description": "Understanding the problem of standard variables not triggering UI updates, introduction to useState.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=400",
+      "duration": "18:22",
+      "index": 5,
+      "type": "youtube"
+    },
+    {
+      "id": "fo9eF2mdX4React6",
+      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
+      "title": "Counter Project in React",
+      "description": "Practical application of state hooks to increment, decrement, and bound numbers.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=400",
+      "duration": "14:40",
+      "index": 6,
+      "type": "youtube"
+    },
+    {
+      "id": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige-7",
+      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
+      "title": "Virtual DOM, Fiber and Reconciliation",
+      "description": "A deep dive into React internals: Diffing algorithm, key prop necessity, and batching updates.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=400",
+      "duration": "22:15",
+      "index": 7,
+      "type": "youtube"
+    },
+    {
+      "id": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige-8",
+      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
+      "title": "Tailwind and Props in React",
+      "description": "Passing custom props, destructured props, default parameters, and styling dynamically with Tailwind.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=400",
+      "duration": "24:35",
+      "index": 8,
+      "type": "youtube"
+    },
+
+    {
+      "id": "e_zM_5Xg38Backend1",
+      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
+      "title": "Chai aur Backend | Introduction",
+      "description": "Introduction to server-side engineering. Setting up the runtime environment and tooling roadmap.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400",
+      "duration": "15:40",
+      "index": 1,
+      "type": "youtube"
+    },
+    {
+      "id": "k8Xn2g7Hn7Backend",
+      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
+      "title": "How to deploy Backend Code in Production",
+      "description": "Deploying server apps to Render, Railway, Vercel, handling node env configurations.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400",
+      "duration": "24:15",
+      "index": 2,
+      "type": "youtube"
+    },
+    {
+      "id": "nC_X7sV2J4Backend",
+      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
+      "title": "Connect Frontend and Backend in Javascript",
+      "description": "Understanding CORS, proxy configurations, JSON data transfers, and standard fetch/axios integrations.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400",
+      "duration": "28:50",
+      "index": 3,
+      "type": "youtube"
+    },
+    {
+      "id": "XkF2md414Backend",
+      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
+      "title": "Data Modelling for Backend with Mongoose",
+      "description": "Designing database schemas, collections, sub-documents, and validation schemas in Mongoose.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400",
+      "duration": "32:10",
+      "index": 4,
+      "type": "youtube"
+    },
+    {
+      "id": "e_zM_5Xg38Backend5",
+      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
+      "title": "Ecommerce and Todo Data Modelling",
+      "description": "Detailed entity-relationship models for an Ecommerce backend (Products, Orders, Categories).",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400",
+      "duration": "29:45",
+      "index": 5,
+      "type": "youtube"
+    },
+    {
+      "id": "fo9eF2mdX4Backend6",
+      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
+      "title": "How to Setup a Professional Backend Project",
+      "description": "Building standard node configurations: npm init, eslint, prettier, src folder, express server initialization.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400",
+      "duration": "35:12",
+      "index": 6,
+      "type": "youtube"
+    },
+    {
+      "id": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW-7",
+      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
+      "title": "Express Router, Controllers and Utilities",
+      "description": "Building custom router interfaces, controllers, async handlers, and API error wrappers.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400",
+      "duration": "27:40",
+      "index": 7,
+      "type": "youtube"
+    },
+    {
+      "id": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW-8",
+      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
+      "title": "User Register Logic and Middlewares",
+      "description": "Building full user signup: checking database, hashing passwords with bcrypt, saving to DB.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400",
+      "duration": "42:15",
+      "index": 8,
+      "type": "youtube"
+    },
+
+    {
+      "id": "udemy-agentic-ai-lesson-1",
+      "courseId": "udemy-agentic-ai",
+      "title": "Introduction to Agentic AI and LLM Architectures",
+      "description": "Manual lecture 1 of the Agentic AI Cohort. Track your progress manually.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400",
+      "duration": "45:00",
+      "index": 1,
+      "type": "udemy"
+    },
+    {
+      "id": "udemy-agentic-ai-lesson-2",
+      "courseId": "udemy-agentic-ai",
+      "title": "Understanding LLM Reasonings: ReAct, Chain of Thought, and Planning",
+      "description": "Manual lecture 2 of the Agentic AI Cohort. Track your progress manually.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400",
+      "duration": "45:00",
+      "index": 2,
+      "type": "udemy"
+    },
+    {
+      "id": "udemy-agentic-ai-lesson-3",
+      "courseId": "udemy-agentic-ai",
+      "title": "Building Your First Custom AI Agent from Scratch in Python",
+      "description": "Manual lecture 3 of the Agentic AI Cohort. Track your progress manually.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400",
+      "duration": "45:00",
+      "index": 3,
+      "type": "udemy"
+    },
+    {
+      "id": "udemy-agentic-ai-lesson-4",
+      "courseId": "udemy-agentic-ai",
+      "title": "Deep Dive into LangChain, AutoGen, and crewAI Frameworks",
+      "description": "Manual lecture 4 of the Agentic AI Cohort. Track your progress manually.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400",
+      "duration": "45:00",
+      "index": 4,
+      "type": "udemy"
+    },
+    {
+      "id": "udemy-agentic-ai-lesson-5",
+      "courseId": "udemy-agentic-ai",
+      "title": "Advanced Agent Evaluation, Testing, and Production Deployment",
+      "description": "Manual lecture 5 of the Agentic AI Cohort. Track your progress manually.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400",
+      "duration": "45:00",
+      "index": 5,
+      "type": "udemy"
+    }
+  ]
+}
