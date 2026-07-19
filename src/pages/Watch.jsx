@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useFocusFlow } from '../hooks/useFocusFlow';
 import { useUIStore } from '../hooks/useUIStore';
-import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2 } from 'lucide-react';
+import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX } from 'lucide-react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/FocusFlowDB';
 
@@ -12,6 +12,7 @@ import { db } from '../db/FocusFlowDB';
  * @returns {string} Formatted duration.
  */
 function formatSeconds(totalSeconds) {
+  if (isNaN(totalSeconds) || totalSeconds === null) return '0:00';
   const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = Math.floor(totalSeconds % 60);
@@ -24,21 +25,29 @@ function formatSeconds(totalSeconds) {
 
 /**
  * Custom Interactive Watch Player View.
- * Wraps official YouTube IFrame Player API, synchronizes playback position
- * to IndexedDB, and exposes timestamped note-taking.
+ * Wraps official YouTube IFrame Player API with custom controls
+ * to eliminate "More Videos" overlays, recommendation links, and ad clicks.
  * @returns {React.JSX.Element}
  */
 export default function Watch() {
   const { courseId, lessonId } = useParams();
   const navigate = useNavigate();
-  const playerRef = useRef(null);
+  
+  const playerContainerRef = useRef(null);
+  const progressBarRef = useRef(null);
   
   const { courses, lessons, progressList, saveProgress } = useFocusFlow();
   const { activeLessonId, isPlaying, seekRequestTime, setActiveLessonId, setIsPlaying, triggerPlayerSeek } = useUIStore();
 
-  const [activeTab, setActiveTab] = useState('syllabus'); // 'syllabus' | 'notes' | 'desc'
+  const [activeTab, setActiveTab] = useState('syllabus');
   const [noteContent, setNoteContent] = useState('');
   const [ytPlayer, setYtPlayer] = useState(null);
+  
+  // Custom Player states
+  const [playerCurrentTime, setPlayerCurrentTime] = useState(0);
+  const [playerDuration, setPlayerDuration] = useState(0);
+  const [playerMuted, setPlayerMuted] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   // Retrieve course
   const course = courses.find(c => c.id === courseId);
@@ -49,15 +58,16 @@ export default function Watch() {
     .filter(l => l.courseId === courseId)
     .sort((a, b) => a.index - b.index);
 
-  // Reactive Dexie query for timestamped notes for this specific lesson
+  // Reactive Dexie query for timestamped notes
   const lessonNotes = useLiveQuery(() => 
     db.notes.where({ courseId, lessonId }).sortBy('timestamp')
   , [courseId, lessonId]) || [];
 
-  // Update active Zustand lesson tracking on component mount/lesson change
   useEffect(() => {
     if (lessonId) {
       setActiveLessonId(lessonId);
+      setPlayerCurrentTime(0);
+      setPlayerDuration(0);
     }
   }, [lessonId]);
 
@@ -66,7 +76,7 @@ export default function Watch() {
     if (ytPlayer && seekRequestTime !== null) {
       ytPlayer.seekTo(seekRequestTime, true);
       ytPlayer.playVideo();
-      triggerPlayerSeek(null); // Reset trigger
+      triggerPlayerSeek(null);
     }
   }, [seekRequestTime, ytPlayer]);
 
@@ -76,37 +86,49 @@ export default function Watch() {
 
     let playerInstance = null;
     let progressTimer = null;
+    let uiSyncTimer = null;
 
     // Retrieve previous watch position to resume
     const currentProgress = progressList.find(p => p.id === `${courseId}_${lessonId}`);
-    // Business Rule: Resume at saved seconds minus two seconds, bounded to >= 0
     const resumeSeconds = currentProgress && !currentProgress.completed ? Math.max(0, currentProgress.watchTime - 2) : 0;
 
     const onPlayerReady = (event) => {
-      // Seek to resume position on ready
+      const player = event.target;
+      setYtPlayer(player);
+      setPlayerDuration(player.getDuration());
+      setPlayerMuted(player.isMuted());
+
       if (resumeSeconds > 0) {
-        event.target.seekTo(resumeSeconds, true);
+        player.seekTo(resumeSeconds, true);
       }
-      setYtPlayer(event.target);
     };
 
     const startProgressTracking = (player) => {
       if (progressTimer) clearInterval(progressTimer);
+      
       progressTimer = setInterval(() => {
         const currentTime = player.getCurrentTime();
         const duration = player.getDuration();
         if (duration > 0) {
-          // Mark completed if watched at least 90% during active playback
           const isCompleted = (currentTime / duration) >= 0.90;
           saveProgress(courseId, lessonId, currentTime, isCompleted);
         }
       }, 10000); // save state every 10 seconds
+
+      // Fast UI interval (100ms) to update custom seekbar position smoothly
+      uiSyncTimer = setInterval(() => {
+        setPlayerCurrentTime(player.getCurrentTime());
+      }, 100);
     };
 
     const stopProgressTracking = () => {
       if (progressTimer) {
         clearInterval(progressTimer);
         progressTimer = null;
+      }
+      if (uiSyncTimer) {
+        clearInterval(uiSyncTimer);
+        uiSyncTimer = null;
       }
     };
 
@@ -119,7 +141,7 @@ export default function Watch() {
         setIsPlaying(false);
         stopProgressTracking();
         
-        // Save state immediately on key lifecycle pauses
+        // Save state immediately on pause
         if (state === window.YT.PlayerState.PAUSED) {
           const currentTime = event.target.getCurrentTime();
           const duration = event.target.getDuration();
@@ -127,7 +149,7 @@ export default function Watch() {
           saveProgress(courseId, lessonId, currentTime, isCompleted);
         }
 
-        // Business Rule: Mark completed when video ends
+        // Mark completed when video ends
         if (state === window.YT.PlayerState.ENDED) {
           const duration = event.target.getDuration();
           saveProgress(courseId, lessonId, duration, true);
@@ -141,10 +163,12 @@ export default function Watch() {
         width: '100%',
         videoId: lessonId,
         playerVars: {
-          rel: 0, // Disable related videos outside this channel
+          rel: 0, // Disable related videos
           iv_load_policy: 3, // Disable annotations
           modestbranding: 1, // Minimize logo presence
-          controls: 1
+          controls: 0, // Hide native controls to eliminate overlays and "More videos" button
+          disablekb: 1, // Disable keyboard controls to prevent cheating
+          fs: 0 // Disable native full-screen button
         },
         events: {
           onReady: onPlayerReady,
@@ -153,7 +177,6 @@ export default function Watch() {
       });
     };
 
-    // Load the official YouTube IFrame Script dynamically if not present
     if (!window.YT) {
       const tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
@@ -164,7 +187,6 @@ export default function Watch() {
       initializePlayer();
     }
 
-    // Cleanup hook resources on unmount
     return () => {
       stopProgressTracking();
       if (playerInstance) {
@@ -175,6 +197,15 @@ export default function Watch() {
     };
   }, [lessonId, courseId]);
 
+  // Handle document fullscreen state sync
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
   if (!lesson || !course) {
     return (
       <div className="p-8 text-center">
@@ -184,6 +215,56 @@ export default function Watch() {
     );
   }
 
+  // Toggle play/pause safely via transparent overlay
+  const handlePlayPause = () => {
+    if (!ytPlayer) return;
+    if (isPlaying) {
+      ytPlayer.pauseVideo();
+    } else {
+      ytPlayer.playVideo();
+    }
+  };
+
+  // Toggle Mute
+  const handleMuteToggle = () => {
+    if (!ytPlayer) return;
+    if (playerMuted) {
+      ytPlayer.unMute();
+      setPlayerMuted(false);
+    } else {
+      ytPlayer.mute();
+      setPlayerMuted(true);
+    }
+  };
+
+  // Custom Fullscreen handler
+  const handleFullscreenToggle = () => {
+    const container = playerContainerRef.current;
+    if (!container) return;
+
+    if (!document.fullscreenElement) {
+      container.requestFullscreen().catch((err) => {
+        console.error('Error entering fullscreen mode:', err);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
+  // Custom Progress bar click-seeking
+  const handleProgressBarClick = (e) => {
+    if (!ytPlayer || !progressBarRef.current || playerDuration === 0) return;
+    
+    const rect = progressBarRef.current.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const width = rect.width;
+    const clickedPercentage = clickX / width;
+    const seekSeconds = clickedPercentage * playerDuration;
+
+    ytPlayer.seekTo(seekSeconds, true);
+    setPlayerCurrentTime(seekSeconds);
+  };
+
   // Handle manual Udemy completion toggle
   const udemyProgress = progressList.find(p => p.id === `${courseId}_${lessonId}`);
   const isUdemyCompleted = udemyProgress ? udemyProgress.completed : false;
@@ -192,7 +273,7 @@ export default function Watch() {
     await saveProgress(courseId, lessonId, isUdemyCompleted ? 0 : 2700, !isUdemyCompleted);
   };
 
-  // Save new note at the active playhead timestamp
+  // Save note
   const handleSaveNote = async (e) => {
     e.preventDefault();
     if (!noteContent.trim()) return;
@@ -215,15 +296,17 @@ export default function Watch() {
     setNoteContent('');
   };
 
-  // Delete a timestamped note
   const handleDeleteNote = async (id) => {
     await db.notes.delete(id);
   };
 
+  // Calculate seek percentage
+  const progressPercent = playerDuration > 0 ? (playerCurrentTime / playerDuration) * 100 : 0;
+
   return (
-    <div className="flex flex-col lg:flex-row h-[calc(100vh-0px)] overflow-hidden">
+    <div className="flex flex-col lg:flex-row h-screen overflow-hidden bg-background">
       {/* Left Area: Video Player Panel */}
-      <div className="flex-1 bg-black flex flex-col min-w-0">
+      <div className="flex-1 bg-black flex flex-col min-w-0 h-full relative">
         {/* Navigation header */}
         <div className="flex items-center gap-4 px-6 py-4 bg-zinc-950/80 border-b border-border z-10">
           <Link to={`/courses/${courseId}`} className="text-zinc-400 hover:text-white transition">
@@ -238,10 +321,73 @@ export default function Watch() {
         </div>
 
         {/* Player Container */}
-        <div className="flex-1 relative bg-zinc-950 flex items-center justify-center">
+        <div 
+          ref={playerContainerRef} 
+          className="flex-1 relative bg-zinc-950 flex items-center justify-center group/player"
+        >
           {lesson.type === 'youtube' ? (
-            <div className="w-full h-full">
-              <div id="yt-player-iframe" className="w-full h-full absolute inset-0" />
+            <div className="w-full h-full relative">
+              {/* YouTube Iframe element */}
+              <div id="yt-player-iframe" className="w-full h-full absolute inset-0 pointer-events-none" />
+
+              {/* Transparent pointer-events overlay */}
+              {/* Prevents user from clicking into YouTube overlays, title screens, or logos */}
+              <div 
+                onClick={handlePlayPause}
+                className="w-full h-[calc(100%-48px)] absolute inset-x-0 top-0 cursor-pointer z-10 bg-transparent"
+              />
+
+              {/* Custom Controls Bar overlay */}
+              {/* Shows up on hover or when paused */}
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 flex flex-col gap-3 z-20 opacity-0 group-hover/player:opacity-100 transition-opacity duration-300">
+                
+                {/* Seek Timeline */}
+                <div 
+                  ref={progressBarRef}
+                  onClick={handleProgressBarClick}
+                  className="w-full h-1.5 bg-zinc-800 rounded-full cursor-pointer relative overflow-hidden group/timeline hover:h-2 transition-all"
+                >
+                  <div 
+                    className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-75"
+                    style={{ width: `${progressPercent}%` }}
+                  />
+                </div>
+
+                {/* Control Actions Row */}
+                <div className="flex items-center justify-between text-white text-xs">
+                  <div className="flex items-center gap-4">
+                    {/* Play/Pause Button */}
+                    <button 
+                      onClick={handlePlayPause} 
+                      className="p-1 text-zinc-300 hover:text-white transition cursor-pointer"
+                    >
+                      {isPlaying ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
+                    </button>
+
+                    {/* Mute Button */}
+                    <button 
+                      onClick={handleMuteToggle}
+                      className="p-1 text-zinc-300 hover:text-white transition cursor-pointer"
+                    >
+                      {playerMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                    </button>
+
+                    {/* Elapsed Time */}
+                    <span className="font-semibold text-zinc-400 select-none">
+                      {formatSeconds(playerCurrentTime)} / {formatSeconds(playerDuration)}
+                    </span>
+                  </div>
+
+                  {/* Fullscreen Button */}
+                  <button 
+                    onClick={handleFullscreenToggle}
+                    className="p-1 text-zinc-300 hover:text-white transition cursor-pointer"
+                  >
+                    <Maximize size={16} />
+                  </button>
+                </div>
+
+              </div>
             </div>
           ) : (
             // Manual Udemy course content tracker shell

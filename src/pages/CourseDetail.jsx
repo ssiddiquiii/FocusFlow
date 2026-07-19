@@ -15,6 +15,7 @@ export default function CourseDetail() {
   const { courses, lessons, progressList, getCourseProgress } = useFocusFlow();
 
   const [courseProgress, setCourseProgress] = useState(0);
+  const [expandedDesc, setExpandedDesc] = useState(false);
 
   // Retrieve matching course
   const course = courses.find(c => c.id === courseId);
@@ -67,7 +68,19 @@ export default function CourseDetail() {
             {course.type === 'youtube' ? 'YouTube Course' : 'Udemy manual'}
           </span>
           <h1 className="text-3xl font-bold text-white tracking-tight">{course.title}</h1>
-          <p className="text-zinc-400 text-sm leading-relaxed max-w-2xl">{course.description}</p>
+          <div className="space-y-1 max-w-2xl">
+            <p className="text-zinc-400 text-sm leading-relaxed">
+              {expandedDesc ? course.description : `${course.description.slice(0, 180)}${course.description.length > 180 ? '...' : ''}`}
+            </p>
+            {course.description.length > 180 && (
+              <button
+                onClick={() => setExpandedDesc(!expandedDesc)}
+                className="text-primary hover:text-primary-hover hover:underline text-xs font-bold focus:outline-none cursor-pointer"
+              >
+                {expandedDesc ? "Show Less" : "Read More"}
+              </button>
+            )}
+          </div>
           <div className="text-xs text-zinc-500 font-semibold">Instructor: {course.channelName}</div>
         </div>
 
