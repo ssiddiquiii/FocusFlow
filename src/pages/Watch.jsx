@@ -29,7 +29,8 @@ function formatSeconds(totalSeconds) {
  * Custom Interactive Watch Player View.
  * Wraps official YouTube IFrame Player API with custom controls
  * to eliminate "More Videos" overlays, recommendation links, and ad clicks.
- * Features a lazy-load play-on-click thumbnail placeholder and speed controls.
+ * YouTube-style layout: strict 16:9 aspect ratio video player at top,
+ * scrollable title/notes/description below, syllabus checklist on the right.
  * @returns {React.JSX.Element}
  */
 export default function Watch() {
@@ -42,7 +43,7 @@ export default function Watch() {
   const { courses, lessons, progressList, saveProgress } = useFocusFlow();
   const { activeLessonId, isPlaying, seekRequestTime, setActiveLessonId, setIsPlaying, triggerPlayerSeek } = useUIStore();
 
-  const [activeTab, setActiveTab] = useState('syllabus');
+  const [activeTab, setActiveTab] = useState('notes'); // default to notes below video
   const [noteContent, setNoteContent] = useState('');
   const [ytPlayer, setYtPlayer] = useState(null);
   
@@ -82,10 +83,8 @@ export default function Watch() {
   // Handle player seek trigger changes from Zustand store
   useEffect(() => {
     if (ytPlayer && seekRequestTime !== null) {
-      // If player wasn't initialized yet, trigger it
       if (!isPlayerTriggered) {
         setIsPlayerTriggered(true);
-        // Wait for player to load before seeking
         setTimeout(() => {
           if (ytPlayer) {
             ytPlayer.seekTo(seekRequestTime, true);
@@ -101,7 +100,6 @@ export default function Watch() {
   }, [seekRequestTime, ytPlayer, isPlayerTriggered]);
 
   // YouTube IFrame Player API Initialization
-  // Runs ONLY after the user clicks the play/thumbnail overlay (isPlayerTriggered === true)
   useEffect(() => {
     if (!lesson || lesson.type !== 'youtube' || !isPlayerTriggered) return;
 
@@ -119,7 +117,6 @@ export default function Watch() {
       setPlayerMuted(player.isMuted());
       player.setPlaybackRate(playbackSpeed);
 
-      // Auto-start video when user clicked the thumbnail placeholder
       player.seekTo(resumeSeconds, true);
       player.playVideo();
     };
@@ -184,10 +181,10 @@ export default function Watch() {
           rel: 0,
           iv_load_policy: 3,
           modestbranding: 1,
-          controls: 0, // hide native controls to avoid "More videos"
+          controls: 0, 
           disablekb: 1,
           fs: 0,
-          cc_load_policy: 0 // Disable captions by default
+          cc_load_policy: 0 
         },
         events: {
           onReady: onPlayerReady,
@@ -334,10 +331,11 @@ export default function Watch() {
 
   return (
     <div className="flex flex-col lg:flex-row h-screen overflow-hidden bg-background">
-      {/* Left Area: Video Player Panel */}
-      <div className="flex-1 bg-black flex flex-col min-w-0 h-full relative">
+      {/* Left Panel: Scrollable main content containing Player and Metadata details (YouTube Style) */}
+      <div className="flex-1 flex flex-col h-full min-w-0 overflow-y-auto bg-zinc-950/20">
+        
         {/* Navigation header */}
-        <div className="flex items-center gap-4 px-6 py-4 bg-zinc-950/80 border-b border-border z-10">
+        <div className="flex items-center gap-4 px-6 py-4 bg-zinc-950/80 border-b border-border sticky top-0 z-30 backdrop-blur">
           <Link to={`/courses/${courseId}`} className="text-zinc-400 hover:text-white transition">
             <ArrowLeft size={18} />
           </Link>
@@ -349,10 +347,10 @@ export default function Watch() {
           </div>
         </div>
 
-        {/* Player Container */}
+        {/* Player Container: STRICT 16:9 ASPECT-RATIO WITH ZERO VERTICAL BLACK BARS */}
         <div 
           ref={playerContainerRef} 
-          className="flex-1 relative bg-zinc-950 flex items-center justify-center group/player"
+          className="w-full aspect-video relative bg-black flex-shrink-0 group/player border-b border-border"
         >
           {lesson.type === 'youtube' ? (
             <div className="w-full h-full relative">
@@ -365,13 +363,13 @@ export default function Watch() {
                   <img 
                     src={lesson.thumbnailUrl} 
                     alt={lesson.title} 
-                    className="w-full h-full object-cover opacity-75 group-hover/thumb:scale-[1.02] transition duration-500"
+                    className="w-full h-full object-cover opacity-70 group-hover/thumb:scale-[1.01] transition duration-500"
                   />
-                  <div className="absolute inset-0 bg-black/40 group-hover/thumb:bg-black/30 transition duration-300" />
+                  <div className="absolute inset-0 bg-black/35 group-hover/thumb:bg-black/25 transition duration-300" />
                   
                   {/* Glowing Play Circle */}
-                  <div className="w-20 h-20 rounded-full flex items-center justify-center bg-primary text-white border-2 border-white/20 shadow-2xl shadow-primary/45 group-hover/thumb:scale-110 transition duration-300 absolute z-20">
-                    <Play size={32} fill="currentColor" className="ml-1" />
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-primary text-white border-2 border-white/20 shadow-2xl shadow-primary/45 group-hover/thumb:scale-110 transition duration-300 absolute z-20">
+                    <Play size={24} fill="currentColor" className="ml-1" />
                   </div>
                 </div>
               ) : (
@@ -452,7 +450,7 @@ export default function Watch() {
             </div>
           ) : (
             // Manual Udemy course content tracker shell
-            <div className="flex flex-col items-center justify-center p-8 max-w-md text-center space-y-6">
+            <div className="flex flex-col items-center justify-center p-8 max-w-md mx-auto text-center space-y-6 h-full justify-center">
               <span className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider rounded bg-accent/20 text-accent border border-accent/30">
                 Udemy Cohort
               </span>
@@ -482,169 +480,167 @@ export default function Watch() {
             </div>
           )}
         </div>
-      </div>
 
-      {/* Right Area: Sidebar Panels (Syllabus, Notes, Description) */}
-      <div className="w-full lg:w-[420px] bg-zinc-950 border-l border-border flex flex-col flex-shrink-0 h-full">
-        {/* Tab Selection Header */}
-        <div className="flex border-b border-border bg-zinc-950">
-          <button
-            onClick={() => setActiveTab('syllabus')}
-            className={`flex-1 py-4 text-xs font-bold uppercase tracking-wider border-b-2 text-center transition ${
-              activeTab === 'syllabus' ? 'border-primary text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
-            }`}
-          >
-            <div className="flex items-center justify-center gap-2">
-              <BookOpen size={14} />
-              <span>Syllabus</span>
-            </div>
-          </button>
-
-          {lesson.type === 'youtube' && (
-            <button
-              onClick={() => setActiveTab('notes')}
-              className={`flex-1 py-4 text-xs font-bold uppercase tracking-wider border-b-2 text-center transition ${
-                activeTab === 'notes' ? 'border-primary text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
-              }`}
-            >
-              <div className="flex items-center justify-center gap-2">
-                <FileText size={14} />
-                <span>Notes ({lessonNotes.length})</span>
+        {/* Video details & interactive workspaces directly below player */}
+        <div className="p-6 space-y-6 max-w-4xl w-full">
+          <div className="space-y-2 border-b border-border pb-4">
+            <h1 className="text-2xl font-bold text-white tracking-tight">{lesson.title}</h1>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-500">
+              <div>
+                <span className="text-zinc-600">Instructor:</span> <span className="text-zinc-300 font-semibold">{course.channelName}</span>
               </div>
-            </button>
-          )}
+              <span className="text-zinc-700">•</span>
+              <div>
+                <span className="text-zinc-600">Origin:</span> <span className="text-zinc-300 font-semibold">{course.type === 'youtube' ? 'YouTube Public API' : 'Udemy manual tracking'}</span>
+              </div>
+            </div>
+          </div>
 
-          <button
-            onClick={() => setActiveTab('desc')}
-            className={`flex-1 py-4 text-xs font-bold uppercase tracking-wider border-b-2 text-center transition ${
-              activeTab === 'desc' ? 'border-primary text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
-            }`}
-          >
-            <span>Details</span>
-          </button>
+          {/* Interactive Workspace Panel (Notes and Description) */}
+          <div className="space-y-4">
+            <div className="flex border-b border-border text-xs font-bold uppercase tracking-wider">
+              {lesson.type === 'youtube' && (
+                <button
+                  onClick={() => setActiveTab('notes')}
+                  className={`pb-3 pr-6 border-b-2 transition ${
+                    activeTab === 'notes' ? 'border-primary text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                  }`}
+                >
+                  Notes ({lessonNotes.length})
+                </button>
+              )}
+              <button
+                onClick={() => setActiveTab('desc')}
+                className={`pb-3 px-6 border-b-2 transition ${
+                  activeTab === 'desc' ? 'border-primary text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                }`}
+              >
+                Video Description
+              </button>
+            </div>
+
+            {/* TAB CONTENTS */}
+            <div className="py-2">
+              {/* NOTES TAB */}
+              {activeTab === 'notes' && lesson.type === 'youtube' && (
+                <div className="space-y-6">
+                  {/* Form Input */}
+                  <form onSubmit={handleSaveNote} className="flex gap-3 items-start">
+                    <textarea
+                      value={noteContent}
+                      onChange={(e) => setNoteContent(e.target.value)}
+                      placeholder="Type a timestamped note... (Press Enter to Save)"
+                      className="flex-1 min-h-[50px] p-3 bg-zinc-900 border border-border rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-primary transition resize-none"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault();
+                          handleSaveNote(e);
+                        }
+                      }}
+                    />
+                    <button
+                      type="submit"
+                      disabled={!noteContent.trim()}
+                      className="px-5 py-3 h-[50px] bg-primary disabled:opacity-50 text-white rounded-xl text-xs font-bold hover:bg-primary/95 transition flex items-center justify-center gap-2 flex-shrink-0"
+                    >
+                      <Plus size={16} />
+                      <span>Note {ytPlayer && `[${formatSeconds(ytPlayer.getCurrentTime())}]`}</span>
+                    </button>
+                  </form>
+
+                  {/* Notes Timeline List */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {lessonNotes.length === 0 ? (
+                      <p className="text-xs text-zinc-500 py-4 col-span-2">No notes written for this video yet.</p>
+                    ) : (
+                      lessonNotes.map((note) => (
+                        <div key={note.id} className="glass-panel p-4 rounded-xl relative group border border-border">
+                          <div className="flex items-center justify-between mb-2">
+                            {/* Clickable Seek Timestamp Badge */}
+                            <button
+                              onClick={() => triggerPlayerSeek(note.timestamp)}
+                              className="px-2.5 py-1 text-[10px] font-bold rounded bg-accent/20 text-accent hover:bg-accent/30 border border-accent/30 transition flex items-center gap-1 cursor-pointer"
+                            >
+                              <Clock size={10} />
+                              <span>{formatSeconds(note.timestamp)}</span>
+                            </button>
+
+                            {/* Delete Note */}
+                            <button
+                              onClick={() => handleDeleteNote(note.id)}
+                              className="text-zinc-600 hover:text-red-500 opacity-0 group-hover:opacity-100 transition p-1 cursor-pointer"
+                              title="Delete note"
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          </div>
+                          <p className="text-sm text-zinc-200 leading-relaxed whitespace-pre-line">{note.content}</p>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* DESCRIPTION TAB */}
+              {activeTab === 'desc' && (
+                <div className="glass-panel p-5 rounded-xl border border-border">
+                  <p className="text-sm text-zinc-400 leading-relaxed whitespace-pre-wrap">
+                    {lesson.description || 'No description available for this lecture.'}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
-        {/* Tab Contents */}
-        <div className="flex-1 overflow-y-auto p-4 min-h-0">
-          {/* TAB 1: SYLLABUS LIST */}
-          {activeTab === 'syllabus' && (
-            <div className="space-y-2">
-              {courseLessons.map((item) => {
-                const prog = progressList.find(p => p.id === `${courseId}_${item.id}`);
-                const isCompleted = prog ? prog.completed : false;
-                const isActive = item.id === lessonId;
+      </div>
 
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                      if (!isActive) navigate(`/courses/${courseId}/lessons/${item.id}`);
-                    }}
-                    className={`w-full text-left p-3 rounded-lg flex items-center justify-between border transition group ${
-                      isActive 
-                        ? 'bg-zinc-900 border-primary/50 text-white' 
-                        : 'bg-transparent border-transparent hover:bg-zinc-900/50 text-zinc-400 hover:text-zinc-200'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      {isCompleted ? (
-                        <CheckCircle2 className="text-accent flex-shrink-0" size={16} fill="currentColor" />
-                      ) : (
-                        <Circle className="text-zinc-700 group-hover:text-zinc-500 flex-shrink-0" size={16} />
-                      )}
-                      <div className="min-w-0">
-                        <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold block mb-0.5">
-                          Lecture {item.index}
-                        </span>
-                        <span className="text-xs font-medium truncate block">{item.title}</span>
-                      </div>
-                    </div>
-                    <span className="text-[10px] text-zinc-600 font-medium flex-shrink-0 flex items-center gap-1">
-                      <Clock size={10} />
-                      <span>{item.duration}</span>
+      {/* Right Sidebar: Syllabus Checklist (Full Height, clean scrollable syllabus playlist) */}
+      <div className="w-full lg:w-[380px] bg-zinc-950 border-l border-border flex flex-col flex-shrink-0 h-full">
+        <div className="px-5 py-4 border-b border-border bg-zinc-950 flex items-center gap-2">
+          <BookOpen size={16} className="text-primary" />
+          <span className="text-xs font-bold uppercase tracking-wider text-white">Course Syllabus</span>
+        </div>
+        
+        <div className="flex-1 overflow-y-auto p-4 space-y-2">
+          {courseLessons.map((item) => {
+            const prog = progressList.find(p => p.id === `${courseId}_${item.id}`);
+            const isCompleted = prog ? prog.completed : false;
+            const isActive = item.id === lessonId;
+
+            return (
+              <button
+                key={item.id}
+                onClick={() => {
+                  if (!isActive) navigate(`/courses/${courseId}/lessons/${item.id}`);
+                }}
+                className={`w-full text-left p-3 rounded-xl flex items-center justify-between border transition group ${
+                  isActive 
+                    ? 'bg-secondary/60 border-primary/45 text-white' 
+                    : 'bg-transparent border-transparent hover:bg-zinc-900/50 text-zinc-400 hover:text-zinc-200'
+                }`}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  {isCompleted ? (
+                    <CheckCircle2 className="text-accent flex-shrink-0" size={16} fill="currentColor" />
+                  ) : (
+                    <Circle className="text-zinc-800 group-hover:text-zinc-600 flex-shrink-0" size={16} />
+                  )}
+                  <div className="min-w-0">
+                    <span className="text-[9px] text-zinc-500 uppercase tracking-widest font-semibold block mb-0.5">
+                      Lecture {item.index}
                     </span>
-                  </button>
-                );
-              })}
-            </div>
-          )}
-
-          {/* TAB 2: NOTES INPUT & LIST */}
-          {activeTab === 'notes' && (
-            <div className="space-y-4 flex flex-col h-full min-h-0">
-              {/* Form Input */}
-              <form onSubmit={handleSaveNote} className="space-y-2 flex-shrink-0">
-                <textarea
-                  value={noteContent}
-                  onChange={(e) => setNoteContent(e.target.value)}
-                  placeholder="Type a timestamped note... (Press Shift+Enter for new line)"
-                  className="w-full h-24 p-3 bg-zinc-900 border border-border rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-primary transition resize-none"
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                      e.preventDefault();
-                      handleSaveNote(e);
-                    }
-                  }}
-                />
-                <button
-                  type="submit"
-                  disabled={!noteContent.trim()}
-                  className="w-full py-2.5 bg-primary disabled:opacity-50 text-white rounded-lg text-xs font-bold hover:bg-primary/95 transition flex items-center justify-center gap-2"
-                >
-                  <Plus size={14} />
-                  <span>Save Note {ytPlayer && `[${formatSeconds(ytPlayer.getCurrentTime())}]`}</span>
-                </button>
-              </form>
-
-              {/* Notes List */}
-              <div className="flex-1 overflow-y-auto space-y-3 pr-1 min-h-0">
-                {lessonNotes.length === 0 ? (
-                  <p className="text-xs text-zinc-500 text-center py-8">No notes written for this video yet.</p>
-                ) : (
-                  lessonNotes.map((note) => (
-                    <div key={note.id} className="glass-panel p-3 rounded-xl relative group">
-                      <div className="flex items-center justify-between mb-2">
-                        {/* Clickable Seek Timestamp Badge */}
-                        <button
-                          onClick={() => triggerPlayerSeek(note.timestamp)}
-                          className="px-2 py-1 text-[10px] font-bold rounded bg-accent/20 text-accent hover:bg-accent/30 border border-accent/30 transition flex items-center gap-1"
-                        >
-                          <Clock size={10} />
-                          <span>{formatSeconds(note.timestamp)}</span>
-                        </button>
-
-                        {/* Delete Note */}
-                        <button
-                          onClick={() => handleDeleteNote(note.id)}
-                          className="text-zinc-600 hover:text-red-500 opacity-0 group-hover:opacity-100 transition p-1"
-                          title="Delete note"
-                        >
-                          <Trash2 size={12} />
-                        </button>
-                      </div>
-                      <p className="text-xs text-zinc-200 leading-relaxed whitespace-pre-line">{note.content}</p>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* TAB 3: DESCRIPTION */}
-          {activeTab === 'desc' && (
-            <div className="space-y-4">
-              <span className="text-xs text-zinc-500 font-bold uppercase tracking-wider block">Course Info</span>
-              <div className="p-3 bg-zinc-900/50 border border-border rounded-xl space-y-2 text-xs">
-                <div><span className="text-zinc-500">Instructor:</span> <span className="text-zinc-300 font-semibold">{course.channelName}</span></div>
-                <div><span className="text-zinc-500">Origin:</span> <span className="text-zinc-300 font-semibold">{course.type === 'youtube' ? 'YouTube Public API' : 'Udemy manual tracking'}</span></div>
-              </div>
-
-              <span className="text-xs text-zinc-500 font-bold uppercase tracking-wider block mt-6">Video Description</span>
-              <p className="text-xs text-zinc-400 leading-relaxed whitespace-pre-wrap">
-                {lesson.description || 'No description available for this lecture.'}
-              </p>
-            </div>
-          )}
+                    <span className="text-xs font-medium truncate block">{item.title}</span>
+                  </div>
+                </div>
+                <span className="text-[10px] text-zinc-600 font-medium flex-shrink-0 flex items-center gap-1 ml-2">
+                  <Clock size={10} />
+                  <span>{item.duration}</span>
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
