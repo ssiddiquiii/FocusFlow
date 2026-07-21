@@ -1,16 +1,128 @@
-# React + Vite
+# FocusFlow
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+FocusFlow is a local-first, distraction-free learning dashboard built for watching video courses without YouTube recommendations, ads, or algorithmic clutter. It gives you full control over your learning progress, timestamped note-taking, and course management.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ⚡ Key Features
 
-## React Compiler
+- **Distraction-Free YouTube Player**: Embedded custom controls with zero recommendations, ad overlays, or related video popups.
+- **Timestamped Note Taking**: Write notes while watching videos with one-click timestamp seeking (`[MM:SS]`).
+- **YouTube & Udemy Course Support**: Track structured YouTube playlists via API and manually log progress for Udemy/external courses.
+- **Per-Catalog Resume Tracking**: Automatically remembers the exact video and timestamp where you left off for each course.
+- **Local-First & Offline Ready**: Powered by IndexedDB (Dexie.js). Your notes, progress, and course data stay 100% private in your browser.
+- **Installable PWA**: Installable as a standalone desktop or mobile application via Chrome / Web App Install.
+- **Keyboard Controls**: Complete media navigation shortcuts (`Space`/`K` for play-pause, `J`/`L` for 5s seek, `M` for mute, `F` for fullscreen, `C` for captions).
+- **Auto-Hiding Controls**: Player controls and mouse cursor automatically fade out when idle during video playback.
+- **Backup Export & Import**: JSON schema-validated backup system to back up and restore your database across devices.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- **Frontend Core**: React 19, React Router v7
+- **Build Tool**: Vite 8
+- **Database**: Dexie.js (IndexedDB wrapper) with `dexie-react-hooks`
+- **Validation**: Zod (schema enforcement for courses, lessons, progress, and backups)
+- **State Management**: Zustand
+- **Styling**: Tailwind CSS v4, Lucide Icons
+- **PWA**: `vite-plugin-pwa` (Workbox service worker)
+
+---
+
+## 📁 Project Structure
+
+```text
+focus-flow/
+├── public/                  # Static assets, PWA icons, favicon, logo
+├── scripts/                 # Utility scripts (YouTube playlist fetcher)
+│   └── fetchRealPlaylists.js
+├── src/
+│   ├── assets/              # Web fonts & styles
+│   ├── components/          # Reusable UI components
+│   ├── db/                  # Dexie.js IndexedDB instance & seed data
+│   │   ├── FocusFlowDB.js
+│   │   └── seedData.json
+│   ├── hooks/               # Custom hooks (useFocusFlow, useUIStore)
+│   ├── pages/               # Page routes (Dashboard, CourseDetail, Watch, Settings, Offline)
+│   ├── types/               # Zod validation schemas
+│   ├── App.jsx              # Main App layout & route configuration
+│   ├── index.css            # Tailwind CSS v4 & theme variables
+│   └── main.jsx             # React DOM entrypoint
+├── docs/                    # Architecture & feature roadmap documentation
+├── package.json
+└── vite.config.js
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm or pnpm
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ssiddiquiii/FocusFlow.git
+   cd focus-flow
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the project root:
+   ```env
+   YOUTUBE_API_KEY=your_youtube_data_api_key_here
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## 📦 Building for Production
+
+To create an optimized production build:
+
+```bash
+npm run build
+```
+
+The compiled assets will be generated in the `dist/` directory, ready to deploy to Vercel, Netlify, or any static host.
+
+---
+
+## ⌨️ Keyboard Shortcuts (Watch View)
+
+| Key | Action |
+| --- | --- |
+| `Space` / `K` | Toggle Play / Pause |
+| `←` / `J` | Seek backward 5 seconds |
+| `→` / `L` | Seek forward 5 seconds |
+| `M` | Toggle Mute / Unmute |
+| `F` | Toggle Fullscreen |
+| `C` | Toggle Captions (CC) |
+
+*Shortcuts are automatically disabled when typing inside note inputs or textareas.*
+
+---
+
+## 🔒 Data & Privacy
+
+FocusFlow operates entirely on a **local-first** architecture. None of your notes, progress statistics, or personal learning data are sent to external servers. Data is stored locally using IndexedDB in your browser. You can export a JSON backup at any time from the **Settings** page.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
