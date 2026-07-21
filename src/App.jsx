@@ -115,14 +115,16 @@ function AppContent() {
             <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
           </div>
         }>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/courses/:courseId" element={<CourseDetail />} />
-            <Route path="/courses/:courseId/lessons/:lessonId" element={<Watch />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/offline" element={<Offline />} />
-            <Route path="*" element={<Dashboard />} />
-          </Routes>
+          <div key={location.pathname} className="animate-page-entry h-full">
+            <Routes location={location}>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/courses/:courseId" element={<CourseDetail />} />
+              <Route path="/courses/:courseId/lessons/:lessonId" element={<Watch />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/offline" element={<Offline />} />
+              <Route path="*" element={<Dashboard />} />
+            </Routes>
+          </div>
         </Suspense>
       </main>
     </div>
