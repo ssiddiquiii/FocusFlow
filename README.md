@@ -90,15 +90,19 @@ focus-flow/
 
 ---
 
-### 🔑 Obtaining a YouTube Data API v3 Key
+### 🔑 Obtaining & Configuring a YouTube Data API v3 Key
 
-If you want to fetch new playlists or run the playlist sync script (`scripts/fetchRealPlaylists.js`), you need a free YouTube Data API Key:
+FocusFlow uses local IndexedDB caching, meaning **daily video watching, note-taking, and app navigation consume 0 API quota units**. 
+
+An API Key is only required if you want to run the playlist fetch script (`scripts/fetchRealPlaylists.js`) or import new YouTube playlists:
 
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
-2. Create a new project (e.g. `FocusFlow-Local`).
+2. Create a new project (e.g., `FocusFlow-Local`).
 3. Navigate to **APIs & Services** > **Library**, search for **YouTube Data API v3**, and click **Enable**.
 4. Navigate to **APIs & Services** > **Credentials**, click **Create Credentials** > **API Key**.
 5. Copy your API Key and paste it into your `.env` file (`YOUTUBE_API_KEY=your_key_here`) or Vercel Environment Variables.
+
+*For detailed API quota mechanics and 0-unit vs active API scenarios, see [docs/YOUTUBE_API_QUOTA_ANALYSIS.md](docs/YOUTUBE_API_QUOTA_ANALYSIS.md).*
 
 ---
 
