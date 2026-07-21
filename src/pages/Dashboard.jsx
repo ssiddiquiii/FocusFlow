@@ -23,25 +23,42 @@ export default function Dashboard() {
   const [courseProgressMap, setCourseProgressMap] = useState({});
   const [continuePath, setContinuePath] = useState(null);
 
-  // Compute progress for each course reactively when list changes
+  // Compute progress for each course reactively when list changes (Parallel execution)
   useEffect(() => {
+    let isCancelled = false;
+
     async function loadAllProgress() {
-      const progressData = {};
-      for (const course of courses) {
-        progressData[course.id] = await getCourseProgress(course.id);
+      const progressEntries = await Promise.all(
+        courses.map(async (course) => {
+          const progress = await getCourseProgress(course.id);
+          return [course.id, progress];
+        })
+      );
+
+      if (!isCancelled) {
+        setCourseProgressMap(Object.fromEntries(progressEntries));
       }
-      setCourseProgressMap(progressData);
     }
     
     if (courses.length > 0) {
       loadAllProgress();
     }
-  }, [courses, progressList]);
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [courses, progressList, getCourseProgress]);
 
   // Calculate the "Continue Learning" path on mount
   useEffect(() => {
-    getContinueLearningPath().then(path => setContinuePath(path));
-  }, [progressList]);
+    let isCancelled = false;
+    getContinueLearningPath().then(path => {
+      if (!isCancelled) setContinuePath(path);
+    });
+    return () => {
+      isCancelled = true;
+    };
+  }, [progressList, getContinueLearningPath]);
 
   if (isInitializing) {
     return (
@@ -60,10 +77,10 @@ export default function Dashboard() {
 
   const sortedCourses = [...courses].sort((a, b) => {
     const progressA = progressList.filter(p => p.courseId === a.id);
-    const maxTimeA = progressA.length > 0 ? Math.max(...progressA.map(p => p.updatedAt || 0)) : 0;
+    const maxTimeA = progressA.length > 0 ? Math.max(...progressA.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
 
     const progressB = progressList.filter(p => p.courseId === b.id);
-    const maxTimeB = progressB.length > 0 ? Math.max(...progressB.map(p => p.updatedAt || 0)) : 0;
+    const maxTimeB = progressB.length > 0 ? Math.max(...progressB.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
 
     if (maxTimeA !== maxTimeB) {
       return maxTimeB - maxTimeA;

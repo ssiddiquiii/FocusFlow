@@ -111,16 +111,20 @@ export default function Watch() {
     let playerInstance = null;
     let progressTimer = null;
     let uiSyncTimer = null;
+    let captionTimeout1 = null;
+    let captionTimeout2 = null;
 
     const currentProgress = progressList.find(p => p.id === `${courseId}_${lessonId}`);
     const resumeSeconds = currentProgress && !currentProgress.completed ? Math.max(0, currentProgress.watchTime - 2) : 0;
 
     const forceCaptionsOff = (player) => {
       try {
-        player.unloadModule('captions');
-        player.unloadModule('cc');
-        player.setOption('captions', 'track', {});
-        player.setOption('captions', 'reload', true);
+        if (player && typeof player.unloadModule === 'function') {
+          player.unloadModule('captions');
+          player.unloadModule('cc');
+          player.setOption('captions', 'track', {});
+          player.setOption('captions', 'reload', true);
+        }
       } catch (_) {}
       setCaptionsEnabled(false);
     };
@@ -134,9 +138,9 @@ export default function Watch() {
 
       // Force captions OFF immediately
       forceCaptionsOff(player);
-      // Also force off after a short delay (YouTube sometimes re-enables after ready)
-      setTimeout(() => forceCaptionsOff(player), 500);
-      setTimeout(() => forceCaptionsOff(player), 1500);
+      // Also force off after a short delay
+      captionTimeout1 = setTimeout(() => forceCaptionsOff(player), 500);
+      captionTimeout2 = setTimeout(() => forceCaptionsOff(player), 1500);
 
       player.seekTo(resumeSeconds, true);
       player.playVideo();
@@ -228,13 +232,26 @@ export default function Watch() {
 
     return () => {
       stopProgressTracking();
+      if (captionTimeout1) clearTimeout(captionTimeout1);
+      if (captionTimeout2) clearTimeout(captionTimeout2);
       if (playerInstance) {
-        playerInstance.destroy();
+        try {
+          playerInstance.destroy();
+        } catch (_) {}
       }
       setYtPlayer(null);
       setIsPlaying(false);
     };
   }, [lessonId, courseId, isPlayerTriggered]);
+
+  // Cleanup mouse timer on unmount
+  useEffect(() => {
+    return () => {
+      if (mouseTimerRef.current) {
+        clearTimeout(mouseTimerRef.current);
+      }
+    };
+  }, []);
 
   // Sync fullscreen state
   useEffect(() => {

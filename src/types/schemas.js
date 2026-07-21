@@ -36,7 +36,8 @@ export const UserProgressSchema = z.object({
   lessonId: z.string().min(1),
   completed: z.boolean().default(false),
   watchTime: z.number().int().nonnegative().default(0), // in seconds
-  lastWatched: z.number().int().positive() // timestamp in ms
+  lastWatched: z.number().int().positive(), // timestamp in ms
+  updatedAt: z.number().int().positive().optional() // timestamp in ms
 });
 
 /**

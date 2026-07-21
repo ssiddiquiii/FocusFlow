@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import CourseDetail from './pages/CourseDetail';
-import Watch from './pages/Watch';
-import Settings from './pages/Settings';
-import Offline from './pages/Offline';
-import { BookOpen, Settings as SettingsIcon, WifiOff, Menu, ChevronLeft, ChevronRight } from 'lucide-react';
+import { BookOpen, Settings as SettingsIcon, WifiOff, Menu } from 'lucide-react';
 import { useUIStore } from './hooks/useUIStore';
+
+// Lazy-loaded page components for optimal bundle splitting
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const CourseDetail = lazy(() => import('./pages/CourseDetail'));
+const Watch = lazy(() => import('./pages/Watch'));
+const Settings = lazy(() => import('./pages/Settings'));
+const Offline = lazy(() => import('./pages/Offline'));
 
 /**
  * Inner shell wrapper to access React Router location hooks.
@@ -108,14 +110,20 @@ function AppContent() {
 
       {/* Main Content Area */}
       <main className="flex-1 overflow-y-auto min-w-0">
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/courses/:courseId" element={<CourseDetail />} />
-          <Route path="/courses/:courseId/lessons/:lessonId" element={<Watch />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/offline" element={<Offline />} />
-          <Route path="*" element={<Dashboard />} />
-        </Routes>
+        <Suspense fallback={
+          <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
+            <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
+          </div>
+        }>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/courses/:courseId" element={<CourseDetail />} />
+            <Route path="/courses/:courseId/lessons/:lessonId" element={<Watch />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/offline" element={<Offline />} />
+            <Route path="*" element={<Dashboard />} />
+          </Routes>
+        </Suspense>
       </main>
     </div>
   );
