@@ -133,6 +133,16 @@ The compiled assets will be generated in the `dist/` directory, ready to deploy 
 
 ---
 
+## 📚 Deep Dive Documentation
+
+For in-depth architecture reports, technical feasibility evaluations, and product roadmaps, refer to the documents in the [`docs/`](docs/) directory:
+
+- [**`docs/CRITICAL_EVALUATION.md`**](docs/CRITICAL_EVALUATION.md): Critical analysis of system dependencies, YouTube ToS & ad behavior, market viability, and SaaS feasibility.
+- [**`docs/YOUTUBE_API_QUOTA_ANALYSIS.md`**](docs/YOUTUBE_API_QUOTA_ANALYSIS.md): Technical breakdown of 5 zero-unit local scenarios vs 5 active YouTube Data API quota scenarios.
+- [**`docs/ROADMAP_RECOMMENDATIONS.md`**](docs/ROADMAP_RECOMMENDATIONS.md): Future technical roadmap covering Command Palette (`Ctrl+K`), Markdown sync, speed memory, and code scratchpad.
+
+---
+
 ## 🔒 Data & Privacy
 
 FocusFlow operates entirely on a **local-first** architecture. None of your notes, progress statistics, or personal learning data are sent to external servers. Data is stored locally using IndexedDB in your browser. You can export a JSON backup at any time from the **Settings** page.
