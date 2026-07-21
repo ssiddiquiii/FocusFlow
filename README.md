@@ -1,12 +1,12 @@
 # FocusFlow
 
-FocusFlow is a local-first, distraction-free learning dashboard built for watching video courses without YouTube recommendations, ads, or algorithmic clutter. It gives you full control over your learning progress, timestamped note-taking, and course management.
+FocusFlow is a local-first, distraction-free learning dashboard built for watching video courses without YouTube homepage recommendations, clickbait sidebars, or algorithmic clutter. It gives you full control over your learning progress, timestamped note-taking, and course management.
 
 ---
 
 ## ⚡ Key Features
 
-- **Distraction-Free YouTube Player**: Embedded custom controls with zero recommendations, ad overlays, or related video popups.
+- **Distraction-Free YouTube Player**: Embedded custom controls with zero homepage feed clutter, related video popups, or comments section distractions.
 - **Timestamped Note Taking**: Write notes while watching videos with one-click timestamp seeking (`[MM:SS]`).
 - **YouTube & Udemy Course Support**: Track structured YouTube playlists via API and manually log progress for Udemy/external courses.
 - **Per-Catalog Resume Tracking**: Automatically remembers the exact video and timestamp where you left off for each course.
