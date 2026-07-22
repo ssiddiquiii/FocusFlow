@@ -184,6 +184,19 @@ export function useFocusFlow() {
     });
   }
 
+  /**
+   * Deletes a course and all associated lessons, progress, and timestamped notes from Dexie IndexedDB.
+   * @param {string} courseId Course ID.
+   */
+  async function deleteCourse(courseId) {
+    await db.transaction('rw', [db.courses, db.lessons, db.progress, db.notes], async () => {
+      await db.courses.delete(courseId);
+      await db.lessons.where('courseId').equals(courseId).delete();
+      await db.progress.where('courseId').equals(courseId).delete();
+      await db.notes.where('courseId').equals(courseId).delete();
+    });
+  }
+
   return {
     courses,
     lessons,
@@ -196,6 +209,7 @@ export function useFocusFlow() {
     getLastWatchedLesson,
     saveProgress,
     importCourse,
+    deleteCourse,
     resetDatabase: () => db.resetDatabase(),
     exportBackup: () => db.exportBackup(),
     importBackup: (backup) => db.importBackup(backup)

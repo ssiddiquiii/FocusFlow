@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useFocusFlow } from '../hooks/useFocusFlow';
-import { BookOpen, Clock, FileText, Play, RotateCcw, Plus } from 'lucide-react';
+import { BookOpen, Clock, FileText, Play, RotateCcw, Plus, Trash2, RefreshCw, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import ImportPlaylistModal from '../components/ImportPlaylistModal';
+import { fetchYouTubePlaylistData } from '../services/youtubeApi';
 
 /**
  * Dashboard Component (Home Catalog).
@@ -18,12 +19,16 @@ export default function Dashboard() {
     stats, 
     isInitializing, 
     getCourseProgress, 
-    getContinueLearningPath 
+    getContinueLearningPath,
+    deleteCourse,
+    importCourse
   } = useFocusFlow();
 
   const [courseProgressMap, setCourseProgressMap] = useState({});
   const [continuePath, setContinuePath] = useState(null);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+  const [syncingCourseId, setSyncingCourseId] = useState(null);
+  const [actionMsg, setActionMsg] = useState(null);
 
   // Compute progress for each course reactively when list changes (Parallel execution)
   useEffect(() => {
@@ -77,6 +82,43 @@ export default function Dashboard() {
     }
   };
 
+  const handleDeleteCourse = async (course) => {
+    const confirmDelete = window.confirm(`Are you sure you want to delete "${course.title}"?\n\nAll progress, checkmarks, and timestamped notes for this course will be permanently removed.`);
+    if (!confirmDelete) return;
+
+    try {
+      await deleteCourse(course.id);
+      setActionMsg({ text: `Course "${course.title}" deleted successfully.`, type: 'info' });
+      setTimeout(() => setActionMsg(null), 3500);
+    } catch (err) {
+      console.error(err);
+      setActionMsg({ text: `Failed to delete course: ${err.message}`, type: 'error' });
+    }
+  };
+
+  const handleSyncCourse = async (course) => {
+    if (course.type !== 'youtube') {
+      setActionMsg({ text: 'Udemy courses are manually tracked.', type: 'info' });
+      setTimeout(() => setActionMsg(null), 3000);
+      return;
+    }
+
+    setSyncingCourseId(course.id);
+    setActionMsg({ text: `Syncing playlist "${course.title}" with YouTube...`, type: 'info' });
+
+    try {
+      const { course: updatedCourse, lessons: updatedLessons } = await fetchYouTubePlaylistData(course.id);
+      await importCourse(updatedCourse, updatedLessons);
+      setActionMsg({ text: `Successfully synced "${course.title}"! (${updatedLessons.length} lectures updated)`, type: 'success' });
+      setTimeout(() => setActionMsg(null), 3500);
+    } catch (err) {
+      console.error(err);
+      setActionMsg({ text: `Sync failed: ${err.message}`, type: 'error' });
+    } finally {
+      setSyncingCourseId(null);
+    }
+  };
+
   const sortedCourses = [...courses].sort((a, b) => {
     const progressA = progressList.filter(p => p.courseId === a.id);
     const maxTimeA = progressA.length > 0 ? Math.max(...progressA.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
@@ -92,6 +134,18 @@ export default function Dashboard() {
 
   return (
     <div className="p-8 max-w-6xl mx-auto space-y-12">
+      {/* Status Action Banner */}
+      {actionMsg && (
+        <div className={`p-4 rounded-xl text-xs font-semibold border flex items-center justify-between ${
+          actionMsg.type === 'success' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' :
+          actionMsg.type === 'error' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
+          'bg-zinc-800 text-zinc-300 border-zinc-700/50'
+        }`}>
+          <span>{actionMsg.text}</span>
+          <button onClick={() => setActionMsg(null)} className="text-zinc-500 hover:text-white ml-4">✕</button>
+        </div>
+      )}
+
       {/* Welcome Header & Stats Grid */}
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -180,6 +234,33 @@ export default function Dashboard() {
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+                  
+                  {/* Top-Right Action Buttons: Sync Playlist & Delete Course */}
+                  <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20">
+                    {course.type === 'youtube' && (
+                      <button
+                        onClick={(e) => { e.preventDefault(); handleSyncCourse(course); }}
+                        disabled={syncingCourseId === course.id}
+                        className="p-2 rounded-xl bg-black/70 hover:bg-black/90 text-zinc-300 hover:text-white border border-zinc-700/50 backdrop-blur transition cursor-pointer disabled:opacity-50"
+                        title="Sync Playlist with YouTube"
+                      >
+                        {syncingCourseId === course.id ? (
+                          <Loader2 size={14} className="animate-spin text-primary" />
+                        ) : (
+                          <RefreshCw size={14} />
+                        )}
+                      </button>
+                    )}
+
+                    <button
+                      onClick={(e) => { e.preventDefault(); handleDeleteCourse(course); }}
+                      className="p-2 rounded-xl bg-black/70 hover:bg-red-950/90 text-zinc-300 hover:text-red-400 border border-zinc-700/50 backdrop-blur transition cursor-pointer"
+                      title="Delete Course"
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+
                   <span className="absolute bottom-6 left-6 px-1.5 py-0.5 text-[9px] font-bold tracking-widest uppercase rounded bg-black/70 text-zinc-300 border border-zinc-700/50 shadow-md">
                     {course.type === 'youtube' ? 'YouTube' : 'Udemy'}
                   </span>
