@@ -67,6 +67,21 @@ export default function Dashboard() {
     };
   }, [progressList, getContinueLearningPath]);
 
+  const sortedCourses = useMemo(() => {
+    return [...courses].sort((a, b) => {
+      const progressA = progressList.filter(p => p.courseId === a.id);
+      const maxTimeA = progressA.length > 0 ? Math.max(...progressA.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
+
+      const progressB = progressList.filter(p => p.courseId === b.id);
+      const maxTimeB = progressB.length > 0 ? Math.max(...progressB.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
+
+      if (maxTimeA !== maxTimeB) {
+        return maxTimeB - maxTimeA;
+      }
+      return a.title.localeCompare(b.title);
+    });
+  }, [courses, progressList]);
+
   if (isInitializing) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[80vh] space-y-4">
@@ -118,21 +133,6 @@ export default function Dashboard() {
       setSyncingCourseId(null);
     }
   };
-
-  const sortedCourses = useMemo(() => {
-    return [...courses].sort((a, b) => {
-      const progressA = progressList.filter(p => p.courseId === a.id);
-      const maxTimeA = progressA.length > 0 ? Math.max(...progressA.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
-
-      const progressB = progressList.filter(p => p.courseId === b.id);
-      const maxTimeB = progressB.length > 0 ? Math.max(...progressB.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
-
-      if (maxTimeA !== maxTimeB) {
-        return maxTimeB - maxTimeA;
-      }
-      return a.title.localeCompare(b.title);
-    });
-  }, [courses, progressList]);
 
   return (
     <div className="p-8 max-w-6xl mx-auto space-y-12">
