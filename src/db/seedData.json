@@ -28,13 +28,13 @@
       "udemyUrl": ""
     },
     {
-      "id": "udemy-agentic-ai",
-      "title": "Agentic AI Cohort",
-      "description": "Hitesh Choudhary's cohort course on Agentic AI, LangChain, crewAI, and building custom LLM agents. (Track progress manually).",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400",
-      "channelName": "Hitesh Choudhary",
-      "type": "udemy",
-      "udemyUrl": "https://www.udemy.com/course/agentic-ai-hitesh-choudhary/"
+      "id": "PLd1s-PEC5Pio",
+      "title": "Chai aur Computer Network",
+      "description": "Indepth series on Computer Network in Hindi",
+      "thumbnailUrl": "https://i.ytimg.com/vi/CltcZTyF5nM/hqdefault.jpg",
+      "channelName": "Chai aur Code",
+      "type": "youtube",
+      "udemyUrl": ""
     }
   ],
   "lessons": [
@@ -1149,54 +1149,154 @@
       "type": "youtube"
     },
     {
-      "id": "udemy-agentic-ai-lesson-1",
-      "courseId": "udemy-agentic-ai",
-      "title": "Introduction to Agentic AI and LLM Architectures",
-      "description": "Manual lecture 1 of the Agentic AI Cohort. Track your progress manually.",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400",
-      "duration": "45:00",
+      "id": "CltcZTyF5nM",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "Introduction to Computer Network Series | Chai aur computer network",
+      "description": "Please check out Shubham's channel and subscribe too:\nhttps://www.youtube.com/@UCTgTS4r_XNE6WHUgCK9OH2Q \n\nWelcome to a indepth series on Computer Network in Hindi. This series will set a benchmark in depth of Computer Network and fundamentals. Concepts and practical along with years of experience is what you get in this series. \n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/CltcZTyF5nM/mqdefault.jpg",
+      "duration": "14:35",
       "index": 1,
-      "type": "udemy"
+      "type": "youtube"
     },
     {
-      "id": "udemy-agentic-ai-lesson-2",
-      "courseId": "udemy-agentic-ai",
-      "title": "Understanding LLM Reasonings: ReAct, Chain of Thought, and Planning",
-      "description": "Manual lecture 2 of the Agentic AI Cohort. Track your progress manually.",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400",
-      "duration": "45:00",
+      "id": "_dCmQCiQmPE",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "What Really Happens When You Make an HTTP Request? Chai aur Computer network",
+      "description": "0:00 Understanding HTTP Requests\n3:51 DNS and Name Resolution\n8:00 Establishing TCP Connections\n12:53 Encapsulating Data into IP Packets\n15:47 Role of MAC Addresses and ARP\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/_dCmQCiQmPE/mqdefault.jpg",
+      "duration": "22:20",
       "index": 2,
-      "type": "udemy"
+      "type": "youtube"
     },
     {
-      "id": "udemy-agentic-ai-lesson-3",
-      "courseId": "udemy-agentic-ai",
-      "title": "Building Your First Custom AI Agent from Scratch in Python",
-      "description": "Manual lecture 3 of the Agentic AI Cohort. Track your progress manually.",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400",
-      "duration": "45:00",
+      "id": "mM9-9KAP0E8",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "03 Mastering IP Address Structure: From Octets to Binary Representation",
+      "description": "for more check https://chaicode.com\n\n0:00 Understanding IP Structure and Octets\n0:30 Basics of Internet Protocol\n1:10 Dotted Quad Notation Explained\n2:29 Binary Format Representation of IP\n3:10 Importance of IPv4 and Its Length\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/mM9-9KAP0E8/mqdefault.jpg",
+      "duration": "3:56",
       "index": 3,
-      "type": "udemy"
+      "type": "youtube"
     },
     {
-      "id": "udemy-agentic-ai-lesson-4",
-      "courseId": "udemy-agentic-ai",
-      "title": "Deep Dive into LangChain, AutoGen, and crewAI Frameworks",
-      "description": "Manual lecture 4 of the Agentic AI Cohort. Track your progress manually.",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400",
-      "duration": "45:00",
+      "id": "8QJ8k7jd-K0",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "04 Master Networking Basics: Network, Host, and CIDR Demystified",
+      "description": "for more visit https://chaicode.com\n0:00 Understanding Network and Host Basics\n2:10 Dynamic Host Configuration Protocol (DHCP)\n4:19 IP Address and Binary Representation\n7:16 Sider Notation and Host Calculation\n8:10 AWS and Sider Notation Examples\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/8QJ8k7jd-K0/mqdefault.jpg",
+      "duration": "10:04",
       "index": 4,
-      "type": "udemy"
+      "type": "youtube"
     },
     {
-      "id": "udemy-agentic-ai-lesson-5",
-      "courseId": "udemy-agentic-ai",
-      "title": "Advanced Agent Evaluation, Testing, and Production Deployment",
-      "description": "Manual lecture 5 of the Agentic AI Cohort. Track your progress manually.",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400",
-      "duration": "45:00",
+      "id": "KVujI1fsQQo",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "05 How Subnet Masks Reveal Network Secrets: A Deep Dive",
+      "description": "for more visit https://chaicode.com\n0:00 Understanding Subnet Mask Basics\n2:36 Role of Subnet Mask in Networking\n3:45 Binary Representation of IP Addresses\n6:51 Detecting Network Membership with Subnet\n8:36 Practical Application of Subnet Mask\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/KVujI1fsQQo/mqdefault.jpg",
+      "duration": "10:57",
       "index": 5,
-      "type": "udemy"
+      "type": "youtube"
+    },
+    {
+      "id": "Ik-buVzjW3s",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "06 Understanding Default Gateway: The Key to Network Communication",
+      "description": "for more visit https://chaicode.com\n0:00 Understanding Default Gateway in Networking\n0:27 Importance of Video Playlist Order\n0:54 Direct Data Transfer in Same Network\n2:27 Role of Router in Data Transmission\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/Ik-buVzjW3s/mqdefault.jpg",
+      "duration": "4:07",
+      "index": 6,
+      "type": "youtube"
+    },
+    {
+      "id": "PqdrgoYb3Vc",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "07 How Default Gateways Facilitate Network Communication",
+      "description": "for more visit https://chaicode.com\n\n0:00 Router as a Default Gateway\n1:36 Router Network Interfaces Setup\n3:06 First Scenario: Intra-Network Communication\n5:24 Second Scenario: Inter-Network Communication\n8:13 Future Topics: MAC and ARP\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/PqdrgoYb3Vc/mqdefault.jpg",
+      "duration": "9:12",
+      "index": 7,
+      "type": "youtube"
+    },
+    {
+      "id": "jKWlJPpkp9o",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "08 What is a MAC Address? Understanding Its Structure and Purpose",
+      "description": "for more visit https://chaicode.com\n0:00 Understanding MAC Address Basics\n2:31 Physical Devices and MAC Addresses\n3:37 Structure of a MAC Address\n4:55 Hexadecimal Numbers in MAC Addresses\n5:55 MAC Address Parts: OUI and Device Identifier\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/jKWlJPpkp9o/mqdefault.jpg",
+      "duration": "8:57",
+      "index": 8,
+      "type": "youtube"
+    },
+    {
+      "id": "sMDYh-II22Q",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "09 Curious About IP vs MAC Addresses? Here's What You Need to Know!",
+      "description": "for more visit https://chaicode.com\n0:00 Difference Between IP and MAC Address\n0:38 IP Address Characteristics and Changes\n3:02 Role of IP in Internet Communication\n4:58 MAC Address in Local Networks\n6:51 Using IP for Network Routing Decisions\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/sMDYh-II22Q/mqdefault.jpg",
+      "duration": "8:02",
+      "index": 9,
+      "type": "youtube"
+    },
+    {
+      "id": "kDAnEyg9nCg",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "10 How Does ARP Work in Your Network?",
+      "description": "for more visit https://chaicode.com\n0:00 Understanding Address Resolution Protocol\n2:09 Finding MAC Address with ARP\n4:01 ARP Request and Broadcast\n6:56 Handling Requests Outside the Network\n8:54 Summary of ARP Concepts\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/kDAnEyg9nCg/mqdefault.jpg",
+      "duration": "9:17",
+      "index": 10,
+      "type": "youtube"
+    },
+    {
+      "id": "ZOLkWBVMcwU",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "11 What Makes OSI and TCP/IP Models Different? Discover the Key Layers",
+      "description": "0:00 OSI Model vs TCP/IP Model Overview\n1:26 Detailed OSI Layer Breakdown\n6:51 Transport Layer and Protocols\n14:09 TCP/IP Model Layer Merging\n17:39 Encapsulation in Network Layers\n27:17 Request Travel in TCP/IP Model\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/ZOLkWBVMcwU/mqdefault.jpg",
+      "duration": "27:39",
+      "index": 11,
+      "type": "youtube"
+    },
+    {
+      "id": "GBhaNXK-ows",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "12 How Routing Determines Your Data's Journey Across Networks",
+      "description": "for more check https://chaicode.com\n0:00 Understanding Routing in Networks\n3:10 Explaining Network Components: Routers and Switches\n7:22 Routing Scenario: Laptop A to Laptop D\n11:56 Routing Scenario: Laptop C to Network X\n17:47 Routing to the Internet and NAT\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/GBhaNXK-ows/mqdefault.jpg",
+      "duration": "25:37",
+      "index": 12,
+      "type": "youtube"
+    },
+    {
+      "id": "VzPFY40qAhQ",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "13 What Happens When You PING Google? Discover the Secrets of ICMP",
+      "description": "## Chapters\n0:00 Understanding ICMP and Network Utilities\n3:07 How Ping Utilizes ICMP\n7:53 ICMP Error Messages and TTL\n14:58 Tracing Routes with ICMP\n21:08 Analyzing Trace Route Probes\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/VzPFY40qAhQ/mqdefault.jpg",
+      "duration": "25:03",
+      "index": 13,
+      "type": "youtube"
+    },
+    {
+      "id": "SjMw3nwAhuI",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "14 Why UDP is the Unsung Hero of Fast Internet Protocols",
+      "description": "0:00 Introduction to User Datagram Protocol\n3:32 UDP vs TCP: Connectionless Protocol\n7:50 Applications Using UDP\n9:56 DNS and UDP Efficiency\n13:55 Reliability Mechanisms in UDP\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/SjMw3nwAhuI/mqdefault.jpg",
+      "duration": "17:55",
+      "index": 14,
+      "type": "youtube"
+    },
+    {
+      "id": "1mTI5X0pN6M",
+      "courseId": "PLd1s-PEC5Pio",
+      "title": "15 Unveiling the UDP Datagram: A Deep Dive into Its Structure",
+      "description": "0:00 Anatomy of UDP Datagram\n3:13 Source and Destination Ports\n4:17 UDP Header and Application Payload\n5:05 Understanding UDP Checksum\n8:13 Data Field in UDP Datagram\n\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
+      "thumbnailUrl": "https://i.ytimg.com/vi/1mTI5X0pN6M/mqdefault.jpg",
+      "duration": "9:31",
+      "index": 15,
+      "type": "youtube"
     }
   ]
 }

@@ -31,8 +31,30 @@ class FocusFlowDB extends Dexie {
    */
   async seedIfEmpty() {
     const courseCount = await this.courses.count();
+    
+    // Auto-migration: Remove legacy udemy course if present in local DB
+    const legacyUdemy = await this.courses.get('udemy-agentic-ai');
+    if (legacyUdemy) {
+      await this.transaction('rw', [this.courses, this.lessons], async () => {
+        await this.courses.delete('udemy-agentic-ai');
+        await this.lessons.where('courseId').equals('udemy-agentic-ai').delete();
+      });
+    }
+
+    // Auto-migration: Ensure new default course (Computer Network PLd1s-PEC5Pio) is seeded
+    const cnCourse = await this.courses.get('PLd1s-PEC5Pio');
+    if (!cnCourse) {
+      const cnSeedCourse = seedData.courses.find(c => c.id === 'PLd1s-PEC5Pio');
+      const cnSeedLessons = seedData.lessons.filter(l => l.courseId === 'PLd1s-PEC5Pio');
+      if (cnSeedCourse) {
+        await this.transaction('rw', [this.courses, this.lessons], async () => {
+          await this.courses.put(CourseSchema.parse(cnSeedCourse));
+          await this.lessons.bulkPut(cnSeedLessons.map(l => LessonSchema.parse(l)));
+        });
+      }
+    }
+
     if (courseCount > 0) {
-      console.log('Database already seeded. Skipping.');
       return;
     }
 
