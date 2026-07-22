@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useFocusFlow } from '../hooks/useFocusFlow';
-import { BookOpen, Clock, FileText, Play, RotateCcw } from 'lucide-react';
+import { BookOpen, Clock, FileText, Play, RotateCcw, Plus } from 'lucide-react';
+import ImportPlaylistModal from '../components/ImportPlaylistModal';
 
 /**
  * Dashboard Component (Home Catalog).
@@ -22,6 +23,7 @@ export default function Dashboard() {
 
   const [courseProgressMap, setCourseProgressMap] = useState({});
   const [continuePath, setContinuePath] = useState(null);
+  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
 
   // Compute progress for each course reactively when list changes (Parallel execution)
   useEffect(() => {
@@ -92,9 +94,18 @@ export default function Dashboard() {
     <div className="p-8 max-w-6xl mx-auto space-y-12">
       {/* Welcome Header & Stats Grid */}
       <div className="space-y-6">
-        <div>
-          <h1 className="text-4xl font-extrabold text-white tracking-tight">Welcome to FocusFlow</h1>
-          <p className="text-zinc-400 text-sm mt-1">Your distraction-free personal learning workspace.</p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-4xl font-extrabold text-white tracking-tight">Welcome to FocusFlow</h1>
+            <p className="text-zinc-400 text-sm mt-1">Your distraction-free personal learning workspace.</p>
+          </div>
+          <button
+            onClick={() => setIsImportModalOpen(true)}
+            className="px-4 py-3 rounded-xl bg-primary hover:bg-primary-hover text-white text-xs font-bold transition shadow-lg shadow-primary/20 flex items-center justify-center gap-2 cursor-pointer flex-shrink-0"
+          >
+            <Plus size={16} />
+            <span>Import Course</span>
+          </button>
         </div>
 
         {/* Stats Grid */}
@@ -217,6 +228,12 @@ export default function Dashboard() {
           })}
         </div>
       </div>
+
+      {/* Import YouTube Playlist Modal */}
+      <ImportPlaylistModal 
+        isOpen={isImportModalOpen} 
+        onClose={() => setIsImportModalOpen(false)} 
+      />
     </div>
   );
 }
