@@ -50,11 +50,10 @@ export default function Settings() {
     e.target.value = '';
   };
 
-  const handleReset = async () => {
+  const handleExecuteReset = async () => {
     try {
-      setStatusMsg({ text: 'Clearing database...', type: 'info' });
-      await resetDatabase();
-      setStatusMsg({ text: 'Database reset to default seeded courses successfully.', type: 'success' });
+      await clearProgressAndNotes();
+      setStatusMsg({ text: 'Watch progress and timestamped notes cleared successfully. All course catalogs remain intact.', type: 'success' });
       setShowConfirmReset(false);
     } catch (err) {
       console.error(err);
@@ -63,24 +62,23 @@ export default function Settings() {
   };
 
   return (
-    <div className="p-8 max-w-3xl mx-auto space-y-8">
+    <div className="p-8 max-w-4xl mx-auto space-y-10 animate-page-entry">
       <div>
-        <h1 className="text-4xl font-extrabold text-white tracking-tight">Settings</h1>
-        <p className="text-zinc-400 text-sm mt-1">Manage your local database backups and system options.</p>
+        <h1 className="text-3xl font-extrabold text-white tracking-tight">Settings & Management</h1>
+        <p className="text-zinc-400 text-xs mt-1">Manage local database backups and learning data progress.</p>
       </div>
 
-      {/* Status Notifications banner */}
       {statusMsg.text && (
         <div className={`p-4 rounded-xl text-xs font-semibold border ${
           statusMsg.type === 'success' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' :
           statusMsg.type === 'error' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
-          'bg-zinc-800 text-zinc-300 border-zinc-700/50'
+          'bg-zinc-900 text-zinc-300 border-border'
         }`}>
           {statusMsg.text}
         </div>
       )}
 
-      {/* Backup and Restore Area */}
+      {/* Local Data Backups */}
       <div className="glass-panel rounded-2xl p-6 space-y-6">
         <div>
           <h2 className="text-lg font-bold text-white mb-1">Local Data Backups</h2>
@@ -94,7 +92,7 @@ export default function Settings() {
           {/* Export button */}
           <button
             onClick={handleExport}
-            className="flex items-center justify-center gap-3 px-5 py-4 bg-zinc-900 border border-border hover:bg-zinc-800 transition rounded-xl font-bold text-white text-sm"
+            className="flex items-center justify-center gap-3 px-5 py-4 bg-zinc-900 border border-border hover:bg-zinc-800 transition rounded-xl font-bold text-white text-sm cursor-pointer"
           >
             <Download size={18} />
             <span>Export Backup JSON</span>
@@ -114,55 +112,39 @@ export default function Settings() {
         </div>
       </div>
 
-      {/* Danger Zone */}
-      <div className="glass-panel rounded-2xl p-6 border-red-500/20 bg-red-500/[0.01] space-y-6">
+      {/* Progress Data Management */}
+      <div className="glass-panel rounded-2xl p-6 border-zinc-800 space-y-6">
         <div>
-          <h2 className="text-lg font-bold text-red-500 mb-1">Danger Zone</h2>
+          <h2 className="text-lg font-bold text-white mb-1">Progress & Notes Reset</h2>
           <p className="text-zinc-500 text-xs leading-relaxed">
-            Manage or reset your stored learning data. You can choose to clear your watch progress while keeping all your course catalogs intact, or perform a full factory reset.
+            Reset your watch times, checkmarks, and notes to zero. Your course catalogs (both default and imported playlists) will stay safe and untouched. To delete a specific course, use the Delete button on its card in the Dashboard.
           </p>
         </div>
 
         {!showConfirmReset ? (
-          <div className="flex flex-wrap gap-3">
-            <button
-              onClick={() => { setResetType('progress'); setShowConfirmReset(true); }}
-              className="px-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 transition text-xs font-bold flex items-center gap-2 cursor-pointer"
-            >
-              <RotateCcw size={15} />
-              <span>Clear Watch Progress & Notes Only (Keep Courses)</span>
-            </button>
-
-            <button
-              onClick={() => { setResetType('full'); setShowConfirmReset(true); }}
-              className="px-4 py-2.5 rounded-xl bg-red-950/30 border border-red-500/30 text-red-400 hover:bg-red-950/60 hover:text-red-300 transition text-xs font-bold flex items-center gap-2 cursor-pointer"
-            >
-              <Trash2 size={15} />
-              <span>Factory Reset (Wipe Everything)</span>
-            </button>
-          </div>
+          <button
+            onClick={() => setShowConfirmReset(true)}
+            className="px-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 transition text-xs font-bold flex items-center gap-2 cursor-pointer"
+          >
+            <RotateCcw size={15} />
+            <span>Clear Watch Progress & Notes</span>
+          </button>
         ) : (
-          <div className="p-4 rounded-xl bg-red-500/5 border border-red-500/20 space-y-4">
-            <div className="flex items-start gap-3 text-red-400 text-xs">
+          <div className="p-4 rounded-xl bg-amber-500/5 border border-amber-500/20 space-y-4">
+            <div className="flex items-start gap-3 text-amber-400 text-xs">
               <ShieldAlert size={18} className="flex-shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold block mb-1">
-                  {resetType === 'progress' ? 'Confirm Reset Progress & Notes' : 'Confirm Full Factory Reset'}
-                </span>
-                <span>
-                  {resetType === 'progress' 
-                    ? 'Are you sure? All your completed checkmarks, watch progress, and notes will be cleared, but your imported courses will remain in your catalog.'
-                    : 'Are you sure? This will delete ALL progress, notes, and ALL custom imported courses forever, restoring only initial default seed courses.'}
-                </span>
+                <span className="font-bold block mb-1">Confirm Reset Progress & Notes</span>
+                <span>Are you sure? All completed checkmarks, watch progress, and notes will be cleared. All course catalogs will remain untouched.</span>
               </div>
             </div>
 
             <div className="flex gap-3">
               <button
                 onClick={handleExecuteReset}
-                className="px-4 py-2 text-xs font-bold rounded-lg bg-red-600 hover:bg-red-700 text-white transition cursor-pointer"
+                className="px-4 py-2 text-xs font-bold rounded-lg bg-amber-600 hover:bg-amber-700 text-white transition cursor-pointer"
               >
-                {resetType === 'progress' ? 'Yes, Reset Progress Only' : 'Yes, Wipe Everything'}
+                Yes, Clear Progress & Notes
               </button>
               <button
                 onClick={() => setShowConfirmReset(false)}
