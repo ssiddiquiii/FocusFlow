@@ -52,7 +52,18 @@ class FocusFlowDB extends Dexie {
   }
 
   /**
-   * Resets all progress, notes, and restores default courses.
+   * Clears user watch progress and timestamped notes while preserving all course catalogs and imported courses.
+   * @returns {Promise<void>}
+   */
+  async clearProgressAndNotes() {
+    await this.transaction('rw', [this.progress, this.notes], async () => {
+      await this.progress.clear();
+      await this.notes.clear();
+    });
+  }
+
+  /**
+   * Resets all progress, notes, and restores default courses (Full Factory Reset).
    * @returns {Promise<void>}
    */
   async resetDatabase() {

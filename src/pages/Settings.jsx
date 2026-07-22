@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFocusFlow } from '../hooks/useFocusFlow';
-import { Download, Upload, Trash2, ShieldAlert } from 'lucide-react';
+import { Download, Upload, Trash2, ShieldAlert, RotateCcw } from 'lucide-react';
 
 /**
  * Settings & Console Management Component.
@@ -9,10 +9,11 @@ import { Download, Upload, Trash2, ShieldAlert } from 'lucide-react';
  * @returns {React.JSX.Element}
  */
 export default function Settings() {
-  const { exportBackup, importBackup, resetDatabase } = useFocusFlow();
+  const { exportBackup, importBackup, resetDatabase, clearProgressAndNotes } = useFocusFlow();
   
   const [statusMsg, setStatusMsg] = useState({ text: '', type: 'info' });
   const [showConfirmReset, setShowConfirmReset] = useState(false);
+  const [resetType, setResetType] = useState('progress'); // 'progress' | 'full'
 
   const handleExport = async () => {
     setStatusMsg({ text: 'Generating backup file...', type: 'info' });
@@ -39,22 +40,6 @@ export default function Settings() {
   const handleImport = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    setStatusMsg({ text: 'Reading backup file...', type: 'info' });
-    const reader = new FileReader();
-    
-    reader.onload = async (event) => {
-      try {
-        const rawJson = JSON.parse(event.target.result);
-        setStatusMsg({ text: 'Validating backup structure...', type: 'info' });
-        
-        await importBackup(rawJson);
-        setStatusMsg({ text: 'Backup restored successfully! Refreshing dashboard data.', type: 'success' });
-      } catch (err) {
-        console.error(err);
-        setStatusMsg({ text: `Failed to import backup: ${err.message}`, type: 'error' });
-      }
-    };
 
     reader.onerror = () => {
       setStatusMsg({ text: 'Error reading file from disk.', type: 'error' });
@@ -134,39 +119,54 @@ export default function Settings() {
         <div>
           <h2 className="text-lg font-bold text-red-500 mb-1">Danger Zone</h2>
           <p className="text-zinc-500 text-xs leading-relaxed">
-            Wiping the database will delete all progress, checkmarks, custom imported courses, and timestamped notes forever.
-            This action cannot be undone.
+            Manage or reset your stored learning data. You can choose to clear your watch progress while keeping all your course catalogs intact, or perform a full factory reset.
           </p>
         </div>
 
         {!showConfirmReset ? (
-          <button
-            onClick={() => setShowConfirmReset(true)}
-            className="px-5 py-3 rounded-lg bg-red-950/20 border border-red-500/30 text-red-400 hover:bg-red-950/50 hover:text-red-300 transition text-sm font-semibold flex items-center gap-2"
-          >
-            <Trash2 size={16} />
-            <span>Reset Database to Default</span>
-          </button>
+          <div className="flex flex-wrap gap-3">
+            <button
+              onClick={() => { setResetType('progress'); setShowConfirmReset(true); }}
+              className="px-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 transition text-xs font-bold flex items-center gap-2 cursor-pointer"
+            >
+              <RotateCcw size={15} />
+              <span>Clear Watch Progress & Notes Only (Keep Courses)</span>
+            </button>
+
+            <button
+              onClick={() => { setResetType('full'); setShowConfirmReset(true); }}
+              className="px-4 py-2.5 rounded-xl bg-red-950/30 border border-red-500/30 text-red-400 hover:bg-red-950/60 hover:text-red-300 transition text-xs font-bold flex items-center gap-2 cursor-pointer"
+            >
+              <Trash2 size={15} />
+              <span>Factory Reset (Wipe Everything)</span>
+            </button>
+          </div>
         ) : (
           <div className="p-4 rounded-xl bg-red-500/5 border border-red-500/20 space-y-4">
             <div className="flex items-start gap-3 text-red-400 text-xs">
               <ShieldAlert size={18} className="flex-shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold block mb-1">Confirm Reset Request</span>
-                <span>Are you sure you want to proceed? All your custom notes and progress checkmarks will be permanently cleared.</span>
+                <span className="font-bold block mb-1">
+                  {resetType === 'progress' ? 'Confirm Reset Progress & Notes' : 'Confirm Full Factory Reset'}
+                </span>
+                <span>
+                  {resetType === 'progress' 
+                    ? 'Are you sure? All your completed checkmarks, watch progress, and notes will be cleared, but your imported courses will remain in your catalog.'
+                    : 'Are you sure? This will delete ALL progress, notes, and ALL custom imported courses forever, restoring only initial default seed courses.'}
+                </span>
               </div>
             </div>
 
             <div className="flex gap-3">
               <button
-                onClick={handleReset}
-                className="px-4 py-2 text-xs font-bold rounded bg-red-600 hover:bg-red-700 text-white transition"
+                onClick={handleExecuteReset}
+                className="px-4 py-2 text-xs font-bold rounded-lg bg-red-600 hover:bg-red-700 text-white transition cursor-pointer"
               >
-                Yes, Clear Everything
+                {resetType === 'progress' ? 'Yes, Reset Progress Only' : 'Yes, Wipe Everything'}
               </button>
               <button
                 onClick={() => setShowConfirmReset(false)}
-                className="px-4 py-2 text-xs font-bold rounded bg-zinc-800 border border-border text-white hover:bg-zinc-700 transition"
+                className="px-4 py-2 text-xs font-bold rounded-lg bg-zinc-800 border border-border text-white hover:bg-zinc-700 transition cursor-pointer"
               >
                 Cancel
               </button>

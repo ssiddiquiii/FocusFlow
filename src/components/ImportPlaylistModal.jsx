@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, Loader2, CheckCircle2, AlertCircle, Link2, X } from 'lucide-react';
 import { extractPlaylistId, fetchYouTubePlaylistData } from '../services/youtubeApi';
 import { useFocusFlow } from '../hooks/useFocusFlow';
@@ -9,6 +9,18 @@ export default function ImportPlaylistModal({ isOpen, onClose }) {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+
+  // Lock body scroll when modal is open to eliminate background page scrollbars
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -48,8 +60,8 @@ export default function ImportPlaylistModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
-      <div className="bg-zinc-950 border border-border rounded-2xl max-w-md sm:max-w-lg w-full p-5 sm:p-6 space-y-4 shadow-2xl animate-page-entry max-h-[90vh] overflow-y-auto relative">
+    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-hidden">
+      <div className="bg-zinc-950 border border-border rounded-2xl max-w-md sm:max-w-lg w-full p-5 sm:p-6 space-y-4 shadow-2xl animate-page-entry relative overflow-hidden">
         {/* Top Right Close Button */}
         <button
           onClick={onClose}

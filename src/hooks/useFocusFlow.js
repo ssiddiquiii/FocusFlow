@@ -210,6 +210,7 @@ export function useFocusFlow() {
     saveProgress,
     importCourse,
     deleteCourse,
+    clearProgressAndNotes: () => db.clearProgressAndNotes(),
     resetDatabase: () => db.resetDatabase(),
     exportBackup: () => db.exportBackup(),
     importBackup: (backup) => db.importBackup(backup)
