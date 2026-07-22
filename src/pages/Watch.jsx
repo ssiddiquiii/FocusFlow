@@ -168,9 +168,17 @@ export default function Watch() {
         }
       }, 10000);
 
+      let lastStep = -1;
       uiSyncTimer = setInterval(() => {
-        setPlayerCurrentTime(player.getCurrentTime());
-      }, 100);
+        if (player && typeof player.getCurrentTime === 'function') {
+          const t = player.getCurrentTime();
+          const step = Math.floor(t * 4); // 250ms threshold
+          if (step !== lastStep) {
+            lastStep = step;
+            setPlayerCurrentTime(t);
+          }
+        }
+      }, 200);
     };
 
     const stopProgressTracking = () => {

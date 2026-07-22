@@ -1,6 +1,6 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/FocusFlowDB';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 /**
  * Custom Production-Grade React Hook for FocusFlow core operations.
@@ -53,7 +53,7 @@ export function useFocusFlow() {
    * Generates overall learning metrics for the Dashboard header stats.
    * @returns {object} Calculated stats (totalHours, completedLessons, totalNotes).
    */
-  const stats = (() => {
+  const stats = useMemo(() => {
     // Total notes written
     const totalNotes = notes.length;
 
@@ -69,7 +69,7 @@ export function useFocusFlow() {
       completedLessons,
       totalNotes
     };
-  })();
+  }, [notes, progressList]);
 
   /**
    * Business Rule: "Continue Learning"

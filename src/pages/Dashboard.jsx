@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useFocusFlow } from '../hooks/useFocusFlow';
 import { BookOpen, Clock, FileText, Play, RotateCcw, Plus, Trash2, RefreshCw, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
@@ -119,18 +119,20 @@ export default function Dashboard() {
     }
   };
 
-  const sortedCourses = [...courses].sort((a, b) => {
-    const progressA = progressList.filter(p => p.courseId === a.id);
-    const maxTimeA = progressA.length > 0 ? Math.max(...progressA.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
+  const sortedCourses = useMemo(() => {
+    return [...courses].sort((a, b) => {
+      const progressA = progressList.filter(p => p.courseId === a.id);
+      const maxTimeA = progressA.length > 0 ? Math.max(...progressA.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
 
-    const progressB = progressList.filter(p => p.courseId === b.id);
-    const maxTimeB = progressB.length > 0 ? Math.max(...progressB.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
+      const progressB = progressList.filter(p => p.courseId === b.id);
+      const maxTimeB = progressB.length > 0 ? Math.max(...progressB.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
 
-    if (maxTimeA !== maxTimeB) {
-      return maxTimeB - maxTimeA;
-    }
-    return a.title.localeCompare(b.title);
-  });
+      if (maxTimeA !== maxTimeB) {
+        return maxTimeB - maxTimeA;
+      }
+      return a.title.localeCompare(b.title);
+    });
+  }, [courses, progressList]);
 
   return (
     <div className="p-8 max-w-6xl mx-auto space-y-12">
