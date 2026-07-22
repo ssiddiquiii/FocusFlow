@@ -2,11 +2,20 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useFocusFlow } from '../hooks/useFocusFlow';
 import { useUIStore } from '../hooks/useUIStore';
-import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX, Gauge, Type } from 'lucide-react';
+import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX, Gauge, Type, Sliders } from 'lucide-react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/FocusFlowDB';
 
 const SPEED_OPTIONS = [0.5, 1, 1.25, 1.5, 2];
+const QUALITY_OPTIONS = [
+  { label: 'Auto', value: 'auto' },
+  { label: '4K', value: 'highres' },
+  { label: '2K', value: 'hd1440' },
+  { label: '1080p', value: 'hd1080' },
+  { label: '720p', value: 'hd720' },
+  { label: '480p', value: 'large' },
+  { label: '360p', value: 'medium' }
+];
 
 /**
  * Formats a duration in seconds to standard MM:SS or HH:MM:SS string.
@@ -55,6 +64,7 @@ export default function Watch() {
   const [playerDuration, setPlayerDuration] = useState(0);
   const [playerMuted, setPlayerMuted] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
+  const [qualityLevel, setQualityLevel] = useState('auto');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [captionsEnabled, setCaptionsEnabled] = useState(false);
   
@@ -376,6 +386,19 @@ export default function Watch() {
     setPlaybackSpeed(nextSpeed);
   };
 
+  // Cycle Video Quality (Auto -> 4K -> 2K -> 1080p -> 720p -> 480p -> 360p)
+  const handleQualityCycle = () => {
+    if (!ytPlayer) return;
+    const currentIndex = QUALITY_OPTIONS.findIndex(q => q.value === qualityLevel);
+    const nextIndex = (currentIndex + 1) % QUALITY_OPTIONS.length;
+    const nextQuality = QUALITY_OPTIONS[nextIndex];
+    
+    try {
+      ytPlayer.setPlaybackQuality(nextQuality.value);
+    } catch (_) {}
+    setQualityLevel(nextQuality.value);
+  };
+
   // Toggle Fullscreen
   const handleFullscreenToggle = () => {
     const container = playerContainerRef.current;
@@ -468,7 +491,7 @@ export default function Watch() {
   const progressPercent = playerDuration > 0 ? (playerCurrentTime / playerDuration) * 100 : 0;
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen overflow-hidden bg-background">
+    <div className="flex flex-col lg:flex-row min-h-screen h-auto lg:h-screen overflow-y-auto lg:overflow-hidden bg-background">
       {/* Left Panel: Scrollable main content containing Player and Metadata details (YouTube Style) */}
       <div className="flex-1 flex flex-col h-full min-w-0 overflow-y-auto bg-zinc-950/20">
         
@@ -486,7 +509,7 @@ export default function Watch() {
         </div>
 
         {/* Player Container: Framed YouTube-style container with rounded borders */}
-        <div className="w-full max-w-5xl mx-auto mt-6 px-6">
+        <div className="w-full max-w-5xl mx-auto mt-3 sm:mt-6 px-2 sm:px-6">
           <div 
             ref={playerContainerRef} 
             onMouseMove={handleMouseMove}
@@ -569,6 +592,16 @@ export default function Watch() {
                       >
                         <Gauge size={12} />
                         <span>{playbackSpeed === 1 ? 'Normal' : `${playbackSpeed}x`}</span>
+                      </button>
+
+                      {/* Quality / Resolution Cycle Button */}
+                      <button
+                        onClick={handleQualityCycle}
+                        className="px-2 py-1 rounded bg-zinc-800 border border-border text-[10px] font-bold text-zinc-300 hover:text-white transition cursor-pointer flex items-center gap-1"
+                        title="Change Video Quality / Resolution"
+                      >
+                        <Sliders size={12} />
+                        <span>{QUALITY_OPTIONS.find(q => q.value === qualityLevel)?.label || 'Auto'}</span>
                       </button>
 
                       {/* Elapsed Time */}
@@ -748,8 +781,8 @@ export default function Watch() {
 
       </div>
 
-      {/* Right Sidebar: Syllabus Checklist (Full Height, clean scrollable syllabus playlist) */}
-      <div className="w-full lg:w-[380px] bg-zinc-950 border-l border-border flex flex-col flex-shrink-0 h-full">
+      {/* Right Sidebar: Syllabus Checklist (Responsive: 1-Column on Mobile, Right Sidebar on Desktop) */}
+      <div className="w-full lg:w-[380px] bg-zinc-950 border-t lg:border-t-0 lg:border-l border-border flex flex-col flex-shrink-0 min-h-[350px] lg:h-full">
         <div className="px-5 py-4 border-b border-border bg-zinc-950 flex items-center gap-2">
           <BookOpen size={16} className="text-primary" />
           <span className="text-xs font-bold uppercase tracking-wider text-white">Course Syllabus</span>

@@ -25,11 +25,32 @@ function AppContent() {
   };
 
   return (
-    <div className="flex min-h-screen bg-background text-foreground">
-      {/* Collapsible Sidebar Navigation */}
+    <div className="flex min-h-screen bg-background text-foreground relative overflow-x-hidden">
+      {/* Mobile Backdrop Overlay when Sidebar is Open */}
+      {!sidebarCollapsed && (
+        <div 
+          onClick={toggleSidebar} 
+          className="fixed inset-0 bg-black/60 z-30 md:hidden backdrop-blur-xs transition-opacity duration-300" 
+        />
+      )}
+
+      {/* Floating Mobile Hamburger Toggle Button when Sidebar is Collapsed */}
+      {sidebarCollapsed && (
+        <button
+          onClick={toggleSidebar}
+          className="md:hidden fixed top-3 left-3 z-30 p-2.5 rounded-xl bg-zinc-900/90 border border-border text-white shadow-xl hover:bg-zinc-800 transition cursor-pointer backdrop-blur"
+          title="Open Menu"
+        >
+          <Menu size={20} />
+        </button>
+      )}
+
+      {/* Collapsible / Drawer Sidebar Navigation */}
       <aside 
-        className={`border-r border-border bg-zinc-950 flex flex-col transition-all duration-300 relative ${
-          sidebarCollapsed ? 'w-[72px]' : 'w-60'
+        className={`border-r border-border bg-zinc-950 flex flex-col transition-all duration-300 ${
+          sidebarCollapsed 
+            ? 'w-0 opacity-0 -translate-x-full pointer-events-none md:pointer-events-auto md:translate-x-0 md:opacity-100 md:w-[72px] md:relative' 
+            : 'fixed inset-y-0 left-0 z-40 w-60 shadow-2xl md:shadow-none md:relative md:z-auto'
         }`}
       >
         {/* Sidebar Header with Hamburger & Logo */}
@@ -60,6 +81,7 @@ function AppContent() {
         <nav className={`flex-1 space-y-1 overflow-y-auto ${sidebarCollapsed ? 'px-1.5' : 'px-3'}`}>
           <Link 
             to="/" 
+            onClick={() => { if (window.innerWidth < 768) toggleSidebar(); }}
             className={`flex items-center w-full rounded-xl transition ${
               sidebarCollapsed 
                 ? 'flex-col justify-center py-4 gap-1' 
@@ -76,6 +98,7 @@ function AppContent() {
           
           <Link 
             to="/settings" 
+            onClick={() => { if (window.innerWidth < 768) toggleSidebar(); }}
             className={`flex items-center w-full rounded-xl transition ${
               sidebarCollapsed 
                 ? 'flex-col justify-center py-4 gap-1' 
@@ -92,6 +115,7 @@ function AppContent() {
 
           <Link 
             to="/offline" 
+            onClick={() => { if (window.innerWidth < 768) toggleSidebar(); }}
             className={`flex items-center w-full rounded-xl transition ${
               sidebarCollapsed 
                 ? 'flex-col justify-center py-4 gap-1' 
