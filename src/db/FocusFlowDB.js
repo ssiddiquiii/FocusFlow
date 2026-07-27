@@ -61,18 +61,17 @@ class FocusFlowDB extends Dexie {
       }
     });
 
-    // Auto-migration: Ensure Git & GitHub Masterclass is seeded
+    // Auto-migration: Ensure Git & GitHub Masterclass is seeded & updated to single masterclass video
     const gitCourseId = 'git-github-masterclass-q8EevlEpQ2A';
-    const existingGit = await this.courses.get(gitCourseId);
-    if (!existingGit) {
-      const gitSeedCourse = seedData.courses.find(c => c.id === gitCourseId);
-      const gitSeedLessons = seedData.lessons.filter(l => l.courseId === gitCourseId);
-      if (gitSeedCourse) {
-        await this.transaction('rw', [this.courses, this.lessons], async () => {
-          await this.courses.put(CourseSchema.parse(gitSeedCourse));
-          await this.lessons.bulkPut(gitSeedLessons.map(l => LessonSchema.parse(l)));
-        });
-      }
+    const gitSeedCourse = seedData.courses.find(c => c.id === gitCourseId);
+    const gitSeedLessons = seedData.lessons.filter(l => l.courseId === gitCourseId);
+    if (gitSeedCourse) {
+      await this.transaction('rw', [this.courses, this.lessons], async () => {
+        await this.courses.put(CourseSchema.parse(gitSeedCourse));
+        // Remove legacy multi-chapter lessons and insert 1 single masterclass video
+        await this.lessons.where('courseId').equals(gitCourseId).delete();
+        await this.lessons.bulkPut(gitSeedLessons.map(l => LessonSchema.parse(l)));
+      });
     }
 
     const courseCount = await this.courses.count();

@@ -76,7 +76,8 @@ const LESSON_TOPIC_MAP = {
   'z9PINyinqwo': 'cat-10-closures-v8-internals',
   'ZRS485LxX0s': 'cat-10-closures-v8-internals',
 
-  // Git & GitHub Masterclass Chapters (Hitesh Choudhary Chai aur Git)
+  // Git & GitHub Masterclass (Hitesh Choudhary Chai aur Git)
+  'q8EevlEpQ2A': 'cat-git-1-intro',
   'git_ch_1': 'cat-git-1-intro',
   'git_ch_2': 'cat-git-2-config',
   'git_ch_3': 'cat-git-3-staging',

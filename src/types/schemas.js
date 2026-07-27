@@ -24,7 +24,12 @@ export const LessonSchema = z.object({
   thumbnailUrl: z.string().optional().default(''),
   duration: z.string().optional().default('0:00'),
   index: z.number().int().min(1),
-  type: z.enum(['youtube', 'udemy'])
+  type: z.enum(['youtube', 'udemy']),
+  chapters: z.array(z.object({
+    title: z.string(),
+    timestamp: z.number(),
+    formattedTime: z.string()
+  })).optional()
 });
 
 /**

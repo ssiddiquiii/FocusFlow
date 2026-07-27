@@ -59,6 +59,7 @@ const LESSON_TOPIC_MAP = {
   'VaH09NXQZ58': 'cat-10-closures-v8-internals',
   'z9PINyinqwo': 'cat-10-closures-v8-internals',
   'ZRS485LxX0s': 'cat-10-closures-v8-internals',
+  'q8EevlEpQ2A': 'cat-git-1-intro',
   'git_ch_1': 'cat-git-1-intro',
   'git_ch_2': 'cat-git-2-config',
   'git_ch_3': 'cat-git-3-staging',
@@ -801,12 +802,46 @@ export default function Watch() {
                   className="px-3.5 py-1.5 rounded-lg bg-primary hover:bg-primary/90 text-white text-xs font-bold transition flex items-center justify-center gap-1.5 shadow cursor-pointer self-start sm:self-auto"
                 >
                   <Target size={13} />
-                  <span>Solve 10 Practice Qs →</span>
+                  <span>Solve Practice Qs →</span>
                 </button>
               </div>
             );
           })()}
         </div>
+
+        {/* Interactive Timed Chapter Timeline Navigator (For Masterclass Videos like Git) */}
+        {lesson.chapters && lesson.chapters.length > 0 && (
+          <div className="px-6 py-5 max-w-7xl w-full mx-auto space-y-3 border-b border-border/50">
+            <div className="flex items-center gap-2">
+              <Clock size={16} className="text-primary" />
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+                Interactive Masterclass Chapters ({lesson.chapters.length} Chapters)
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
+              {lesson.chapters.map((ch, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    setIsPlayerTriggered(true);
+                    triggerPlayerSeek(ch.timestamp);
+                  }}
+                  className="p-3 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-primary/50 hover:bg-zinc-800/80 transition text-left space-y-1 group cursor-pointer"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold text-primary uppercase tracking-wider font-mono">
+                      ⏱️ {ch.formattedTime}
+                    </span>
+                    <Play size={11} className="text-zinc-500 group-hover:text-primary transition" fill="currentColor" />
+                  </div>
+                  <p className="text-xs font-semibold text-zinc-200 truncate group-hover:text-white transition">
+                    {ch.title}
+                  </p>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Course Playlist / Syllabus Section (Directly Below Video) */}
         <div className="px-6 py-6 max-w-7xl w-full mx-auto space-y-4">
