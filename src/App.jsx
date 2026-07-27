@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { BookOpen, Settings as SettingsIcon, WifiOff, Menu } from 'lucide-react';
+import { BookOpen, Settings as SettingsIcon, WifiOff, Menu, Target } from 'lucide-react';
 import { useUIStore } from './hooks/useUIStore';
 
 // Lazy-loaded page components for optimal bundle splitting
@@ -9,6 +9,7 @@ const CourseDetail = lazy(() => import('./pages/CourseDetail'));
 const Watch = lazy(() => import('./pages/Watch'));
 const Settings = lazy(() => import('./pages/Settings'));
 const Offline = lazy(() => import('./pages/Offline'));
+const PracticeHub = lazy(() => import('./pages/PracticeHub'));
 
 /**
  * Inner shell wrapper to access React Router location hooks.
@@ -97,6 +98,23 @@ function AppContent() {
           </Link>
           
           <Link 
+            to="/practice" 
+            onClick={() => { if (window.innerWidth < 768) toggleSidebar(); }}
+            className={`flex items-center w-full rounded-xl transition ${
+              sidebarCollapsed 
+                ? 'flex-col justify-center py-4 gap-1' 
+                : 'flex-row px-3 py-2.5 gap-4'
+            } ${
+              isActive('/practice') 
+                ? 'bg-zinc-800 font-medium text-white' 
+                : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'
+            }`}
+          >
+            <Target size={sidebarCollapsed ? 22 : 20} className={isActive('/practice') ? 'text-primary' : ''} />
+            <span className={sidebarCollapsed ? 'text-[9px] text-center w-full truncate px-1' : 'text-sm'}>Practice</span>
+          </Link>
+
+          <Link 
             to="/settings" 
             onClick={() => { if (window.innerWidth < 768) toggleSidebar(); }}
             className={`flex items-center w-full rounded-xl transition ${
@@ -144,6 +162,7 @@ function AppContent() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/courses/:courseId" element={<CourseDetail />} />
               <Route path="/courses/:courseId/lessons/:lessonId" element={<Watch />} />
+              <Route path="/practice" element={<PracticeHub />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/offline" element={<Offline />} />
               <Route path="*" element={<Dashboard />} />

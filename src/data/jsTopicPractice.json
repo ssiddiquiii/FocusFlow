@@ -1,0 +1,722 @@
+[
+  {
+    "id": "variables-scope",
+    "topic": "Variables, Scope & TDZ",
+    "icon": "📦",
+    "description": "Master var, let, const, block scope, function scope, and Temporal Dead Zone gotchas.",
+    "questions": [
+      {
+        "id": "var_1",
+        "title": "Predict Output: var scoping vs let scoping inside loops",
+        "difficulty": "easy",
+        "question": "What will be printed when running `for(var i=0; i<3; i++) { setTimeout(()=>console.log(i), 100); }` vs using `let i`?",
+        "solution": "With `var`, it prints `3 3 3` because `var` is function-scoped and shares 1 binding. With `let`, it prints `0 1 2` because `let` creates a new block-scoped binding for each loop iteration.",
+        "link": "https://javascript.info/closure#tasks"
+      },
+      {
+        "id": "var_2",
+        "title": "Temporal Dead Zone (TDZ) Identification",
+        "difficulty": "medium",
+        "question": "Why does accessing `let a` before line `let a = 10` throw ReferenceError while `var b` returns `undefined`?",
+        "solution": "`let` and `const` are hoisted into the Temporal Dead Zone (TDZ) from the start of the block until execution reaches their declaration line. Accessing them in TDZ throws ReferenceError.",
+        "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let"
+      },
+      {
+        "id": "var_3",
+        "title": "Const Mutation Trap",
+        "difficulty": "easy",
+        "question": "Can you push elements into an array declared with `const arr = []`? Why or why not?",
+        "solution": "Yes! `const` prevents re-assigning the variable identifier reference (`arr = newArr`), but it does NOT freeze internal object/array mutations.",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-13.php"
+      },
+      {
+        "id": "var_4",
+        "title": "Global Window Pollution",
+        "difficulty": "medium",
+        "question": "Which keyword (`var`, `let`, `const`) attaches variables declared at top-level to the global `window` object in browser?",
+        "solution": "`var` attaches to `window` (e.g. `var x = 5` -> `window.x === 5`). `let` and `const` do NOT attach to the global object.",
+        "link": "https://javascript.info/variables"
+      },
+      {
+        "id": "var_5",
+        "title": "Redeclaration Rules",
+        "difficulty": "easy",
+        "question": "Which of the following will throw a SyntaxError?\nA) `var a=1; var a=2;` \nB) `let b=1; let b=2;`",
+        "solution": "Option B throws `SyntaxError: Identifier 'b' has already been declared`. `let` cannot be re-declared within the same scope.",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-14.php"
+      },
+      {
+        "id": "var_6",
+        "title": "Shadowing & Block Scope",
+        "difficulty": "medium",
+        "question": "What is variable shadowing? Can a `var` shadow a `let` variable in a nested block?",
+        "solution": "Shadowing occurs when an inner scope variable has the same name as outer scope. Illegal shadowing: A `var` CANNOT shadow a `let` in the same/nested scope, but `let` CAN shadow `var`.",
+        "link": "https://javascript.info/closure"
+      },
+      {
+        "id": "var_7",
+        "title": "Freeze Object Immutability (Interview Classic)",
+        "difficulty": "hard",
+        "question": "How do you make an object completely immutable in JavaScript so properties cannot be added, edited, or deleted?",
+        "solution": "Use `Object.freeze(obj)`. For deep nested objects, implement a recursive `deepFreeze(obj)` function.",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-17.php"
+      },
+      {
+        "id": "var_8",
+        "title": "Implement a Const-like Wrapper Function",
+        "difficulty": "hard",
+        "question": "Write a function `createImmutableProp(obj, propName, value)` using `Object.defineProperty` to make a read-only property.",
+        "solution": "```js\nfunction createImmutableProp(obj, key, val) {\n  Object.defineProperty(obj, key, {\n    value: val,\n    writable: false,\n    configurable: false\n  });\n}\n```",
+        "link": "https://javascript.info/property-descriptors"
+      }
+    ]
+  },
+  {
+    "id": "datatypes-coercion",
+    "topic": "Data Types, Numbers & Coercion",
+    "icon": "🔢",
+    "description": "Master primitives vs references, type coercion, IEEE 754 precision, and NaN checks.",
+    "questions": [
+      {
+        "id": "type_1",
+        "title": "The `typeof null` Historical Bug",
+        "difficulty": "easy",
+        "question": "What does `typeof null` return, and why?",
+        "solution": "It returns `\"object\"`. This is a legacy bug from JS 1.0 where type tags for objects were represented as 0, and `null` was represented as NULL pointer (0x00).",
+        "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof"
+      },
+      {
+        "id": "type_2",
+        "title": "Coercion Matrix: `\"5\" + 3` vs `\"5\" - 3`",
+        "difficulty": "easy",
+        "question": "Evaluate: `console.log(\"5\" + 3)` and `console.log(\"5\" - 3)`.",
+        "solution": "`\"5\" + 3 === \"53\"` (+ triggers string concatenation if either operand is String).\n`\"5\" - 3 === 2` (- converts string to number).",
+        "link": "https://javascript.info/type-conversions"
+      },
+      {
+        "id": "type_3",
+        "title": "NaN Comparison Traps",
+        "difficulty": "medium",
+        "question": "Why does `NaN === NaN` evaluate to `false`? How do you reliably check for NaN?",
+        "solution": "`NaN` (Not-a-Number) is the only value in JS not equal to itself. Use `Number.isNaN(val)` or `Object.is(val, NaN)`.",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-math-exercise-1.php"
+      },
+      {
+        "id": "type_4",
+        "title": "Floating Point Precision Gotcha",
+        "difficulty": "medium",
+        "question": "Why does `0.1 + 0.2 === 0.3` return `false`? How do you compare floating points safely?",
+        "solution": "JS uses IEEE 754 64-bit float format. `0.1 + 0.2` equals `0.30000000000000004`. Compare using epsilon: `Math.abs(a - b) < Number.EPSILON`.",
+        "link": "https://javascript.info/number"
+      },
+      {
+        "id": "type_5",
+        "title": "Loose vs Strict Equality Matrix",
+        "difficulty": "medium",
+        "question": "Evaluate: A) `false == 0`  B) `\"\" == 0`  C) `null == undefined`  D) `null === undefined`",
+        "solution": "A) true  B) true  C) true  D) false (Loose equality `==` coerces types; `null` only loosely equals `undefined`).",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-36.php"
+      },
+      {
+        "id": "type_6",
+        "title": "Explicit Type Conversions",
+        "difficulty": "easy",
+        "question": "Write a snippet converting string `\"123.45px\"` into a clean number `123.45`.",
+        "solution": "Use `parseFloat(\"123.45px\")` -> `123.45`. Note: `Number(\"123.45px\")` returns `NaN`.",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-math-exercise-5.php"
+      },
+      {
+        "id": "type_7",
+        "title": "BigInt & Safe Integer Bounds",
+        "difficulty": "hard",
+        "question": "What is `Number.MAX_SAFE_INTEGER`? How do you perform operations on integers larger than 2^53 - 1?",
+        "solution": "`Number.MAX_SAFE_INTEGER` is `9007199254740991`. For larger numbers, use BigInt literals (append `n` to integer e.g., `9007199254740993n`).",
+        "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt"
+      },
+      {
+        "id": "type_8",
+        "title": "Symbol Property Privacy & Uniqueness",
+        "difficulty": "hard",
+        "question": "Are Symbols unique? Does `Symbol(\"id\") === Symbol(\"id\")` evaluate to true or false?",
+        "solution": "Every Symbol call returns a guaranteed unique Symbol value. `Symbol(\"id\") === Symbol(\"id\")` is `false`. Useful for hidden object properties.",
+        "link": "https://javascript.info/symbol"
+      }
+    ]
+  },
+  {
+    "id": "strings",
+    "topic": "Strings & Pattern Operations",
+    "icon": "🔤",
+    "description": "Master string immutability, slice vs substring, template literals, and regex patterns.",
+    "questions": [
+      {
+        "id": "str_1",
+        "title": "String Immutability Proof",
+        "difficulty": "easy",
+        "question": "If `let str = 'hello'`, what happens when executing `str[0] = 'H'`?",
+        "solution": "Nothing! Strings in JS are immutable. `str` remains `'hello'`. In strict mode (`'use strict'`), it throws an error.",
+        "link": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-1.php"
+      },
+      {
+        "id": "str_2",
+        "title": "Reverse a String (3 Ways)",
+        "difficulty": "easy",
+        "question": "Write a 1-line function to reverse a string `'FocusFlow'`.",
+        "solution": "```js\nconst reverseStr = str => str.split('').reverse().join('');\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-14.php"
+      },
+      {
+        "id": "str_3",
+        "title": "Slice vs Substring Difference",
+        "difficulty": "medium",
+        "question": "What does `'JavaScript'.slice(-4)` return vs `'JavaScript'.substring(-4)`?",
+        "solution": "`'JavaScript'.slice(-4)` returns `'ript'` (supports negative index from end).\n`'JavaScript'.substring(-4)` treats negative index as `0`, returning `'JavaScript'`. ",
+        "link": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-4.php"
+      },
+      {
+        "id": "str_4",
+        "title": "Palindrome Checker Function",
+        "url": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-2.php",
+        "difficulty": "easy",
+        "question": "Write a function `isPalindrome(str)` ignoring case and non-alphanumeric characters.",
+        "solution": "```js\nfunction isPalindrome(str) {\n  const clean = str.toLowerCase().replace(/[^a-z0-9]/g, '');\n  return clean === clean.split('').reverse().join('');\n}\n```"
+      },
+      {
+        "id": "str_5",
+        "title": "Title Case Capitalization",
+        "difficulty": "medium",
+        "question": "Write a function `toTitleCase(\"chai aur code\")` returning `\"Chai Aur Code\"`.",
+        "solution": "```js\nconst toTitleCase = str => str.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-5.php"
+      },
+      {
+        "id": "str_6",
+        "title": "Count Vowels in a String",
+        "difficulty": "easy",
+        "question": "Count vowels (a, e, i, o, u) in string `\"javascript exercises\"`.",
+        "solution": "```js\nconst countVowels = str => (str.match(/[aeiou]/gi) || []).length;\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-54.php"
+      },
+      {
+        "id": "str_7",
+        "title": "First Non-Repeating Character",
+        "difficulty": "hard",
+        "question": "Find the first character in string `\"abacddbec\"` that does not repeat.",
+        "solution": "```js\nfunction firstNonRepeated(str) {\n  for (let char of str) {\n    if (str.indexOf(char) === str.lastIndexOf(char)) return char;\n  }\n  return null;\n}\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-23.php"
+      },
+      {
+        "id": "str_8",
+        "title": "Truncate String with Ellipsis",
+        "difficulty": "easy",
+        "question": "Write `truncateStr(str, num)` that truncates string to length `num` and appends `...` if longer.",
+        "solution": "```js\nconst truncateStr = (str, num) => str.length > num ? str.slice(0, num) + '...' : str;\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-16.php"
+      }
+    ]
+  },
+  {
+    "id": "arrays-methods",
+    "topic": "Arrays & Functional Methods (HOFs)",
+    "icon": "📊",
+    "description": "Master map, filter, reduce, splice vs slice, flat, and array deduplication.",
+    "questions": [
+      {
+        "id": "arr_1",
+        "title": "Deduplicate Array Items (4 Ways)",
+        "difficulty": "easy",
+        "question": "Write the cleanest 1-liner to remove duplicates from `[1, 2, 2, 3, 4, 4, 5]`.",
+        "solution": "```js\nconst unique = arr => [...new Set(arr)];\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-14.php"
+      },
+      {
+        "id": "arr_2",
+        "title": "Splice vs Slice Mutability Check",
+        "difficulty": "easy",
+        "question": "Given `arr = [1, 2, 3, 4, 5]`, what is the difference between `arr.slice(1, 3)` and `arr.splice(1, 3)`?",
+        "solution": "`slice(1, 3)` returns `[2, 3]` without altering `arr`.\n`splice(1, 3)` removes 3 elements starting at index 1 (`[2, 3, 4]`) and MUTATES `arr` to `[1, 5]`.",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-24.php"
+      },
+      {
+        "id": "arr_3",
+        "title": "Map vs Filter vs Reduce Purpose",
+        "difficulty": "easy",
+        "question": "Which method would you use to A) Calculate total price of shopping cart, B) Get products with price > $50, C) Format all price numbers with $ sign?",
+        "solution": "A) `reduce()` (Accumulate single total value)\nB) `filter()` (Select subset matching criteria)\nC) `map()` (Transform each element)",
+        "link": "https://javascript.info/array-methods"
+      },
+      {
+        "id": "arr_4",
+        "title": "Flatten Multidimensional Array",
+        "difficulty": "medium",
+        "question": "Flatten deeply nested array `[1, [2, [3, [4]]]]` into single flat array `[1, 2, 3, 4]`.",
+        "solution": "Use `arr.flat(Infinity)` or recursive custom function.",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-21.php"
+      },
+      {
+        "id": "arr_5",
+        "title": "Implement Custom `myMap` Prototype",
+        "difficulty": "hard",
+        "question": "Write a custom `Array.prototype.myMap` implementation without using built-in `.map()`.",
+        "solution": "```js\nArray.prototype.myMap = function(cb) {\n  const res = [];\n  for (let i = 0; i < this.length; i++) {\n    if (i in this) res.push(cb(this[i], i, this));\n  }\n  return res;\n};\n```",
+        "link": "https://javascript.info/array-methods"
+      },
+      {
+        "id": "arr_6",
+        "title": "Find Two Sum Indices (LeetCode #1)",
+        "difficulty": "medium",
+        "question": "Given `nums = [2, 7, 11, 15]` and `target = 9`, return indices of 2 numbers adding up to target in O(n) time.",
+        "solution": "```js\nfunction twoSum(nums, target) {\n  const map = new Map();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff), i];\n    map.set(nums[i], i);\n  }\n}\n```",
+        "link": "https://leetcode.com/problems/two-sum/"
+      },
+      {
+        "id": "arr_7",
+        "title": "Group Objects by Property with Reduce",
+        "difficulty": "hard",
+        "question": "Given `users = [{age:20, name:'A'}, {age:20, name:'B'}, {age:30, name:'C'}]`, group users by age.",
+        "solution": "```js\nconst grouped = users.reduce((acc, u) => {\n  acc[u.age] = acc[u.age] || [];\n  acc[u.age].push(u);\n  return acc;\n}, {});\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-27.php"
+      },
+      {
+        "id": "arr_8",
+        "title": "Array Sort Mutability & Comparator Gotcha",
+        "difficulty": "medium",
+        "question": "Why does `[10, 5, 20, 2].sort()` produce `[10, 20, 2, 5]`? How do you sort numerically?",
+        "solution": "Default `.sort()` converts elements to strings and compares UTF-16 code units. For numbers, pass comparator: `arr.sort((a, b) => a - b)`.",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-7.php"
+      }
+    ]
+  },
+  {
+    "id": "objects-methods",
+    "topic": "Objects, Prototype & Destructuring",
+    "icon": "🔑",
+    "description": "Master object literals, keys/values/entries, shallow vs deep clone, and destructuring.",
+    "questions": [
+      {
+        "id": "obj_1",
+        "title": "Shallow Copy vs Deep Copy Methods",
+        "difficulty": "easy",
+        "question": "What is the difference between `Object.assign({}, obj)` and `structuredClone(obj)`?",
+        "solution": "`Object.assign` and spread `{...obj}` create a SHALLOW copy (nested objects share reference).\n`structuredClone()` creates a true DEEP copy including nested objects/dates/maps.",
+        "link": "https://javascript.info/object-copy"
+      },
+      {
+        "id": "obj_2",
+        "title": "Object Destructuring with Default & Alias",
+        "difficulty": "easy",
+        "question": "Destructure `name` as `userName` and `role` with default `'Student'` from `const person = { name: 'Ali' }`.",
+        "solution": "```js\nconst { name: userName, role = 'Student' } = person;\n```",
+        "link": "https://javascript.info/destructuring-assignment"
+      },
+      {
+        "id": "obj_3",
+        "title": "Check if Property Exists in Object",
+        "difficulty": "easy",
+        "question": "What is the difference between `'key' in obj` and `obj.hasOwnProperty('key')`?",
+        "solution": "`'key' in obj` checks both object AND its prototype chain.\n`obj.hasOwnProperty('key')` checks ONLY object's own direct properties.",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-17.php"
+      },
+      {
+        "id": "obj_4",
+        "title": "Count Frequency of Words in Object",
+        "difficulty": "medium",
+        "question": "Write a function `countWords(['apple', 'banana', 'apple'])` returning `{apple: 2, banana: 1}`.",
+        "solution": "```js\nconst countWords = arr => arr.reduce((acc, word) => {\n  acc[word] = (acc[word] || 0) + 1;\n  return acc;\n}, {});\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-3.php"
+      },
+      {
+        "id": "obj_5",
+        "title": "Invert Object Keys and Values",
+        "difficulty": "medium",
+        "question": "Write a function `invertObj({a: '1', b: '2'})` returning `{'1': 'a', '2': 'b'}`.",
+        "solution": "```js\nfunction invertObj(obj) {\n  return Object.fromEntries(Object.entries(obj).map(([k, v]) => [v, k]));\n}\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-16.php"
+      },
+      {
+        "id": "obj_6",
+        "title": "Optional Chaining & Nullish Coalescing",
+        "difficulty": "easy",
+        "question": "Rewrite safely without errors: `const city = user && user.address && user.address.city || 'Unknown'` using ES2020 syntax.",
+        "solution": "```js\nconst city = user?.address?.city ?? 'Unknown';\n```",
+        "link": "https://javascript.info/optional-chaining"
+      },
+      {
+        "id": "obj_7",
+        "title": "Implement Custom `deepEqual(obj1, obj2)`",
+        "difficulty": "hard",
+        "question": "Write a function to recursively compare 2 objects for deep structural equality.",
+        "solution": "Compare keys length, then recursively verify `typeof` and values equality for every key.",
+        "link": "https://javascript.info/object"
+      },
+      {
+        "id": "obj_8",
+        "title": "Property Descriptor Configuration",
+        "difficulty": "hard",
+        "question": "How do you prevent a property from showing up in `for...in` loops or `Object.keys()`?",
+        "solution": "Set `enumerable: false` using `Object.defineProperty(obj, prop, { enumerable: false })`.",
+        "link": "https://javascript.info/property-descriptors"
+      }
+    ]
+  },
+  {
+    "id": "functions-hoisting",
+    "topic": "Functions, Hoisting & IIFE",
+    "icon": "⚙️",
+    "description": "Master declarations vs expressions, parameter defaults, rest parameters, and IIFEs.",
+    "questions": [
+      {
+        "id": "fn_1",
+        "title": "Declaration vs Expression Hoisting",
+        "difficulty": "easy",
+        "question": "Why does calling `foo()` work before declaration, but calling `bar()` throws `TypeError: bar is not a function`?",
+        "solution": "`function foo() {}` declaration hoists both name and function body.\n`var bar = function() {}` hoists variable `bar` as `undefined`.",
+        "link": "https://javascript.info/function-expressions"
+      },
+      {
+        "id": "fn_2",
+        "title": "Rest Parameters vs Arguments Object",
+        "difficulty": "easy",
+        "question": "Why are Rest parameters (`...args`) preferred over the legacy `arguments` keyword?",
+        "solution": "1. `...args` is a real Array (supports map/filter/reduce), whereas `arguments` is an Array-like object.\n2. `...args` works cleanly in Arrow functions.",
+        "link": "https://javascript.info/rest-parameters-spread"
+      },
+      {
+        "id": "fn_3",
+        "title": "Immediately Invoked Function Expression (IIFE)",
+        "difficulty": "medium",
+        "question": "Write an IIFE syntax and explain why IIFEs were historically used in JS modules.",
+        "solution": "```js\n(function() {\n  const privateVar = \"Secret\";\n})();\n```\nIIFEs create a private function scope to prevent variables from polluting global namespace.",
+        "link": "https://developer.mozilla.org/en-US/docs/Glossary/IIFE"
+      },
+      {
+        "id": "fn_4",
+        "title": "First-Class Functions & Callbacks",
+        "difficulty": "easy",
+        "question": "What makes JavaScript functions 'First-Class Citizens'?",
+        "solution": "Functions can be assigned to variables, passed as arguments to other functions, and returned from functions.",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-28.php"
+      },
+      {
+        "id": "fn_5",
+        "title": "Pure Functions & Side Effects",
+        "difficulty": "medium",
+        "question": "What is a Pure Function? Which of these is pure: A) `Math.random()` B) `(a, b) => a + b`?",
+        "solution": "A pure function always returns same output for same inputs and has NO side effects. Option B is pure; Option A is impure.",
+        "link": "https://javascript.info/function-basics"
+      },
+      {
+        "id": "fn_6",
+        "title": "Currying Function Implementation",
+        "difficulty": "hard",
+        "question": "Write a curried function `add(2)(3)(4)` that returns `9`.",
+        "solution": "```js\nconst add = a => b => c => a + b + c;\n```",
+        "link": "https://javascript.info/currying-partials"
+      },
+      {
+        "id": "fn_7",
+        "title": "Infinite Currying Function (Interview Favorite)",
+        "difficulty": "hard",
+        "question": "Implement an infinite currying sum function `sum(1)(2)(3)...()` that returns total when invoked empty.",
+        "solution": "```js\nfunction sum(a) {\n  return function(b) {\n    if (b !== undefined) return sum(a + b);\n    return a;\n  };\n}\n```",
+        "link": "https://javascript.info/currying-partials"
+      },
+      {
+        "id": "fn_8",
+        "title": "Function Debounce Implementation",
+        "difficulty": "hard",
+        "question": "Write a `debounce(fn, delay)` function to rate-limit search input handlers.",
+        "solution": "```js\nfunction debounce(fn, delay) {\n  let timer;\n  return function(...args) {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn.apply(this, args), delay);\n  };\n}\n```",
+        "link": "https://javascript.info/settimeout-setinterval"
+      }
+    ]
+  },
+  {
+    "id": "this-binding",
+    "topic": "THIS Keyword, Call, Apply & Bind",
+    "icon": "🎯",
+    "description": "Master dynamic this binding, explicit binding (call/apply/bind), and arrow function lexicals.",
+    "questions": [
+      {
+        "id": "this_1",
+        "title": "4 Rules of `this` Binding",
+        "difficulty": "medium",
+        "question": "List the 4 rules that determine what `this` points to in JS.",
+        "solution": "1. Default binding (standalone call -> window/undefined)\n2. Implicit binding (object method `obj.method()`) \n3. Explicit binding (`call`/`apply`/`bind`)\n4. New binding (`new Constructor()`)",
+        "link": "https://javascript.info/object-methods"
+      },
+      {
+        "id": "this_2",
+        "title": "Call vs Apply vs Bind Differences",
+        "difficulty": "easy",
+        "question": "What is the difference between `fn.call()`, `fn.apply()`, and `fn.bind()`?",
+        "solution": "`call(thisArg, arg1, arg2)`: Invokes immediately with comma args.\n`apply(thisArg, [arg1, arg2])`: Invokes immediately with array args.\n`bind(thisArg, arg1)`: Returns a NEW bound function without executing immediately.",
+        "link": "https://javascript.info/bind"
+      },
+      {
+        "id": "this_3",
+        "title": "Arrow Functions Lexical `this` Trap",
+        "difficulty": "medium",
+        "question": "Predict output of `user = { name:'A', say: () => console.log(this.name) }; user.say();`",
+        "solution": "Prints `undefined` (or global name). Arrow functions do NOT have `this` — they inherit `this` lexically from outer window scope.",
+        "link": "https://javascript.info/arrow-functions"
+      },
+      {
+        "id": "this_4",
+        "title": "Method Borrowing with `call()`",
+        "difficulty": "medium",
+        "question": "Borrow `Array.prototype.slice` to convert arguments object into real Array.",
+        "solution": "```js\nconst argsArray = Array.prototype.slice.call(arguments);\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-11.php"
+      },
+      {
+        "id": "this_5",
+        "title": "Implement Custom `myBind()` Prototype",
+        "difficulty": "hard",
+        "question": "Write custom `Function.prototype.myBind` without using built-in `.bind()`.",
+        "solution": "```js\nFunction.prototype.myBind = function(context, ...outerArgs) {\n  const fn = this;\n  return function(...innerArgs) {\n    return fn.apply(context, [...outerArgs, ...innerArgs]);\n  };\n};\n```",
+        "link": "https://javascript.info/bind"
+      },
+      {
+        "id": "this_6",
+        "title": "Losing `this` in Callback Timeout",
+        "difficulty": "medium",
+        "question": "Why does `setTimeout(user.sayHi, 1000)` lose `this` context? Fix it 2 ways.",
+        "solution": "When passed as callback, method loses object context.\nFix 1: `setTimeout(() => user.sayHi(), 1000)`\nFix 2: `setTimeout(user.sayHi.bind(user), 1000)`",
+        "link": "https://javascript.info/bind"
+      },
+      {
+        "id": "this_7",
+        "title": "`new` Keyword 4-Step Process",
+        "difficulty": "hard",
+        "question": "What 4 steps happen when executing `new Person('Sameed')`?",
+        "solution": "1. Creates empty object `{}`.\n2. Links `__proto__` to `Person.prototype`.\n3. Binds `this` to new object and executes constructor.\n4. Returns new object (unless constructor explicitly returns another object).",
+        "link": "https://javascript.info/constructor-new"
+      },
+      {
+        "id": "this_8",
+        "title": "Chaining Methods with `this`",
+        "difficulty": "easy",
+        "question": "How do you make a calculator object `calc.add(5).subtract(2).getResult()` chainable?",
+        "solution": "Return `this` at the end of each chainable method: `add(n) { this.val += n; return this; }`.",
+        "link": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-8.php"
+      }
+    ]
+  },
+  {
+    "id": "closures-scope",
+    "topic": "Lexical Scope & Closures",
+    "icon": "🔒",
+    "description": "Master outer lexical environment access, private variables, and closure memory leaks.",
+    "questions": [
+      {
+        "id": "cl_1",
+        "title": "Closure Definition & Core Mechanism",
+        "difficulty": "easy",
+        "question": "Define closure in 1 simple sentence.",
+        "solution": "A closure is a function bundled together with references to its outer lexical environment, preserving variables even after the outer function finishes execution.",
+        "link": "https://javascript.info/closure"
+      },
+      {
+        "id": "cl_2",
+        "title": "Private Counter Pattern",
+        "difficulty": "easy",
+        "question": "Create a `createCounter()` function with private `count` variable and `increment()`, `decrement()`, `getCount()` methods.",
+        "solution": "```js\nfunction createCounter() {\n  let count = 0;\n  return {\n    increment: () => ++count,\n    decrement: () => --count,\n    getCount: () => count\n  };\n}\n```",
+        "link": "https://leetcode.com/problems/counter-ii/"
+      },
+      {
+        "id": "cl_3",
+        "title": "Closure Loop Bug Fix (Classic)",
+        "difficulty": "medium",
+        "question": "Fix bug: `for(var i=0; i<3; i++) { setTimeout(()=>console.log(i), 100); }` using closure (WITHOUT changing `var` to `let`).",
+        "solution": "Wrap in IIFE to capture current `i` in closure:\n```js\nfor(var i=0; i<3; i++) {\n  (function(index) {\n    setTimeout(()=>console.log(index), 100);\n  })(i);\n}\n```",
+        "link": "https://javascript.info/closure"
+      },
+      {
+        "id": "cl_4",
+        "title": "Function Memoization using Closure",
+        "difficulty": "hard",
+        "question": "Write a `memoize(fn)` wrapper that caches calculated results for expensive operations.",
+        "solution": "```js\nfunction memoize(fn) {\n  const cache = {};\n  return function(...args) {\n    const key = JSON.stringify(args);\n    if (key in cache) return cache[key];\n    const res = fn.apply(this, args);\n    cache[key] = res;\n    return res;\n  };\n}\n```",
+        "link": "https://javascript.info/closure"
+      },
+      {
+        "id": "cl_5",
+        "title": "Module Pattern with Closures",
+        "difficulty": "medium",
+        "question": "How do closures enable Encapsulation and Data Privacy in JavaScript modules?",
+        "solution": "Variables declared inside outer function are inaccessible from outside scope. Only methods exposed via returned object can read/write those closed variables.",
+        "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures"
+      },
+      {
+        "id": "cl_6",
+        "title": "Run Once Function (`once`)",
+        "difficulty": "medium",
+        "question": "Write a function `once(fn)` that ensures `fn` is executed only once no matter how many times called.",
+        "solution": "```js\nfunction once(fn) {\n  let ran = false, res;\n  return function(...args) {\n    if (!ran) {\n      ran = true;\n      res = fn.apply(this, args);\n    }\n    return res;\n  };\n}\n```",
+        "link": "https://leetcode.com/problems/allow-one-function-call/"
+      },
+      {
+        "id": "cl_7",
+        "title": "Closure Memory Leak Prevention",
+        "difficulty": "hard",
+        "question": "How can closures cause memory leaks in single-page web applications?",
+        "solution": "If a closure retains references to large DOM elements or arrays, the Garbage Collector cannot free them even when no longer displayed. Nullify unused variables when done.",
+        "link": "https://javascript.info/garbage-collection"
+      },
+      {
+        "id": "cl_8",
+        "title": "Partial Application Function",
+        "difficulty": "hard",
+        "question": "Write `partial(fn, ...presetArgs)` that pre-fills arguments using closures.",
+        "solution": "```js\nconst partial = (fn, ...preset) => (...later) => fn(...preset, ...later);\n```",
+        "link": "https://javascript.info/currying-partials"
+      }
+    ]
+  },
+  {
+    "id": "async-promises",
+    "topic": "Async JS, Promises & Event Loop",
+    "icon": "⚡",
+    "description": "Master microtasks vs macrotasks, Promise states, async/await, and Promise combinators.",
+    "questions": [
+      {
+        "id": "async_1",
+        "title": "Event Loop Task Queue Order (Interview Classic)",
+        "difficulty": "medium",
+        "question": "Predict output order: \n`console.log(1); setTimeout(()=>console.log(2),0); Promise.resolve().then(()=>console.log(3)); console.log(4);`",
+        "solution": "Prints: `1, 4, 3, 2`.\nSynchronous code (1, 4) executes first. Microtask Promise queue (3) runs before Macrotask setTimeout queue (2).",
+        "link": "https://javascript.info/event-loop"
+      },
+      {
+        "id": "async_2",
+        "title": "Promise States & Immutability",
+        "difficulty": "easy",
+        "question": "What happens if a Promise calls `resolve('A')` followed immediately by `reject('B')`?",
+        "solution": "The Promise resolves to `'A'`. Once a Promise state transitions from Pending to Fulfilled or Rejected, it becomes immutable and subsequent calls are ignored.",
+        "link": "https://javascript.info/promise-basics"
+      },
+      {
+        "id": "async_3",
+        "title": "Promise.all vs Promise.allSettled",
+        "difficulty": "medium",
+        "question": "If 1 of 5 promises rejects, what is the output of `Promise.all()` vs `Promise.allSettled()`?",
+        "solution": "`Promise.all()` rejects immediately with the error of the first rejected promise (short-circuit).\n`Promise.allSettled()` waits for all promises and returns an array of objects describing status (`fulfilled`/`rejected`) of each.",
+        "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled"
+      },
+      {
+        "id": "async_4",
+        "title": "Retry Failed API Request",
+        "difficulty": "hard",
+        "question": "Write `fetchWithRetry(url, retries)` that retries failed fetch up to `retries` times before rejecting.",
+        "solution": "```js\nasync function fetchWithRetry(url, retries = 3) {\n  try {\n    return await fetch(url);\n  } catch (err) {\n    if (retries <= 1) throw err;\n    return fetchWithRetry(url, retries - 1);\n  }\n}\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/asynchronous/javascript-asynchronous-exercise-6.php"
+      },
+      {
+        "id": "async_5",
+        "title": "Sleep / Delay Helper Function",
+        "difficulty": "easy",
+        "question": "Write a `sleep(ms)` helper function using Promises so you can execute `await sleep(2000)`.",
+        "solution": "```js\nconst sleep = ms => new Promise(resolve => setTimeout(resolve, ms));\n```",
+        "link": "https://leetcode.com/problems/sleep/"
+      },
+      {
+        "id": "async_6",
+        "title": "Sequential vs Parallel Async Execution",
+        "difficulty": "medium",
+        "question": "Given `[url1, url2, url3]`, write parallel fetch vs sequential fetch using async/await.",
+        "solution": "Parallel: `await Promise.all(urls.map(url => fetch(url)))`\nSequential: Use a `for...of` loop with `await fetch(url)` inside.",
+        "link": "https://javascript.info/async-await"
+      },
+      {
+        "id": "async_7",
+        "title": "Custom Promise Implementation (Simplified)",
+        "difficulty": "hard",
+        "question": "Write a mini `MyPromise` class supporting `.then()` and `resolve()`.",
+        "solution": "Implement state `PENDING/FULFILLED`, `value`, and `callbacks` array invoked when state transitions.",
+        "link": "https://javascript.info/promise-basics"
+      },
+      {
+        "id": "async_8",
+        "title": "Promise.race vs Promise.any",
+        "difficulty": "medium",
+        "question": "What is the difference between `Promise.race()` and `Promise.any()`?",
+        "solution": "`Promise.race()` settles (fulfills or rejects) as soon as FIRST promise settles.\n`Promise.any()` fulfills as soon as FIRST promise FULFILLS (ignores rejections unless all reject).",
+        "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any"
+      }
+    ]
+  },
+  {
+    "id": "dom-events",
+    "topic": "DOM Operations & Event Delegation",
+    "icon": "🌐",
+    "description": "Master DOM tree traversal, event bubbling, event delegation, and performance optimization.",
+    "questions": [
+      {
+        "id": "dom_1",
+        "title": "Event Bubbling vs Capturing",
+        "difficulty": "easy",
+        "question": "Explain Event Bubbling vs Capturing. Which direction does Bubbling propagate?",
+        "solution": "Bubbling propagates UPWARDS from the target element to window. Capturing propagates DOWNWARDS from window to target element.",
+        "link": "https://javascript.info/bubbling-and-capturing"
+      },
+      {
+        "id": "dom_2",
+        "title": "Event Delegation Pattern (Interview Classic)",
+        "difficulty": "medium",
+        "question": "Why is adding 1 event listener to `<ul>` better than adding 100 listeners to `<li>` items?",
+        "solution": "Event Delegation uses bubbling. 1 listener on `<ul>` handles clicks for all current AND dynamically added `<li>` elements, saving memory and DOM setup overhead.",
+        "link": "https://javascript.info/event-delegation"
+      },
+      {
+        "id": "dom_3",
+        "title": "NodeList vs HTMLCollection",
+        "difficulty": "easy",
+        "question": "What is the key difference between `querySelectorAll` (NodeList) and `getElementsByTagName` (HTMLCollection)?",
+        "solution": "`querySelectorAll` returns a static NodeList (supports `.forEach()`). `getElementsByTagName` returns a LIVE HTMLCollection that auto-updates when DOM changes.",
+        "link": "https://javascript.info/searching-elements-dom"
+      },
+      {
+        "id": "dom_4",
+        "title": "preventDefault vs stopPropagation",
+        "difficulty": "easy",
+        "question": "What is the difference between `e.preventDefault()` and `e.stopPropagation()`?",
+        "solution": "`e.preventDefault()` cancels browser default action (e.g. link navigation/form submit).\n`e.stopPropagation()` stops event from bubbling up the DOM tree.",
+        "link": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-1.php"
+      },
+      {
+        "id": "dom_5",
+        "title": "Dynamic Element Creation & Insertion",
+        "difficulty": "medium",
+        "question": "Write code to create `<button class='btn'>Click</button>` and append to `<div id='app'>`.",
+        "solution": "```js\nconst btn = document.createElement('button');\nbtn.className = 'btn';\nbtn.textContent = 'Click';\ndocument.getElementById('app').appendChild(btn);\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-5.php"
+      },
+      {
+        "id": "dom_6",
+        "title": "Reflow & Repaint Optimization (DocumentFragment)",
+        "difficulty": "hard",
+        "question": "How do you append 1,000 `<li>` items to a `<ul>` without causing 1,000 DOM reflows?",
+        "solution": "Use a `DocumentFragment`:\n```js\nconst fragment = document.createDocumentFragment();\nfor(let i=0; i<1000; i++) {\n  const li = document.createElement('li');\n  fragment.appendChild(li);\n}\ndocument.querySelector('ul').appendChild(fragment);\n```",
+        "link": "https://javascript.info/modifying-document"
+      },
+      {
+        "id": "dom_7",
+        "title": "Form Submit Handler without Reload",
+        "difficulty": "easy",
+        "question": "Write event listener for `<form id='login'>` to prevent page reload and log form inputs.",
+        "solution": "```js\ndocument.getElementById('login').addEventListener('submit', (e) => {\n  e.preventDefault();\n  const formData = new FormData(e.target);\n  console.log(Object.fromEntries(formData));\n});\n```",
+        "link": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-2.php"
+      },
+      {
+        "id": "dom_8",
+        "title": "Intersection Observer API for Infinite Scroll",
+        "difficulty": "hard",
+        "question": "How do you detect when a sentinel `<div>` at the bottom of the page becomes visible?",
+        "solution": "Use `IntersectionObserver`:\n```js\nconst observer = new IntersectionObserver((entries) => {\n  if (entries[0].isIntersecting) loadMoreItems();\n});\nobserver.observe(document.getElementById('sentinel'));\n```",
+        "link": "https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API"
+      }
+    ]
+  }
+]

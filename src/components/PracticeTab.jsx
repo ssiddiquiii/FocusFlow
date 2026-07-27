@@ -1,158 +1,234 @@
-import React from 'react';
-import { ExternalLink, CheckCircle2, Circle } from 'lucide-react';
-import jsPracticeMap from '../data/jsPracticeMap.json';
+import React, { useState } from 'react';
+import { ExternalLink, CheckCircle2, Circle, Lightbulb, ChevronDown, ChevronUp, Target, Filter } from 'lucide-react';
+import jsTopicPractice from '../data/jsTopicPractice.json';
 
 /**
- * Platform brand colors and labels for visual distinction.
+ * Mapping lesson concepts to topic practice module IDs.
  */
-const PLATFORM_CONFIG = {
-  'freecodecamp': { label: 'freeCodeCamp', color: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' },
-  'javascript.info': { label: 'JavaScript.info', color: 'bg-amber-500/15 text-amber-400 border-amber-500/30' },
-  'leetcode': { label: 'LeetCode', color: 'bg-orange-500/15 text-orange-400 border-orange-500/30' },
-  'codewars': { label: 'Codewars', color: 'bg-red-500/15 text-red-400 border-red-500/30' },
-  'exercism': { label: 'Exercism', color: 'bg-violet-500/15 text-violet-400 border-violet-500/30' },
-  'w3schools': { label: 'W3Schools', color: 'bg-green-500/15 text-green-400 border-green-500/30' },
-  'mdn': { label: 'MDN Docs', color: 'bg-blue-500/15 text-blue-400 border-blue-500/30' },
-  'other': { label: 'Resource', color: 'bg-zinc-500/15 text-zinc-400 border-zinc-500/30' }
+const LESSON_TOPIC_MAP = {
+  'yY0bKZNYmJs': 'variables-scope',
+  'cHHU0jXfjKY': 'variables-scope',
+  'eWwge2YpHhc': 'variables-scope',
+  '-9knnv97wSc': 'datatypes-coercion',
+  'X7hDBhd_L5U': 'datatypes-coercion',
+  'N9el4APFtAo': 'datatypes-coercion',
+  'giP2uXMlv4c': 'datatypes-coercion',
+  '7gwc-1czolw': 'datatypes-coercion',
+  'fozwNnFunlo': 'strings',
+  '_KqpeDc47Ro': 'datatypes-coercion',
+  'tGLCuoumaGY': 'datatypes-coercion',
+  'cejBux2gtEE': 'arrays-methods',
+  'm6azhgyCi-k': 'arrays-methods',
+  'M0YImBHQsWU': 'arrays-methods',
+  '9MfwYoWKKVE': 'arrays-methods',
+  'vVYOHmqQDCU': 'objects-methods',
+  '4lb2pXWWXJI': 'objects-methods',
+  'AViTh83k-IE': 'objects-methods',
+  'jss2rL9kv6s': 'objects-methods',
+  't6vLhF-iSxQ': 'objects-methods',
+  'Bn56WahG_t0': 'functions-hoisting',
+  't7ZHPhgdA4U': 'functions-hoisting',
+  'GAIbn16Iytc': 'functions-hoisting',
+  'ByhtOgF6uYM': 'functions-hoisting',
+  '9ksqBa8_txM': 'this-binding',
+  '-owpuf4lbyU': 'this-binding',
+  'u6mVHkMpoMk': 'this-binding',
+  '75dMiOY_4ac': 'this-binding',
+  'VaH09NXQZ58': 'closures-scope',
+  'zgt5oTD3rRc': 'async-promises',
+  'efrW5-IYoCU': 'async-promises',
+  'pDPAcYdSse8': 'async-promises',
+  'NJwRQgsu1Q8': 'async-promises',
+  'Rive84an6Lc': 'async-promises',
+  'DcjNkHtDj8A': 'dom-events',
+  'Ab6K57WjWTE': 'dom-events',
+  'xAvTgCsCHLs': 'dom-events',
+  'VQlY-X_eeTE': 'dom-events',
+  'EGqHVjU-fas': 'dom-events',
+  '_ALUMTa8BAE': 'dom-events'
 };
 
-const DIFFICULTY_BADGE = {
-  'easy': { label: 'Easy', color: 'text-emerald-400' },
-  'medium': { label: 'Medium', color: 'text-amber-400' },
-  'hard': { label: 'Challenge', color: 'text-red-400' }
+const DIFFICULTY_BADGES = {
+  'easy': { label: 'Easy', color: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' },
+  'medium': { label: 'Medium', color: 'bg-amber-500/15 text-amber-400 border-amber-500/30' },
+  'hard': { label: 'Interview Challenge', color: 'bg-red-500/15 text-red-400 border-red-500/30' }
 };
 
 /**
  * PracticeTab Component.
- * Renders topic-specific coding challenges for a given lesson,
- * with completion checkboxes and external platform links.
+ * Displays 8-10 topic-specific, interview-focused coding practice questions per module,
+ * with completion tracking, difficulty filtering, and expandable solution cheat sheets.
  *
  * @param {object} props
  * @param {string} props.courseId — Current course ID.
- * @param {string} props.lessonId — Current lesson (video) ID.
+ * @param {string} props.lessonId — Current lesson ID.
  * @param {Array} props.practiceProgressList — Reactive Dexie practiceProgress records.
- * @param {Function} props.togglePractice — Toggle practice completion function.
+ * @param {Function} props.togglePractice — Toggle completion function.
  * @returns {React.JSX.Element}
  */
 export default function PracticeTab({ courseId, lessonId, practiceProgressList, togglePractice }) {
-  const practiceData = jsPracticeMap[lessonId];
+  // Determine matching topic module for current lesson (fallback to variables-scope)
+  const defaultTopicId = LESSON_TOPIC_MAP[lessonId] || 'variables-scope';
+  const [selectedTopicId, setSelectedTopicId] = useState(defaultTopicId);
+  const [expandedSolutionId, setExpandedSolutionId] = useState(null);
+  const [filterDifficulty, setFilterDifficulty] = useState('all');
 
-  if (!practiceData) {
-    return (
-      <div className="py-8 text-center space-y-3">
-        <span className="text-zinc-600 text-4xl block">🎯</span>
-        <p className="text-sm text-zinc-500">No practice challenges mapped for this lesson yet.</p>
-        <p className="text-xs text-zinc-600">Practice links are curated per concept. Check back later!</p>
-      </div>
-    );
-  }
+  const currentModule = jsTopicPractice.find(t => t.id === selectedTopicId) || jsTopicPractice[0];
 
-  const { conceptLabel, practices } = practiceData;
-  const completedCount = practices.filter((_, i) =>
-    practiceProgressList.some(p => p.id === `${lessonId}_${i}` && p.completed)
+  const filteredQuestions = currentModule.questions.filter(q => 
+    filterDifficulty === 'all' ? true : q.difficulty === filterDifficulty
+  );
+
+  const completedCount = currentModule.questions.filter(q =>
+    practiceProgressList.some(p => p.id === `${lessonId}_${q.id}` && p.completed)
   ).length;
+
+  const toggleSolution = (id) => {
+    setExpandedSolutionId(expandedSolutionId === id ? null : id);
+  };
 
   return (
     <div className="space-y-5">
-      {/* Concept Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="text-lg">🎯</span>
-          <div>
-            <h3 className="text-sm font-bold text-white">Practice: {conceptLabel}</h3>
-            <p className="text-[10px] text-zinc-500 mt-0.5">Complete challenges to solidify this concept</p>
+      {/* Topic Module Selector Header */}
+      <div className="space-y-3 pb-3 border-b border-border/50">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">{currentModule.icon}</span>
+            <div>
+              <h3 className="text-sm font-bold text-white">{currentModule.topic}</h3>
+              <p className="text-[10px] text-zinc-400 mt-0.5">{currentModule.description}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-bold text-primary">
+            <span>{completedCount}/{currentModule.questions.length}</span>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <span className={`text-xs font-bold ${completedCount === practices.length ? 'text-emerald-400' : 'text-zinc-400'}`}>
-            {completedCount}/{practices.length}
-          </span>
-          {/* Mini progress ring */}
-          <div className="w-8 h-8 relative">
-            <svg className="w-8 h-8 -rotate-90" viewBox="0 0 32 32">
-              <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" strokeWidth="3" className="text-zinc-800" />
-              <circle
-                cx="16" cy="16" r="13" fill="none" stroke="currentColor" strokeWidth="3"
-                className={completedCount === practices.length ? 'text-emerald-400' : 'text-primary'}
-                strokeDasharray={`${(completedCount / practices.length) * 81.68} 81.68`}
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
+
+        {/* Dropdown to Switch Topics */}
+        <div className="flex gap-2 items-center">
+          <select
+            value={selectedTopicId}
+            onChange={(e) => setSelectedTopicId(e.target.value)}
+            className="flex-1 bg-zinc-900 border border-border text-white text-xs rounded-lg p-2 font-medium focus:outline-none focus:border-primary transition cursor-pointer"
+          >
+            {jsTopicPractice.map(mod => (
+              <option key={mod.id} value={mod.id}>
+                {mod.icon} {mod.topic} ({mod.questions.length} Questions)
+              </option>
+            ))}
+          </select>
+
+          {/* Difficulty Filter */}
+          <select
+            value={filterDifficulty}
+            onChange={(e) => setFilterDifficulty(e.target.value)}
+            className="bg-zinc-900 border border-border text-zinc-300 text-xs rounded-lg p-2 font-medium focus:outline-none focus:border-primary transition cursor-pointer"
+          >
+            <option value="all">All Difficulty</option>
+            <option value="easy">🟢 Easy</option>
+            <option value="medium">🟡 Medium</option>
+            <option value="hard">🔴 Interview</option>
+          </select>
         </div>
       </div>
 
-      {/* Practice Cards */}
+      {/* Question Cards List */}
       <div className="space-y-3">
-        {practices.map((practice, index) => {
-          const isCompleted = practiceProgressList.some(
-            p => p.id === `${lessonId}_${index}` && p.completed
-          );
-          const platformConf = PLATFORM_CONFIG[practice.platform] || PLATFORM_CONFIG['other'];
-          const diffConf = DIFFICULTY_BADGE[practice.difficulty] || DIFFICULTY_BADGE['easy'];
+        {filteredQuestions.length === 0 ? (
+          <p className="text-xs text-zinc-500 py-6 text-center">No questions matching selected difficulty filter.</p>
+        ) : (
+          filteredQuestions.map((q) => {
+            const isCompleted = practiceProgressList.some(
+              p => p.id === `${lessonId}_${q.id}` && p.completed
+            );
+            const isSolutionOpen = expandedSolutionId === q.id;
+            const diffBadge = DIFFICULTY_BADGES[q.difficulty] || DIFFICULTY_BADGES['easy'];
 
-          return (
-            <div
-              key={index}
-              className={`group glass-panel rounded-xl p-4 border transition duration-200 ${
-                isCompleted
-                  ? 'border-emerald-500/20 bg-emerald-500/5'
-                  : 'border-border hover:border-primary/30'
-              }`}
-            >
-              <div className="flex items-start gap-3">
-                {/* Completion Toggle */}
-                <button
-                  onClick={() => togglePractice(courseId, lessonId, index, practice.url, !isCompleted)}
-                  className="mt-0.5 flex-shrink-0 cursor-pointer transition hover:scale-110"
-                  title={isCompleted ? 'Mark as incomplete' : 'Mark as done'}
-                >
-                  {isCompleted ? (
-                    <CheckCircle2 size={20} className="text-emerald-400" fill="currentColor" />
-                  ) : (
-                    <Circle size={20} className="text-zinc-700 group-hover:text-zinc-500" />
-                  )}
-                </button>
+            return (
+              <div
+                key={q.id}
+                className={`group glass-panel rounded-xl p-4 border transition duration-200 space-y-3 ${
+                  isCompleted
+                    ? 'border-emerald-500/25 bg-emerald-500/5'
+                    : 'border-border hover:border-primary/40'
+                }`}
+              >
+                {/* Header Row */}
+                <div className="flex items-start gap-3">
+                  {/* Completion Checkbox */}
+                  <button
+                    onClick={() => togglePractice(courseId, lessonId, q.id, q.link || '', !isCompleted)}
+                    className="mt-0.5 flex-shrink-0 cursor-pointer transition hover:scale-110"
+                    title={isCompleted ? 'Mark as incomplete' : 'Mark as solved'}
+                  >
+                    {isCompleted ? (
+                      <CheckCircle2 size={20} className="text-emerald-400" fill="currentColor" />
+                    ) : (
+                      <Circle size={20} className="text-zinc-700 group-hover:text-zinc-500" />
+                    )}
+                  </button>
 
-                {/* Content */}
-                <div className="flex-1 min-w-0 space-y-2">
-                  <div className="flex items-start justify-between gap-2">
-                    <h4 className={`text-sm font-semibold leading-snug ${isCompleted ? 'text-zinc-400 line-through' : 'text-white'}`}>
-                      {practice.title}
-                    </h4>
-                    <a
-                      href={practice.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-shrink-0 p-1.5 rounded-lg text-zinc-500 hover:text-primary hover:bg-primary/10 transition"
-                      title="Open in new tab"
-                    >
-                      <ExternalLink size={14} />
-                    </a>
-                  </div>
+                  {/* Title & Question */}
+                  <div className="flex-1 min-w-0 space-y-1.5">
+                    <div className="flex items-start justify-between gap-2">
+                      <h4 className={`text-xs font-bold leading-snug ${isCompleted ? 'text-zinc-400 line-through' : 'text-white'}`}>
+                        {q.title}
+                      </h4>
+                      <span className={`px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider rounded-md border flex-shrink-0 ${diffBadge.color}`}>
+                        {diffBadge.label}
+                      </span>
+                    </div>
 
-                  {/* Badges Row */}
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className={`px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-md border ${platformConf.color}`}>
-                      {platformConf.label}
-                    </span>
-                    <span className={`text-[9px] font-bold uppercase tracking-wider ${diffConf.color}`}>
-                      {diffConf.label}
-                    </span>
+                    <p className="text-xs text-zinc-300 leading-relaxed font-medium">
+                      {q.question}
+                    </p>
                   </div>
                 </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
 
-      {/* Completion Message */}
-      {completedCount === practices.length && practices.length > 0 && (
-        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center">
-          <span className="text-emerald-400 text-sm font-bold">🎉 All practices completed! You've mastered this concept.</span>
-        </div>
-      )}
+                {/* Actions Row */}
+                <div className="flex items-center justify-between pt-1 border-t border-zinc-900 text-[11px]">
+                  {/* Toggle Solution Button */}
+                  <button
+                    onClick={() => toggleSolution(q.id)}
+                    className="flex items-center gap-1.5 text-primary hover:text-primary-hover font-semibold transition cursor-pointer"
+                  >
+                    <Lightbulb size={13} />
+                    <span>{isSolutionOpen ? 'Hide Solution' : 'View Code Solution'}</span>
+                    {isSolutionOpen ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+                  </button>
+
+                  {/* External Reference Link */}
+                  {q.link && (
+                    <a
+                      href={q.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-zinc-500 hover:text-zinc-300 transition flex items-center gap-1 font-medium"
+                      title="Open reference guide"
+                    >
+                      <span>Doc</span>
+                      <ExternalLink size={11} />
+                    </a>
+                  )}
+                </div>
+
+                {/* Expandable Solution Box */}
+                {isSolutionOpen && (
+                  <div className="p-3 rounded-xl bg-zinc-950 border border-primary/20 space-y-2 text-xs animate-in fade-in duration-200">
+                    <div className="flex items-center gap-1.5 text-emerald-400 font-bold text-[10px] uppercase tracking-wider">
+                      <CheckCircle2 size={12} />
+                      <span>Official Solution / Answer:</span>
+                    </div>
+                    <div className="font-mono text-[11px] text-zinc-200 leading-relaxed bg-zinc-900/80 p-3 rounded-lg border border-zinc-800/80 overflow-x-auto whitespace-pre-wrap">
+                      {q.solution}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 }
