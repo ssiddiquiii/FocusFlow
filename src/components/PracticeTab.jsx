@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ExternalLink, CheckCircle2, Circle, Lightbulb, ChevronDown, ChevronUp, Target, Filter } from 'lucide-react';
 import jsTopicPractice from '../data/jsTopicPractice.json';
 import CategoryIcon from './CategoryIcon';
+import { JsLogo, GitLogo } from './BrandLogos';
 
 /**
  * Mapping lesson concepts to topic practice module IDs.
@@ -150,11 +151,11 @@ export default function PracticeTab({ courseId, lessonId, practiceProgressList, 
           onClick={() => handleCatalogSwitch('js')}
           className={`flex-1 py-2.5 px-3 rounded-lg transition flex items-center justify-center gap-2 cursor-pointer ${
             activeCatalog === 'js'
-              ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow'
+              ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/40 shadow'
               : 'text-zinc-400 hover:text-white'
           }`}
         >
-          <span>🟨</span>
+          <JsLogo size={18} />
           <span>JavaScript Mastery (100 Qs)</span>
         </button>
         <button
@@ -165,7 +166,7 @@ export default function PracticeTab({ courseId, lessonId, practiceProgressList, 
               : 'text-zinc-400 hover:text-white'
           }`}
         >
-          <span>🐙</span>
+          <GitLogo size={18} />
           <span>Git & GitHub Mastery (40 Qs)</span>
         </button>
       </div>
