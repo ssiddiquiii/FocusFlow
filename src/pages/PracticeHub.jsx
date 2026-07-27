@@ -16,11 +16,11 @@ export default function PracticeHub() {
       <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-primary/25 bg-gradient-to-r from-primary/10 via-accent/5 to-zinc-950 space-y-2">
         <div className="flex items-center gap-2">
           <span className="text-2xl">🎯</span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">JavaScript Concept Practice Hub</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Practice Hub — Dedicated Course Catalogs</h1>
         </div>
         <p className="text-xs sm:text-sm text-zinc-400 max-w-2xl leading-relaxed">
-          80 curated, interview-perspective coding challenges categorized into 10 Core JS Mastery Modules.
-          Includes interactive checkboxes, difficulty ratings, and expandable code solutions.
+          Select between <strong className="text-amber-400">🟨 JavaScript Mastery (100 Qs)</strong> and <strong className="text-orange-400">🐙 Git & GitHub Mastery (40 Qs)</strong> catalogs.
+          Each module includes interactive checkboxes, difficulty ratings, and expandable code solutions.
         </p>
       </div>
 

@@ -104,13 +104,24 @@ const DIFFICULTY_BADGES = {
  * @returns {React.JSX.Element}
  */
 export default function PracticeTab({ courseId, lessonId, practiceProgressList, togglePractice }) {
-  // Determine matching topic module for current lesson (fallback to variables-scope)
-  const defaultTopicId = LESSON_TOPIC_MAP[lessonId] || 'variables-scope';
+  // Separate modules by Course Track
+  const jsModules = jsTopicPractice.filter(t => !t.id.startsWith('cat-git'));
+  const gitModules = jsTopicPractice.filter(t => t.id.startsWith('cat-git'));
+
+  // Detect default catalog based on lesson/course
+  const defaultTopicId = LESSON_TOPIC_MAP[lessonId] || 'cat-1-variables-datatypes';
+  const initialCatalog = defaultTopicId.startsWith('cat-git') || courseId === 'git-github-masterclass-q8EevlEpQ2A' ? 'git' : 'js';
+
+  const [activeCatalog, setActiveCatalog] = useState(initialCatalog);
   const [selectedTopicId, setSelectedTopicId] = useState(defaultTopicId);
   const [expandedSolutionId, setExpandedSolutionId] = useState(null);
   const [filterDifficulty, setFilterDifficulty] = useState('all');
 
-  const currentModule = jsTopicPractice.find(t => t.id === selectedTopicId) || jsTopicPractice[0];
+  // Active module list based on selected catalog
+  const activeModules = activeCatalog === 'git' ? gitModules : jsModules;
+
+  // Fallback to first module in active catalog if current selection belongs to other catalog
+  const currentModule = activeModules.find(t => t.id === selectedTopicId) || activeModules[0];
 
   const filteredQuestions = currentModule.questions.filter(q => 
     filterDifficulty === 'all' ? true : q.difficulty === filterDifficulty
@@ -124,8 +135,40 @@ export default function PracticeTab({ courseId, lessonId, practiceProgressList, 
     setExpandedSolutionId(expandedSolutionId === id ? null : id);
   };
 
+  const handleCatalogSwitch = (catalogKey) => {
+    setActiveCatalog(catalogKey);
+    const targetList = catalogKey === 'git' ? gitModules : jsModules;
+    setSelectedTopicId(targetList[0].id);
+  };
+
   return (
     <div className="space-y-5">
+      {/* Track Catalog Switcher Tabs */}
+      <div className="flex rounded-xl bg-zinc-900/90 p-1 border border-border text-xs font-bold">
+        <button
+          onClick={() => handleCatalogSwitch('js')}
+          className={`flex-1 py-2.5 px-3 rounded-lg transition flex items-center justify-center gap-2 cursor-pointer ${
+            activeCatalog === 'js'
+              ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow'
+              : 'text-zinc-400 hover:text-white'
+          }`}
+        >
+          <span>🟨</span>
+          <span>JavaScript Mastery (100 Qs)</span>
+        </button>
+        <button
+          onClick={() => handleCatalogSwitch('git')}
+          className={`flex-1 py-2.5 px-3 rounded-lg transition flex items-center justify-center gap-2 cursor-pointer ${
+            activeCatalog === 'git'
+              ? 'bg-orange-500/20 text-orange-300 border border-orange-500/40 shadow'
+              : 'text-zinc-400 hover:text-white'
+          }`}
+        >
+          <span>🐙</span>
+          <span>Git & GitHub Mastery (40 Qs)</span>
+        </button>
+      </div>
+
       {/* Topic Module Selector Header */}
       <div className="space-y-3 pb-3 border-b border-border/50">
         <div className="flex items-center justify-between">
@@ -141,16 +184,16 @@ export default function PracticeTab({ courseId, lessonId, practiceProgressList, 
           </div>
         </div>
 
-        {/* Dropdown to Switch Topics */}
+        {/* Dropdown to Switch Topics within active catalog */}
         <div className="flex gap-2 items-center">
           <select
-            value={selectedTopicId}
+            value={currentModule.id}
             onChange={(e) => setSelectedTopicId(e.target.value)}
             className="flex-1 bg-zinc-900 border border-border text-white text-xs rounded-lg p-2 font-medium focus:outline-none focus:border-primary transition cursor-pointer"
           >
-            {jsTopicPractice.map(mod => (
+            {activeModules.map(mod => (
               <option key={mod.id} value={mod.id}>
-                {mod.icon} {mod.topic} ({mod.questions.length} Questions)
+                {mod.icon} {mod.topic} ({mod.questions.length} Qs)
               </option>
             ))}
           </select>
