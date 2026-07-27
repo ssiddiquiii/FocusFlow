@@ -595,11 +595,14 @@ export default function Watch() {
           >
           {lesson.type === 'youtube' ? (
             <div className="w-full h-full relative">
+              {/* YouTube Iframe element - Always mounted in DOM */}
+              <div id="yt-player-iframe" className="w-full h-full absolute inset-0 z-0" />
+
               {/* Play-on-Click Lazy Load Thumbnail Placeholder */}
-              {!isPlayerTriggered ? (
+              {!isPlayerTriggered && (
                 <div 
                   onClick={() => setIsPlayerTriggered(true)}
-                  className="w-full h-full absolute inset-0 cursor-pointer flex items-center justify-center bg-zinc-900 group/thumb z-10"
+                  className="w-full h-full absolute inset-0 cursor-pointer flex items-center justify-center bg-zinc-900 group/thumb z-20"
                 >
                   <img 
                     src={lesson.thumbnailUrl} 
@@ -609,13 +612,10 @@ export default function Watch() {
                   <div className="absolute inset-0 bg-black/35 group-hover/thumb:bg-black/25 transition duration-300" />
                   
                   {/* Glowing Play Circle */}
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-primary text-white border-2 border-white/20 shadow-2xl shadow-primary/45 group-hover/thumb:scale-110 transition duration-300 absolute z-20">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-primary text-white border-2 border-white/20 shadow-2xl shadow-primary/45 group-hover/thumb:scale-110 transition duration-300 absolute z-30">
                     <Play size={24} fill="currentColor" className="ml-1" />
                   </div>
                 </div>
-              ) : (
-                /* YouTube Iframe element */
-                <div id="yt-player-iframe" className="w-full h-full absolute inset-0 pointer-events-none" />
               )}
 
               {/* Transparent pointer-events overlay */}

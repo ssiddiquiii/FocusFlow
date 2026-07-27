@@ -1,21 +1,23 @@
 import React from 'react';
 
 /**
- * Official JavaScript Brand Badge (Yellow Square with black JS text)
+ * Pixel-Perfect Official JavaScript Brand Badge
+ * (Standard Yellow Square #F7DF1E with Official JS Typography)
  */
 export function JsLogo({ size = 20, className = '' }) {
   return (
     <svg 
       width={size} 
       height={size} 
-      viewBox="0 0 630 630" 
-      fill="none" 
+      viewBox="0 0 128 128" 
       xmlns="http://www.w3.org/2000/svg"
-      className={`rounded-md shadow-sm ${className}`}
+      className={`rounded-sm flex-shrink-0 ${className}`}
     >
-      <rect width="630" height="630" fill="#F7DF1E" rx="90" />
+      {/* Official JS Yellow Background */}
+      <rect width="128" height="128" fill="#F7DF1E" rx="8" />
+      {/* Official JS Black Letters */}
       <path 
-        d="M165 500c14 24 35 40 68 40 33 0 54-16 54-39 0-26-21-36-54-50l-19-8c-55-23-80-49-80-101 0-71 58-111 143-111 59 0 98 22 121 65l-52 33c-13-24-30-36-69-36-31 0-49 14-49 34 0 21 16 31 49 45l19 8c64 27 88 51 88 102 0 78-60 115-148 115-77 0-123-37-145-80l54-34zM420 500c17 26 43 40 76 40 37 0 56-18 56-42 0-28-21-39-58-54l-19-8c-52-21-75-47-75-97 0-70 56-108 141-108 55 0 90 20 113 58l-52 33c-11-20-27-31-61-31-29 0-45 13-45 32 0 21 15 29 48 42l19 8c62 25 85 49 85 101 0 79-58 117-151 117-74 0-117-36-139-81l62-34z" 
+        d="M67.31 104.75c3.5 6.07 9 10.42 17.5 10.42 7.42 0 12.17-3.67 12.17-8.92 0-6.17-4.83-8.42-12.92-11.92l-4.42-1.92c-12.75-5.42-18.42-12.25-18.42-25.08 0-14.75 11.58-25.75 29.58-25.75 13 0 21.67 4.58 26.67 13.75l-10.42 6.67c-3-5.25-6.5-7.58-16.17-7.58-6.42 0-10.75 3.08-10.75 7.42 0 4.92 3.5 7.08 11.33 10.5l4.42 1.92c14.67 6.25 20.33 12.5 20.33 25.5 0 17-13.42 27-32.92 27-16.92 0-26.67-7.67-31.5-17.5l10.42-6.5zm-38.08.33c2.75 4.92 6.08 8.75 12.5 8.75 6.42 0 10.5-2.58 10.5-12.67V42.75h16.25v58.67c0 18.67-10.92 26.75-26.42 26.75-13.75 0-21.75-6.83-25.75-16.08l12.92-7.01z" 
         fill="#000000" 
       />
     </svg>
@@ -33,7 +35,7 @@ export function GitLogo({ size = 20, className = '' }) {
       viewBox="0 0 256 256" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
-      className={`${className}`}
+      className={`flex-shrink-0 ${className}`}
     >
       <path 
         d="M246.6 117.4L138.6 9.4c-5.9-5.9-15.4-5.9-21.2 0L9.4 117.4c-5.9 5.9-5.9 15.4 0 21.2l108 108c5.9 5.9 15.4 5.9 21.2 0l108-108c5.9-5.9 5.9-15.3 0-21.2z" 
@@ -58,7 +60,7 @@ export function GithubLogo({ size = 20, className = '' }) {
       viewBox="0 0 98 96" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
-      className={`${className}`}
+      className={`flex-shrink-0 ${className}`}
     >
       <path 
         fillRule="evenodd" 
