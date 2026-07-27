@@ -241,6 +241,10 @@ export default function Watch() {
       uiSyncTimer = setInterval(() => {
         if (player && typeof player.getCurrentTime === 'function') {
           const t = player.getCurrentTime();
+          const dur = player.getDuration();
+          if (dur > 0) {
+            setPlayerDuration(dur);
+          }
           const step = Math.floor(t * 4); // 250ms threshold
           if (step !== lastStep) {
             lastStep = step;
@@ -321,14 +325,14 @@ export default function Watch() {
       });
     };
 
-    if (!window.YT || !window.YT.Player) {
+    if (!window.YT) {
       const tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
       const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       window.onYouTubeIframeAPIReady = initializePlayer;
     } else {
-      initializePlayer();
+      setTimeout(initializePlayer, 50);
     }
 
     return () => {
@@ -444,13 +448,20 @@ export default function Watch() {
     );
   }
 
-  // Toggle play/pause
+  // Toggle play/pause cleanly
   const handlePlayPause = () => {
     if (!ytPlayer) return;
-    if (isPlaying) {
-      ytPlayer.pauseVideo();
-    } else {
-      ytPlayer.playVideo();
+    try {
+      const state = typeof ytPlayer.getPlayerState === 'function' ? ytPlayer.getPlayerState() : -1;
+      if (state === 1 || isPlaying) { // 1 = PLAYING
+        ytPlayer.pauseVideo();
+        setIsPlaying(false);
+      } else {
+        ytPlayer.playVideo();
+        setIsPlaying(true);
+      }
+    } catch (_) {
+      setIsPlaying(prev => !prev);
     }
   };
 
@@ -628,27 +639,15 @@ export default function Watch() {
                   </div>
                 </div>
               ) : (
-                /* Fail-Proof Direct YouTube Iframe Player Embed */
-                <iframe
-                  src={`https://www.youtube.com/embed/${lesson.videoId || lessonId}?autoplay=1&start=${
-                    (() => {
-                      const prog = progressList.find(p => p.id === `${courseId}_${lessonId}`);
-                      if (prog && !prog.completed && prog.watchTime > 2) return Math.floor(prog.watchTime);
-                      return lesson.startTimestamp || 0;
-                    })()
-                  }&rel=0&modestbranding=1&enablejsapi=1`}
-                  title={lesson.title}
-                  className="w-full h-full border-0 absolute inset-0 z-10"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+                /* YouTube IFrame API Target Element */
+                <div id="yt-player-iframe" className="w-full h-full absolute inset-0 z-10" />
               )}
 
-              {/* Transparent pointer-events overlay */}
+              {/* Click overlay for play/pause toggle */}
               {isPlayerTriggered && (
                 <div 
                   onClick={handlePlayPause}
-                  className={`w-full h-[calc(100%-48px)] absolute inset-x-0 top-0 z-10 bg-transparent ${!isControlsVisible && isPlaying ? 'cursor-none' : 'cursor-pointer'}`}
+                  className={`w-full h-[calc(100%-60px)] absolute inset-x-0 top-0 z-20 bg-transparent ${!isControlsVisible && isPlaying ? 'cursor-none' : 'cursor-pointer'}`}
                 />
               )}
 
