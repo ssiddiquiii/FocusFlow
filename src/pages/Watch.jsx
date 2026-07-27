@@ -147,13 +147,13 @@ export default function Watch() {
     db.notes.where({ courseId, lessonId }).sortBy('timestamp')
   , [courseId, lessonId]) || [];
 
-  // Auto-trigger video playback on load & lesson switch
+  // Reset play states when navigating to a new lesson so thumbnail displays cleanly
   useEffect(() => {
     if (lessonId) {
       setActiveLessonId(lessonId);
       setPlayerCurrentTime(0);
       setPlayerDuration(0);
-      setIsPlayerTriggered(true); // Auto-trigger playback on lesson change
+      setIsPlayerTriggered(false); // Display thumbnail preview on lesson load/switch
       setPlaybackSpeed(1);
     }
   }, [lessonId]);
@@ -608,27 +608,39 @@ export default function Watch() {
           >
           {lesson.type === 'youtube' ? (
             <div className="w-full h-full relative">
-              {/* YouTube Iframe element - Always mounted in DOM */}
-              <div id="yt-player-iframe" className="w-full h-full absolute inset-0 z-0" />
-
               {/* Play-on-Click Lazy Load Thumbnail Placeholder */}
-              {!isPlayerTriggered && (
+              {!isPlayerTriggered ? (
                 <div 
                   onClick={() => setIsPlayerTriggered(true)}
                   className="w-full h-full absolute inset-0 cursor-pointer flex items-center justify-center bg-zinc-900 group/thumb z-20"
                 >
                   <img 
-                    src={lesson.thumbnailUrl} 
+                    src={lesson.thumbnailUrl || `https://i.ytimg.com/vi/${lesson.videoId || lessonId}/hqdefault.jpg`} 
                     alt={lesson.title} 
-                    className="w-full h-full object-cover opacity-70 group-hover/thumb:scale-[1.01] transition duration-500"
+                    className="w-full h-full object-cover opacity-85 group-hover/thumb:scale-[1.01] transition duration-500"
                   />
-                  <div className="absolute inset-0 bg-black/35 group-hover/thumb:bg-black/25 transition duration-300" />
+                  <div className="absolute inset-0 bg-black/35 group-hover/thumb:bg-black/20 transition duration-300" />
                   
                   {/* Glowing Play Circle */}
                   <div className="w-16 h-16 rounded-full flex items-center justify-center bg-primary text-white border-2 border-white/20 shadow-2xl shadow-primary/45 group-hover/thumb:scale-110 transition duration-300 absolute z-30">
                     <Play size={24} fill="currentColor" className="ml-1" />
                   </div>
                 </div>
+              ) : (
+                /* Fail-Proof Direct YouTube Iframe Player Embed */
+                <iframe
+                  src={`https://www.youtube.com/embed/${lesson.videoId || lessonId}?autoplay=1&start=${
+                    (() => {
+                      const prog = progressList.find(p => p.id === `${courseId}_${lessonId}`);
+                      if (prog && !prog.completed && prog.watchTime > 2) return Math.floor(prog.watchTime);
+                      return lesson.startTimestamp || 0;
+                    })()
+                  }&rel=0&modestbranding=1&enablejsapi=1`}
+                  title={lesson.title}
+                  className="w-full h-full border-0 absolute inset-0 z-10"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
               )}
 
               {/* Transparent pointer-events overlay */}
