@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useFocusFlow } from '../hooks/useFocusFlow';
 import { useUIStore } from '../hooks/useUIStore';
-import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX, Gauge, Type, Sliders, Target } from 'lucide-react';
+import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX, Gauge, Type, Sliders, Target, Info } from 'lucide-react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/FocusFlowDB';
 import PracticeTab from '../components/PracticeTab';
+import ReadingTab from '../components/ReadingTab';
 
 const SPEED_OPTIONS = [0.5, 1, 1.25, 1.5, 2];
 const QUALITY_OPTIONS = [
@@ -501,7 +502,7 @@ export default function Watch() {
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen h-auto lg:h-screen overflow-y-auto lg:overflow-hidden bg-background">
-      {/* Left Panel: Scrollable main content containing Player and Metadata details (YouTube Style) */}
+      {/* Left Panel: Scrollable main content (Maximized Player + Below Syllabus) */}
       <div className="flex-1 flex flex-col h-full min-w-0 overflow-y-auto bg-zinc-950/20">
         
         {/* Navigation header */}
@@ -517,8 +518,8 @@ export default function Watch() {
           </div>
         </div>
 
-        {/* Player Container: Framed YouTube-style container with rounded borders */}
-        <div className="w-full max-w-5xl mx-auto mt-3 sm:mt-6 px-2 sm:px-6">
+        {/* Player Container: Maximized Video View */}
+        <div className="w-full max-w-6xl mx-auto mt-3 sm:mt-5 px-2 sm:px-6">
           <div 
             ref={playerContainerRef} 
             onMouseMove={handleMouseMove}
@@ -675,187 +676,217 @@ export default function Watch() {
           </div>
         </div>
 
-        {/* Video details & interactive workspaces directly below player */}
-        <div className="px-6 py-6 space-y-6 max-w-5xl w-full mx-auto">
-          <div className="space-y-2 border-b border-border pb-4">
-            <h1 className="text-2xl font-bold text-white tracking-tight">{lesson.title}</h1>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-500">
-              <div>
-                <span className="text-zinc-600">Instructor:</span> <span className="text-zinc-300 font-semibold">{course.channelName}</span>
-              </div>
-              <span className="text-zinc-700">•</span>
-              <div>
-                <span className="text-zinc-600">Origin:</span> <span className="text-zinc-300 font-semibold">{course.type === 'youtube' ? 'YouTube Public API' : 'Udemy manual tracking'}</span>
-              </div>
+        {/* Video Details Header */}
+        <div className="px-6 py-4 space-y-2 max-w-6xl w-full mx-auto border-b border-border/50">
+          <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{lesson.title}</h1>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-500">
+            <div>
+              <span className="text-zinc-600">Instructor:</span> <span className="text-zinc-300 font-semibold">{course.channelName}</span>
+            </div>
+            <span className="text-zinc-700">•</span>
+            <div>
+              <span className="text-zinc-600">Origin:</span> <span className="text-zinc-300 font-semibold">{course.type === 'youtube' ? 'YouTube Public API' : 'Udemy manual tracking'}</span>
             </div>
           </div>
+        </div>
 
-          {/* Interactive Workspace Panel (Notes and Description) */}
-          <div className="space-y-4">
-            <div className="flex border-b border-border text-xs font-bold uppercase tracking-wider">
-              {lesson.type === 'youtube' && (
-                <>
-                  <button
-                    onClick={() => setActiveTab('notes')}
-                    className={`pb-3 pr-6 border-b-2 transition cursor-pointer ${
-                      activeTab === 'notes' ? 'border-primary text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
-                    }`}
-                  >
-                    Notes ({lessonNotes.length})
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('practice')}
-                    className={`pb-3 px-6 border-b-2 transition cursor-pointer flex items-center gap-1.5 ${
-                      activeTab === 'practice' ? 'border-primary text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
-                    }`}
-                  >
-                    <Target size={14} className={activeTab === 'practice' ? 'text-primary' : ''} />
-                    <span>Practice</span>
-                  </button>
-                </>
-              )}
-              <button
-                onClick={() => setActiveTab('desc')}
-                className={`pb-3 px-6 border-b-2 transition cursor-pointer ${
-                  activeTab === 'desc' ? 'border-primary text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
-                }`}
-              >
-                Video Description
-              </button>
+        {/* Course Playlist / Syllabus Section (Directly Below Video) */}
+        <div className="px-6 py-6 max-w-6xl w-full mx-auto space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <BookOpen size={18} className="text-primary" />
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider">Course Syllabus</h3>
             </div>
+            <span className="text-xs font-semibold text-zinc-500">
+              {courseLessons.filter(item => progressList.some(p => p.id === `${courseId}_${item.id}` && p.completed)).length} / {courseLessons.length} Completed
+            </span>
+          </div>
 
-            {/* TAB CONTENTS */}
-            <div className="py-2">
-              {/* NOTES TAB */}
-              {activeTab === 'notes' && lesson.type === 'youtube' && (
-                <div className="space-y-6">
-                  {/* Form Input */}
-                  <form onSubmit={handleSaveNote} className="flex gap-3 items-center">
-                    <textarea
-                      value={noteContent}
-                      onChange={(e) => setNoteContent(e.target.value)}
-                      placeholder="Type a timestamped note... (Press Enter to Save)"
-                      className="flex-1 h-[50px] p-3 bg-zinc-900 border border-border rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-primary transition resize-none"
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                          e.preventDefault();
-                          handleSaveNote(e);
-                        }
-                      }}
-                    />
-                    <button
-                      type="submit"
-                      disabled={!noteContent.trim()}
-                      className="px-5 py-3 h-[50px] bg-primary disabled:opacity-50 text-white rounded-xl text-xs font-bold hover:bg-primary/95 transition flex items-center justify-center gap-2 flex-shrink-0"
-                    >
-                      <Plus size={16} />
-                      <span>Note {ytPlayer && `[${formatSeconds(ytPlayer.getCurrentTime())}]`}</span>
-                    </button>
-                  </form>
+          {/* Scrollable Lecture Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[400px] overflow-y-auto pr-1">
+            {courseLessons.map((item) => {
+              const prog = progressList.find(p => p.id === `${courseId}_${item.id}`);
+              const isCompleted = prog ? prog.completed : false;
+              const isActive = item.id === lessonId;
 
-                  {/* Notes Timeline List */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {lessonNotes.length === 0 ? (
-                      <p className="text-xs text-zinc-500 py-4 col-span-2">No notes written for this video yet.</p>
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    if (!isActive) navigate(`/courses/${courseId}/lessons/${item.id}`);
+                  }}
+                  className={`w-full text-left p-3.5 rounded-xl flex items-center justify-between border transition group cursor-pointer ${
+                    isActive 
+                      ? 'bg-primary/15 border-primary/50 text-white shadow-md' 
+                      : 'bg-zinc-900/60 border-border/60 hover:bg-zinc-800/80 hover:border-zinc-700 text-zinc-400 hover:text-zinc-200'
+                  }`}
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    {isCompleted ? (
+                      <CheckCircle2 className="text-accent flex-shrink-0" size={18} fill="currentColor" />
                     ) : (
-                      lessonNotes.map((note) => (
-                        <div key={note.id} className="glass-panel p-4 rounded-xl relative group border border-border">
-                          <div className="flex items-center justify-between mb-2">
-                            {/* Clickable Seek Timestamp Badge */}
-                            <button
-                              onClick={() => triggerPlayerSeek(note.timestamp)}
-                              className="px-2.5 py-1 text-[10px] font-bold rounded bg-accent/20 text-accent hover:bg-accent/30 border border-accent/30 transition flex items-center gap-1 cursor-pointer"
-                            >
-                              <Clock size={10} />
-                              <span>{formatSeconds(note.timestamp)}</span>
-                            </button>
-
-                            {/* Delete Note */}
-                            <button
-                              onClick={() => handleDeleteNote(note.id)}
-                              className="text-zinc-600 hover:text-red-500 opacity-0 group-hover:opacity-100 transition p-1 cursor-pointer"
-                              title="Delete note"
-                            >
-                              <Trash2 size={14} />
-                            </button>
-                          </div>
-                          <p className="text-sm text-zinc-200 leading-relaxed whitespace-pre-line">{note.content}</p>
-                        </div>
-                      ))
+                      <Circle className="text-zinc-700 group-hover:text-zinc-500 flex-shrink-0" size={18} />
                     )}
+                    <div className="min-w-0">
+                      <span className="text-[9px] text-zinc-500 uppercase tracking-widest font-semibold block mb-0.5">
+                        Lecture {item.index}
+                      </span>
+                      <span className="text-xs font-semibold truncate block">{item.title}</span>
+                    </div>
                   </div>
-                </div>
-              )}
-
-              {/* PRACTICE TAB */}
-              {activeTab === 'practice' && lesson.type === 'youtube' && (
-                <PracticeTab
-                  courseId={courseId}
-                  lessonId={lessonId}
-                  practiceProgressList={practiceProgressList}
-                  togglePractice={togglePractice}
-                />
-              )}
-
-              {/* DESCRIPTION TAB */}
-              {activeTab === 'desc' && (
-                <div className="glass-panel p-5 rounded-xl border border-border">
-                  <p className="text-sm text-zinc-400 leading-relaxed whitespace-pre-wrap">
-                    {lesson.description || 'No description available for this lecture.'}
-                  </p>
-                </div>
-              )}
-            </div>
+                  <span className="text-[10px] text-zinc-500 font-medium flex-shrink-0 flex items-center gap-1 ml-2">
+                    <Clock size={10} />
+                    <span>{item.duration}</span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
       </div>
 
-      {/* Right Sidebar: Syllabus Checklist (Responsive: 1-Column on Mobile, Right Sidebar on Desktop) */}
-      <div className="w-full lg:w-[380px] bg-zinc-950 border-t lg:border-t-0 lg:border-l border-border flex flex-col flex-shrink-0 min-h-[350px] lg:h-full">
-        <div className="px-5 py-4 border-b border-border bg-zinc-950 flex items-center gap-2">
-          <BookOpen size={16} className="text-primary" />
-          <span className="text-xs font-bold uppercase tracking-wider text-white">Course Syllabus</span>
-        </div>
+      {/* Right Sidebar: Dedicated Study Tools Panel (4 Tabs: Notes, Practice, Reading, Description) */}
+      <div className="w-full lg:w-[420px] bg-zinc-950 border-t lg:border-t-0 lg:border-l border-border flex flex-col flex-shrink-0 min-h-[450px] lg:h-full overflow-hidden">
         
-        <div className="flex-1 overflow-y-auto p-4 space-y-2">
-          {courseLessons.map((item) => {
-            const prog = progressList.find(p => p.id === `${courseId}_${item.id}`);
-            const isCompleted = prog ? prog.completed : false;
-            const isActive = item.id === lessonId;
-
-            return (
+        {/* Sidebar Tab Selector Header */}
+        <div className="flex border-b border-border bg-zinc-950 text-xs font-bold uppercase tracking-wider flex-shrink-0 overflow-x-auto">
+          {lesson.type === 'youtube' && (
+            <>
+              {/* Notes Tab */}
               <button
-                key={item.id}
-                onClick={() => {
-                  if (!isActive) navigate(`/courses/${courseId}/lessons/${item.id}`);
-                }}
-                className={`w-full text-left p-3 rounded-xl flex items-center justify-between border transition group ${
-                  isActive 
-                    ? 'bg-secondary/60 border-primary/45 text-white' 
-                    : 'bg-transparent border-transparent hover:bg-zinc-900/50 text-zinc-400 hover:text-zinc-200'
+                onClick={() => setActiveTab('notes')}
+                className={`py-3.5 px-4 border-b-2 transition cursor-pointer flex items-center gap-1.5 flex-1 justify-center ${
+                  activeTab === 'notes' ? 'border-primary text-white bg-zinc-900/50' : 'border-transparent text-zinc-500 hover:text-zinc-300'
                 }`}
               >
-                <div className="flex items-center gap-3 min-w-0">
-                  {isCompleted ? (
-                    <CheckCircle2 className="text-accent flex-shrink-0" size={16} fill="currentColor" />
-                  ) : (
-                    <Circle className="text-zinc-800 group-hover:text-zinc-600 flex-shrink-0" size={16} />
-                  )}
-                  <div className="min-w-0">
-                    <span className="text-[9px] text-zinc-500 uppercase tracking-widest font-semibold block mb-0.5">
-                      Lecture {item.index}
-                    </span>
-                    <span className="text-xs font-medium truncate block">{item.title}</span>
-                  </div>
-                </div>
-                <span className="text-[10px] text-zinc-600 font-medium flex-shrink-0 flex items-center gap-1 ml-2">
-                  <Clock size={10} />
-                  <span>{item.duration}</span>
-                </span>
+                <FileText size={14} className={activeTab === 'notes' ? 'text-primary' : ''} />
+                <span>Notes ({lessonNotes.length})</span>
               </button>
-            );
-          })}
+
+              {/* Practice Tab */}
+              <button
+                onClick={() => setActiveTab('practice')}
+                className={`py-3.5 px-4 border-b-2 transition cursor-pointer flex items-center gap-1.5 flex-1 justify-center ${
+                  activeTab === 'practice' ? 'border-primary text-white bg-zinc-900/50' : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                }`}
+              >
+                <Target size={14} className={activeTab === 'practice' ? 'text-primary' : ''} />
+                <span>Practice</span>
+              </button>
+
+              {/* Reading Tab */}
+              <button
+                onClick={() => setActiveTab('reading')}
+                className={`py-3.5 px-4 border-b-2 transition cursor-pointer flex items-center gap-1.5 flex-1 justify-center ${
+                  activeTab === 'reading' ? 'border-primary text-white bg-zinc-900/50' : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                }`}
+              >
+                <BookOpen size={14} className={activeTab === 'reading' ? 'text-primary' : ''} />
+                <span>Reading</span>
+              </button>
+            </>
+          )}
+
+          {/* Description Tab */}
+          <button
+            onClick={() => setActiveTab('desc')}
+            className={`py-3.5 px-4 border-b-2 transition cursor-pointer flex items-center gap-1.5 flex-1 justify-center ${
+              activeTab === 'desc' ? 'border-primary text-white bg-zinc-900/50' : 'border-transparent text-zinc-500 hover:text-zinc-300'
+            }`}
+          >
+            <Info size={14} className={activeTab === 'desc' ? 'text-primary' : ''} />
+            <span>Info</span>
+          </button>
+        </div>
+
+        {/* Sidebar Active Tab Content Body */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          {/* NOTES TAB */}
+          {activeTab === 'notes' && lesson.type === 'youtube' && (
+            <div className="space-y-4">
+              {/* Note Form Input */}
+              <form onSubmit={handleSaveNote} className="space-y-2">
+                <textarea
+                  value={noteContent}
+                  onChange={(e) => setNoteContent(e.target.value)}
+                  placeholder="Type a timestamped note... (Press Enter to Save)"
+                  className="w-full h-[70px] p-3 bg-zinc-900 border border-border rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-primary transition resize-none"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSaveNote(e);
+                    }
+                  }}
+                />
+                <button
+                  type="submit"
+                  disabled={!noteContent.trim()}
+                  className="w-full py-2.5 bg-primary disabled:opacity-50 text-white rounded-xl text-xs font-bold hover:bg-primary/95 transition flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                >
+                  <Plus size={15} />
+                  <span>Save Note {ytPlayer && `[${formatSeconds(ytPlayer.getCurrentTime())}]`}</span>
+                </button>
+              </form>
+
+              {/* Notes Timeline List */}
+              <div className="space-y-3 pt-2">
+                {lessonNotes.length === 0 ? (
+                  <p className="text-xs text-zinc-500 py-6 text-center">No notes written for this video yet.</p>
+                ) : (
+                  lessonNotes.map((note) => (
+                    <div key={note.id} className="glass-panel p-3.5 rounded-xl relative group border border-border space-y-2">
+                      <div className="flex items-center justify-between">
+                        {/* Clickable Seek Timestamp Badge */}
+                        <button
+                          onClick={() => triggerPlayerSeek(note.timestamp)}
+                          className="px-2.5 py-1 text-[10px] font-bold rounded bg-accent/20 text-accent hover:bg-accent/30 border border-accent/30 transition flex items-center gap-1 cursor-pointer"
+                        >
+                          <Clock size={10} />
+                          <span>{formatSeconds(note.timestamp)}</span>
+                        </button>
+
+                        {/* Delete Note */}
+                        <button
+                          onClick={() => handleDeleteNote(note.id)}
+                          className="text-zinc-600 hover:text-red-500 opacity-0 group-hover:opacity-100 transition p-1 cursor-pointer"
+                          title="Delete note"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                      <p className="text-xs text-zinc-200 leading-relaxed whitespace-pre-line">{note.content}</p>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* PRACTICE TAB */}
+          {activeTab === 'practice' && lesson.type === 'youtube' && (
+            <PracticeTab
+              courseId={courseId}
+              lessonId={lessonId}
+              practiceProgressList={practiceProgressList}
+              togglePractice={togglePractice}
+            />
+          )}
+
+          {/* READING TAB */}
+          {activeTab === 'reading' && lesson.type === 'youtube' && (
+            <ReadingTab lessonId={lessonId} />
+          )}
+
+          {/* DESCRIPTION TAB */}
+          {activeTab === 'desc' && (
+            <div className="glass-panel p-4 rounded-xl border border-border space-y-3">
+              <h4 className="text-xs font-bold text-white uppercase tracking-wider">Video Description</h4>
+              <p className="text-xs text-zinc-400 leading-relaxed whitespace-pre-wrap">
+                {lesson.description || 'No description available for this lecture.'}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,103 +1,209 @@
 {
   "Hr5iLG7sUa0": {
     "concept": "intro",
-    "conceptLabel": "JavaScript Basics",
+    "conceptLabel": "JavaScript Basics & Output",
     "practices": [
       {
-        "title": "Comment Your JavaScript Code",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/comment-your-javascript-code",
-        "platform": "freecodecamp",
+        "title": "w3resource #1: Display Current Day & Time",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-1.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Hello World in JavaScript",
-        "url": "https://javascript.info/hello-world#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource #2: Print Window Contents",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-2.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "JS First Steps — MDN",
+        "title": "w3resource #3: Get Current Date in Formats",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-3.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #4: Area of Triangle (Side lengths 5,6,7)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-4.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #5: Rotate String 'w3resource' Periodically",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-5.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: JavaScript First Steps",
         "url": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps",
-        "platform": "mdn",
-        "difficulty": "easy"
+        "source": "MDN Web Docs",
+        "readTime": "5 min read",
+        "description": "An introduction to JavaScript syntax, capabilities, and basic structure."
+      },
+      {
+        "title": "JavaScript.info: Hello, World!",
+        "url": "https://javascript.info/hello-world",
+        "source": "JavaScript.info",
+        "readTime": "3 min read",
+        "description": "How script tags work and running your first JavaScript program."
       }
     ]
   },
   "cvoLc3deAdQ": {
     "concept": "setup",
-    "conceptLabel": "Environment Setup",
+    "conceptLabel": "Environment Setup & Developer Tools",
     "practices": [
       {
-        "title": "JS Exercise: console.log Basics",
-        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_output1",
-        "platform": "w3schools",
+        "title": "w3resource #6: Find if Year is Leap Year",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-6.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Node.js Getting Started",
-        "url": "https://www.w3schools.com/nodejs/nodejs_get_started.asp",
-        "platform": "w3schools",
+        "title": "w3resource #7: Find Jan 1st being Sunday (2014-2050)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-7.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource #8: Random Guess Number (1 to 10)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-8.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Code Structure Tasks",
-        "url": "https://javascript.info/structure#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource #9: Days Left Until Next Christmas",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-9.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #10: Calculate Multiplication & Division of 2 Numbers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-10.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "Node.js Environment Setup Guide",
+        "url": "https://nodejs.org/en/learn/getting-started/how-to-install-nodejs",
+        "source": "Node.js Official",
+        "readTime": "4 min read",
+        "description": "Setting up Node.js locally for running backend and CLI JS scripts."
+      },
+      {
+        "title": "Chrome DevTools Console Overview",
+        "url": "https://developer.chrome.com/docs/devtools/console",
+        "source": "Google Developers",
+        "readTime": "6 min read",
+        "description": "Mastering the browser console for instant debugging and code testing."
       }
     ]
   },
   "-GoKoR6aLcY": {
     "concept": "git-basics",
-    "conceptLabel": "Git & GitHub Basics",
+    "conceptLabel": "Git & GitHub Version Control",
     "practices": [
       {
-        "title": "Learn Git Branching (Interactive)",
-        "url": "https://learngitbranching.js.org/",
-        "platform": "other",
+        "title": "w3resource #11: Convert Temperatures (Celsius ↔ Fahrenheit)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-11.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "GitHub Skills: Introduction to GitHub",
-        "url": "https://github.com/skills/introduction-to-github",
-        "platform": "other",
+        "title": "w3resource #12: Get Current Website URL",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-12.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Git Exercises",
-        "url": "https://www.w3schools.com/git/exercise.asp",
-        "platform": "w3schools",
+        "title": "w3resource #13: Create User-Defined Variable",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-13.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #14: Get File Extension from Name",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-14.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #15: Difference between Number and 13 (Double if > 13)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-15.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "Git Handbook — GitHub Guides",
+        "url": "https://guides.github.com/introduction/git-handbook/",
+        "source": "GitHub Docs",
+        "readTime": "8 min read",
+        "description": "Essential Git workflows: init, add, commit, push, and remote repositories."
+      },
+      {
+        "title": "w3resource Git Tutorial",
+        "url": "https://www.w3resource.com/git/",
+        "source": "w3resource",
+        "readTime": "5 min read",
+        "description": "Step-by-step beginner Git tutorial and command reference."
       }
     ]
   },
   "yY0bKZNYmJs": {
     "concept": "variables",
-    "conceptLabel": "Variables (let, const, var)",
+    "conceptLabel": "Variables (let, const, var & Scope Rules)",
     "practices": [
       {
-        "title": "Declare JavaScript Variables",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/declare-javascript-variables",
-        "platform": "freecodecamp",
+        "title": "w3resource #16: Sum of Two Integers (Triple if Same)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-16.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Variables — Tasks",
-        "url": "https://javascript.info/variables#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource #17: Absolute Difference from 19 (Triple if > 19)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-17.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Grasshopper — Variable Assignment",
-        "url": "https://www.codewars.com/kata/50ee6b0bdeab583673000025",
-        "platform": "codewars",
+        "title": "w3resource #18: Check if 2 Numbers equal 50 or Sum equals 50",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-18.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "JS Variables Exercises",
-        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_variables1",
-        "platform": "w3schools",
+        "title": "w3resource #19: Check Integer within 20 of 100 or 400",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-19.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #20: Check One Positive and One Negative Integer",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-20.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: Storing the information you need — Variables",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Variables",
+        "source": "MDN Web Docs",
+        "readTime": "6 min read",
+        "description": "Detailed guide on let vs const vs var, scoping, and re-declaration rules."
+      },
+      {
+        "title": "JavaScript.info: Variables",
+        "url": "https://javascript.info/variables",
+        "source": "JavaScript.info",
+        "readTime": "4 min read",
+        "description": "Variable naming conventions, immutability with const, and execution environment."
       }
     ]
   },
@@ -106,322 +212,549 @@
     "conceptLabel": "Data Types & ECMA Standards",
     "practices": [
       {
-        "title": "Data Types — Tasks",
-        "url": "https://javascript.info/types#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource #21: Create New String with 'Py' Prepended",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-21.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Understanding typeof Operator",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/understanding-uninitialized-variables",
-        "platform": "freecodecamp",
+        "title": "w3resource #22: Remove Character at Specified Position",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-22.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "JS Data Types Exercises",
-        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_datatypes1",
-        "platform": "w3schools",
+        "title": "w3resource #23: Change Position of First and Last Character",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-23.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Basic Data Types (Exercism)",
-        "url": "https://exercism.org/tracks/javascript/concepts/numbers",
-        "platform": "exercism",
+        "title": "w3resource #24: Add First Character at Front and Back",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-24.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #25: Check if Number is Multiple of 3 or 7",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-25.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: JavaScript Data Structures & Types",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures",
+        "source": "MDN Web Docs",
+        "readTime": "7 min read",
+        "description": "Comprehensive reference of 7 primitive types and Object type."
+      },
+      {
+        "title": "JavaScript.info: Data Types",
+        "url": "https://javascript.info/types",
+        "source": "JavaScript.info",
+        "readTime": "5 min read",
+        "description": "Dynamic typing, typeof operator behavior, and special numeric values."
       }
     ]
   },
   "X7hDBhd_L5U": {
     "concept": "type-coercion",
-    "conceptLabel": "Type Conversion & Coercion",
+    "conceptLabel": "Datatype Conversion & Coercion Confusion",
     "practices": [
       {
-        "title": "Type Conversions — Tasks",
-        "url": "https://javascript.info/type-conversions#tasks",
-        "platform": "javascript.info",
-        "difficulty": "medium"
-      },
-      {
-        "title": "parseInt & parseFloat Practice",
-        "url": "https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_parseint",
-        "platform": "w3schools",
+        "title": "w3resource #26: Create String from Last 3 Chars at Front & Back",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-26.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Convert Number to Reversed Array",
-        "url": "https://www.codewars.com/kata/5583090cbe83f4fd8c000051",
-        "platform": "codewars",
+        "title": "w3resource #27: Check if String Starts with 'Java'",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-27.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #28: Check if Two Integers in Range 50..99",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-28.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #29: Check if Three Integers in Range 50..99",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-29.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #30: Check if String Contains 'Script' at Index 4",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-30.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Type Conversions",
+        "url": "https://javascript.info/type-conversions",
+        "source": "JavaScript.info",
+        "readTime": "5 min read",
+        "description": "Numeric, String, and Boolean conversion rules and coercion traps."
+      },
+      {
+        "title": "MDN: Type Coercion Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Glossary/Type_coercion",
+        "source": "MDN Web Docs",
+        "readTime": "4 min read",
+        "description": "Implicit vs explicit conversion when evaluating mathematical and logical expressions."
       }
     ]
   },
   "N9el4APFtAo": {
-    "concept": "type-coercion",
-    "conceptLabel": "String to Number Conversion",
+    "concept": "type-coercion-depth",
+    "conceptLabel": "String to Number Conversion Gotchas",
     "practices": [
       {
-        "title": "Convert a String to a Number",
-        "url": "https://www.codewars.com/kata/544675c6f971f7399a000e79",
-        "platform": "codewars",
+        "title": "w3resource #31: Find Largest of Three Integers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-31.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Number() vs parseInt() Deep Dive",
-        "url": "https://javascript.info/number#tasks",
-        "platform": "javascript.info",
-        "difficulty": "medium"
+        "title": "w3resource #32: Find Closest Value to 100 from Two Integers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-32.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
       },
       {
-        "title": "Convert String to camelCase",
-        "url": "https://www.codewars.com/kata/517abf86da9663f1d2000003",
-        "platform": "codewars",
+        "title": "w3resource #33: Check if Two Numbers in Ranges 40..60 or 70..100",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-33.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #34: Find Larger Number in Range 40..60",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-34.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #35: Check Specified Character in 2nd..4th Position",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-35.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "w3resource: Number() vs parseInt() vs parseFloat()",
+        "url": "https://www.w3resource.com/javascript/global-objects/number/number.php",
+        "source": "w3resource",
+        "readTime": "5 min read",
+        "description": "Detailed comparisons of numeric parsing methods and NaN handling."
+      },
+      {
+        "title": "MDN: Number Global Object",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+        "source": "MDN Web Docs",
+        "readTime": "6 min read",
+        "description": "Static properties, Number.isNaN(), Number.isInteger(), and parsing rules."
       }
     ]
   },
   "giP2uXMlv4c": {
     "concept": "comparison",
-    "conceptLabel": "Comparison & Equality Operators",
+    "conceptLabel": "Comparison Operators (Strict vs Loose Equality)",
     "practices": [
       {
-        "title": "Comparisons — Tasks",
-        "url": "https://javascript.info/comparison#tasks",
-        "platform": "javascript.info",
-        "difficulty": "medium"
-      },
-      {
-        "title": "Comparison with == vs ===",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/comparison-with-the-equality-operator",
-        "platform": "freecodecamp",
+        "title": "w3resource #36: Check if Last Digit of Three Positive Integers is Same",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-36.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Truthy and Falsy Bouncer",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/falsy-bouncer",
-        "platform": "freecodecamp",
+        "title": "w3resource #37: Produce Lowercase 3 Chars if Length >= 3",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-37.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #38: Evaluate Student Total Marks & Grade A+",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-38.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #39: Compute Sum of Two Integers (Return 65..80 as 65)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-39.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      },
+      {
+        "title": "w3resource #40: Check if One is 15 or Sum/Difference is 15",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-40.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Comparisons",
+        "url": "https://javascript.info/comparison",
+        "source": "JavaScript.info",
+        "readTime": "5 min read",
+        "description": "Boolean comparisons, string comparisons, null vs undefined comparison gotchas."
+      },
+      {
+        "title": "MDN: Equality comparisons and sameness",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness",
+        "source": "MDN Web Docs",
+        "readTime": "7 min read",
+        "description": "In-depth breakdown of == vs === vs Object.is()."
       }
     ]
   },
   "suMvZWjjKbo": {
-    "concept": "datatypes-review",
-    "conceptLabel": "Data Types Summary & Review",
+    "concept": "datatypes-summary",
+    "conceptLabel": "Data Types Summary & Reference Types",
     "practices": [
       {
-        "title": "JavaScript Fundamentals — All Tasks",
-        "url": "https://javascript.info/first-steps",
-        "platform": "javascript.info",
+        "title": "w3resource #41: Check Three Numbers Strict or Soft Increasing",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-41.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #42: Check Three Numbers Strict or Soft Decreasing",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-42.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #43: Check Rightmost Digits of Three Numbers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-43.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #44: Check if One Integer >= 20 and Less Than Others",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-44.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Basic JS Certification Challenges",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/",
-        "platform": "freecodecamp",
-        "difficulty": "easy"
-      },
+        "title": "w3resource #45: Check Two Integers where One is 15 or Sum/Diff is 15",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-45.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
       {
-        "title": "Even or Odd",
-        "url": "https://www.codewars.com/kata/53da3dbb4a5168369a0000fe",
-        "platform": "codewars",
-        "difficulty": "easy"
+        "title": "JavaScript.info: Objects & Reference Copying",
+        "url": "https://javascript.info/object-copy",
+        "source": "JavaScript.info",
+        "readTime": "6 min read",
+        "description": "How primitives are stored by value while objects are stored by reference."
       }
     ]
   },
   "7gwc-1czolw": {
     "concept": "memory",
-    "conceptLabel": "Stack & Heap Memory",
+    "conceptLabel": "Stack & Heap Memory Architecture",
     "practices": [
       {
-        "title": "Pass by Value vs Reference — Quiz",
-        "url": "https://javascript.info/object-copy#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource #46: Check Two Numbers where One is Multiple of 7 or 11",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-46.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Cloning Objects Practice",
-        "url": "https://javascript.info/object-copy",
-        "platform": "javascript.info",
+        "title": "w3resource #47: Check if Number Present in Range 40..10000",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-47.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Deep Copy vs Shallow Copy",
-        "url": "https://www.codewars.com/kata/596e414344af11e98a00001f",
-        "platform": "codewars",
+        "title": "w3resource #48: Reverse a Given String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-48.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #49: Replace Every Character with Next Alphabet",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-49.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      },
+      {
+        "title": "w3resource #50: Capitalize First Letter of Each Word",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-50.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: Memory Management in JavaScript",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management",
+        "source": "MDN Web Docs",
+        "readTime": "8 min read",
+        "description": "Memory lifecycle, stack allocation, heap memory, and garbage collection algorithm."
       }
     ]
   },
   "fozwNnFunlo": {
     "concept": "strings",
-    "conceptLabel": "Strings & String Methods",
+    "conceptLabel": "Strings & String Manipulation Methods",
     "practices": [
       {
-        "title": "Strings — Tasks (5 exercises)",
-        "url": "https://javascript.info/string#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource String #1: Check if Input is String",
+        "url": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-1.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource String #2: Check if String is Blank",
+        "url": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-2.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource String #3: Split String into Array of Words",
+        "url": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-3.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource String #4: Extract Specified Number of Characters",
+        "url": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-4.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource String #5: Convert String into Abbreviated Form",
+        "url": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-5.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: String Global Object & Methods",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+        "source": "MDN Web Docs",
+        "readTime": "10 min read",
+        "description": "Comprehensive reference of slice, substring, replace, charAt, and template literals."
       },
       {
-        "title": "Reverse a String",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/reverse-a-string",
-        "platform": "freecodecamp",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Reversed Strings",
-        "url": "https://www.codewars.com/kata/5168bb5dfe9a00b126000018",
-        "platform": "codewars",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Reverse String — LeetCode #344",
-        "url": "https://leetcode.com/problems/reverse-string/",
-        "platform": "leetcode",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Valid Palindrome — LeetCode #125",
-        "url": "https://leetcode.com/problems/valid-palindrome/",
-        "platform": "leetcode",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Abbreviate a Two Word Name",
-        "url": "https://www.codewars.com/kata/57eadb7ecd143f4c9c0000a3",
-        "platform": "codewars",
-        "difficulty": "easy"
+        "title": "w3resource: JavaScript String Methods Tutorial",
+        "url": "https://www.w3resource.com/javascript/global-objects/string/string-properties-and-methods.php",
+        "source": "w3resource",
+        "readTime": "6 min read",
+        "description": "Visual guide to string indexing, length, and immutability."
       }
     ]
   },
   "_KqpeDc47Ro": {
     "concept": "numbers-math",
-    "conceptLabel": "Numbers & Math Object",
+    "conceptLabel": "Numbers & Math Object Methods",
     "practices": [
       {
-        "title": "Numbers — Tasks",
-        "url": "https://javascript.info/number#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Math #1: Convert Number to Binary/Hex/Octal",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-math-exercise-1.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Math.random & Math.floor Practice",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/generate-random-whole-numbers-with-javascript",
-        "platform": "freecodecamp",
+        "title": "w3resource Math #2: Binary to Decimal Conversion",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-math-exercise-2.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Sum of Positive Numbers",
-        "url": "https://www.codewars.com/kata/5715eaedb436cf5606000381",
-        "platform": "codewars",
+        "title": "w3resource Math #3: Decimal to Hexadecimal Conversion",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-math-exercise-3.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Multiply Kata",
-        "url": "https://www.codewars.com/kata/50654ddff44f800200000004",
-        "platform": "codewars",
+        "title": "w3resource Math #4: Generate Random Integer in Range",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-math-exercise-4.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Sqrt(x) — LeetCode #69",
-        "url": "https://leetcode.com/problems/sqrtx/",
-        "platform": "leetcode",
+        "title": "w3resource Math #5: Format Number to Fixed Decimals",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-math-exercise-5.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: Math Global Object",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math",
+        "source": "MDN Web Docs",
+        "readTime": "7 min read",
+        "description": "Math.floor, Math.ceil, Math.round, Math.random, Math.max, and Math.min methods."
+      },
+      {
+        "title": "JavaScript.info: Numbers",
+        "url": "https://javascript.info/number",
+        "source": "JavaScript.info",
+        "readTime": "6 min read",
+        "description": "Imprecise calculations, 64-bit float storage, and rounding functions."
       }
     ]
   },
   "tGLCuoumaGY": {
     "concept": "date-time",
-    "conceptLabel": "Date & Time",
+    "conceptLabel": "Date & Time In Depth",
     "practices": [
       {
-        "title": "Date Object Methods Practice",
-        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_dates1",
-        "platform": "w3schools",
+        "title": "w3resource #1: Current Date & Time Format",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-1.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Grasshopper — Debug sayHello",
-        "url": "https://www.codewars.com/kata/5625618b1fe21ab49f00001f",
-        "platform": "codewars",
+        "title": "w3resource #3: Format Date as mm-dd-yyyy",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-3.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Calculate Age from Date",
-        "url": "https://www.codewars.com/kata/5568c24bc191e83c0c000029",
-        "platform": "codewars",
+        "title": "w3resource #9: Days Left Until Next Christmas",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-9.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #51: Convert Number to Hours and Minutes",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-51.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      },
+      {
+        "title": "w3resource #52: Sort Characters of String Alphabetically",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-52.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Date and time",
+        "url": "https://javascript.info/date",
+        "source": "JavaScript.info",
+        "readTime": "7 min read",
+        "description": "Creating dates, extracting components, timestamps, and measuring performance."
+      },
+      {
+        "title": "MDN: Date Object Reference",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+        "source": "MDN Web Docs",
+        "readTime": "8 min read",
+        "description": "Date constructor, getTime(), toISOString(), and timezone considerations."
       }
     ]
   },
   "cejBux2gtEE": {
     "concept": "arrays",
-    "conceptLabel": "Arrays (Part 1)",
+    "conceptLabel": "Arrays & Fundamentals Methods",
     "practices": [
       {
-        "title": "Arrays — Tasks (7 exercises)",
-        "url": "https://javascript.info/array#tasks",
-        "platform": "javascript.info",
-        "difficulty": "medium"
-      },
-      {
-        "title": "Manipulate Arrays with push/pop",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/manipulate-arrays-with-push",
-        "platform": "freecodecamp",
+        "title": "w3resource Array #1: Check if Input is Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-1.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Sum of Array (8 kyu)",
-        "url": "https://www.codewars.com/kata/53dc54212259ed3d4f00071c",
-        "platform": "codewars",
+        "title": "w3resource Array #2: Clone an Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-2.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Remove First and Last Character",
-        "url": "https://www.codewars.com/kata/56bc28ad5bdaeb48760009b0",
-        "platform": "codewars",
+        "title": "w3resource Array #3: Get First Element of Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-3.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Two Sum — LeetCode #1",
-        "url": "https://leetcode.com/problems/two-sum/",
-        "platform": "leetcode",
+        "title": "w3resource Array #4: Get Last Element of Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-4.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Remove Duplicates — LeetCode #26",
-        "url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
-        "platform": "leetcode",
+        "title": "w3resource Array #5: Join All Array Elements into String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-5.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: Array Global Object",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+        "source": "MDN Web Docs",
+        "readTime": "10 min read",
+        "description": "Array methods: push, pop, shift, unshift, splice, slice, and indexing."
+      },
+      {
+        "title": "JavaScript.info: Arrays",
+        "url": "https://javascript.info/array",
+        "source": "JavaScript.info",
+        "readTime": "6 min read",
+        "description": "Array creation, queue/stack behavior, and internal performance tips."
       }
     ]
   },
   "m6azhgyCi-k": {
     "concept": "arrays-advanced",
-    "conceptLabel": "Arrays Advanced (spread, flat, concat)",
+    "conceptLabel": "Arrays Part 2 (concat, spread, flat, Array.from)",
     "practices": [
       {
-        "title": "Array Methods — Tasks (12 exercises)",
-        "url": "https://javascript.info/array-methods#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Array #6: Insert Dashes Between Even Numbers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-6.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Use the Spread Operator",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-the-spread-operator-to-evaluate-arrays-in-place",
-        "platform": "freecodecamp",
+        "title": "w3resource Array #7: Sort Array Items",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-7.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Flatten Nested Arrays",
-        "url": "https://www.codewars.com/kata/57ee99a16c8df7b02d00045f",
-        "platform": "codewars",
+        "title": "w3resource Array #8: Find Most Frequent Item of Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-8.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Merge Sorted Array — LeetCode #88",
-        "url": "https://leetcode.com/problems/merge-sorted-array/",
-        "platform": "leetcode",
-        "difficulty": "easy"
+        "title": "w3resource Array #9: Swap Case of Each Character",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-9.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Array #10: Print Elements of 2D Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-10.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Array methods",
+        "url": "https://javascript.info/array-methods",
+        "source": "JavaScript.info",
+        "readTime": "12 min read",
+        "description": "Complete guide to transform, iterate, search, and flat array operations."
       }
     ]
   },
@@ -430,82 +763,147 @@
     "conceptLabel": "Objects In Depth",
     "practices": [
       {
-        "title": "Objects — Tasks",
-        "url": "https://javascript.info/object#tasks",
-        "platform": "javascript.info",
-        "difficulty": "medium"
-      },
-      {
-        "title": "Build JavaScript Objects",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/build-javascript-objects",
-        "platform": "freecodecamp",
+        "title": "w3resource Object #1: List Properties of Object",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-1.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Object keys, values, entries",
-        "url": "https://javascript.info/keys-values-entries#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #2: Delete Property from Object",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-2.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Object #3: Get Length of JavaScript Object",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-3.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Object #4: Display Reading Status of Books",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-4.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Count Developers (7 kyu)",
-        "url": "https://www.codewars.com/kata/5a03af8a6b7dbd2b12000040",
-        "platform": "codewars",
+        "title": "w3resource Object #5: Volume of Cylinder using Object",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-5.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Objects",
+        "url": "https://javascript.info/object",
+        "source": "JavaScript.info",
+        "readTime": "7 min read",
+        "description": "Literals, properties, square bracket notation, property existence checks."
+      },
+      {
+        "title": "MDN: Working with Objects",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
+        "source": "MDN Web Docs",
+        "readTime": "8 min read",
+        "description": "Creating objects, initializing properties, methods, and enumerating properties."
       }
     ]
   },
   "4lb2pXWWXJI": {
     "concept": "objects-methods",
-    "conceptLabel": "Object Methods & Utilities",
+    "conceptLabel": "Object Methods, Keys, Values & Entries",
     "practices": [
       {
-        "title": "Object.keys/values/entries — Tasks",
-        "url": "https://javascript.info/keys-values-entries#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #6: Bubble Sort Algorithm in Object",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-6.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      },
+      {
+        "title": "w3resource Object #7: Returns All Substrings of String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-7.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Accessing Object Properties",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/accessing-object-properties-with-dot-notation",
-        "platform": "freecodecamp",
+        "title": "w3resource Object #8: Create Clock Object with Tick",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-8.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Object #9: Calculate Area and Perimeter of Circle",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-9.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Character Count (Object counting)",
-        "url": "https://www.codewars.com/kata/52efefcbcdf57161d4000091",
-        "platform": "codewars",
+        "title": "w3resource Object #10: Sort Array of Object by Title",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-10.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Object.keys, values, entries",
+        "url": "https://javascript.info/keys-values-entries",
+        "source": "JavaScript.info",
+        "readTime": "5 min read",
+        "description": "Transforming objects with Object.entries and Object.fromEntries."
       }
     ]
   },
   "AViTh83k-IE": {
     "concept": "destructuring",
-    "conceptLabel": "Destructuring & JSON",
+    "conceptLabel": "Object Destructuring & JSON API",
     "practices": [
       {
-        "title": "Destructuring Assignment — Tasks",
-        "url": "https://javascript.info/destructuring-assignment#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #11: Print All Methods in Object",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-11.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Use Destructuring to Extract Values",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-destructuring-assignment-to-extract-values-from-objects",
-        "platform": "freecodecamp",
+        "title": "w3resource Object #12: Parse URL into Components",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-12.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      },
+      {
+        "title": "w3resource Object #13: Retrieve All Names of Object Properties",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-13.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Destructuring with Rest Parameter",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-destructuring-assignment-with-the-rest-parameter-to-reassign-array-elements",
-        "platform": "freecodecamp",
-        "difficulty": "medium"
+        "title": "w3resource Object #14: Retrieve All Values of Object Properties",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-14.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
       },
       {
-        "title": "JSON.parse/stringify Practice",
-        "url": "https://javascript.info/json#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #15: Convert Object into List of Pairs",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-15.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Destructuring assignment",
+        "url": "https://javascript.info/destructuring-assignment",
+        "source": "JavaScript.info",
+        "readTime": "8 min read",
+        "description": "Object and array destructuring, default values, rest pattern."
+      },
+      {
+        "title": "MDN: JSON Object Reference",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+        "source": "MDN Web Docs",
+        "readTime": "5 min read",
+        "description": "JSON.stringify() and JSON.parse() serialization."
       }
     ]
   },
@@ -514,64 +912,95 @@
     "conceptLabel": "Functions & Parameters",
     "practices": [
       {
-        "title": "Function Basics — Tasks",
-        "url": "https://javascript.info/function-basics#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Functions #1: Reverse a Number",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-1.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Write Reusable JavaScript Functions",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/write-reusable-javascript-with-functions",
-        "platform": "freecodecamp",
+        "title": "w3resource Functions #2: Check Palindrome String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-2.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Function Expressions — Tasks",
-        "url": "https://javascript.info/function-expressions#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Functions #3: Generate All Combination of String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-3.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Sentence Smash",
-        "url": "https://www.codewars.com/kata/53dc23c68a0c93699800041d",
-        "platform": "codewars",
+        "title": "w3resource Functions #4: Sort Letters of String Alphabetically",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-4.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Lucian's Luscious Lasagna (Exercism)",
-        "url": "https://exercism.org/tracks/javascript/exercises/lasagna",
-        "platform": "exercism",
+        "title": "w3resource Functions #5: Capitalize First Letter of Each Word",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-5.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: Functions Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+        "source": "MDN Web Docs",
+        "readTime": "9 min read",
+        "description": "Defining functions, function expressions, parameters, and return statements."
+      },
+      {
+        "title": "JavaScript.info: Function basics",
+        "url": "https://javascript.info/function-basics",
+        "source": "JavaScript.info",
+        "readTime": "6 min read",
+        "description": "Local vs outer variables, default arguments, and function naming."
       }
     ]
   },
   "t7ZHPhgdA4U": {
     "concept": "functions-advanced",
-    "conceptLabel": "Functions with Objects & Arrays",
+    "conceptLabel": "Functions with Objects & Rest Parameters",
     "practices": [
       {
-        "title": "Rest Parameters — Tasks",
-        "url": "https://javascript.info/rest-parameters-spread#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Functions #6: Find Longest Word in String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-6.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Passing Values to Functions",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/passing-values-to-functions-with-arguments",
-        "platform": "freecodecamp",
+        "title": "w3resource Functions #7: Count Vowels in String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-7.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "List Filtering (7 kyu)",
-        "url": "https://www.codewars.com/kata/53dbd5315a3c69571d00006e",
-        "platform": "codewars",
+        "title": "w3resource Functions #8: Check if Number is Prime",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-8.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Freelancer Rates (Exercism)",
-        "url": "https://exercism.org/tracks/javascript/exercises/freelancer-rates",
-        "platform": "exercism",
+        "title": "w3resource Functions #9: Detect Data Type of Argument",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-9.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Functions #10: Generate Identity Matrix",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-10.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Rest parameters and spread syntax",
+        "url": "https://javascript.info/rest-parameters-spread",
+        "source": "JavaScript.info",
+        "readTime": "6 min read",
+        "description": "Handling variable number of arguments with rest parameters (...args)."
       }
     ]
   },
@@ -580,124 +1009,230 @@
     "conceptLabel": "Global & Local Scope",
     "practices": [
       {
-        "title": "Global vs Local Scope in Functions",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/global-vs--local-scope-in-functions",
-        "platform": "freecodecamp",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Variable Scope / Closures intro — Tasks",
-        "url": "https://javascript.info/closure#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Functions #11: Find Second Lowest and Second Greatest",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-11.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Global Scope and Functions",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/global-scope-and-functions",
-        "platform": "freecodecamp",
+        "title": "w3resource Functions #12: Check Perfect Number",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-12.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Functions #13: Compute Factors of Positive Integer",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-13.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Functions #14: Convert Amount to Coins",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-14.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Functions #15: Compute b^n Power of Number",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-15.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: Scope in JavaScript",
+        "url": "https://developer.mozilla.org/en-US/docs/Glossary/Scope",
+        "source": "MDN Web Docs",
+        "readTime": "5 min read",
+        "description": "Global scope, module scope, function scope, and block scope explained."
       }
     ]
   },
   "eWwge2YpHhc": {
     "concept": "hoisting",
-    "conceptLabel": "Scope Levels & Hoisting",
+    "conceptLabel": "Scope Levels & Hoisting Mechanics",
     "practices": [
       {
-        "title": "Variable Scope, Closures — Tasks",
-        "url": "https://javascript.info/closure#tasks",
-        "platform": "javascript.info",
-        "difficulty": "hard"
-      },
-      {
-        "title": "Understanding Hoisting Quiz",
-        "url": "https://www.w3schools.com/js/js_hoisting.asp",
-        "platform": "w3schools",
+        "title": "w3resource Functions #16: Extract Unique Characters from String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-16.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Local Scope and Functions",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/local-scope-and-functions",
-        "platform": "freecodecamp",
+        "title": "w3resource Functions #17: Count Occurrences of Letter",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-17.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Functions #18: Binary Search Algorithm",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-18.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      },
+      {
+        "title": "w3resource Functions #19: Get Array Elements Larger than Number",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-19.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Functions #20: Generate String ID of Random Length",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-20.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: Hoisting",
+        "url": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting",
+        "source": "MDN Web Docs",
+        "readTime": "5 min read",
+        "description": "Why function declarations and var variables hoist while let/const hit Temporal Dead Zone."
       }
     ]
   },
   "9ksqBa8_txM": {
     "concept": "this-arrow",
-    "conceptLabel": "this Keyword & Arrow Functions",
+    "conceptLabel": "THIS Keyword & Arrow Functions",
     "practices": [
       {
-        "title": "Object Methods, 'this' — Tasks",
-        "url": "https://javascript.info/object-methods#tasks",
-        "platform": "javascript.info",
-        "difficulty": "medium"
+        "title": "w3resource Functions #21: Generate Subsets of Specified Length",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-21.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
       },
       {
-        "title": "Arrow Functions Revisited — Tasks",
-        "url": "https://javascript.info/arrow-functions#tasks",
-        "platform": "javascript.info",
-        "difficulty": "medium"
-      },
-      {
-        "title": "Use Arrow Functions (ES6)",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-arrow-functions-to-write-concise-anonymous-functions",
-        "platform": "freecodecamp",
+        "title": "w3resource Functions #22: Count Occurrences of Letter in String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-22.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Calculate BMI (Arrow function)",
-        "url": "https://www.codewars.com/kata/57a429e253ba3381850000fb",
-        "platform": "codewars",
-        "difficulty": "easy"
+        "title": "w3resource Functions #23: Find First Non-Repeated Character",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-23.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Functions #24: Bubble Sort Algorithm",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-24.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      },
+      {
+        "title": "w3resource Functions #25: Longest Country Name in Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-25.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Object methods, 'this'",
+        "url": "https://javascript.info/object-methods",
+        "source": "JavaScript.info",
+        "readTime": "7 min read",
+        "description": "Understanding 'this' binding rules and how arrow functions inherit outer 'this'."
+      },
+      {
+        "title": "MDN: Arrow function expressions",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions",
+        "source": "MDN Web Docs",
+        "readTime": "6 min read",
+        "description": "Syntax, implicit returns, lack of 'this' binding, and constructor limitations."
       }
     ]
   },
   "GAIbn16Iytc": {
     "concept": "iife",
-    "conceptLabel": "IIFE (Immediately Invoked Functions)",
+    "conceptLabel": "Immediately Invoked Function Expressions (IIFE)",
     "practices": [
       {
-        "title": "Write Concise Declarative Functions",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/write-concise-declarative-functions-with-es6",
-        "platform": "freecodecamp",
+        "title": "w3resource Functions #26: Longest Substring Without Repeating",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-26.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      },
+      {
+        "title": "w3resource Functions #27: Longest Palindrome in String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-27.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      },
+      {
+        "title": "w3resource Functions #28: Pass JavaScript Function as Parameter",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-28.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Module Pattern Practice",
-        "url": "https://javascript.info/modules-intro",
-        "platform": "javascript.info",
-        "difficulty": "medium"
+        "title": "w3resource Functions #29: Get Function Name",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-29.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
       },
       {
-        "title": "Self-invoking Function Exercises",
-        "url": "https://www.w3schools.com/js/js_function_definition.asp",
-        "platform": "w3schools",
+        "title": "w3resource #53: Check if 'a' and 'b' Separated by Exactly 3 Chars",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-53.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: IIFE (Immediately Invoked Function Expression)",
+        "url": "https://developer.mozilla.org/en-US/docs/Glossary/IIFE",
+        "source": "MDN Web Docs",
+        "readTime": "4 min read",
+        "description": "Why IIFE is used for data privacy and avoiding global namespace pollution."
       }
     ]
   },
   "ByhtOgF6uYM": {
     "concept": "execution-context",
-    "conceptLabel": "Execution Context & Call Stack",
+    "conceptLabel": "Code Execution & Call Stack Mechanics",
     "practices": [
       {
-        "title": "Visualize Call Stack — Loupe Tool",
-        "url": "http://latentflip.com/loupe/",
-        "platform": "other",
+        "title": "w3resource Recursion #1: Factorial of a Number",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-recursion-exercise-1.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Recursion #2: Greatest Common Divisor (GCD)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-recursion-exercise-2.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Recursion — Tasks",
-        "url": "https://javascript.info/recursion#tasks",
-        "platform": "javascript.info",
-        "difficulty": "hard"
+        "title": "w3resource Recursion #3: Range of Integers (x to y)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-recursion-exercise-3.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
       },
       {
-        "title": "Predict Output: Call Stack Exercises",
-        "url": "https://www.freecodecamp.org/news/understanding-the-javascript-call-stack-861e41ae61d4/",
-        "platform": "freecodecamp",
+        "title": "w3resource Recursion #4: Compute Sum of Array of Numbers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-recursion-exercise-4.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Recursion #5: Compute Exponent of Number (n^p)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-recursion-exercise-5.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Recursion and stack",
+        "url": "https://javascript.info/recursion",
+        "source": "JavaScript.info",
+        "readTime": "8 min read",
+        "description": "Execution context stack, recursion depth, and call stack visualization."
       }
     ]
   },
@@ -706,34 +1241,43 @@
     "conceptLabel": "Control Flow (if/else, switch)",
     "practices": [
       {
-        "title": "Conditional Branching — Tasks",
-        "url": "https://javascript.info/ifelse#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Cond #1: Display Larger of Two Integers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-conditional-statements-and-loops-exercise-1.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Use Conditional Logic with If Statements",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/use-conditional-logic-with-if-statements",
-        "platform": "freecodecamp",
+        "title": "w3resource Cond #2: Find Sign of Product of Three Numbers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-conditional-statements-and-loops-exercise-2.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Switch Statement Practice",
-        "url": "https://javascript.info/switch#tasks",
-        "platform": "javascript.info",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Ternary Operator Challenges",
-        "url": "https://www.codewars.com/kata/53369039d7ab3ac506000b54",
-        "platform": "codewars",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Logical Operators — Tasks",
-        "url": "https://javascript.info/logical-operators#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Cond #3: Sort Three Numbers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-conditional-statements-and-loops-exercise-3.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Cond #4: Find Largest of Five Numbers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-conditional-statements-and-loops-exercise-4.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Cond #5: Odd/Even Loop Check",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-conditional-statements-and-loops-exercise-5.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: Control Flow & Conditionals",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
+        "source": "MDN Web Docs",
+        "readTime": "7 min read",
+        "description": "If...else, switch statements, throw/try...catch statements."
       }
     ]
   },
@@ -742,34 +1286,43 @@
     "conceptLabel": "For Loop, Break & Continue",
     "practices": [
       {
-        "title": "Loops: while and for — Tasks",
-        "url": "https://javascript.info/while-for#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Cond #6: Calculate Average & Grade of Students",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-conditional-statements-and-loops-exercise-6.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Iterate with For Loops",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/iterate-with-javascript-for-loops",
-        "platform": "freecodecamp",
+        "title": "w3resource Cond #7: FizzBuzz Loop Challenge",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-conditional-statements-and-loops-exercise-7.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "FizzBuzz — LeetCode #412",
-        "url": "https://leetcode.com/problems/fizz-buzz/",
-        "platform": "leetcode",
-        "difficulty": "easy"
+        "title": "w3resource Cond #8: Happy Number Checker",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-conditional-statements-and-loops-exercise-8.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
       },
       {
-        "title": "Collatz Conjecture (Exercism)",
-        "url": "https://exercism.org/tracks/javascript/exercises/collatz-conjecture",
-        "platform": "exercism",
-        "difficulty": "easy"
+        "title": "w3resource Cond #9: Armstrong Numbers (3 Digits)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-conditional-statements-and-loops-exercise-9.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
       },
       {
-        "title": "Multiples of 3 or 5 (6 kyu)",
-        "url": "https://www.codewars.com/kata/514b92a657cdc65150000006",
-        "platform": "codewars",
+        "title": "w3resource Cond #10: Construct Pattern of Stars (*)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-conditional-statements-and-loops-exercise-10.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Loops: while and for",
+        "url": "https://javascript.info/while-for",
+        "source": "JavaScript.info",
+        "readTime": "6 min read",
+        "description": "For loop components, break, continue, and labels for outer loops."
       }
     ]
   },
@@ -778,46 +1331,88 @@
     "conceptLabel": "While & Do-While Loops",
     "practices": [
       {
-        "title": "Iterate with While Loops",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/iterate-with-javascript-while-loops",
-        "platform": "freecodecamp",
-        "difficulty": "easy"
-      },
-      {
-        "title": "While Loop — Tasks",
-        "url": "https://javascript.info/while-for#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Cond #11: Compute Greatest Common Divisor (GCD)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-conditional-statements-and-loops-exercise-11.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Number of Steps to Reduce — LeetCode #1342",
-        "url": "https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/",
-        "platform": "leetcode",
+        "title": "w3resource Cond #12: Sum Multiples of 3 and 5 under 1000",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-conditional-statements-and-loops-exercise-12.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #54: Count Vowels in String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-54.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #55: Check Equal Number of 'p' and 't' in String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-55.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #56: Divide Two Positive Numbers & Format String",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-56.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: Loops and iteration",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration",
+        "source": "MDN Web Docs",
+        "readTime": "8 min read",
+        "description": "While, do...while, for, for...in, for...of statement comparisons."
       }
     ]
   },
   "M0YImBHQsWU": {
     "concept": "hof-loops",
-    "conceptLabel": "Higher-Order Array Loops",
+    "conceptLabel": "Higher-Order Array Loops (for...of, forEach)",
     "practices": [
       {
-        "title": "Iterables — Tasks",
-        "url": "https://javascript.info/iterable#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Array #11: Sum of Squares of Vector Elements",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-11.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #12: Compute Sum and Product of Array Integers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-12.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #13: Add Items to Blank Array & Display",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-13.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #14: Remove Duplicate Items from Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-14.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "for...of Loop Practice",
-        "url": "https://www.w3schools.com/js/js_loop_forof.asp",
-        "platform": "w3schools",
+        "title": "w3resource Array #15: Display Choice Colors with Ordinal Numbers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-15.php",
+        "platform": "w3resource",
         "difficulty": "easy"
-      },
+      }
+    ],
+    "readingMaterials": [
       {
-        "title": "Elyse's Enchantments (Exercism)",
-        "url": "https://exercism.org/tracks/javascript/exercises/elyses-enchantments",
-        "platform": "exercism",
-        "difficulty": "easy"
+        "title": "JavaScript.info: Iterables",
+        "url": "https://javascript.info/iterable",
+        "source": "JavaScript.info",
+        "readTime": "5 min read",
+        "description": "Symbol.iterator, for...of loop mechanics, and array-like objects."
       }
     ]
   },
@@ -826,520 +1421,895 @@
     "conceptLabel": "filter(), map() & reduce()",
     "practices": [
       {
-        "title": "Array Methods — Tasks (12 exercises)",
-        "url": "https://javascript.info/array-methods#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Array #16: Find Leap Years in Range",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-16.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Use map to Extract Data",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/functional-programming/use-the-map-method-to-extract-data-from-an-array",
-        "platform": "freecodecamp",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Use filter to Extract Data",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/functional-programming/use-the-filter-method-to-extract-data-from-an-array",
-        "platform": "freecodecamp",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Use reduce to Analyze Data",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/functional-programming/use-the-reduce-method-to-analyze-data",
-        "platform": "freecodecamp",
+        "title": "w3resource Array #17: Shuffle an Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-17.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Reduce but Grow (8 kyu)",
-        "url": "https://www.codewars.com/kata/57f780909f7e8e3183000078",
-        "platform": "codewars",
-        "difficulty": "easy"
+        "title": "w3resource Array #18: Binary Search in Sorted Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-18.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
       },
       {
-        "title": "Running Sum — LeetCode #1480",
-        "url": "https://leetcode.com/problems/running-sum-of-1d-array/",
-        "platform": "leetcode",
-        "difficulty": "easy"
+        "title": "w3resource Array #19: Compute Sum of Individual Index Items",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-19.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
       },
       {
-        "title": "RNA Transcription (Exercism)",
-        "url": "https://exercism.org/tracks/javascript/exercises/rna-transcription",
-        "platform": "exercism",
-        "difficulty": "easy"
+        "title": "w3resource Array #20: Find Duplicate Values in Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-20.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: Array.prototype.map()",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map",
+        "source": "MDN Web Docs",
+        "readTime": "6 min read",
+        "description": "Transforming arrays immutably with callback functions."
+      },
+      {
+        "title": "MDN: Array.prototype.reduce()",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce",
+        "source": "MDN Web Docs",
+        "readTime": "8 min read",
+        "description": "Accumulating array elements into single values, objects, or arrays."
       }
     ]
   },
   "DcjNkHtDj8A": {
     "concept": "dom-basics",
-    "conceptLabel": "DOM Introduction",
+    "conceptLabel": "DOM Introduction & Tree Structure",
     "practices": [
       {
-        "title": "DOM Navigation — Tasks",
-        "url": "https://javascript.info/dom-navigation#tasks",
-        "platform": "javascript.info",
-        "difficulty": "medium"
-      },
-      {
-        "title": "JS HTML DOM Exercises",
-        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_dom_html1",
-        "platform": "w3schools",
+        "title": "w3resource DOM #1: Change Style of Paragraph Text",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-1.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "Searching: getElement*, querySelector*",
-        "url": "https://javascript.info/searching-elements-dom#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource DOM #2: Get Form First and Last Name Values",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-2.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource DOM #3: Set Background Color of Paragraph",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-3.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource DOM #4: Get href, hreflang, target of Link",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-4.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource DOM #5: Insert Rows in Table",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-5.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: Introduction to the DOM",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction",
+        "source": "MDN Web Docs",
+        "readTime": "6 min read",
+        "description": "What is the DOM tree, node types, and document interfaces."
       }
     ]
   },
   "Ab6K57WjWTE": {
     "concept": "dom-selectors",
-    "conceptLabel": "DOM Selectors & Collections",
+    "conceptLabel": "DOM Selectors (NodeList vs HTMLCollection)",
     "practices": [
       {
-        "title": "Searching Elements — Tasks",
-        "url": "https://javascript.info/searching-elements-dom#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource DOM #6: Change Content of Specific Cell in Table",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-6.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "DOM CSS Exercises",
-        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_dom_css1",
-        "platform": "w3schools",
+        "title": "w3resource DOM #7: Create Table and Specify Rows and Columns",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-7.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource DOM #8: Remove Selected Item from Dropdown List",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-8.php",
+        "platform": "w3resource",
         "difficulty": "easy"
       },
       {
-        "title": "DOM Attributes & Properties — Tasks",
-        "url": "https://javascript.info/dom-attributes-and-properties#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource DOM #9: Count & Display Dropdown Options",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-9.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource DOM #10: Calculate Sphere Volume",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-10.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Searching: getElement*, querySelector*",
+        "url": "https://javascript.info/searching-elements-dom",
+        "source": "JavaScript.info",
+        "readTime": "7 min read",
+        "description": "querySelector, querySelectorAll, getElementById, and static vs live collections."
       }
     ]
   },
   "xAvTgCsCHLs": {
     "concept": "dom-create",
-    "conceptLabel": "Creating DOM Elements",
+    "conceptLabel": "Creating & Appending DOM Elements",
     "practices": [
       {
-        "title": "Modifying the Document — Tasks",
-        "url": "https://javascript.info/modifying-document#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource DOM #11: Highlight Bold Words on Mouseover",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-11.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Create List from User Input",
-        "url": "https://javascript.info/modifying-document#create-a-list",
-        "platform": "javascript.info",
-        "difficulty": "medium"
-      },
-      {
-        "title": "DOM Elements Exercises",
-        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_dom_elements1",
-        "platform": "w3schools",
+        "title": "w3resource DOM #12: Get Window Width and Height on Resize",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-12.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #21: Flatten Nested Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-21.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Array #22: Union of Two Arrays",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-22.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Array #23: Difference of Two Arrays",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-23.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Modifying the document",
+        "url": "https://javascript.info/modifying-document",
+        "source": "JavaScript.info",
+        "readTime": "9 min read",
+        "description": "document.createElement, append, prepend, before, after, remove, and cloneNode."
       }
     ]
   },
   "VQlY-X_eeTE": {
     "concept": "dom-modify",
-    "conceptLabel": "Edit & Remove DOM Elements",
+    "conceptLabel": "Modifying & Removing DOM Elements",
     "practices": [
       {
-        "title": "Sort Table — DOM Task",
-        "url": "https://javascript.info/modifying-document#sort-the-table",
-        "platform": "javascript.info",
+        "title": "w3resource Array #24: Remove False Values from Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-24.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #25: Sort Array of Objects by Title",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-25.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Array #26: Find Pair of Elements with Target Sum",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-26.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Array #27: Retrieve Property Value from Array of Objects",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-27.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Array #28: Find Longest Common Starting Substring",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-28.php",
+        "platform": "w3resource",
         "difficulty": "hard"
-      },
+      }
+    ],
+    "readingMaterials": [
       {
-        "title": "Insert HTML/Element — Tasks",
-        "url": "https://javascript.info/modifying-document#tasks",
-        "platform": "javascript.info",
-        "difficulty": "medium"
-      },
-      {
-        "title": "Styles and Classes — Tasks",
-        "url": "https://javascript.info/styles-and-classes#tasks",
-        "platform": "javascript.info",
-        "difficulty": "medium"
+        "title": "MDN: Element.classList",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Element/classList",
+        "source": "MDN Web Docs",
+        "readTime": "4 min read",
+        "description": "Adding, removing, toggling, and checking CSS classes dynamically."
       }
     ]
   },
   "EGqHVjU-fas": {
     "concept": "dom-projects",
-    "conceptLabel": "DOM Mini Projects",
+    "conceptLabel": "Build 4 DOM Beginner Projects",
     "practices": [
       {
-        "title": "Build a Random Color Flipper",
+        "title": "w3resource #1: Color Flipper Project Guide",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-1.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #2: Counter App Project Guide",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-10.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource #8: Clock Object & UI Project",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-8.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Array #29: Fill Array with Values",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-29.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #30: Merge Two Arrays and Remove Duplicates",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-30.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "FreeCodeCamp: 10 DOM Projects for Beginners",
         "url": "https://www.freecodecamp.org/news/javascript-projects-for-beginners/",
-        "platform": "freecodecamp",
-        "difficulty": "medium"
-      },
-      {
-        "title": "Build a Counter App",
-        "url": "https://www.freecodecamp.org/news/javascript-projects-for-beginners/#how-to-create-a-counter",
-        "platform": "freecodecamp",
-        "difficulty": "medium"
-      },
-      {
-        "title": "Build a Simple Calculator",
-        "url": "https://www.freecodecamp.org/news/javascript-projects-for-beginners/#how-to-create-a-simple-calculator",
-        "platform": "freecodecamp",
-        "difficulty": "medium"
+        "source": "freeCodeCamp",
+        "readTime": "15 min read",
+        "description": "Hands-on projects: Color Flipper, Counter, Review Carousel, and Modal."
       }
     ]
   },
   "_ALUMTa8BAE": {
     "concept": "dom-events",
-    "conceptLabel": "Events & Event Handling",
+    "conceptLabel": "Events, Listeners & Event Delegation",
     "practices": [
       {
-        "title": "Introduction to Events — Tasks",
-        "url": "https://javascript.info/introduction-browser-events#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource DOM #11: Highlight Bold Words on Mouseover Event",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-11.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Bubbling and Capturing — Tasks",
-        "url": "https://javascript.info/bubbling-and-capturing#tasks",
-        "platform": "javascript.info",
-        "difficulty": "hard"
-      },
-      {
-        "title": "Event Delegation — Tasks",
-        "url": "https://javascript.info/event-delegation#tasks",
-        "platform": "javascript.info",
-        "difficulty": "hard"
-      },
-      {
-        "title": "JS Events Exercises",
-        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_events1",
-        "platform": "w3schools",
+        "title": "w3resource DOM #12: Get Window Size on Window Resize Event",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-12.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #31: Remove Specific Element from Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-31.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #32: Find if Array Contains Specific Element",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-32.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #33: Empty an Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-33.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Introduction to Browser Events",
+        "url": "https://javascript.info/introduction-browser-events",
+        "source": "JavaScript.info",
+        "readTime": "8 min read",
+        "description": "addEventListener, removeEventListener, event object, and default browser actions."
+      },
+      {
+        "title": "JavaScript.info: Bubbling and capturing",
+        "url": "https://javascript.info/bubbling-and-capturing",
+        "source": "JavaScript.info",
+        "readTime": "7 min read",
+        "description": "Event bubbling mechanics, event phase, event.target vs event.currentTarget."
       }
     ]
   },
   "zgt5oTD3rRc": {
     "concept": "async-basics",
-    "conceptLabel": "Async JavaScript Fundamentals",
+    "conceptLabel": "Async JavaScript Fundamentals & Event Loop",
     "practices": [
       {
-        "title": "Callbacks — Tasks",
-        "url": "https://javascript.info/callbacks#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Basic #1: Timers with setInterval",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-1.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Basic #5: Periodic String Rotation using setTimeout",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-5.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "setTimeout / setInterval — Tasks",
-        "url": "https://javascript.info/settimeout-setinterval#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #8: Clock Object with Tick Interval",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-8.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Event Loop Visualizer (Loupe)",
-        "url": "http://latentflip.com/loupe/",
-        "platform": "other",
+        "title": "w3resource Array #34: Get nth Largest Element from Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-34.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Array #35: Get Random Item from Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-35.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Scheduling: setTimeout and setInterval",
+        "url": "https://javascript.info/settimeout-setinterval",
+        "source": "JavaScript.info",
+        "readTime": "6 min read",
+        "description": "Zero-delay setTimeout, nested timers, and event loop microtask queue."
+      },
+      {
+        "title": "MDN: The Event Loop",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop",
+        "source": "MDN Web Docs",
+        "readTime": "8 min read",
+        "description": "Call stack, heap, message queue, and non-blocking I/O model."
       }
     ]
   },
   "efrW5-IYoCU": {
     "concept": "async-projects",
-    "conceptLabel": "Async JS Projects",
+    "conceptLabel": "2 Async JavaScript Mini Projects",
     "practices": [
       {
-        "title": "Build a Countdown Timer",
-        "url": "https://www.freecodecamp.org/news/javascript-projects-for-beginners/#how-to-create-a-countdown-timer",
-        "platform": "freecodecamp",
+        "title": "w3resource #8: Unlimited Colors Project Helper",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-8.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Build a Random Quote Generator",
-        "url": "https://www.freecodecamp.org/news/javascript-projects-for-beginners/#how-to-create-a-random-quote-generator",
-        "platform": "freecodecamp",
+        "title": "w3resource Array #36: Create Array Pre-filled with Values",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-36.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #37: Create Array Pre-filled with String Values",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-37.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #38: Move Element to Another Index",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-38.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Async Exercises",
-        "url": "https://www.w3schools.com/js/js_asynchronous.asp",
-        "platform": "w3schools",
+        "title": "w3resource Array #39: Filter Duplicate Values from Array",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-39.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Callbacks",
+        "url": "https://javascript.info/callbacks",
+        "source": "JavaScript.info",
+        "readTime": "5 min read",
+        "description": "Asynchronous loading script callbacks and handling callback hell."
       }
     ]
   },
   "pDPAcYdSse8": {
     "concept": "api-fetch",
-    "conceptLabel": "API Requests & V8 Engine",
+    "conceptLabel": "API Requests & V8 Engine Core",
     "practices": [
       {
-        "title": "Fetch API — Tasks",
-        "url": "https://javascript.info/fetch#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Array #40: Generate Array Range of Numbers",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-40.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #41: Generate Array of Integers in Range",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-41.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Array #42: Find Unique Elements between 2 Arrays",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-42.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Working with APIs (FCC)",
-        "url": "https://www.freecodecamp.org/news/how-to-use-fetch-api/",
-        "platform": "freecodecamp",
-        "difficulty": "medium"
-      },
-      {
-        "title": "Build a Weather App",
-        "url": "https://www.freecodecamp.org/news/javascript-projects-for-beginners/#how-to-create-a-weather-app",
-        "platform": "freecodecamp",
+        "title": "w3resource Object #12: Parse URL for API Query Parameters",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-12.php",
+        "platform": "w3resource",
         "difficulty": "hard"
+      },
+      {
+        "title": "w3resource String #16: Truncate String with Ellipsis (...)",
+        "url": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-16.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: Using the Fetch API",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+        "source": "MDN Web Docs",
+        "readTime": "8 min read",
+        "description": "Making HTTP GET/POST requests, parsing JSON responses, and network error handling."
       }
     ]
   },
   "NJwRQgsu1Q8": {
     "concept": "promises",
-    "conceptLabel": "Promises",
+    "conceptLabel": "Promises & Microtask Queue",
     "practices": [
       {
-        "title": "Promise Basics — Tasks",
-        "url": "https://javascript.info/promise-basics#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Promises #1: Create Resolved & Rejected Promise",
+        "url": "https://www.w3resource.com/javascript-exercises/asynchronous/javascript-asynchronous-exercise-1.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Promises #2: Promise with Delayed Resolution",
+        "url": "https://www.w3resource.com/javascript-exercises/asynchronous/javascript-asynchronous-exercise-2.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Promises #3: Fetch Data from API with Promises",
+        "url": "https://www.w3resource.com/javascript-exercises/asynchronous/javascript-asynchronous-exercise-3.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Promises Chaining — Tasks",
-        "url": "https://javascript.info/promise-chaining#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Promises #4: Chaining Multiple Promises",
+        "url": "https://www.w3resource.com/javascript-exercises/asynchronous/javascript-asynchronous-exercise-4.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Promises #5: Promise.all with Multiple Requests",
+        "url": "https://www.w3resource.com/javascript-exercises/asynchronous/javascript-asynchronous-exercise-5.php",
+        "platform": "w3resource",
         "difficulty": "hard"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Promise basics",
+        "url": "https://javascript.info/promise-basics",
+        "source": "JavaScript.info",
+        "readTime": "8 min read",
+        "description": "Producer code vs Consumer code, resolve, reject, .then, .catch, .finally."
       },
       {
-        "title": "Create a JavaScript Promise",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/create-a-javascript-promise",
-        "platform": "freecodecamp",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Sleep — LeetCode #2621",
-        "url": "https://leetcode.com/problems/sleep/",
-        "platform": "leetcode",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Timeout Cancellation — LeetCode #2715",
-        "url": "https://leetcode.com/problems/timeout-cancellation/",
-        "platform": "leetcode",
-        "difficulty": "easy"
+        "title": "MDN: Promise Reference",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+        "source": "MDN Web Docs",
+        "readTime": "9 min read",
+        "description": "Promise states (pending, fulfilled, rejected), Promise.all, Promise.race."
       }
     ]
   },
   "Rive84an6Lc": {
     "concept": "fetch-api",
-    "conceptLabel": "Fetch API & async/await",
+    "conceptLabel": "Fetch API & async / await Syntax",
     "practices": [
       {
-        "title": "Async/Await — Tasks",
-        "url": "https://javascript.info/async-await#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Async #6: Fetch API with Async/Await",
+        "url": "https://www.w3resource.com/javascript-exercises/asynchronous/javascript-asynchronous-exercise-6.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Error Handling with Promises",
-        "url": "https://javascript.info/promise-error-handling#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Async #7: Parallel Requests with Promise.all",
+        "url": "https://www.w3resource.com/javascript-exercises/asynchronous/javascript-asynchronous-exercise-7.php",
+        "platform": "w3resource",
         "difficulty": "hard"
       },
       {
-        "title": "Promise.all — Tasks",
-        "url": "https://javascript.info/promise-api#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Async #8: Handle Network Timeout in Fetch",
+        "url": "https://www.w3resource.com/javascript-exercises/asynchronous/javascript-asynchronous-exercise-8.php",
+        "platform": "w3resource",
         "difficulty": "hard"
       },
       {
-        "title": "Add Two Promises — LeetCode #2723",
-        "url": "https://leetcode.com/problems/add-two-promises/",
-        "platform": "leetcode",
-        "difficulty": "easy"
+        "title": "w3resource String #17: Chop String into Chunks",
+        "url": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-17.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource String #18: Count Substring Occurrences in String",
+        "url": "https://www.w3resource.com/javascript-exercises/string/javascript-string-exercise-18.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Async/await",
+        "url": "https://javascript.info/async-await",
+        "source": "JavaScript.info",
+        "readTime": "8 min read",
+        "description": "Syntactic sugar over promises, error handling with try...catch, top-level await."
       }
     ]
   },
   "pN-Qmv4zBcI": {
     "concept": "oop",
-    "conceptLabel": "Object-Oriented Programming",
+    "conceptLabel": "Object-Oriented Programming & Constructors",
     "practices": [
       {
-        "title": "Constructor Functions — Tasks",
-        "url": "https://javascript.info/constructor-new#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #5: Create Cylinder Class/Object with Volume Method",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-5.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "OOP Challenges (FCC)",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/object-oriented-programming/",
-        "platform": "freecodecamp",
-        "difficulty": "medium"
-      },
-      {
-        "title": "Define a Constructor Function",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/object-oriented-programming/define-a-constructor-function",
-        "platform": "freecodecamp",
+        "title": "w3resource Object #9: Circle Class with Area & Perimeter",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-9.php",
+        "platform": "w3resource",
         "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Functions #28: Function Passed as Parameter Method",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-28.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Object #11: Print All Methods of Object",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-11.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Object #13: Retrieve Property Names",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-13.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Constructor function, 'new' operator",
+        "url": "https://javascript.info/constructor-new",
+        "source": "JavaScript.info",
+        "readTime": "6 min read",
+        "description": "Object creation factory vs constructor functions with 'new'."
       }
     ]
   },
   "uMI5cNeHTOc": {
     "concept": "prototype",
-    "conceptLabel": "Prototypes & Prototype Chain",
+    "conceptLabel": "Prototypes & Prototypal Inheritance",
     "practices": [
       {
-        "title": "Prototypal Inheritance — Tasks",
-        "url": "https://javascript.info/prototype-inheritance#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #6: Add Method to Prototype for Bubble Sort",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-6.php",
+        "platform": "w3resource",
         "difficulty": "hard"
       },
       {
-        "title": "F.prototype — Tasks",
-        "url": "https://javascript.info/function-prototype#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #7: Add Method to String Prototype for Substrings",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-7.php",
+        "platform": "w3resource",
         "difficulty": "hard"
       },
       {
-        "title": "Prototype Methods — Tasks",
-        "url": "https://javascript.info/prototype-methods#tasks",
-        "platform": "javascript.info",
-        "difficulty": "hard"
+        "title": "w3resource Object #14: Retrieve All Values of Object Properties",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-14.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
       },
       {
-        "title": "Understand the Prototype Chain",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/object-oriented-programming/understand-the-prototype-chain",
-        "platform": "freecodecamp",
+        "title": "w3resource Object #15: Convert Object into List of Pairs",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-15.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Object #16: Reverse Keys and Values of Object",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-16.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Prototypal inheritance",
+        "url": "https://javascript.info/prototype-inheritance",
+        "source": "JavaScript.info",
+        "readTime": "8 min read",
+        "description": "[[Prototype]] property, __proto__ getter/setter, and prototype chain lookups."
+      },
+      {
+        "title": "MDN: Inheritance and the prototype chain",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain",
+        "source": "MDN Web Docs",
+        "readTime": "9 min read",
+        "description": "Shadowing properties, prototype-based OOP vs class-based OOP."
       }
     ]
   },
   "-owpuf4lbyU": {
     "concept": "call-apply",
-    "conceptLabel": "call(), apply() & this",
+    "conceptLabel": "call(), apply() & Method Borrowing",
     "practices": [
       {
-        "title": "Decorators and Forwarding — Tasks",
-        "url": "https://javascript.info/call-apply-decorators#tasks",
-        "platform": "javascript.info",
-        "difficulty": "hard"
+        "title": "w3resource Object #17: Check if Object Contains Given Property",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-17.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
       },
       {
-        "title": "Function Binding — Tasks",
-        "url": "https://javascript.info/bind#tasks",
-        "platform": "javascript.info",
-        "difficulty": "hard"
-      },
-      {
-        "title": "Object Methods & 'this' — Tasks",
-        "url": "https://javascript.info/object-methods#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #18: Check if Given Value is DOM Element",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-18.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Functions #9: Detect Data Type of Argument",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-9.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Functions #28: Function Execution Context",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-28.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Array #42: Find Unique Elements using Call/Apply",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-42.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Decorators and forwarding, call/apply",
+        "url": "https://javascript.info/call-apply-decorators",
+        "source": "JavaScript.info",
+        "readTime": "9 min read",
+        "description": "Transparent caching, func.call(context, ...args), and func.apply(context, args)."
       }
     ]
   },
   "u6mVHkMpoMk": {
     "concept": "classes",
-    "conceptLabel": "Classes, Constructor & Static",
+    "conceptLabel": "ES6 Classes, Constructor & Static Methods",
     "practices": [
       {
-        "title": "Class Basic Syntax — Tasks",
-        "url": "https://javascript.info/class#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #5: Create Cylinder Class with Volume Method",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-5.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Class Inheritance — Tasks",
-        "url": "https://javascript.info/class-inheritance#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #8: Clock Class with Start/Stop Methods",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-8.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Object #9: Circle Class with Area & Perimeter",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-9.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Object #10: Sort Books Class Array by Title",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-10.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Object #12: URL Parser Class",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-12.php",
+        "platform": "w3resource",
         "difficulty": "hard"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Class basic syntax",
+        "url": "https://javascript.info/class",
+        "source": "JavaScript.info",
+        "readTime": "7 min read",
+        "description": "Class declarations, constructor method, getter/setter in classes, and methods."
       },
       {
-        "title": "Static Properties & Methods — Tasks",
-        "url": "https://javascript.info/static-properties-methods#tasks",
-        "platform": "javascript.info",
-        "difficulty": "medium"
-      },
-      {
-        "title": "Use ES6 Class Syntax",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-class-syntax-to-define-a-constructor-function",
-        "platform": "freecodecamp",
-        "difficulty": "easy"
-      },
-      {
-        "title": "High Scores (Exercism)",
-        "url": "https://exercism.org/tracks/javascript/exercises/high-scores",
-        "platform": "exercism",
-        "difficulty": "easy"
+        "title": "MDN: Classes Reference",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes",
+        "source": "MDN Web Docs",
+        "readTime": "8 min read",
+        "description": "Class bodies, static methods, extends keyword, and super calls."
       }
     ]
   },
   "75dMiOY_4ac": {
     "concept": "bind",
-    "conceptLabel": "bind() Method",
+    "conceptLabel": "bind() Method & Event Handler Context",
     "practices": [
       {
-        "title": "Function Binding — Tasks (6 exercises)",
-        "url": "https://javascript.info/bind#tasks",
-        "platform": "javascript.info",
-        "difficulty": "hard"
-      },
-      {
-        "title": "Partial Application Practice",
-        "url": "https://javascript.info/bind#partial-functions",
-        "platform": "javascript.info",
+        "title": "w3resource Object #8: Clock Object method binding",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-8.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Understand call, apply, and bind",
-        "url": "https://www.freecodecamp.org/news/understand-call-apply-and-bind-in-javascript-with-examples/",
-        "platform": "freecodecamp",
+        "title": "w3resource Functions #28: Function Context Binding",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-28.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      },
+      {
+        "title": "w3resource DOM #1: Bind Event Handlers to Button",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-1.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource DOM #11: Bind Hover Event Listener",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-11.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource DOM #12: Bind Window Resize Event Listener",
+        "url": "https://www.w3resource.com/javascript-exercises/dom/javascript-dom-exercise-12.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Function binding",
+        "url": "https://javascript.info/bind",
+        "source": "JavaScript.info",
+        "readTime": "7 min read",
+        "description": "Losing 'this', solution 1: wrapper, solution 2: bind, and partial functions."
       }
     ]
   },
   "jss2rL9kv6s": {
     "concept": "objects-deep",
-    "conceptLabel": "Objects Deep Dive",
+    "conceptLabel": "Objects Deep Dive & Property Descriptors",
     "practices": [
       {
-        "title": "Property Flags & Descriptors — Tasks",
-        "url": "https://javascript.info/property-descriptors#tasks",
-        "platform": "javascript.info",
-        "difficulty": "hard"
+        "title": "w3resource Object #1: Object Property Flags Check",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-1.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
       },
       {
-        "title": "Symbol Type",
-        "url": "https://javascript.info/symbol",
-        "platform": "javascript.info",
-        "difficulty": "medium"
+        "title": "w3resource Object #2: Delete Non-configurable Property",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-2.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
       },
       {
-        "title": "Optional Chaining — Tasks",
-        "url": "https://javascript.info/optional-chaining#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #13: Retrieve All Property Names",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-13.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Object #14: Retrieve All Property Values",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-14.php",
+        "platform": "w3resource",
+        "difficulty": "easy"
+      },
+      {
+        "title": "w3resource Object #17: Check Property Existence using hasOwnProperty",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-17.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Property flags and descriptors",
+        "url": "https://javascript.info/property-descriptors",
+        "source": "JavaScript.info",
+        "readTime": "8 min read",
+        "description": "Writable, enumerable, configurable flags, Object.defineProperty, and Object.freeze."
       }
     ]
   },
   "t6vLhF-iSxQ": {
     "concept": "getter-setter",
-    "conceptLabel": "Getters, Setters & Descriptors",
+    "conceptLabel": "Getters, Setters & Stack Overflow",
     "practices": [
       {
-        "title": "Property Getters and Setters — Tasks",
-        "url": "https://javascript.info/property-accessors#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Object #9: Circle Object with Radius Getter & Setter",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-9.php",
+        "platform": "w3resource",
         "difficulty": "medium"
       },
       {
-        "title": "Use Getters and Setters (FCC)",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-getters-and-setters-to-control-access-to-an-object",
-        "platform": "freecodecamp",
-        "difficulty": "easy"
+        "title": "w3resource Object #5: Cylinder Object Getter for Volume",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-5.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
       },
       {
-        "title": "Private Class Features — Tasks",
-        "url": "https://javascript.info/private-protected-properties-methods#tasks",
-        "platform": "javascript.info",
-        "difficulty": "hard"
+        "title": "w3resource Object #8: Clock Object Time Accessors",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-8.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Recursion #1: Infinite Recursion / Stack Overflow Demo",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-recursion-exercise-1.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Recursion #5: Exponentiation Recursive Setter",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-recursion-exercise-5.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Property getters and setters",
+        "url": "https://javascript.info/property-accessors",
+        "source": "JavaScript.info",
+        "readTime": "6 min read",
+        "description": "Accessor properties, get/set syntax, smart getters/setters, and call stack overflow traps."
       }
     ]
   },
@@ -1348,94 +2318,140 @@
     "conceptLabel": "Lexical Scoping & Closures",
     "practices": [
       {
-        "title": "Closure — Tasks (10 exercises!)",
-        "url": "https://javascript.info/closure#tasks",
-        "platform": "javascript.info",
+        "title": "w3resource Functions #16: Unique Characters Function with Closure",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-16.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Functions #20: Private State Counter Function",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-20.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Functions #21: Subset Generator with Lexical Scope",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-21.php",
+        "platform": "w3resource",
         "difficulty": "hard"
       },
       {
-        "title": "Counter — LeetCode #2620",
-        "url": "https://leetcode.com/problems/counter/",
-        "platform": "leetcode",
-        "difficulty": "easy"
+        "title": "w3resource Functions #28: Function Counter using Closure",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-function-exercise-28.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
       },
       {
-        "title": "Counter II — LeetCode #2665",
-        "url": "https://leetcode.com/problems/counter-ii/",
-        "platform": "leetcode",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Hello World Function — LeetCode #2667",
-        "url": "https://leetcode.com/problems/create-hello-world-function/",
-        "platform": "leetcode",
-        "difficulty": "easy"
-      },
-      {
-        "title": "Closures & Scopes (7 kyu)",
-        "url": "https://www.codewars.com/kata/541ef01e9a28e5e0ec000017",
-        "platform": "codewars",
+        "title": "w3resource Recursion #4: Array Sum with Enclosed State",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-recursion-exercise-4.php",
+        "platform": "w3resource",
         "difficulty": "medium"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "JavaScript.info: Variable scope, closure",
+        "url": "https://javascript.info/closure",
+        "source": "JavaScript.info",
+        "readTime": "10 min read",
+        "description": "Lexical Environment, outer environment reference, nested functions, and garbage collection."
       },
       {
-        "title": "Windowing System (Exercism)",
-        "url": "https://exercism.org/tracks/javascript/exercises/windowing-system",
-        "platform": "exercism",
-        "difficulty": "medium"
+        "title": "MDN: Closures Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures",
+        "source": "MDN Web Docs",
+        "readTime": "9 min read",
+        "description": "Lexical scoping, practical closure examples (private methods, currying), and performance traps."
       }
     ]
   },
   "z9PINyinqwo": {
     "concept": "js-recap",
-    "conceptLabel": "JavaScript Complete Review",
+    "conceptLabel": "JavaScript Complete Course Capstone Review",
     "practices": [
       {
-        "title": "FCC: JS Algorithms & Data Structures (Full Cert)",
-        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/",
-        "platform": "freecodecamp",
+        "title": "w3resource JavaScript Basic Exercises (150 Challenges)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-basic-exercises.php",
+        "platform": "w3resource",
         "difficulty": "hard"
       },
       {
-        "title": "LeetCode JS 30 Days Challenge",
-        "url": "https://leetcode.com/studyplan/30-days-of-javascript/",
-        "platform": "leetcode",
-        "difficulty": "medium"
+        "title": "w3resource JavaScript Functions Exercises (29 Challenges)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-functions-exercises.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
       },
       {
-        "title": "JavaScript Track (Exercism)",
-        "url": "https://exercism.org/tracks/javascript",
-        "platform": "exercism",
-        "difficulty": "medium"
+        "title": "w3resource JavaScript Object Exercises (18 Challenges)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercises.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
       },
       {
-        "title": "Codewars JavaScript Kata",
-        "url": "https://www.codewars.com/kata/search/javascript?q=&r%5B%5D=-8&r%5B%5D=-7",
-        "platform": "codewars",
-        "difficulty": "medium"
+        "title": "w3resource JavaScript Array Exercises (53 Challenges)",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercises.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      },
+      {
+        "title": "w3resource JavaScript Async & Promises (10 Challenges)",
+        "url": "https://www.w3resource.com/javascript-exercises/asynchronous/index.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "MDN: JavaScript Guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+        "source": "MDN Web Docs",
+        "readTime": "20 min read",
+        "description": "Complete authoritative developer guide for core JavaScript."
       }
     ]
   },
   "ZRS485LxX0s": {
     "concept": "v8-internals",
-    "conceptLabel": "V8 Internals — PACKED vs HOLEY",
+    "conceptLabel": "V8 Internals — PACKED vs HOLEY Arrays",
     "practices": [
       {
-        "title": "V8 Blog: Elements Kinds",
+        "title": "w3resource Array #14: Benchmark Duplicate Removal in V8",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-14.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      },
+      {
+        "title": "w3resource Array #21: Benchmark Array Flattening in V8",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-21.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      },
+      {
+        "title": "w3resource Array #36: Pre-allocation Benchmark in V8",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-36.php",
+        "platform": "w3resource",
+        "difficulty": "medium"
+      },
+      {
+        "title": "w3resource Array #38: Index Mutation Benchmark",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-array-exercise-38.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      },
+      {
+        "title": "w3resource Object #6: V8 Property Access Benchmark",
+        "url": "https://www.w3resource.com/javascript-exercises/javascript-object-exercise-6.php",
+        "platform": "w3resource",
+        "difficulty": "hard"
+      }
+    ],
+    "readingMaterials": [
+      {
+        "title": "V8 Blog: Element Kinds in V8",
         "url": "https://v8.dev/blog/elements-kinds",
-        "platform": "other",
-        "difficulty": "hard"
-      },
-      {
-        "title": "JavaScript Engine Fundamentals",
-        "url": "https://mathiasbynens.be/notes/shapes-ics",
-        "platform": "other",
-        "difficulty": "hard"
-      },
-      {
-        "title": "Performance Benchmark Exercises",
-        "url": "https://www.codewars.com/kata/search/javascript?q=performance",
-        "platform": "codewars",
-        "difficulty": "hard"
+        "source": "V8 Official Blog",
+        "readTime": "10 min read",
+        "description": "PACKED vs HOLEY elements, SMI vs DOUBLE arrays, and V8 optimization guidelines."
       }
     ]
   }
