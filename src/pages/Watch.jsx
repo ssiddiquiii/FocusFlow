@@ -7,6 +7,58 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/FocusFlowDB';
 import PracticeTab from '../components/PracticeTab';
 import ReadingTab from '../components/ReadingTab';
+import jsTopicPractice from '../data/jsTopicPractice.json';
+
+const LESSON_TOPIC_MAP = {
+  'yY0bKZNYmJs': 'cat-1-variables-datatypes',
+  '-9knnv97wSc': 'cat-1-variables-datatypes',
+  'X7hDBhd_L5U': 'cat-1-variables-datatypes',
+  'N9el4APFtAo': 'cat-1-variables-datatypes',
+  'giP2uXMlv4c': 'cat-1-variables-datatypes',
+  'suMvZWjjKbo': 'cat-2-memory-strings-math',
+  '7gwc-1czolw': 'cat-2-memory-strings-math',
+  'fozwNnFunlo': 'cat-2-memory-strings-math',
+  '_KqpeDc47Ro': 'cat-2-memory-strings-math',
+  'tGLCuoumaGY': 'cat-2-memory-strings-math',
+  'cejBux2gtEE': 'cat-3-arrays-objects-json',
+  'm6azhgyCi-k': 'cat-3-arrays-objects-json',
+  'vVYOHmqQDCU': 'cat-3-arrays-objects-json',
+  '4lb2pXWWXJI': 'cat-3-arrays-objects-json',
+  'AViTh83k-IE': 'cat-3-arrays-objects-json',
+  'Bn56WahG_t0': 'cat-4-functions-scopes-this',
+  't7ZHPhgdA4U': 'cat-4-functions-scopes-this',
+  'cHHU0jXfjKY': 'cat-4-functions-scopes-this',
+  'eWwge2YpHhc': 'cat-4-functions-scopes-this',
+  '9ksqBa8_txM': 'cat-4-functions-scopes-this',
+  'GAIbn16Iytc': 'cat-5-execution-callstack-control',
+  'ByhtOgF6uYM': 'cat-5-execution-callstack-control',
+  '0P_YvC6Gg0c': 'cat-5-execution-callstack-control',
+  'Y1cpFsXrEgY': 'cat-5-execution-callstack-control',
+  'w3Q55-l47P0': 'cat-5-execution-callstack-control',
+  'M0YImBHQsWU': 'cat-6-hofs-filter-map-reduce-dom',
+  '9MfwYoWKKVE': 'cat-6-hofs-filter-map-reduce-dom',
+  'DcjNkHtDj8A': 'cat-6-hofs-filter-map-reduce-dom',
+  'Ab6K57WjWTE': 'cat-6-hofs-filter-map-reduce-dom',
+  'xAvTgCsCHLs': 'cat-6-hofs-filter-map-reduce-dom',
+  'VQlY-X_eeTE': 'cat-7-dom-events-async-basics',
+  'EGqHVjU-fas': 'cat-7-dom-events-async-basics',
+  '_ALUMTa8BAE': 'cat-7-dom-events-async-basics',
+  'zgt5oTD3rRc': 'cat-7-dom-events-async-basics',
+  'efrW5-IYoCU': 'cat-7-dom-events-async-basics',
+  'pDPAcYdSse8': 'cat-8-promises-fetch-prototypes',
+  'NJwRQgsu1Q8': 'cat-8-promises-fetch-prototypes',
+  'Rive84an6Lc': 'cat-8-promises-fetch-prototypes',
+  'pN-Qmv4zBcI': 'cat-8-promises-fetch-prototypes',
+  'uMI5cNeHTOc': 'cat-8-promises-fetch-prototypes',
+  '-owpuf4lbyU': 'cat-9-classes-callbind-descriptors',
+  'u6mVHkMpoMk': 'cat-9-classes-callbind-descriptors',
+  '75dMiOY_4ac': 'cat-9-classes-callbind-descriptors',
+  'jss2rL9kv6s': 'cat-9-classes-callbind-descriptors',
+  't6vLhF-iSxQ': 'cat-9-classes-callbind-descriptors',
+  'VaH09NXQZ58': 'cat-10-closures-v8-internals',
+  'z9PINyinqwo': 'cat-10-closures-v8-internals',
+  'ZRS485LxX0s': 'cat-10-closures-v8-internals'
+};
 
 const SPEED_OPTIONS = [0.5, 1, 1.25, 1.5, 2];
 const QUALITY_OPTIONS = [
@@ -677,7 +729,7 @@ export default function Watch() {
         </div>
 
         {/* Video Details Header */}
-        <div className="px-6 py-4 space-y-2 max-w-7xl w-full mx-auto border-b border-border/50">
+        <div className="px-6 py-4 space-y-3 max-w-7xl w-full mx-auto border-b border-border/50">
           <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{lesson.title}</h1>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-500">
             <div>
@@ -688,6 +740,32 @@ export default function Watch() {
               <span className="text-zinc-600">Origin:</span> <span className="text-zinc-300 font-semibold">{course.type === 'youtube' ? 'YouTube Public API' : 'Udemy manual tracking'}</span>
             </div>
           </div>
+
+          {/* Active Topic Module Highlight Banner */}
+          {(() => {
+            const catId = LESSON_TOPIC_MAP[lessonId] || 'cat-1-variables-datatypes';
+            const catObj = jsTopicPractice.find(c => c.id === catId);
+            if (!catObj) return null;
+
+            return (
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-primary/10 border border-primary/25 mt-2">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-lg">{catObj.icon}</span>
+                  <div>
+                    <span className="text-[10px] font-bold text-primary uppercase tracking-widest block">Topic Practice Category</span>
+                    <h4 className="text-xs font-bold text-white">{catObj.topic}</h4>
+                  </div>
+                </div>
+                <button
+                  onClick={() => navigate('/practice')}
+                  className="px-3.5 py-1.5 rounded-lg bg-primary hover:bg-primary/90 text-white text-xs font-bold transition flex items-center justify-center gap-1.5 shadow cursor-pointer self-start sm:self-auto"
+                >
+                  <Target size={13} />
+                  <span>Solve 10 Practice Qs →</span>
+                </button>
+              </div>
+            );
+          })()}
         </div>
 
         {/* Course Playlist / Syllabus Section (Directly Below Video) */}
