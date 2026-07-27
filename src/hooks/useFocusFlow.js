@@ -78,49 +78,66 @@ export function useFocusFlow() {
    * @returns {Promise<{courseId: string, lessonId: string} | null>} Target path payload.
    */
   async function getContinueLearningPath() {
-    // 1. Check for the most recently watched in-progress lesson
-    const recentProgress = await db.progress
-      .orderBy('lastWatched')
-      .reverse()
-      .filter(p => !p.completed)
-      .first();
+    try {
+      // 1. Check for the most recently watched in-progress lesson
+      let recentProgress = null;
+      try {
+        recentProgress = await db.progress
+          .orderBy('lastWatched')
+          .reverse()
+          .filter(p => !p.completed)
+          .first();
+      } catch (err) {
+        // Memory fallback if lastWatched index is building
+        const allProgress = await db.progress.toArray();
+        const inProgress = allProgress.filter(p => !p.completed && p.lastWatched);
+        inProgress.sort((a, b) => (b.lastWatched || 0) - (a.lastWatched || 0));
+        recentProgress = inProgress[0] || null;
+      }
 
-    if (recentProgress) {
-      return { courseId: recentProgress.courseId, lessonId: recentProgress.lessonId };
-    }
+      if (recentProgress) {
+        return { courseId: recentProgress.courseId, lessonId: recentProgress.lessonId };
+      }
 
-    // 2. Find the most recently opened incomplete course
-    const recentWatchedAny = await db.progress
-      .orderBy('lastWatched')
-      .reverse()
-      .first();
+      // 2. Find the most recently opened incomplete course
+      let recentWatchedAny = null;
+      try {
+        recentWatchedAny = await db.progress
+          .orderBy('lastWatched')
+          .reverse()
+          .first();
+      } catch (err) {
+        const allProgress = await db.progress.toArray();
+        allProgress.sort((a, b) => (b.lastWatched || 0) - (a.lastWatched || 0));
+        recentWatchedAny = allProgress[0] || null;
+      }
 
-    if (recentWatchedAny) {
-      // Find the first uncompleted/not-started lesson in this course
-      const courseLessons = await db.lessons
-        .where('courseId')
-        .equals(recentWatchedAny.courseId)
-        .sortBy('index');
+      if (recentWatchedAny) {
+        const courseLessons = await db.lessons
+          .where('courseId')
+          .equals(recentWatchedAny.courseId)
+          .sortBy('index');
 
-      for (const lesson of courseLessons) {
-        const prog = await db.progress.get(`${recentWatchedAny.courseId}_${lesson.id}`);
-        if (!prog || !prog.completed) {
-          return { courseId: recentWatchedAny.courseId, lessonId: lesson.id };
+        for (const lesson of courseLessons) {
+          const prog = await db.progress.get(`${recentWatchedAny.courseId}_${lesson.id}`);
+          if (!prog || !prog.completed) {
+            return { courseId: recentWatchedAny.courseId, lessonId: lesson.id };
+          }
         }
       }
+    } catch (globalErr) {
+      console.warn('Fallback continue learning path used due to DB indexing:', globalErr);
     }
 
-    // 3. Fallback: return the very first lesson of the first course in database catalog order
-    const firstCourse = await db.courses.first();
+    // 3. Fallback: First lesson of the first course in catalog
+    const firstCourse = await db.courses.orderBy('title').first();
     if (firstCourse) {
       const firstLesson = await db.lessons
         .where('courseId')
         .equals(firstCourse.id)
-        .sortBy('index')
-        .then(list => list[0]);
-        
-      if (firstLesson) {
-        return { courseId: firstCourse.id, lessonId: firstLesson.id };
+        .sortBy('index');
+      if (firstLesson.length > 0) {
+        return { courseId: firstCourse.id, lessonId: firstLesson[0].id };
       }
     }
 

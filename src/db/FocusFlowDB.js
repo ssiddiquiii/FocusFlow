@@ -27,6 +27,15 @@ class FocusFlowDB extends Dexie {
       practiceProgress: 'id, courseId, lessonId, completed'
     });
 
+    // Version 3: Add lastWatched index to progress table & compound [courseId+lessonId] to notes
+    this.version(3).stores({
+      courses: 'id, title, type',
+      lessons: 'id, courseId, index, type',
+      progress: 'id, courseId, lessonId, completed, lastWatched',
+      notes: '++id, courseId, lessonId, [courseId+lessonId], timestamp',
+      practiceProgress: 'id, courseId, lessonId, completed'
+    });
+
     this.courses = this.table('courses');
     this.lessons = this.table('lessons');
     this.progress = this.table('progress');
