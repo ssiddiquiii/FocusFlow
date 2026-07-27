@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { BookOpen, Settings as SettingsIcon, WifiOff, Menu, Target } from 'lucide-react';
 import { useUIStore } from './hooks/useUIStore';
+import PomodoroTimer from './components/PomodoroTimer';
 
 // Lazy-loaded page components for optimal bundle splitting
 const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -170,6 +171,9 @@ function AppContent() {
           </div>
         </Suspense>
       </main>
+
+      {/* Global Pomodoro Focus Timer Widget */}
+      <PomodoroTimer />
     </div>
   );
 }
