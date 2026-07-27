@@ -49,7 +49,17 @@
         "readTime": "3 min read",
         "description": "How script tags work and running your first JavaScript program."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "JavaScript is a dynamic, single-threaded, weakly-typed programming language executed by V8 (Chrome/Node) and SpiderMonkey (Firefox) engines.",
+      "keyPoints": [
+        "Executes code synchronously from top to bottom on a single thread.",
+        "Can run both in the browser (DOM manipulation) and server-side (Node.js).",
+        "Uses console.log() to print outputs to developer tools."
+      ],
+      "codeSnippet": "// Hello World & Basic Console Output\nconsole.log(\"Hello FocusFlow!\");\nconsole.table([{ name: \"Sameed\", role: \"JS Developer\" }]);",
+      "pitfalls": "JS is case-sensitive! Console.log or CONSOLE.log will throw a ReferenceError."
+    }
   },
   "cvoLc3deAdQ": {
     "concept": "setup",
@@ -205,7 +215,17 @@
         "readTime": "4 min read",
         "description": "Variable naming conventions, immutability with const, and execution environment."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "Understanding the differences between var, let, and const is crucial for writing bug-free modern ES6+ JavaScript.",
+      "keyPoints": [
+        "var: Function-scoped, can be re-declared and updated. Suffers from scope leaking outside block statements.",
+        "let: Block-scoped ({}), can be updated but NOT re-declared within the same scope.",
+        "const: Block-scoped ({}), CANNOT be updated or re-declared. Must be initialized upon declaration."
+      ],
+      "codeSnippet": "// Scope & Re-declaration rules\nlet score = 100;\nscore = 150; // ✅ Allowed\n\nconst API_KEY = \"secret_123\";\n// API_KEY = \"new\"; // ❌ TypeError: Assignment to constant variable\n\n// const with Objects allows property mutation:\nconst user = { name: \"Sameed\" };\nuser.name = \"Developer\"; // ✅ Allowed!\n// user = {}; // ❌ TypeError",
+      "pitfalls": "Temporal Dead Zone (TDZ): Accessing let/const variables before initialization throws ReferenceError, unlike var which returns undefined."
+    }
   },
   "-9knnv97wSc": {
     "concept": "datatypes",
@@ -257,7 +277,17 @@
         "readTime": "5 min read",
         "description": "Dynamic typing, typeof operator behavior, and special numeric values."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "JavaScript has 7 Primitive Data Types (stored in Stack) and Non-Primitive / Reference Type Objects (stored in Heap).",
+      "keyPoints": [
+        "Primitives: Number, String, Boolean, Null, Undefined, Symbol, BigInt (Passed by Value).",
+        "Reference: Object, Array, Function (Passed by Reference).",
+        "typeof null is historically \"object\" — a famous JS design flaw!"
+      ],
+      "codeSnippet": "const count = 42;             // Number\nconst name = \"FocusFlow\";      // String\nconst isActive = true;        // Boolean\nconst empty = null;           // Null (typeof returns \"object\")\nlet unassigned;               // Undefined\nconst id = Symbol(\"id\");      // Symbol (Unique value)",
+      "pitfalls": "typeof null === \"object\" returns true due to legacy 32-bit type tag representations in early V8 versions."
+    }
   },
   "X7hDBhd_L5U": {
     "concept": "type-coercion",
@@ -309,7 +339,17 @@
         "readTime": "4 min read",
         "description": "Implicit vs explicit conversion when evaluating mathematical and logical expressions."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "Implicit type coercion occurs when JS automatically converts datatypes during operations like string concatenation or comparison.",
+      "keyPoints": [
+        "String + Number results in String concatenation: \"1\" + 2 === \"12\".",
+        "String - Number converts String to Number: \"5\" - 2 === 3.",
+        "Use explicit conversion: Number(\"123\"), String(456), Boolean(1)."
+      ],
+      "codeSnippet": "console.log(\"1\" + 2 + 2);   // \"122\" (\"1\"+2 = \"12\", \"12\"+2 = \"122\")\nconsole.log(1 + 2 + \"2\");   // \"32\"  (1+2 = 3, 3+\"2\" = \"32\")\nconsole.log(+\"\");            // 0 (Empty string coerced to number 0)\nconsole.log(+true);          // 1",
+      "pitfalls": "NaN === NaN returns false! Use Number.isNaN(val) or Object.is(val, NaN) to check for NaN."
+    }
   },
   "N9el4APFtAo": {
     "concept": "type-coercion-depth",
@@ -413,7 +453,17 @@
         "readTime": "7 min read",
         "description": "In-depth breakdown of == vs === vs Object.is()."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "JavaScript provides Loose Equality (==) which performs type coercion, and Strict Equality (===) which checks both value and type.",
+      "keyPoints": [
+        "Strict Equality (===): No type conversion. Compares value AND type.",
+        "Loose Equality (==): Converts operands to same type before comparing.",
+        "Always default to === in modern production code."
+      ],
+      "codeSnippet": "console.log(5 == \"5\");       // true (coerced string \"5\" to number 5)\nconsole.log(5 === \"5\");      // false (different types: number vs string)\nconsole.log(null == undefined); // true\nconsole.log(null === undefined);// false",
+      "pitfalls": "== comparison results can be wildly unintuitive: [] == false is true, but [] == ![] is also true!"
+    }
   },
   "suMvZWjjKbo": {
     "concept": "datatypes-summary",
@@ -503,7 +553,17 @@
         "readTime": "8 min read",
         "description": "Memory lifecycle, stack allocation, heap memory, and garbage collection algorithm."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "Memory in JS is split into the Stack (fixed size, primitive values, fast) and the Heap (dynamic size, objects/arrays, garbage collected).",
+      "keyPoints": [
+        "Stack: Primitive values stored directly. Copying creates an independent value.",
+        "Heap: Objects stored dynamically. Copying duplicates reference address, NOT content.",
+        "Garbage Collector uses Mark-and-Sweep algorithm to reclaim unreferenced Heap memory."
+      ],
+      "codeSnippet": "// Stack Copy (Independent)\nlet myName = \"Hitesh\";\nlet anotherName = myName;\nanotherName = \"Chai\";\nconsole.log(myName);      // \"Hitesh\" (unaffected!)\n\n// Heap Copy (Reference Shared)\nlet userOne = { email: \"user@google.com\" };\nlet userTwo = userOne;\nuserTwo.email = \"sameed@gmail.com\";\nconsole.log(userOne.email); // \"sameed@gmail.com\" (Mutated original!)",
+      "pitfalls": "Mutating shared object references causes unexpected side-effects across components. Use spread operator {...obj} or structuredClone(obj) for deep copies."
+    }
   },
   "fozwNnFunlo": {
     "concept": "strings",
@@ -555,7 +615,17 @@
         "readTime": "6 min read",
         "description": "Visual guide to string indexing, length, and immutability."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "Strings are immutable sequences of UTF-16 code units with powerful built-in inspection and slicing methods.",
+      "keyPoints": [
+        "Strings are immutable — methods return NEW strings rather than modifying originals.",
+        "Template Literals (backticks ``) support string interpolation (${val}) and multi-line text.",
+        "Use slice(start, end) for extract sub-strings (supports negative indices)."
+      ],
+      "codeSnippet": "const str = \"Chai aur Code\";\nconsole.log(str.length);             // 13\nconsole.log(str.toUpperCase());      // \"CHAI AUR CODE\"\nconsole.log(str.slice(-4));          // \"Code\" (Negative index from end)\nconsole.log(str.includes(\"Chai\"));    // true\nconsole.log(str.replace(\"Chai\", \"Coffee\")); // \"Coffee aur Code\"",
+      "pitfalls": "str[0] = \"K\" silently fails or throws error in strict mode because primitive strings are immutable."
+    }
   },
   "_KqpeDc47Ro": {
     "concept": "numbers-math",
@@ -607,7 +677,17 @@
         "readTime": "6 min read",
         "description": "Imprecise calculations, 64-bit float storage, and rounding functions."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "JavaScript numbers are double-precision 64-bit binary format IEEE 754 values, including special values like Infinity and NaN.",
+      "keyPoints": [
+        "Math.floor() rounds down, Math.ceil() rounds up, Math.round() rounds to nearest.",
+        "Math.random() generates floating number between 0 (inclusive) and 1 (exclusive).",
+        "Use (Math.random() * (max - min + 1)) + min for integer ranges."
+      ],
+      "codeSnippet": "const min = 10, max = 20;\nconst randomRange = Math.floor(Math.random() * (max - min + 1)) + min;\nconsole.log(randomRange); // Random integer between 10 and 20\n\nconst balance = 123.4567;\nconsole.log(balance.toFixed(2)); // \"123.46\" (returns String!)",
+      "pitfalls": "0.1 + 0.2 === 0.30000000000000004 due to 64-bit binary floating point representation precision limit."
+    }
   },
   "tGLCuoumaGY": {
     "concept": "date-time",
@@ -711,7 +791,17 @@
         "readTime": "6 min read",
         "description": "Array creation, queue/stack behavior, and internal performance tips."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "Arrays are resizable, zero-indexed collections that can contain mixed datatypes and reference objects.",
+      "keyPoints": [
+        "Mutating methods: push(), pop(), shift(), unshift(), splice().",
+        "Non-mutating methods: slice(), concat(), join(), includes().",
+        "pop() removes last element, shift() removes first element."
+      ],
+      "codeSnippet": "const myArr = [0, 1, 2, 3, 4];\nmyArr.push(5);              // [0, 1, 2, 3, 4, 5]\nmyArr.pop();                // Removes 5\n\n// Splice (mutates original array):\nconst removed = myArr.splice(1, 2); // Removes 2 elements starting at index 1\nconsole.log(myArr);         // [0, 3, 4]",
+      "pitfalls": "splice() modifies the original array, whereas slice() returns a shallow copy without altering original array."
+    }
   },
   "m6azhgyCi-k": {
     "concept": "arrays-advanced",
@@ -808,7 +898,17 @@
         "readTime": "8 min read",
         "description": "Creating objects, initializing properties, methods, and enumerating properties."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "Objects store key-value pairs where keys are Strings or Symbols, and values can be any datatype including functions (methods).",
+      "keyPoints": [
+        "Access properties via Dot notation (obj.name) or Bracket notation (obj[\"name\"]).",
+        "Use Bracket notation when key name has spaces, hyphens, or is dynamic variable.",
+        "Object.freeze(obj) prevents adding, modifying, or deleting properties."
+      ],
+      "codeSnippet": "const sym = Symbol(\"key1\");\nconst user = {\n  name: \"Sameed\",\n  [sym]: \"mySymbolValue\", // Symbol as key\n  \"full name\": \"Sameed Siddiqui\"\n};\n\nconsole.log(user.name);\nconsole.log(user[\"full name\"]);\nconsole.log(user[sym]); // Access symbol property",
+      "pitfalls": "Symbol keys are non-enumerable in standard for...in loops and Object.keys(). Use Object.getOwnPropertySymbols()."
+    }
   },
   "4lb2pXWWXJI": {
     "concept": "objects-methods",
@@ -957,7 +1057,17 @@
         "readTime": "6 min read",
         "description": "Local vs outer variables, default arguments, and function naming."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "Functions are first-class citizens in JS — they can be assigned to variables, passed as arguments, and returned from other functions.",
+      "keyPoints": [
+        "Function Declarations are hoisted completely.",
+        "Function Expressions (assigned to const/let) are NOT hoisted before initialization.",
+        "Parameters are inputs defined in function signature; arguments are real values passed during invocation."
+      ],
+      "codeSnippet": "// Function Declaration (Hoisted)\nsayHi(); // Works!\nfunction sayHi() {\n  console.log(\"Hi!\");\n}\n\n// Function Expression (Not Hoisted)\n// sayHello(); // ❌ ReferenceError!\nconst sayHello = function() {\n  console.log(\"Hello!\");\n};",
+      "pitfalls": "Invoking a function without required arguments defaults missing parameters to undefined."
+    }
   },
   "t7ZHPhgdA4U": {
     "concept": "functions-advanced",
@@ -1144,7 +1254,17 @@
         "readTime": "6 min read",
         "description": "Syntax, implicit returns, lack of 'this' binding, and constructor limitations."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "The this keyword refers to the execution context object. Arrow functions do NOT have their own this binding.",
+      "keyPoints": [
+        "In object methods: this points to the object calling the method.",
+        "In standalone function: this points to global window (or undefined in strict mode).",
+        "Arrow functions (() => {}): Inherit this lexically from parent enclosing scope."
+      ],
+      "codeSnippet": "const user = {\n  username: \"Hitesh\",\n  welcomeMessage: function() {\n    console.log(`${this.username}, welcome!`); // \"Hitesh, welcome!\"\n  },\n  arrowWelcome: () => {\n    console.log(`${this.username}, welcome!`); // undefined (inherits window this!)\n  }\n};",
+      "pitfalls": "Do NOT use arrow functions for object methods or DOM event listeners if you need this to refer to the object/element."
+    }
   },
   "GAIbn16Iytc": {
     "concept": "iife",
@@ -1466,7 +1586,17 @@
         "readTime": "8 min read",
         "description": "Accumulating array elements into single values, objects, or arrays."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "filter(), map(), and reduce() are higher-order functional array methods that return new values without mutating the source array.",
+      "keyPoints": [
+        "map(): Transforms each item and returns a new array of same length.",
+        "filter(): Returns a new array containing items that satisfy boolean condition.",
+        "reduce(): Accumulates array items into a single final value (number, object, array)."
+      ],
+      "codeSnippet": "const nums = [1, 2, 3, 4, 5];\n\n// map: Multiply by 2\nconst doubled = nums.map(n => n * 2); // [2, 4, 6, 8, 10]\n\n// filter: Even numbers\nconst evens = nums.filter(n => n % 2 === 0); // [2, 4]\n\n// reduce: Sum total\nconst total = nums.reduce((acc, curr) => acc + curr, 0); // 15",
+      "pitfalls": "Always specify the initial accumulator value (0, {}, []) in reduce(), otherwise it defaults to first array element which breaks empty arrays."
+    }
   },
   "DcjNkHtDj8A": {
     "concept": "dom-basics",
@@ -1937,7 +2067,17 @@
         "readTime": "9 min read",
         "description": "Promise states (pending, fulfilled, rejected), Promise.all, Promise.race."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "Promises represent eventual completion or failure of an asynchronous operation and its resulting value.",
+      "keyPoints": [
+        "States: Pending (initial), Fulfilled (resolved successfully), Rejected (failed).",
+        ".then() handles fulfilled result, .catch() handles error, .finally() runs always.",
+        "Promise callbacks are placed into the Microtask Queue (executed before Macrotask setTimeout queue)."
+      ],
+      "codeSnippet": "const myPromise = new Promise((resolve, reject) => {\n  const success = true;\n  setTimeout(() => {\n    if (success) resolve({ data: \"User fetched\" });\n    else reject(\"Network error\");\n  }, 1000);\n});\n\nmyPromise\n  .then(res => console.log(res.data))\n  .catch(err => console.error(err))\n  .finally(() => console.log(\"Operation finished\"));",
+      "pitfalls": "Uncaught Promise Rejections crash Node.js processes! Always attach a .catch() block or wrap in try...catch with await."
+    }
   },
   "Rive84an6Lc": {
     "concept": "fetch-api",
@@ -2363,7 +2503,17 @@
         "readTime": "9 min read",
         "description": "Lexical scoping, practical closure examples (private methods, currying), and performance traps."
       }
-    ]
+    ],
+    "summaryArticle": {
+      "overview": "A closure is a function bundled together with references to its surrounding lexical environment, allowing inner functions to access outer scope variables even after parent function finishes execution.",
+      "keyPoints": [
+        "Lexical Scoping: Inner functions have access to variables defined in outer parent scopes.",
+        "Closure: Created every time a function is created at function creation time.",
+        "Practical uses: Data privacy (encapsulation), factory functions, event handlers, memoization."
+      ],
+      "codeSnippet": "function outerCounter() {\n  let count = 0; // Private variable via closure\n  return function inner() {\n    count++;\n    return count;\n  };\n}\n\nconst counter = outerCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\nconsole.log(counter()); // 3 (count stays alive in memory!)",
+      "pitfalls": "Closures keep outer variables alive in memory, which can lead to memory leaks if unwanted large objects are held in closed scopes."
+    }
   },
   "z9PINyinqwo": {
     "concept": "js-recap",
