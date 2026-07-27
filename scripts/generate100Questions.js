@@ -1,4 +1,7 @@
-[
+import fs from 'fs';
+const path = './src/data/jsTopicPractice.json';
+
+const categories = [
   {
     "id": "cat-1-variables-datatypes",
     "topic": "1. Variables, Datatypes & Type Coercion (Videos 4-8)",
@@ -879,4 +882,7 @@
       }
     ]
   }
-]
+];
+
+fs.writeFileSync(path, JSON.stringify(categories, null, 2));
+console.log('Successfully generated 100 high-yield questions grouped into 10 numbered categories mapped to 51 videos!');

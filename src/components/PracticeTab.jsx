@@ -6,46 +6,73 @@ import jsTopicPractice from '../data/jsTopicPractice.json';
  * Mapping lesson concepts to topic practice module IDs.
  */
 const LESSON_TOPIC_MAP = {
-  'yY0bKZNYmJs': 'variables-scope',
-  'cHHU0jXfjKY': 'variables-scope',
-  'eWwge2YpHhc': 'variables-scope',
-  '-9knnv97wSc': 'datatypes-coercion',
-  'X7hDBhd_L5U': 'datatypes-coercion',
-  'N9el4APFtAo': 'datatypes-coercion',
-  'giP2uXMlv4c': 'datatypes-coercion',
-  '7gwc-1czolw': 'datatypes-coercion',
-  'fozwNnFunlo': 'strings',
-  '_KqpeDc47Ro': 'datatypes-coercion',
-  'tGLCuoumaGY': 'datatypes-coercion',
-  'cejBux2gtEE': 'arrays-methods',
-  'm6azhgyCi-k': 'arrays-methods',
-  'M0YImBHQsWU': 'arrays-methods',
-  '9MfwYoWKKVE': 'arrays-methods',
-  'vVYOHmqQDCU': 'objects-methods',
-  '4lb2pXWWXJI': 'objects-methods',
-  'AViTh83k-IE': 'objects-methods',
-  'jss2rL9kv6s': 'objects-methods',
-  't6vLhF-iSxQ': 'objects-methods',
-  'Bn56WahG_t0': 'functions-hoisting',
-  't7ZHPhgdA4U': 'functions-hoisting',
-  'GAIbn16Iytc': 'functions-hoisting',
-  'ByhtOgF6uYM': 'functions-hoisting',
-  '9ksqBa8_txM': 'this-binding',
-  '-owpuf4lbyU': 'this-binding',
-  'u6mVHkMpoMk': 'this-binding',
-  '75dMiOY_4ac': 'this-binding',
-  'VaH09NXQZ58': 'closures-scope',
-  'zgt5oTD3rRc': 'async-promises',
-  'efrW5-IYoCU': 'async-promises',
-  'pDPAcYdSse8': 'async-promises',
-  'NJwRQgsu1Q8': 'async-promises',
-  'Rive84an6Lc': 'async-promises',
-  'DcjNkHtDj8A': 'dom-events',
-  'Ab6K57WjWTE': 'dom-events',
-  'xAvTgCsCHLs': 'dom-events',
-  'VQlY-X_eeTE': 'dom-events',
-  'EGqHVjU-fas': 'dom-events',
-  '_ALUMTa8BAE': 'dom-events'
+  // Batch 1 (Videos 4-8): Variables & Datatypes
+  'yY0bKZNYmJs': 'cat-1-variables-datatypes',
+  '-9knnv97wSc': 'cat-1-variables-datatypes',
+  'X7hDBhd_L5U': 'cat-1-variables-datatypes',
+  'N9el4APFtAo': 'cat-1-variables-datatypes',
+  'giP2uXMlv4c': 'cat-1-variables-datatypes',
+
+  // Batch 2 (Videos 9-13): Memory, Strings, Math & Dates
+  'suMvZWjjKbo': 'cat-2-memory-strings-math',
+  '7gwc-1czolw': 'cat-2-memory-strings-math',
+  'fozwNnFunlo': 'cat-2-memory-strings-math',
+  '_KqpeDc47Ro': 'cat-2-memory-strings-math',
+  'tGLCuoumaGY': 'cat-2-memory-strings-math',
+
+  // Batch 3 (Videos 14-18): Arrays, Objects, Destructuring & JSON
+  'cejBux2gtEE': 'cat-3-arrays-objects-json',
+  'm6azhgyCi-k': 'cat-3-arrays-objects-json',
+  'vVYOHmqQDCU': 'cat-3-arrays-objects-json',
+  '4lb2pXWWXJI': 'cat-3-arrays-objects-json',
+  'AViTh83k-IE': 'cat-3-arrays-objects-json',
+
+  // Batch 4 (Videos 19-23): Functions, Scopes & this
+  'Bn56WahG_t0': 'cat-4-functions-scopes-this',
+  't7ZHPhgdA4U': 'cat-4-functions-scopes-this',
+  'cHHU0jXfjKY': 'cat-4-functions-scopes-this',
+  'eWwge2YpHhc': 'cat-4-functions-scopes-this',
+  '9ksqBa8_txM': 'cat-4-functions-scopes-this',
+
+  // Batch 5 (Videos 24-28): IIFE, Execution Context & Control Flow
+  'GAIbn16Iytc': 'cat-5-execution-callstack-control',
+  'ByhtOgF6uYM': 'cat-5-execution-callstack-control',
+  '0P_YvC6Gg0c': 'cat-5-execution-callstack-control',
+  'Y1cpFsXrEgY': 'cat-5-execution-callstack-control',
+  'w3Q55-l47P0': 'cat-5-execution-callstack-control',
+
+  // Batch 6 (Videos 29-33): Higher Order Loops, Map/Filter/Reduce & DOM Intro
+  'M0YImBHQsWU': 'cat-6-hofs-filter-map-reduce-dom',
+  '9MfwYoWKKVE': 'cat-6-hofs-filter-map-reduce-dom',
+  'DcjNkHtDj8A': 'cat-6-hofs-filter-map-reduce-dom',
+  'Ab6K57WjWTE': 'cat-6-hofs-filter-map-reduce-dom',
+  'xAvTgCsCHLs': 'cat-6-hofs-filter-map-reduce-dom',
+
+  // Batch 7 (Videos 34-38): DOM Events & Async Basics
+  'VQlY-X_eeTE': 'cat-7-dom-events-async-basics',
+  'EGqHVjU-fas': 'cat-7-dom-events-async-basics',
+  '_ALUMTa8BAE': 'cat-7-dom-events-async-basics',
+  'zgt5oTD3rRc': 'cat-7-dom-events-async-basics',
+  'efrW5-IYoCU': 'cat-7-dom-events-async-basics',
+
+  // Batch 8 (Videos 39-43): Promises, Fetch & Prototypes
+  'pDPAcYdSse8': 'cat-8-promises-fetch-prototypes',
+  'NJwRQgsu1Q8': 'cat-8-promises-fetch-prototypes',
+  'Rive84an6Lc': 'cat-8-promises-fetch-prototypes',
+  'pN-Qmv4zBcI': 'cat-8-promises-fetch-prototypes',
+  'uMI5cNeHTOc': 'cat-8-promises-fetch-prototypes',
+
+  // Batch 9 (Videos 44-48): Classes, Call/Bind & Descriptors
+  '-owpuf4lbyU': 'cat-9-classes-callbind-descriptors',
+  'u6mVHkMpoMk': 'cat-9-classes-callbind-descriptors',
+  '75dMiOY_4ac': 'cat-9-classes-callbind-descriptors',
+  'jss2rL9kv6s': 'cat-9-classes-callbind-descriptors',
+  't6vLhF-iSxQ': 'cat-9-classes-callbind-descriptors',
+
+  // Batch 10 (Videos 49-51): Closures & V8 Internals
+  'VaH09NXQZ58': 'cat-10-closures-v8-internals',
+  'z9PINyinqwo': 'cat-10-closures-v8-internals',
+  'ZRS485LxX0s': 'cat-10-closures-v8-internals'
 };
 
 const DIFFICULTY_BADGES = {
