@@ -519,7 +519,7 @@ export default function Watch() {
         </div>
 
         {/* Player Container: Maximized Video View */}
-        <div className="w-full max-w-6xl mx-auto mt-3 sm:mt-5 px-2 sm:px-6">
+        <div className="w-full max-w-7xl mx-auto mt-2 sm:mt-4 px-2 sm:px-6">
           <div 
             ref={playerContainerRef} 
             onMouseMove={handleMouseMove}
@@ -677,7 +677,7 @@ export default function Watch() {
         </div>
 
         {/* Video Details Header */}
-        <div className="px-6 py-4 space-y-2 max-w-6xl w-full mx-auto border-b border-border/50">
+        <div className="px-6 py-4 space-y-2 max-w-7xl w-full mx-auto border-b border-border/50">
           <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{lesson.title}</h1>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-500">
             <div>
@@ -691,7 +691,7 @@ export default function Watch() {
         </div>
 
         {/* Course Playlist / Syllabus Section (Directly Below Video) */}
-        <div className="px-6 py-6 max-w-6xl w-full mx-auto space-y-4">
+        <div className="px-6 py-6 max-w-7xl w-full mx-auto space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <BookOpen size={18} className="text-primary" />
@@ -746,8 +746,8 @@ export default function Watch() {
 
       </div>
 
-      {/* Right Sidebar: Dedicated Study Tools Panel (4 Tabs: Notes, Practice, Reading, Description) */}
-      <div className="w-full lg:w-[420px] bg-zinc-950 border-t lg:border-t-0 lg:border-l border-border flex flex-col flex-shrink-0 min-h-[450px] lg:h-full overflow-hidden">
+      {/* Right Sidebar: Dedicated Study Tools Panel (3 Tabs: Notes, Reading, Description) */}
+      <div className="w-full lg:w-[380px] bg-zinc-950 border-t lg:border-t-0 lg:border-l border-border flex flex-col flex-shrink-0 min-h-[450px] lg:h-full overflow-hidden">
         
         {/* Sidebar Tab Selector Header */}
         <div className="flex border-b border-border bg-zinc-950 text-xs font-bold uppercase tracking-wider flex-shrink-0 overflow-x-auto">
@@ -762,17 +762,6 @@ export default function Watch() {
               >
                 <FileText size={14} className={activeTab === 'notes' ? 'text-primary' : ''} />
                 <span>Notes ({lessonNotes.length})</span>
-              </button>
-
-              {/* Practice Tab */}
-              <button
-                onClick={() => setActiveTab('practice')}
-                className={`py-3.5 px-4 border-b-2 transition cursor-pointer flex items-center gap-1.5 flex-1 justify-center ${
-                  activeTab === 'practice' ? 'border-primary text-white bg-zinc-900/50' : 'border-transparent text-zinc-500 hover:text-zinc-300'
-                }`}
-              >
-                <Target size={14} className={activeTab === 'practice' ? 'text-primary' : ''} />
-                <span>Practice</span>
               </button>
 
               {/* Reading Tab */}
@@ -861,16 +850,6 @@ export default function Watch() {
                 )}
               </div>
             </div>
-          )}
-
-          {/* PRACTICE TAB */}
-          {activeTab === 'practice' && lesson.type === 'youtube' && (
-            <PracticeTab
-              courseId={courseId}
-              lessonId={lessonId}
-              practiceProgressList={practiceProgressList}
-              togglePractice={togglePractice}
-            />
           )}
 
           {/* READING TAB */}
