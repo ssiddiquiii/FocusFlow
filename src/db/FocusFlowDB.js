@@ -40,30 +40,33 @@ class FocusFlowDB extends Dexie {
    * @returns {Promise<void>}
    */
   async seedIfEmpty() {
-    const courseCount = await this.courses.count();
-    
-    // Auto-migration: Remove legacy udemy course if present in local DB
-    const legacyUdemy = await this.courses.get('udemy-agentic-ai');
-    if (legacyUdemy) {
-      await this.transaction('rw', [this.courses, this.lessons], async () => {
-        await this.courses.delete('udemy-agentic-ai');
-        await this.lessons.where('courseId').equals('udemy-agentic-ai').delete();
-      });
-    }
+    // Auto-migration: Clean up unneeded courses (React, Backend, Computer Network, Legacy Udemy)
+    const coursesToRemove = ['udemy-agentic-ai', 'PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige', 'PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW', 'PLd1s-PEC5Pio'];
+    await this.transaction('rw', [this.courses, this.lessons], async () => {
+      for (const id of coursesToRemove) {
+        const exists = await this.courses.get(id);
+        if (exists) {
+          await this.courses.delete(id);
+          await this.lessons.where('courseId').equals(id).delete();
+        }
+      }
+    });
 
-    // Auto-migration: Ensure new default course (Computer Network PLd1s-PEC5Pio) is seeded
-    const cnCourse = await this.courses.get('PLd1s-PEC5Pio');
-    if (!cnCourse) {
-      const cnSeedCourse = seedData.courses.find(c => c.id === 'PLd1s-PEC5Pio');
-      const cnSeedLessons = seedData.lessons.filter(l => l.courseId === 'PLd1s-PEC5Pio');
-      if (cnSeedCourse) {
+    // Auto-migration: Ensure Git & GitHub Masterclass is seeded
+    const gitCourseId = 'git-github-masterclass-q8EevlEpQ2A';
+    const existingGit = await this.courses.get(gitCourseId);
+    if (!existingGit) {
+      const gitSeedCourse = seedData.courses.find(c => c.id === gitCourseId);
+      const gitSeedLessons = seedData.lessons.filter(l => l.courseId === gitCourseId);
+      if (gitSeedCourse) {
         await this.transaction('rw', [this.courses, this.lessons], async () => {
-          await this.courses.put(CourseSchema.parse(cnSeedCourse));
-          await this.lessons.bulkPut(cnSeedLessons.map(l => LessonSchema.parse(l)));
+          await this.courses.put(CourseSchema.parse(gitSeedCourse));
+          await this.lessons.bulkPut(gitSeedLessons.map(l => LessonSchema.parse(l)));
         });
       }
     }
 
+    const courseCount = await this.courses.count();
     if (courseCount > 0) {
       return;
     }

@@ -10,28 +10,10 @@
       "udemyUrl": ""
     },
     {
-      "id": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Chai aur React",
-      "description": "Learn reactjs with chai and me. This is one of beginner friendly reactjs series that will teach you foundation of reactjs by building projects in react.",
-      "thumbnailUrl": "https://i.ytimg.com/vi/vz1RlUyrc3w/hqdefault.jpg",
-      "channelName": "Chai aur Code",
-      "type": "youtube",
-      "udemyUrl": ""
-    },
-    {
-      "id": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Chai aur Backend",
-      "description": "Welcome to another playlist about building a complete and complex backend using javascript as your programming language. In this series, we will start from scratch and will build a complete backend for our complex project.",
-      "thumbnailUrl": "https://i.ytimg.com/vi/EH3vGeqeIAo/hqdefault.jpg",
-      "channelName": "Chai aur Code",
-      "type": "youtube",
-      "udemyUrl": ""
-    },
-    {
-      "id": "PLd1s-PEC5Pio",
-      "title": "Chai aur Computer Network",
-      "description": "Indepth series on Computer Network in Hindi",
-      "thumbnailUrl": "https://i.ytimg.com/vi/CltcZTyF5nM/hqdefault.jpg",
+      "id": "git-github-masterclass-q8EevlEpQ2A",
+      "title": "Complete Git and GitHub Course in Hindi",
+      "description": "Complete hands-on Git and GitHub masterclass by Chai aur Code. Learn version control, commits, branches, GitHub remotes, pull requests, merge conflicts, and open-source collaboration from scratch.",
+      "thumbnailUrl": "https://i.ytimg.com/vi/q8EevlEpQ2A/hqdefault.jpg",
       "channelName": "Chai aur Code",
       "type": "youtube",
       "udemyUrl": ""
@@ -549,754 +531,100 @@
       "type": "youtube"
     },
     {
-      "id": "vz1RlUyrc3w",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "React JS roadmap | chai aur react series",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/vz1RlUyrc3w/hqdefault.jpg",
-      "duration": "30:18",
+      "id": "git_ch_1",
+      "courseId": "git-github-masterclass-q8EevlEpQ2A",
       "index": 1,
-      "type": "youtube"
+      "title": "Ch 1: Introduction to Version Control Systems & Git",
+      "description": "Understanding what Version Control System (VCS) is, why developers need Git, local vs centralized vs distributed VCS.",
+      "duration": "12:30",
+      "videoId": "q8EevlEpQ2A",
+      "type": "youtube",
+      "thumbnailUrl": "https://i.ytimg.com/vi/q8EevlEpQ2A/hqdefault.jpg",
+      "startTimestamp": 0
     },
     {
-      "id": "k3KqQvywToE",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Create react projects | chai aur react",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n#react #series \nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/k3KqQvywToE/hqdefault.jpg",
-      "duration": "35:16",
+      "id": "git_ch_2",
+      "courseId": "git-github-masterclass-q8EevlEpQ2A",
       "index": 2,
-      "type": "youtube"
-    },
-    {
-      "id": "yNbnA5pryMg",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Understand the react flow and structure",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\n\"\"/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/yNbnA5pryMg/hqdefault.jpg",
-      "duration": "35:59",
-      "index": 3,
-      "type": "youtube"
-    },
-    {
-      "id": "kAOuj6o7Kxs",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Create your own react library and JSX",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/kAOuj6o7Kxs/hqdefault.jpg",
-      "duration": "45:50",
-      "index": 4,
-      "type": "youtube"
-    },
-    {
-      "id": "lI7IIOWM0Mo",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Why you need hooks and project",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\n\"\"/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/lI7IIOWM0Mo/hqdefault.jpg",
-      "duration": "28:18",
-      "index": 5,
-      "type": "youtube"
-    },
-    {
-      "id": "MPCVGFvgVEQ",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "06 Virtual DOM, Fibre and reconciliation",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/MPCVGFvgVEQ/hqdefault.jpg",
-      "duration": "21:21",
-      "index": 6,
-      "type": "youtube"
-    },
-    {
-      "id": "bB6707XzCNc",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Tailwind and Props in reactjs",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/bB6707XzCNc/hqdefault.jpg",
-      "duration": "31:34",
-      "index": 7,
-      "type": "youtube"
-    },
-    {
-      "id": "tOYkV6Yhrhs",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "A react interview question on counter",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\n\"\"/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/tOYkV6Yhrhs/hqdefault.jpg",
-      "duration": "8:26",
-      "index": 8,
-      "type": "youtube"
-    },
-    {
-      "id": "_lJ3KNMue3w",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Building a react project | bgChanger",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/_lJ3KNMue3w/hqdefault.jpg",
-      "duration": "18:16",
-      "index": 9,
-      "type": "youtube"
-    },
-    {
-      "id": "Lt4vy8hfc-s",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "useEffect, useRef and useCallback with 1 project",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\n\"\"/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/Lt4vy8hfc-s/hqdefault.jpg",
-      "duration": "57:15",
-      "index": 10,
-      "type": "youtube"
-    },
-    {
-      "id": "AFDYnd-XPa8",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Custom hooks in react | currency Project",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nIn this video we'll learn about custom hooks. how to create custom hooks how to use them along with that we'll look  how to make api call and will discuss about optimization techniques and how to create reusable component. \nWhile creating hook make sure you are using .js extension because\nthey don't return jsx they are js functions and you should follow the standard approach for creating hook that is hook should be started from use word.\n\ntimestamps\n\n0:00  - 4:08   Intro\n4:08  - 6:00   code intro\n6:00  - 9:18   project setup\n9:17  - 22:15  creating custom hook \n22:16 - 37:46  creating component\n37:46 - 39:09  Approach for exporting component\n39:10 - 43:28  useId hook\n43:28 - 47:00  state setup\n47:00 - 58:13  working on functionality\n58:13 - 59:30  debuging\n59:30 - 1:00:00 checking functionality\n1:00:00 - 1:01:37 assignment\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://\"\"/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/AFDYnd-XPa8/hqdefault.jpg",
-      "duration": "1:01:38",
-      "index": 11,
-      "type": "youtube"
-    },
-    {
-      "id": "VJov5QWEKE4",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "React router crash course",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\n\"\"/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/VJov5QWEKE4/hqdefault.jpg",
-      "duration": "1:04:35",
-      "index": 12,
-      "type": "youtube"
-    },
-    {
-      "id": "JQVBGtZMqgU",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Context API crash course with 2 projects",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/JQVBGtZMqgU/hqdefault.jpg",
-      "duration": "1:13:27",
-      "index": 13,
-      "type": "youtube"
-    },
-    {
-      "id": "6KQeopPE36I",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Context api with local storage | project",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/6KQeopPE36I/hqdefault.jpg",
-      "duration": "1:15:33",
-      "index": 14,
-      "type": "youtube"
-    },
-    {
-      "id": "1i04-A7kfFI",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Redux toolkit crash course | Chai aur React Series",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nRedux toolkit crash course\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/1i04-A7kfFI/hqdefault.jpg",
-      "duration": "1:10:18",
-      "index": 15,
-      "type": "youtube"
-    },
-    {
-      "id": "CqNSTD9ENb0",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "What is your choice for Mega Project in React?",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\n1 bht hi zruri react ka question h. Kis trh se bnaye mega project:\nOption A: Easy way, 1 baar me smjh aa jaye, todo type blog\nOption B: Hard way, production ready, complex app\n\nJaisa aap bole, vaisa krwa denge.\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/CqNSTD9ENb0/hqdefault.jpg",
-      "duration": "8:23",
-      "index": 16,
-      "type": "youtube"
-    },
-    {
-      "id": "P-WHzz2M5aU",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Our mega project in React | The hard way",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nWelcome to another video of React series. In this video, we will move towards building a big project that includes a lot of things that we already know like react router, redux toolkit etc. This project involves Signup, Signin, protected pages, complete backed with Appwrite, visual editor, image upload and lot more.\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/P-WHzz2M5aU/hqdefault.jpg",
-      "duration": "10:23",
-      "index": 17,
-      "type": "youtube"
-    },
-    {
-      "id": "zLWif1pFYJg",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Appwrite backend for react project",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nAppwrite backend for react project\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nhttps://hitesh.ai/whatsapp\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/zLWif1pFYJg/hqdefault.jpg",
-      "duration": "14:59",
-      "index": 18,
-      "type": "youtube"
-    },
-    {
-      "id": "4_JlIr8yry0",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "ENV and Appwrite in React project",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/4_JlIr8yry0/hqdefault.jpg",
-      "duration": "34:28",
-      "index": 19,
-      "type": "youtube"
-    },
-    {
-      "id": "0Py5cGGW2lE",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Build authentication service with appwrite",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/0Py5cGGW2lE/hqdefault.jpg",
-      "duration": "26:48",
-      "index": 20,
-      "type": "youtube"
-    },
-    {
-      "id": "lzx52HnWh4Y",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Appwrite database, file upload and custom queries",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/lzx52HnWh4Y/hqdefault.jpg",
-      "duration": "33:12",
-      "index": 21,
-      "type": "youtube"
-    },
-    {
-      "id": "8QGKg_W5sDQ",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "How to configure redux toolkit in big projects",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/8QGKg_W5sDQ/hqdefault.jpg",
-      "duration": "28:20",
-      "index": 22,
-      "type": "youtube"
-    },
-    {
-      "id": "BSaYsHVpaK0",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Production grade react components",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/BSaYsHVpaK0/hqdefault.jpg",
-      "duration": "43:46",
-      "index": 23,
-      "type": "youtube"
-    },
-    {
-      "id": "lfMyCuB6xfc",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "How to use React hook form in production",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/lfMyCuB6xfc/hqdefault.jpg",
-      "duration": "1:02:13",
-      "index": 24,
-      "type": "youtube"
-    },
-    {
-      "id": "-6LvNku2nJE",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Adding form and slug values",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/-6LvNku2nJE/hqdefault.jpg",
-      "duration": "43:36",
-      "index": 25,
-      "type": "youtube"
-    },
-    {
-      "id": "rC644qOZUro",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Building pages | chai aur react",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/rC644qOZUro/hqdefault.jpg",
-      "duration": "29:36",
-      "index": 26,
-      "type": "youtube"
-    },
-    {
-      "id": "Od4rQCU41s4",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "CORS and debugging in React Project",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/Od4rQCU41s4/hqdefault.jpg",
-      "duration": "25:39",
-      "index": 27,
-      "type": "youtube"
-    },
-    {
-      "id": "dg2Gw1HSlpQ",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "How to deploy react app to production",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nHow to deploy react app to production\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/dg2Gw1HSlpQ/hqdefault.jpg",
-      "duration": "14:51",
-      "index": 28,
-      "type": "youtube"
-    },
-    {
-      "id": "KqGze7HCTIA",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Assignments for your react course",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nAssignments for your react course\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/KqGze7HCTIA/hqdefault.jpg",
-      "duration": "17:01",
-      "index": 29,
-      "type": "youtube"
-    },
-    {
-      "id": "3o4qc9WRtWE",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "React series ends here",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/3o4qc9WRtWE/hqdefault.jpg",
-      "duration": "10:26",
-      "index": 30,
-      "type": "youtube"
-    },
-    {
-      "id": "fFHyqhmnVfs",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "How to connect frontend and backend in javascript | Fullstack Proxy and CORS",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nLearn to connect frontend build in react with backend build in express. We will learn how these technologies talk to each other\n\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/fFHyqhmnVfs/hqdefault.jpg",
-      "duration": "50:45",
-      "index": 31,
-      "type": "youtube"
-    },
-    {
-      "id": "P4X0vPTQX4A",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "you don't need state for this | react interview question",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/P4X0vPTQX4A/hqdefault.jpg",
-      "duration": "13:47",
-      "index": 32,
-      "type": "youtube"
-    },
-    {
-      "id": "M3AxZX3g00w",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Testing your datatype skills in react interviews",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/M3AxZX3g00w/hqdefault.jpg",
-      "duration": "11:58",
-      "index": 33,
-      "type": "youtube"
-    },
-    {
-      "id": "NxAwOjb_NlA",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "Handle APIs like a pro in Reactjs | Custom react query | Axios | Race condition",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nHandle APIs like a pro in Reactjs\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/NxAwOjb_NlA/hqdefault.jpg",
-      "duration": "52:41",
-      "index": 34,
-      "type": "youtube"
-    },
-    {
-      "id": "UsNdgJY6tCY",
-      "courseId": "PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
-      "title": "A common Production mistake in react",
-      "description": "Welcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/UsNdgJY6tCY/hqdefault.jpg",
-      "duration": "16:30",
-      "index": 35,
-      "type": "youtube"
-    },
-    {
-      "id": "EH3vGeqeIAo",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Javascript Backend Roadmap | chai aur backend",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nhttps://hitesh.ai/whatsapp\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/EH3vGeqeIAo/hqdefault.jpg",
-      "duration": "29:20",
-      "index": 1,
-      "type": "youtube"
-    },
-    {
-      "id": "pOV4EjUtl70",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "How to deploy backend code in production",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nHow to deploy backend code in production\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nhttps://hitesh.ai/whatsapp\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/pOV4EjUtl70/hqdefault.jpg",
-      "duration": "50:14",
-      "index": 2,
-      "type": "youtube"
-    },
-    {
-      "id": "fFHyqhmnVfs",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "How to connect frontend and backend in javascript | Fullstack Proxy and CORS",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nLearn to connect frontend build in react with backend build in express. We will learn how these technologies talk to each other\n\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\n\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/fFHyqhmnVfs/hqdefault.jpg",
-      "duration": "50:45",
-      "index": 3,
-      "type": "youtube"
-    },
-    {
-      "id": "10hRlpUNeNA",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Taking backend to next level",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nI thought let's raise the bar of quality in backend too. What can I do more to improve the teaching on this channel. One such thought is to improve the final project in the playlist. This will surely take a lot of time but it's surely worth it.\n\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\nWhatsApp pe yaha paaye jaate h:\nhttps://hitesh.ai/whatsapp\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/10hRlpUNeNA/hqdefault.jpg",
-      "duration": "9:51",
-      "index": 4,
-      "type": "youtube"
-    },
-    {
-      "id": "VbGl3msgce8",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Data modelling for backend with mongoose",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nhttps://stackblitz.com/edit/stackblitz-starters-mg2tiy?file=models%2Ftodos%2Fuser.models.js\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\nWhatsApp pe yaha paaye jaate h:\nhttps://hitesh.ai/whatsapp\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/VbGl3msgce8/hqdefault.jpg",
-      "duration": "56:11",
-      "index": 5,
-      "type": "youtube"
-    },
-    {
-      "id": "lA_mNpddN5U",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Ecommerce and Hospital management Data modelling",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nhttps://stackblitz.com/edit/stackblitz-starters-mg2tiy?file=models%2Fhospital-management%2Fhospital.models.js\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\nWhatsApp pe yaha paaye jaate h:\nhttps://hitesh.ai/whatsapp\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/lA_mNpddN5U/hqdefault.jpg",
-      "duration": "49:49",
-      "index": 6,
-      "type": "youtube"
-    },
-    {
-      "id": "9B4CvtzXRpc",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "How to setup a professional backend project",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSource code:\nhttps://github.com/hiteshchoudhary/chai-backend\n\nModels link:\nhttps://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj?origin=share\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\nWhatsApp pe yaha paaye jaate h:\nhttps://hitesh.ai/whatsapp\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/9B4CvtzXRpc/hqdefault.jpg",
-      "duration": "41:44",
-      "index": 7,
-      "type": "youtube"
-    },
-    {
-      "id": "w4z8Py-UoNk",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "How to connect database in MERN with debugging",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nLearn how to connect with database professionally:\nhttps://github.com/hiteshchoudhary/chai-backend\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\nWhatsApp pe yaha paaye jaate h:\nhttps://hitesh.ai/whatsapp\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/w4z8Py-UoNk/hqdefault.jpg",
-      "duration": "40:53",
-      "index": 8,
-      "type": "youtube"
-    },
-    {
-      "id": "S5EpsMjel-M",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Custom api response and error handling | chai aur backend",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nhttps://github.com/hiteshchoudhary/chai-backend\nhttps://hitesh.ai \n\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\nWhatsApp pe yaha paaye jaate h:\nhttps://hitesh.ai/whatsapp\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/S5EpsMjel-M/hqdefault.jpg",
-      "duration": "46:55",
-      "index": 9,
-      "type": "youtube"
-    },
-    {
-      "id": "eWnZVUXMq8k",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "User and video model with hooks and JWT",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nLearn about hooks an d JWT in backend development in javascript for our MERN project\nhttps://github.com/hiteshchoudhary/chai-backend\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\nWhatsApp pe yaha paaye jaate h:\nhttps://hitesh.ai/whatsapp\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/eWnZVUXMq8k/hqdefault.jpg",
-      "duration": "50:01",
-      "index": 10,
-      "type": "youtube"
-    },
-    {
-      "id": "6KPXn2Ha0cM",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "How to upload file in backend | Multer",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nIn this video we will learn to upload file using multer and cloudinary\n\nCode files:\nhttps://github.com/hiteshchoudhary/chai-backend\n\nSara code yaha milta h\nhttps://github.com/hiteshchoudhary/\nWhatsApp pe yaha paaye jaate h:\nhttps://hitesh.ai/whatsapp\nDiscord pe yaha paaye jaate h:\nhttps://hitesh.ai/discord\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/",
-      "thumbnailUrl": "https://i.ytimg.com/vi/6KPXn2Ha0cM/hqdefault.jpg",
-      "duration": "38:21",
-      "index": 11,
-      "type": "youtube"
-    },
-    {
-      "id": "qgZiUvV41TI",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "HTTP crash course | http Methods | http headers",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh/ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/qgZiUvV41TI/hqdefault.jpg",
-      "duration": "24:19",
-      "index": 12,
-      "type": "youtube"
-    },
-    {
-      "id": "HqcGLJSORaA",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Complete guide for router and controller with debugging",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh/ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/HqcGLJSORaA/hqdefault.jpg",
-      "duration": "29:35",
-      "index": 13,
-      "type": "youtube"
-    },
-    {
-      "id": "VKXnSwNm_lE",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Logic building | Register controller",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh/ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/VKXnSwNm_lE/hqdefault.jpg",
-      "duration": "52:49",
-      "index": 14,
-      "type": "youtube"
-    },
-    {
-      "id": "_u-WgSN5ymU",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "How to use postman for backend",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh/ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/_u-WgSN5ymU/hqdefault.jpg",
-      "duration": "36:13",
-      "index": 15,
-      "type": "youtube"
-    },
-    {
-      "id": "7DVpag3cO0g",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Access Refresh Token, Middleware and cookies in Backend",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary/chai-backend\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh/ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/7DVpag3cO0g/hqdefault.jpg",
-      "duration": "1:02:45",
-      "index": 16,
-      "type": "youtube"
-    },
-    {
-      "id": "L2_gIrDxCes",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Access token and refresh token in Backend",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\nhttps://github.com/hiteshchoudhary/chai-backend\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh/ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/L2_gIrDxCes/hqdefault.jpg",
-      "duration": "30:08",
-      "index": 17,
-      "type": "youtube"
-    },
-    {
-      "id": "9azRerL6CZc",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Writing update controllers for user | Backend with JS",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/9azRerL6CZc/hqdefault.jpg",
-      "duration": "43:15",
-      "index": 18,
-      "type": "youtube"
-    },
-    {
-      "id": "4_Ge2QEcT8k",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Understand the subscription Schema",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh/ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/4_Ge2QEcT8k/hqdefault.jpg",
-      "duration": "20:11",
-      "index": 19,
-      "type": "youtube"
-    },
-    {
-      "id": "fDTf1mk-jQg",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Learn Mongodb aggregation pipelines",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh/ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/fDTf1mk-jQg/hqdefault.jpg",
-      "duration": "36:45",
-      "index": 20,
-      "type": "youtube"
-    },
-    {
-      "id": "qNnR7cuVliI",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "How to write sub pipelines and routes",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh/ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/qNnR7cuVliI/hqdefault.jpg",
-      "duration": "30:14",
-      "index": 21,
-      "type": "youtube"
-    },
-    {
-      "id": "VUgl3i8DdW4",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Summary of our Backend Series",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nSummary of our backend series so far...\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh/ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/VUgl3i8DdW4/hqdefault.jpg",
+      "title": "Ch 2: Installing Git & Global Configurations (`git config`)",
+      "description": "Installing Git on Windows/Mac/Linux, setting up global user.name, user.email, default branch name, and editor configurations.",
       "duration": "15:45",
-      "index": 22,
-      "type": "youtube"
+      "videoId": "q8EevlEpQ2A",
+      "type": "youtube",
+      "thumbnailUrl": "https://i.ytimg.com/vi/q8EevlEpQ2A/hqdefault.jpg",
+      "startTimestamp": 750
     },
     {
-      "id": "-5yWyE4AiVk",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "MongoDB models for like playlist and tweet",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh/ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/-5yWyE4AiVk/hqdefault.jpg",
-      "duration": "30:12",
-      "index": 23,
-      "type": "youtube"
-    },
-    {
-      "id": "3ouqT3lfiUE",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Build in public and open source | Only video that you need 🔥",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\nHere is the repo that you need to work on:\nhttps://github.com/hiteshchoudhary/chai-backend\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/3ouqT3lfiUE/hqdefault.jpg",
-      "duration": "11:01",
-      "index": 24,
-      "type": "youtube"
-    },
-    {
-      "id": "Uc3Iq41npyI",
-      "courseId": "PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "title": "Backend series Final Video",
-      "description": "Visit https://chaicode.com for all related materials, community help, source code etc.\ndiscord: https://hitesh.ai/discord\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
-      "thumbnailUrl": "https://i.ytimg.com/vi/Uc3Iq41npyI/hqdefault.jpg",
-      "duration": "8:08",
-      "index": 25,
-      "type": "youtube"
-    },
-    {
-      "id": "CltcZTyF5nM",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "Introduction to Computer Network Series | Chai aur computer network",
-      "description": "Please check out Shubham's channel and subscribe too:\nhttps://www.youtube.com/@UCTgTS4r_XNE6WHUgCK9OH2Q \n\nWelcome to a indepth series on Computer Network in Hindi. This series will set a benchmark in depth of Computer Network and fundamentals. Concepts and practical along with years of experience is what you get in this series. \n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/CltcZTyF5nM/mqdefault.jpg",
-      "duration": "14:35",
-      "index": 1,
-      "type": "youtube"
-    },
-    {
-      "id": "_dCmQCiQmPE",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "What Really Happens When You Make an HTTP Request? Chai aur Computer network",
-      "description": "0:00 Understanding HTTP Requests\n3:51 DNS and Name Resolution\n8:00 Establishing TCP Connections\n12:53 Encapsulating Data into IP Packets\n15:47 Role of MAC Addresses and ARP\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/_dCmQCiQmPE/mqdefault.jpg",
-      "duration": "22:20",
-      "index": 2,
-      "type": "youtube"
-    },
-    {
-      "id": "mM9-9KAP0E8",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "03 Mastering IP Address Structure: From Octets to Binary Representation",
-      "description": "for more check https://chaicode.com\n\n0:00 Understanding IP Structure and Octets\n0:30 Basics of Internet Protocol\n1:10 Dotted Quad Notation Explained\n2:29 Binary Format Representation of IP\n3:10 Importance of IPv4 and Its Length\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/mM9-9KAP0E8/mqdefault.jpg",
-      "duration": "3:56",
+      "id": "git_ch_3",
+      "courseId": "git-github-masterclass-q8EevlEpQ2A",
       "index": 3,
-      "type": "youtube"
+      "title": "Ch 3: Working Directory, Staging Area & Commits (`git init`, `git add`)",
+      "description": "Deep dive into 3 states of Git: Working Directory, Staging Area (Index), and Local Repository. Using git status and git add.",
+      "duration": "25:10",
+      "videoId": "q8EevlEpQ2A",
+      "type": "youtube",
+      "thumbnailUrl": "https://i.ytimg.com/vi/q8EevlEpQ2A/hqdefault.jpg",
+      "startTimestamp": 1695
     },
     {
-      "id": "8QJ8k7jd-K0",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "04 Master Networking Basics: Network, Host, and CIDR Demystified",
-      "description": "for more visit https://chaicode.com\n0:00 Understanding Network and Host Basics\n2:10 Dynamic Host Configuration Protocol (DHCP)\n4:19 IP Address and Binary Representation\n7:16 Sider Notation and Host Calculation\n8:10 AWS and Sider Notation Examples\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/8QJ8k7jd-K0/mqdefault.jpg",
-      "duration": "10:04",
+      "id": "git_ch_4",
+      "courseId": "git-github-masterclass-q8EevlEpQ2A",
       "index": 4,
-      "type": "youtube"
+      "title": "Ch 4: Making Commits & Viewing History (`git commit`, `git log`)",
+      "description": "Writing clear commit messages, viewing commit history logs, git diff inspection, and restoring modified files.",
+      "duration": "28:40",
+      "videoId": "q8EevlEpQ2A",
+      "type": "youtube",
+      "thumbnailUrl": "https://i.ytimg.com/vi/q8EevlEpQ2A/hqdefault.jpg",
+      "startTimestamp": 3205
     },
     {
-      "id": "KVujI1fsQQo",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "05 How Subnet Masks Reveal Network Secrets: A Deep Dive",
-      "description": "for more visit https://chaicode.com\n0:00 Understanding Subnet Mask Basics\n2:36 Role of Subnet Mask in Networking\n3:45 Binary Representation of IP Addresses\n6:51 Detecting Network Membership with Subnet\n8:36 Practical Application of Subnet Mask\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/KVujI1fsQQo/mqdefault.jpg",
-      "duration": "10:57",
+      "id": "git_ch_5",
+      "courseId": "git-github-masterclass-q8EevlEpQ2A",
       "index": 5,
-      "type": "youtube"
+      "title": "Ch 5: Git Branching & Merging (`git branch`, `git checkout`, `git merge`)",
+      "description": "Creating feature branches, switching branches with checkout/switch, fast-forward merges, and branch deletion.",
+      "duration": "35:15",
+      "videoId": "q8EevlEpQ2A",
+      "type": "youtube",
+      "thumbnailUrl": "https://i.ytimg.com/vi/q8EevlEpQ2A/hqdefault.jpg",
+      "startTimestamp": 4925
     },
     {
-      "id": "Ik-buVzjW3s",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "06 Understanding Default Gateway: The Key to Network Communication",
-      "description": "for more visit https://chaicode.com\n0:00 Understanding Default Gateway in Networking\n0:27 Importance of Video Playlist Order\n0:54 Direct Data Transfer in Same Network\n2:27 Role of Router in Data Transmission\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/Ik-buVzjW3s/mqdefault.jpg",
-      "duration": "4:07",
+      "id": "git_ch_6",
+      "courseId": "git-github-masterclass-q8EevlEpQ2A",
       "index": 6,
-      "type": "youtube"
+      "title": "Ch 6: Connecting to GitHub & Remote Operations (`git remote`, `git push`, `git pull`)",
+      "description": "Setting up GitHub SSH/HTTPS keys, adding remote origin, pushing branches, and pulling updates from GitHub.",
+      "duration": "30:00",
+      "videoId": "q8EevlEpQ2A",
+      "type": "youtube",
+      "thumbnailUrl": "https://i.ytimg.com/vi/q8EevlEpQ2A/hqdefault.jpg",
+      "startTimestamp": 7040
     },
     {
-      "id": "PqdrgoYb3Vc",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "07 How Default Gateways Facilitate Network Communication",
-      "description": "for more visit https://chaicode.com\n\n0:00 Router as a Default Gateway\n1:36 Router Network Interfaces Setup\n3:06 First Scenario: Intra-Network Communication\n5:24 Second Scenario: Inter-Network Communication\n8:13 Future Topics: MAC and ARP\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/PqdrgoYb3Vc/mqdefault.jpg",
-      "duration": "9:12",
+      "id": "git_ch_7",
+      "courseId": "git-github-masterclass-q8EevlEpQ2A",
       "index": 7,
-      "type": "youtube"
+      "title": "Ch 7: Pull Requests, Code Reviews & Open Source Contributions",
+      "description": "Forking repositories, creating feature branches, submitting Pull Requests (PRs), code reviews, and open-source etiquette.",
+      "duration": "24:30",
+      "videoId": "q8EevlEpQ2A",
+      "type": "youtube",
+      "thumbnailUrl": "https://i.ytimg.com/vi/q8EevlEpQ2A/hqdefault.jpg",
+      "startTimestamp": 8840
     },
     {
-      "id": "jKWlJPpkp9o",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "08 What is a MAC Address? Understanding Its Structure and Purpose",
-      "description": "for more visit https://chaicode.com\n0:00 Understanding MAC Address Basics\n2:31 Physical Devices and MAC Addresses\n3:37 Structure of a MAC Address\n4:55 Hexadecimal Numbers in MAC Addresses\n5:55 MAC Address Parts: OUI and Device Identifier\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/jKWlJPpkp9o/mqdefault.jpg",
-      "duration": "8:57",
+      "id": "git_ch_8",
+      "courseId": "git-github-masterclass-q8EevlEpQ2A",
       "index": 8,
-      "type": "youtube"
-    },
-    {
-      "id": "sMDYh-II22Q",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "09 Curious About IP vs MAC Addresses? Here's What You Need to Know!",
-      "description": "for more visit https://chaicode.com\n0:00 Difference Between IP and MAC Address\n0:38 IP Address Characteristics and Changes\n3:02 Role of IP in Internet Communication\n4:58 MAC Address in Local Networks\n6:51 Using IP for Network Routing Decisions\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/sMDYh-II22Q/mqdefault.jpg",
-      "duration": "8:02",
-      "index": 9,
-      "type": "youtube"
-    },
-    {
-      "id": "kDAnEyg9nCg",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "10 How Does ARP Work in Your Network?",
-      "description": "for more visit https://chaicode.com\n0:00 Understanding Address Resolution Protocol\n2:09 Finding MAC Address with ARP\n4:01 ARP Request and Broadcast\n6:56 Handling Requests Outside the Network\n8:54 Summary of ARP Concepts\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/kDAnEyg9nCg/mqdefault.jpg",
-      "duration": "9:17",
-      "index": 10,
-      "type": "youtube"
-    },
-    {
-      "id": "ZOLkWBVMcwU",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "11 What Makes OSI and TCP/IP Models Different? Discover the Key Layers",
-      "description": "0:00 OSI Model vs TCP/IP Model Overview\n1:26 Detailed OSI Layer Breakdown\n6:51 Transport Layer and Protocols\n14:09 TCP/IP Model Layer Merging\n17:39 Encapsulation in Network Layers\n27:17 Request Travel in TCP/IP Model\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/ZOLkWBVMcwU/mqdefault.jpg",
-      "duration": "27:39",
-      "index": 11,
-      "type": "youtube"
-    },
-    {
-      "id": "GBhaNXK-ows",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "12 How Routing Determines Your Data's Journey Across Networks",
-      "description": "for more check https://chaicode.com\n0:00 Understanding Routing in Networks\n3:10 Explaining Network Components: Routers and Switches\n7:22 Routing Scenario: Laptop A to Laptop D\n11:56 Routing Scenario: Laptop C to Network X\n17:47 Routing to the Internet and NAT\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/GBhaNXK-ows/mqdefault.jpg",
-      "duration": "25:37",
-      "index": 12,
-      "type": "youtube"
-    },
-    {
-      "id": "VzPFY40qAhQ",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "13 What Happens When You PING Google? Discover the Secrets of ICMP",
-      "description": "## Chapters\n0:00 Understanding ICMP and Network Utilities\n3:07 How Ping Utilizes ICMP\n7:53 ICMP Error Messages and TTL\n14:58 Tracing Routes with ICMP\n21:08 Analyzing Trace Route Probes\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/VzPFY40qAhQ/mqdefault.jpg",
-      "duration": "25:03",
-      "index": 13,
-      "type": "youtube"
-    },
-    {
-      "id": "SjMw3nwAhuI",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "14 Why UDP is the Unsung Hero of Fast Internet Protocols",
-      "description": "0:00 Introduction to User Datagram Protocol\n3:32 UDP vs TCP: Connectionless Protocol\n7:50 Applications Using UDP\n9:56 DNS and UDP Efficiency\n13:55 Reliability Mechanisms in UDP\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/SjMw3nwAhuI/mqdefault.jpg",
-      "duration": "17:55",
-      "index": 14,
-      "type": "youtube"
-    },
-    {
-      "id": "1mTI5X0pN6M",
-      "courseId": "PLd1s-PEC5Pio",
-      "title": "15 Unveiling the UDP Datagram: A Deep Dive into Its Structure",
-      "description": "0:00 Anatomy of UDP Datagram\n3:13 Source and Destination Ports\n4:17 UDP Header and Application Payload\n5:05 Understanding UDP Checksum\n8:13 Data Field in UDP Datagram\n\n\nWelcome to chai aur code, a coding/programming dedicated channel in Hindi language. Now you can learn best of programming concepts with industry standard practical guide in Hindi language.\n\nAll source code is available at my Github account:\nhttps://github.com/hiteshchoudhary\n\nOur Open-Source Project is here: https://freeapi.app\n\nJoin me at whatsapp: https://hitesh.ai/whatsapp\n\nfor community discord: https://hitesh.ai/discord\n\nInstagram pe yaha paaye jaate h:\nhttps://www.instagram.com/hiteshchoudharyofficial/\n\nHTML video series:  https://www.youtube.com/watch?v=XmLOwJHFHf0&list=PLu71SKxNbfoDBNF5s-WH6aLbthSEIMhMI\n\nComplete javascript series: https://www.youtube.com/watch?v=Hr5iLG7sUa0&list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37\n\nComplete Reactjs series: https://www.youtube.com/watch?v=vz1RlUyrc3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige\n\nJavascript and react interview series: https://www.youtube.com/watch?v=1wqCyz7XrV4&list=PLu71SKxNbfoCy_MsA98SBfvUKF5eQit6L\n\nBackend development with Javascript: https://www.youtube.com/watch?v=EH3vGeqeIAo&list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW\n\nPython Series: https://www.youtube.com/watch?v=Ca5DLSDfPec&list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s",
-      "thumbnailUrl": "https://i.ytimg.com/vi/1mTI5X0pN6M/mqdefault.jpg",
-      "duration": "9:31",
-      "index": 15,
-      "type": "youtube"
+      "title": "Ch 8: Resolving Merge Conflicts & Advanced Rebase vs Merge",
+      "description": "Understanding why merge conflicts occur, step-by-step conflict resolution in VS Code, git rebase mechanics, and best practices.",
+      "duration": "26:50",
+      "videoId": "q8EevlEpQ2A",
+      "type": "youtube",
+      "thumbnailUrl": "https://i.ytimg.com/vi/q8EevlEpQ2A/hqdefault.jpg",
+      "startTimestamp": 10310
     }
   ]
 }

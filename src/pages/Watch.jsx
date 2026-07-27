@@ -206,7 +206,12 @@ export default function Watch() {
       captionTimeout1 = setTimeout(() => forceCaptionsOff(player), 500);
       captionTimeout2 = setTimeout(() => forceCaptionsOff(player), 1500);
 
-      player.seekTo(resumeSeconds, true);
+      // Start time: resume seconds first, or chapter startTimestamp, or 0
+      const startSec = resumeSeconds > 0 
+        ? resumeSeconds 
+        : (lesson.startTimestamp || 0);
+
+      player.seekTo(startSec, true);
       player.playVideo();
     };
 
@@ -275,8 +280,9 @@ export default function Watch() {
       playerInstance = new window.YT.Player('yt-player-iframe', {
         height: '100%',
         width: '100%',
-        videoId: lessonId,
+        videoId: lesson.videoId || lessonId,
         playerVars: {
+          start: lesson.startTimestamp || 0,
           rel: 0,
           iv_load_policy: 3,
           modestbranding: 1,
