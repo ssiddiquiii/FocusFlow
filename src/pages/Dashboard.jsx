@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useFocusFlow } from '../hooks/useFocusFlow';
-import { BookOpen, Clock, FileText, Play, RotateCcw, Plus, Trash2, RefreshCw, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { BookOpen, Clock, FileText, Play, RotateCcw, Plus, Trash2, RefreshCw, Loader2, CheckCircle2, AlertCircle, Target } from 'lucide-react';
 import ImportPlaylistModal from '../components/ImportPlaylistModal';
 import { fetchYouTubePlaylistData } from '../services/youtubeApi';
 
@@ -16,6 +16,7 @@ export default function Dashboard() {
   const { 
     courses, 
     progressList, 
+    practiceProgressList,
     stats, 
     isInitializing, 
     getCourseProgress, 
@@ -165,34 +166,44 @@ export default function Dashboard() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="glass-panel rounded-2xl p-6 flex items-center gap-5">
-            <div className="w-12 h-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center">
-              <Clock size={24} />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          <div className="glass-panel rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center flex-shrink-0">
+              <Clock size={22} />
             </div>
             <div>
-              <span className="text-zinc-500 text-xs font-semibold uppercase tracking-wider block">Watch Time</span>
-              <span className="text-2xl font-extrabold text-white">{stats.totalHours} hrs</span>
+              <span className="text-zinc-500 text-[10px] sm:text-xs font-semibold uppercase tracking-wider block">Watch Time</span>
+              <span className="text-xl sm:text-2xl font-extrabold text-white">{stats.totalHours} hrs</span>
             </div>
           </div>
 
-          <div className="glass-panel rounded-2xl p-6 flex items-center gap-5">
-            <div className="w-12 h-12 rounded-xl bg-accent/20 text-accent flex items-center justify-center">
-              <BookOpen size={24} />
+          <div className="glass-panel rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-accent/20 text-accent flex items-center justify-center flex-shrink-0">
+              <BookOpen size={22} />
             </div>
             <div>
-              <span className="text-zinc-500 text-xs font-semibold uppercase tracking-wider block">Lectures Completed</span>
-              <span className="text-2xl font-extrabold text-white">{stats.completedLessons}</span>
+              <span className="text-zinc-500 text-[10px] sm:text-xs font-semibold uppercase tracking-wider block">Lectures Done</span>
+              <span className="text-xl sm:text-2xl font-extrabold text-white">{stats.completedLessons}</span>
             </div>
           </div>
 
-          <div className="glass-panel rounded-2xl p-6 flex items-center gap-5">
-            <div className="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center">
-              <FileText size={24} />
+          <div className="glass-panel rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+              <Target size={22} />
             </div>
             <div>
-              <span className="text-zinc-500 text-xs font-semibold uppercase tracking-wider block">Notes Written</span>
-              <span className="text-2xl font-extrabold text-white">{stats.totalNotes}</span>
+              <span className="text-zinc-500 text-[10px] sm:text-xs font-semibold uppercase tracking-wider block">Practices Done</span>
+              <span className="text-xl sm:text-2xl font-extrabold text-white">{practiceProgressList.filter(p => p.completed).length}</span>
+            </div>
+          </div>
+
+          <div className="glass-panel rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center flex-shrink-0">
+              <FileText size={22} />
+            </div>
+            <div>
+              <span className="text-zinc-500 text-[10px] sm:text-xs font-semibold uppercase tracking-wider block">Notes Written</span>
+              <span className="text-xl sm:text-2xl font-extrabold text-white">{stats.totalNotes}</span>
             </div>
           </div>
         </div>

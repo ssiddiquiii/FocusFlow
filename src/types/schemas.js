@@ -54,6 +54,19 @@ export const NoteSchema = z.object({
 });
 
 /**
+ * Zod validation schema for PracticeProgress.
+ * Tracks whether a user has completed a specific coding practice challenge.
+ */
+export const PracticeProgressSchema = z.object({
+  id: z.string().min(1), // Formatted as "lessonId_practiceIndex"
+  courseId: z.string().min(1),
+  lessonId: z.string().min(1),
+  practiceUrl: z.string().url(),
+  completed: z.boolean().default(false),
+  completedAt: z.number().int().positive().optional() // timestamp in ms
+});
+
+/**
  * Zod validation schema for the JSON backup export/import wrapper.
  */
 export const BackupSchema = z.object({
@@ -62,5 +75,6 @@ export const BackupSchema = z.object({
   courses: z.array(CourseSchema),
   lessons: z.array(LessonSchema),
   progress: z.array(UserProgressSchema),
-  notes: z.array(NoteSchema)
+  notes: z.array(NoteSchema),
+  practiceProgress: z.array(PracticeProgressSchema).optional().default([])
 });

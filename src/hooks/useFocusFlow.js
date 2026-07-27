@@ -29,6 +29,7 @@ export function useFocusFlow() {
   const lessons = useLiveQuery(() => db.lessons.toArray()) || [];
   const progressList = useLiveQuery(() => db.progress.toArray()) || [];
   const notes = useLiveQuery(() => db.notes.toArray()) || [];
+  const practiceProgressList = useLiveQuery(() => db.practiceProgress.toArray()) || [];
 
   /**
    * Fetches the progress value for a single course dynamically.
@@ -189,12 +190,37 @@ export function useFocusFlow() {
    * @param {string} courseId Course ID.
    */
   async function deleteCourse(courseId) {
-    await db.transaction('rw', [db.courses, db.lessons, db.progress, db.notes], async () => {
+    await db.transaction('rw', [db.courses, db.lessons, db.progress, db.notes, db.practiceProgress], async () => {
       await db.courses.delete(courseId);
       await db.lessons.where('courseId').equals(courseId).delete();
       await db.progress.where('courseId').equals(courseId).delete();
       await db.notes.where('courseId').equals(courseId).delete();
+      await db.practiceProgress.where('courseId').equals(courseId).delete();
     });
+  }
+
+  /**
+   * Toggles a practice challenge as completed/uncompleted in Dexie IndexedDB.
+   * @param {string} courseId Course ID.
+   * @param {string} lessonId Lesson ID.
+   * @param {number} practiceIndex Index of the practice in the practices array.
+   * @param {string} practiceUrl URL of the practice challenge.
+   * @param {boolean} completed Whether to mark as completed.
+   */
+  async function togglePractice(courseId, lessonId, practiceIndex, practiceUrl, completed) {
+    const id = `${lessonId}_${practiceIndex}`;
+    if (completed) {
+      await db.practiceProgress.put({
+        id,
+        courseId,
+        lessonId,
+        practiceUrl,
+        completed: true,
+        completedAt: Date.now()
+      });
+    } else {
+      await db.practiceProgress.delete(id);
+    }
   }
 
   return {
@@ -202,6 +228,7 @@ export function useFocusFlow() {
     lessons,
     progressList,
     notes,
+    practiceProgressList,
     stats,
     isInitializing,
     getCourseProgress,
@@ -210,6 +237,7 @@ export function useFocusFlow() {
     saveProgress,
     importCourse,
     deleteCourse,
+    togglePractice,
     clearProgressAndNotes: () => db.clearProgressAndNotes(),
     resetDatabase: () => db.resetDatabase(),
     exportBackup: () => db.exportBackup(),

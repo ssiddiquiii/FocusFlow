@@ -1,6 +1,6 @@
 import Dexie from 'dexie';
 import seedData from './seedData.json';
-import { CourseSchema, LessonSchema, UserProgressSchema, NoteSchema, BackupSchema } from '../types/schemas';
+import { CourseSchema, LessonSchema, UserProgressSchema, NoteSchema, PracticeProgressSchema, BackupSchema } from '../types/schemas';
 
 /**
  * FocusFlow Local-First Browser Database
@@ -18,10 +18,20 @@ class FocusFlowDB extends Dexie {
       notes: '++id, courseId, lessonId, timestamp'
     });
 
+    // Version 2: Add practice progress tracking table
+    this.version(2).stores({
+      courses: 'id, title, type',
+      lessons: 'id, courseId, index, type',
+      progress: 'id, courseId, lessonId, completed',
+      notes: '++id, courseId, lessonId, timestamp',
+      practiceProgress: 'id, courseId, lessonId, completed'
+    });
+
     this.courses = this.table('courses');
     this.lessons = this.table('lessons');
     this.progress = this.table('progress');
     this.notes = this.table('notes');
+    this.practiceProgress = this.table('practiceProgress');
   }
 
   /**
@@ -78,9 +88,10 @@ class FocusFlowDB extends Dexie {
    * @returns {Promise<void>}
    */
   async clearProgressAndNotes() {
-    await this.transaction('rw', [this.progress, this.notes], async () => {
+    await this.transaction('rw', [this.progress, this.notes, this.practiceProgress], async () => {
       await this.progress.clear();
       await this.notes.clear();
+      await this.practiceProgress.clear();
     });
   }
 
@@ -89,11 +100,12 @@ class FocusFlowDB extends Dexie {
    * @returns {Promise<void>}
    */
   async resetDatabase() {
-    await this.transaction('rw', [this.courses, this.lessons, this.progress, this.notes], async () => {
+    await this.transaction('rw', [this.courses, this.lessons, this.progress, this.notes, this.practiceProgress], async () => {
       await this.courses.clear();
       await this.lessons.clear();
       await this.progress.clear();
       await this.notes.clear();
+      await this.practiceProgress.clear();
     });
     await this.seedIfEmpty();
   }
@@ -107,14 +119,16 @@ class FocusFlowDB extends Dexie {
     const lessons = await this.lessons.toArray();
     const progress = await this.progress.toArray();
     const notes = await this.notes.toArray();
+    const practiceProgress = await this.practiceProgress.toArray();
 
     const backupPayload = {
-      version: 1,
+      version: 2,
       exportedAt: Date.now(),
       courses,
       lessons,
       progress,
-      notes
+      notes,
+      practiceProgress
     };
 
     // Validate structure via Zod before returning
@@ -130,18 +144,22 @@ class FocusFlowDB extends Dexie {
     // Validate backup structure via Zod
     const validatedBackup = BackupSchema.parse(rawBackup);
 
-    await this.transaction('rw', [this.courses, this.lessons, this.progress, this.notes], async () => {
+    await this.transaction('rw', [this.courses, this.lessons, this.progress, this.notes, this.practiceProgress], async () => {
       // Clear current data
       await this.courses.clear();
       await this.lessons.clear();
       await this.progress.clear();
       await this.notes.clear();
+      await this.practiceProgress.clear();
 
       // Ingest backed-up records
       await this.courses.bulkPut(validatedBackup.courses);
       await this.lessons.bulkPut(validatedBackup.lessons);
       await this.progress.bulkPut(validatedBackup.progress);
       await this.notes.bulkPut(validatedBackup.notes);
+      if (validatedBackup.practiceProgress) {
+        await this.practiceProgress.bulkPut(validatedBackup.practiceProgress);
+      }
     });
   }
 }

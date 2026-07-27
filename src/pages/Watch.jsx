@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useFocusFlow } from '../hooks/useFocusFlow';
 import { useUIStore } from '../hooks/useUIStore';
-import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX, Gauge, Type, Sliders } from 'lucide-react';
+import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX, Gauge, Type, Sliders, Target } from 'lucide-react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/FocusFlowDB';
+import PracticeTab from '../components/PracticeTab';
 
 const SPEED_OPTIONS = [0.5, 1, 1.25, 1.5, 2];
 const QUALITY_OPTIONS = [
@@ -49,7 +50,7 @@ export default function Watch() {
   const playerContainerRef = useRef(null);
   const progressBarRef = useRef(null);
   
-  const { courses, lessons, progressList, saveProgress } = useFocusFlow();
+  const { courses, lessons, progressList, practiceProgressList, saveProgress, togglePractice } = useFocusFlow();
   const { activeLessonId, isPlaying, seekRequestTime, setActiveLessonId, setIsPlaying, triggerPlayerSeek } = useUIStore();
 
   const [activeTab, setActiveTab] = useState('notes'); // default to notes below video
@@ -693,18 +694,29 @@ export default function Watch() {
           <div className="space-y-4">
             <div className="flex border-b border-border text-xs font-bold uppercase tracking-wider">
               {lesson.type === 'youtube' && (
-                <button
-                  onClick={() => setActiveTab('notes')}
-                  className={`pb-3 pr-6 border-b-2 transition ${
-                    activeTab === 'notes' ? 'border-primary text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
-                  }`}
-                >
-                  Notes ({lessonNotes.length})
-                </button>
+                <>
+                  <button
+                    onClick={() => setActiveTab('notes')}
+                    className={`pb-3 pr-6 border-b-2 transition cursor-pointer ${
+                      activeTab === 'notes' ? 'border-primary text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                    }`}
+                  >
+                    Notes ({lessonNotes.length})
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('practice')}
+                    className={`pb-3 px-6 border-b-2 transition cursor-pointer flex items-center gap-1.5 ${
+                      activeTab === 'practice' ? 'border-primary text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                    }`}
+                  >
+                    <Target size={14} className={activeTab === 'practice' ? 'text-primary' : ''} />
+                    <span>Practice</span>
+                  </button>
+                </>
               )}
               <button
                 onClick={() => setActiveTab('desc')}
-                className={`pb-3 px-6 border-b-2 transition ${
+                className={`pb-3 px-6 border-b-2 transition cursor-pointer ${
                   activeTab === 'desc' ? 'border-primary text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
                 }`}
               >
@@ -773,6 +785,16 @@ export default function Watch() {
                     )}
                   </div>
                 </div>
+              )}
+
+              {/* PRACTICE TAB */}
+              {activeTab === 'practice' && lesson.type === 'youtube' && (
+                <PracticeTab
+                  courseId={courseId}
+                  lessonId={lessonId}
+                  practiceProgressList={practiceProgressList}
+                  togglePractice={togglePractice}
+                />
               )}
 
               {/* DESCRIPTION TAB */}

@@ -1,0 +1,1442 @@
+{
+  "Hr5iLG7sUa0": {
+    "concept": "intro",
+    "conceptLabel": "JavaScript Basics",
+    "practices": [
+      {
+        "title": "Comment Your JavaScript Code",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/comment-your-javascript-code",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Hello World in JavaScript",
+        "url": "https://javascript.info/hello-world#tasks",
+        "platform": "javascript.info",
+        "difficulty": "easy"
+      },
+      {
+        "title": "JS First Steps — MDN",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps",
+        "platform": "mdn",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "cvoLc3deAdQ": {
+    "concept": "setup",
+    "conceptLabel": "Environment Setup",
+    "practices": [
+      {
+        "title": "JS Exercise: console.log Basics",
+        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_output1",
+        "platform": "w3schools",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Node.js Getting Started",
+        "url": "https://www.w3schools.com/nodejs/nodejs_get_started.asp",
+        "platform": "w3schools",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Code Structure Tasks",
+        "url": "https://javascript.info/structure#tasks",
+        "platform": "javascript.info",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "-GoKoR6aLcY": {
+    "concept": "git-basics",
+    "conceptLabel": "Git & GitHub Basics",
+    "practices": [
+      {
+        "title": "Learn Git Branching (Interactive)",
+        "url": "https://learngitbranching.js.org/",
+        "platform": "other",
+        "difficulty": "easy"
+      },
+      {
+        "title": "GitHub Skills: Introduction to GitHub",
+        "url": "https://github.com/skills/introduction-to-github",
+        "platform": "other",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Git Exercises",
+        "url": "https://www.w3schools.com/git/exercise.asp",
+        "platform": "w3schools",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "yY0bKZNYmJs": {
+    "concept": "variables",
+    "conceptLabel": "Variables (let, const, var)",
+    "practices": [
+      {
+        "title": "Declare JavaScript Variables",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/declare-javascript-variables",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Variables — Tasks",
+        "url": "https://javascript.info/variables#tasks",
+        "platform": "javascript.info",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Grasshopper — Variable Assignment",
+        "url": "https://www.codewars.com/kata/50ee6b0bdeab583673000025",
+        "platform": "codewars",
+        "difficulty": "easy"
+      },
+      {
+        "title": "JS Variables Exercises",
+        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_variables1",
+        "platform": "w3schools",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "-9knnv97wSc": {
+    "concept": "datatypes",
+    "conceptLabel": "Data Types & ECMA Standards",
+    "practices": [
+      {
+        "title": "Data Types — Tasks",
+        "url": "https://javascript.info/types#tasks",
+        "platform": "javascript.info",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Understanding typeof Operator",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/understanding-uninitialized-variables",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "JS Data Types Exercises",
+        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_datatypes1",
+        "platform": "w3schools",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Basic Data Types (Exercism)",
+        "url": "https://exercism.org/tracks/javascript/concepts/numbers",
+        "platform": "exercism",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "X7hDBhd_L5U": {
+    "concept": "type-coercion",
+    "conceptLabel": "Type Conversion & Coercion",
+    "practices": [
+      {
+        "title": "Type Conversions — Tasks",
+        "url": "https://javascript.info/type-conversions#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "parseInt & parseFloat Practice",
+        "url": "https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_parseint",
+        "platform": "w3schools",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Convert Number to Reversed Array",
+        "url": "https://www.codewars.com/kata/5583090cbe83f4fd8c000051",
+        "platform": "codewars",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "N9el4APFtAo": {
+    "concept": "type-coercion",
+    "conceptLabel": "String to Number Conversion",
+    "practices": [
+      {
+        "title": "Convert a String to a Number",
+        "url": "https://www.codewars.com/kata/544675c6f971f7399a000e79",
+        "platform": "codewars",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Number() vs parseInt() Deep Dive",
+        "url": "https://javascript.info/number#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Convert String to camelCase",
+        "url": "https://www.codewars.com/kata/517abf86da9663f1d2000003",
+        "platform": "codewars",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "giP2uXMlv4c": {
+    "concept": "comparison",
+    "conceptLabel": "Comparison & Equality Operators",
+    "practices": [
+      {
+        "title": "Comparisons — Tasks",
+        "url": "https://javascript.info/comparison#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Comparison with == vs ===",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/comparison-with-the-equality-operator",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Truthy and Falsy Bouncer",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/falsy-bouncer",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "suMvZWjjKbo": {
+    "concept": "datatypes-review",
+    "conceptLabel": "Data Types Summary & Review",
+    "practices": [
+      {
+        "title": "JavaScript Fundamentals — All Tasks",
+        "url": "https://javascript.info/first-steps",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Basic JS Certification Challenges",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Even or Odd",
+        "url": "https://www.codewars.com/kata/53da3dbb4a5168369a0000fe",
+        "platform": "codewars",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "7gwc-1czolw": {
+    "concept": "memory",
+    "conceptLabel": "Stack & Heap Memory",
+    "practices": [
+      {
+        "title": "Pass by Value vs Reference — Quiz",
+        "url": "https://javascript.info/object-copy#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Cloning Objects Practice",
+        "url": "https://javascript.info/object-copy",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Deep Copy vs Shallow Copy",
+        "url": "https://www.codewars.com/kata/596e414344af11e98a00001f",
+        "platform": "codewars",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "fozwNnFunlo": {
+    "concept": "strings",
+    "conceptLabel": "Strings & String Methods",
+    "practices": [
+      {
+        "title": "Strings — Tasks (5 exercises)",
+        "url": "https://javascript.info/string#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Reverse a String",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/reverse-a-string",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Reversed Strings",
+        "url": "https://www.codewars.com/kata/5168bb5dfe9a00b126000018",
+        "platform": "codewars",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Reverse String — LeetCode #344",
+        "url": "https://leetcode.com/problems/reverse-string/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Valid Palindrome — LeetCode #125",
+        "url": "https://leetcode.com/problems/valid-palindrome/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Abbreviate a Two Word Name",
+        "url": "https://www.codewars.com/kata/57eadb7ecd143f4c9c0000a3",
+        "platform": "codewars",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "_KqpeDc47Ro": {
+    "concept": "numbers-math",
+    "conceptLabel": "Numbers & Math Object",
+    "practices": [
+      {
+        "title": "Numbers — Tasks",
+        "url": "https://javascript.info/number#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Math.random & Math.floor Practice",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/generate-random-whole-numbers-with-javascript",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Sum of Positive Numbers",
+        "url": "https://www.codewars.com/kata/5715eaedb436cf5606000381",
+        "platform": "codewars",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Multiply Kata",
+        "url": "https://www.codewars.com/kata/50654ddff44f800200000004",
+        "platform": "codewars",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Sqrt(x) — LeetCode #69",
+        "url": "https://leetcode.com/problems/sqrtx/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "tGLCuoumaGY": {
+    "concept": "date-time",
+    "conceptLabel": "Date & Time",
+    "practices": [
+      {
+        "title": "Date Object Methods Practice",
+        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_dates1",
+        "platform": "w3schools",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Grasshopper — Debug sayHello",
+        "url": "https://www.codewars.com/kata/5625618b1fe21ab49f00001f",
+        "platform": "codewars",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Calculate Age from Date",
+        "url": "https://www.codewars.com/kata/5568c24bc191e83c0c000029",
+        "platform": "codewars",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "cejBux2gtEE": {
+    "concept": "arrays",
+    "conceptLabel": "Arrays (Part 1)",
+    "practices": [
+      {
+        "title": "Arrays — Tasks (7 exercises)",
+        "url": "https://javascript.info/array#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Manipulate Arrays with push/pop",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/manipulate-arrays-with-push",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Sum of Array (8 kyu)",
+        "url": "https://www.codewars.com/kata/53dc54212259ed3d4f00071c",
+        "platform": "codewars",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Remove First and Last Character",
+        "url": "https://www.codewars.com/kata/56bc28ad5bdaeb48760009b0",
+        "platform": "codewars",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Two Sum — LeetCode #1",
+        "url": "https://leetcode.com/problems/two-sum/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Remove Duplicates — LeetCode #26",
+        "url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "m6azhgyCi-k": {
+    "concept": "arrays-advanced",
+    "conceptLabel": "Arrays Advanced (spread, flat, concat)",
+    "practices": [
+      {
+        "title": "Array Methods — Tasks (12 exercises)",
+        "url": "https://javascript.info/array-methods#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Use the Spread Operator",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-the-spread-operator-to-evaluate-arrays-in-place",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Flatten Nested Arrays",
+        "url": "https://www.codewars.com/kata/57ee99a16c8df7b02d00045f",
+        "platform": "codewars",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Merge Sorted Array — LeetCode #88",
+        "url": "https://leetcode.com/problems/merge-sorted-array/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "vVYOHmqQDCU": {
+    "concept": "objects",
+    "conceptLabel": "Objects In Depth",
+    "practices": [
+      {
+        "title": "Objects — Tasks",
+        "url": "https://javascript.info/object#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Build JavaScript Objects",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/build-javascript-objects",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Object keys, values, entries",
+        "url": "https://javascript.info/keys-values-entries#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Count Developers (7 kyu)",
+        "url": "https://www.codewars.com/kata/5a03af8a6b7dbd2b12000040",
+        "platform": "codewars",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "4lb2pXWWXJI": {
+    "concept": "objects-methods",
+    "conceptLabel": "Object Methods & Utilities",
+    "practices": [
+      {
+        "title": "Object.keys/values/entries — Tasks",
+        "url": "https://javascript.info/keys-values-entries#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Accessing Object Properties",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/accessing-object-properties-with-dot-notation",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Character Count (Object counting)",
+        "url": "https://www.codewars.com/kata/52efefcbcdf57161d4000091",
+        "platform": "codewars",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "AViTh83k-IE": {
+    "concept": "destructuring",
+    "conceptLabel": "Destructuring & JSON",
+    "practices": [
+      {
+        "title": "Destructuring Assignment — Tasks",
+        "url": "https://javascript.info/destructuring-assignment#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Use Destructuring to Extract Values",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-destructuring-assignment-to-extract-values-from-objects",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Destructuring with Rest Parameter",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-destructuring-assignment-with-the-rest-parameter-to-reassign-array-elements",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      },
+      {
+        "title": "JSON.parse/stringify Practice",
+        "url": "https://javascript.info/json#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "Bn56WahG_t0": {
+    "concept": "functions",
+    "conceptLabel": "Functions & Parameters",
+    "practices": [
+      {
+        "title": "Function Basics — Tasks",
+        "url": "https://javascript.info/function-basics#tasks",
+        "platform": "javascript.info",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Write Reusable JavaScript Functions",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/write-reusable-javascript-with-functions",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Function Expressions — Tasks",
+        "url": "https://javascript.info/function-expressions#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Sentence Smash",
+        "url": "https://www.codewars.com/kata/53dc23c68a0c93699800041d",
+        "platform": "codewars",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Lucian's Luscious Lasagna (Exercism)",
+        "url": "https://exercism.org/tracks/javascript/exercises/lasagna",
+        "platform": "exercism",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "t7ZHPhgdA4U": {
+    "concept": "functions-advanced",
+    "conceptLabel": "Functions with Objects & Arrays",
+    "practices": [
+      {
+        "title": "Rest Parameters — Tasks",
+        "url": "https://javascript.info/rest-parameters-spread#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Passing Values to Functions",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/passing-values-to-functions-with-arguments",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "List Filtering (7 kyu)",
+        "url": "https://www.codewars.com/kata/53dbd5315a3c69571d00006e",
+        "platform": "codewars",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Freelancer Rates (Exercism)",
+        "url": "https://exercism.org/tracks/javascript/exercises/freelancer-rates",
+        "platform": "exercism",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "cHHU0jXfjKY": {
+    "concept": "scope",
+    "conceptLabel": "Global & Local Scope",
+    "practices": [
+      {
+        "title": "Global vs Local Scope in Functions",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/global-vs--local-scope-in-functions",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Variable Scope / Closures intro — Tasks",
+        "url": "https://javascript.info/closure#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Global Scope and Functions",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/global-scope-and-functions",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "eWwge2YpHhc": {
+    "concept": "hoisting",
+    "conceptLabel": "Scope Levels & Hoisting",
+    "practices": [
+      {
+        "title": "Variable Scope, Closures — Tasks",
+        "url": "https://javascript.info/closure#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Understanding Hoisting Quiz",
+        "url": "https://www.w3schools.com/js/js_hoisting.asp",
+        "platform": "w3schools",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Local Scope and Functions",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/local-scope-and-functions",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "9ksqBa8_txM": {
+    "concept": "this-arrow",
+    "conceptLabel": "this Keyword & Arrow Functions",
+    "practices": [
+      {
+        "title": "Object Methods, 'this' — Tasks",
+        "url": "https://javascript.info/object-methods#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Arrow Functions Revisited — Tasks",
+        "url": "https://javascript.info/arrow-functions#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Use Arrow Functions (ES6)",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-arrow-functions-to-write-concise-anonymous-functions",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Calculate BMI (Arrow function)",
+        "url": "https://www.codewars.com/kata/57a429e253ba3381850000fb",
+        "platform": "codewars",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "GAIbn16Iytc": {
+    "concept": "iife",
+    "conceptLabel": "IIFE (Immediately Invoked Functions)",
+    "practices": [
+      {
+        "title": "Write Concise Declarative Functions",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/write-concise-declarative-functions-with-es6",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Module Pattern Practice",
+        "url": "https://javascript.info/modules-intro",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Self-invoking Function Exercises",
+        "url": "https://www.w3schools.com/js/js_function_definition.asp",
+        "platform": "w3schools",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "ByhtOgF6uYM": {
+    "concept": "execution-context",
+    "conceptLabel": "Execution Context & Call Stack",
+    "practices": [
+      {
+        "title": "Visualize Call Stack — Loupe Tool",
+        "url": "http://latentflip.com/loupe/",
+        "platform": "other",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Recursion — Tasks",
+        "url": "https://javascript.info/recursion#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Predict Output: Call Stack Exercises",
+        "url": "https://www.freecodecamp.org/news/understanding-the-javascript-call-stack-861e41ae61d4/",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "0P_YvC6Gg0c": {
+    "concept": "control-flow",
+    "conceptLabel": "Control Flow (if/else, switch)",
+    "practices": [
+      {
+        "title": "Conditional Branching — Tasks",
+        "url": "https://javascript.info/ifelse#tasks",
+        "platform": "javascript.info",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Use Conditional Logic with If Statements",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/use-conditional-logic-with-if-statements",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Switch Statement Practice",
+        "url": "https://javascript.info/switch#tasks",
+        "platform": "javascript.info",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Ternary Operator Challenges",
+        "url": "https://www.codewars.com/kata/53369039d7ab3ac506000b54",
+        "platform": "codewars",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Logical Operators — Tasks",
+        "url": "https://javascript.info/logical-operators#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "Y1cpFsXrEgY": {
+    "concept": "loops-for",
+    "conceptLabel": "For Loop, Break & Continue",
+    "practices": [
+      {
+        "title": "Loops: while and for — Tasks",
+        "url": "https://javascript.info/while-for#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Iterate with For Loops",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/iterate-with-javascript-for-loops",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "FizzBuzz — LeetCode #412",
+        "url": "https://leetcode.com/problems/fizz-buzz/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Collatz Conjecture (Exercism)",
+        "url": "https://exercism.org/tracks/javascript/exercises/collatz-conjecture",
+        "platform": "exercism",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Multiples of 3 or 5 (6 kyu)",
+        "url": "https://www.codewars.com/kata/514b92a657cdc65150000006",
+        "platform": "codewars",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "w3Q55-l47P0": {
+    "concept": "loops-while",
+    "conceptLabel": "While & Do-While Loops",
+    "practices": [
+      {
+        "title": "Iterate with While Loops",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/iterate-with-javascript-while-loops",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "While Loop — Tasks",
+        "url": "https://javascript.info/while-for#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Number of Steps to Reduce — LeetCode #1342",
+        "url": "https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "M0YImBHQsWU": {
+    "concept": "hof-loops",
+    "conceptLabel": "Higher-Order Array Loops",
+    "practices": [
+      {
+        "title": "Iterables — Tasks",
+        "url": "https://javascript.info/iterable#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "for...of Loop Practice",
+        "url": "https://www.w3schools.com/js/js_loop_forof.asp",
+        "platform": "w3schools",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Elyse's Enchantments (Exercism)",
+        "url": "https://exercism.org/tracks/javascript/exercises/elyses-enchantments",
+        "platform": "exercism",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "9MfwYoWKKVE": {
+    "concept": "filter-map-reduce",
+    "conceptLabel": "filter(), map() & reduce()",
+    "practices": [
+      {
+        "title": "Array Methods — Tasks (12 exercises)",
+        "url": "https://javascript.info/array-methods#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Use map to Extract Data",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/functional-programming/use-the-map-method-to-extract-data-from-an-array",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Use filter to Extract Data",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/functional-programming/use-the-filter-method-to-extract-data-from-an-array",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Use reduce to Analyze Data",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/functional-programming/use-the-reduce-method-to-analyze-data",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Reduce but Grow (8 kyu)",
+        "url": "https://www.codewars.com/kata/57f780909f7e8e3183000078",
+        "platform": "codewars",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Running Sum — LeetCode #1480",
+        "url": "https://leetcode.com/problems/running-sum-of-1d-array/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      },
+      {
+        "title": "RNA Transcription (Exercism)",
+        "url": "https://exercism.org/tracks/javascript/exercises/rna-transcription",
+        "platform": "exercism",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "DcjNkHtDj8A": {
+    "concept": "dom-basics",
+    "conceptLabel": "DOM Introduction",
+    "practices": [
+      {
+        "title": "DOM Navigation — Tasks",
+        "url": "https://javascript.info/dom-navigation#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "JS HTML DOM Exercises",
+        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_dom_html1",
+        "platform": "w3schools",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Searching: getElement*, querySelector*",
+        "url": "https://javascript.info/searching-elements-dom#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "Ab6K57WjWTE": {
+    "concept": "dom-selectors",
+    "conceptLabel": "DOM Selectors & Collections",
+    "practices": [
+      {
+        "title": "Searching Elements — Tasks",
+        "url": "https://javascript.info/searching-elements-dom#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "DOM CSS Exercises",
+        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_dom_css1",
+        "platform": "w3schools",
+        "difficulty": "easy"
+      },
+      {
+        "title": "DOM Attributes & Properties — Tasks",
+        "url": "https://javascript.info/dom-attributes-and-properties#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "xAvTgCsCHLs": {
+    "concept": "dom-create",
+    "conceptLabel": "Creating DOM Elements",
+    "practices": [
+      {
+        "title": "Modifying the Document — Tasks",
+        "url": "https://javascript.info/modifying-document#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Create List from User Input",
+        "url": "https://javascript.info/modifying-document#create-a-list",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "DOM Elements Exercises",
+        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_dom_elements1",
+        "platform": "w3schools",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "VQlY-X_eeTE": {
+    "concept": "dom-modify",
+    "conceptLabel": "Edit & Remove DOM Elements",
+    "practices": [
+      {
+        "title": "Sort Table — DOM Task",
+        "url": "https://javascript.info/modifying-document#sort-the-table",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Insert HTML/Element — Tasks",
+        "url": "https://javascript.info/modifying-document#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Styles and Classes — Tasks",
+        "url": "https://javascript.info/styles-and-classes#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "EGqHVjU-fas": {
+    "concept": "dom-projects",
+    "conceptLabel": "DOM Mini Projects",
+    "practices": [
+      {
+        "title": "Build a Random Color Flipper",
+        "url": "https://www.freecodecamp.org/news/javascript-projects-for-beginners/",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Build a Counter App",
+        "url": "https://www.freecodecamp.org/news/javascript-projects-for-beginners/#how-to-create-a-counter",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Build a Simple Calculator",
+        "url": "https://www.freecodecamp.org/news/javascript-projects-for-beginners/#how-to-create-a-simple-calculator",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "_ALUMTa8BAE": {
+    "concept": "dom-events",
+    "conceptLabel": "Events & Event Handling",
+    "practices": [
+      {
+        "title": "Introduction to Events — Tasks",
+        "url": "https://javascript.info/introduction-browser-events#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Bubbling and Capturing — Tasks",
+        "url": "https://javascript.info/bubbling-and-capturing#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Event Delegation — Tasks",
+        "url": "https://javascript.info/event-delegation#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "JS Events Exercises",
+        "url": "https://www.w3schools.com/js/exercise.asp?filename=exercise_js_events1",
+        "platform": "w3schools",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "zgt5oTD3rRc": {
+    "concept": "async-basics",
+    "conceptLabel": "Async JavaScript Fundamentals",
+    "practices": [
+      {
+        "title": "Callbacks — Tasks",
+        "url": "https://javascript.info/callbacks#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "setTimeout / setInterval — Tasks",
+        "url": "https://javascript.info/settimeout-setinterval#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Event Loop Visualizer (Loupe)",
+        "url": "http://latentflip.com/loupe/",
+        "platform": "other",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "efrW5-IYoCU": {
+    "concept": "async-projects",
+    "conceptLabel": "Async JS Projects",
+    "practices": [
+      {
+        "title": "Build a Countdown Timer",
+        "url": "https://www.freecodecamp.org/news/javascript-projects-for-beginners/#how-to-create-a-countdown-timer",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Build a Random Quote Generator",
+        "url": "https://www.freecodecamp.org/news/javascript-projects-for-beginners/#how-to-create-a-random-quote-generator",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Async Exercises",
+        "url": "https://www.w3schools.com/js/js_asynchronous.asp",
+        "platform": "w3schools",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "pDPAcYdSse8": {
+    "concept": "api-fetch",
+    "conceptLabel": "API Requests & V8 Engine",
+    "practices": [
+      {
+        "title": "Fetch API — Tasks",
+        "url": "https://javascript.info/fetch#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Working with APIs (FCC)",
+        "url": "https://www.freecodecamp.org/news/how-to-use-fetch-api/",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Build a Weather App",
+        "url": "https://www.freecodecamp.org/news/javascript-projects-for-beginners/#how-to-create-a-weather-app",
+        "platform": "freecodecamp",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  "NJwRQgsu1Q8": {
+    "concept": "promises",
+    "conceptLabel": "Promises",
+    "practices": [
+      {
+        "title": "Promise Basics — Tasks",
+        "url": "https://javascript.info/promise-basics#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Promises Chaining — Tasks",
+        "url": "https://javascript.info/promise-chaining#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Create a JavaScript Promise",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/create-a-javascript-promise",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Sleep — LeetCode #2621",
+        "url": "https://leetcode.com/problems/sleep/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Timeout Cancellation — LeetCode #2715",
+        "url": "https://leetcode.com/problems/timeout-cancellation/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "Rive84an6Lc": {
+    "concept": "fetch-api",
+    "conceptLabel": "Fetch API & async/await",
+    "practices": [
+      {
+        "title": "Async/Await — Tasks",
+        "url": "https://javascript.info/async-await#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Error Handling with Promises",
+        "url": "https://javascript.info/promise-error-handling#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Promise.all — Tasks",
+        "url": "https://javascript.info/promise-api#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Add Two Promises — LeetCode #2723",
+        "url": "https://leetcode.com/problems/add-two-promises/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "pN-Qmv4zBcI": {
+    "concept": "oop",
+    "conceptLabel": "Object-Oriented Programming",
+    "practices": [
+      {
+        "title": "Constructor Functions — Tasks",
+        "url": "https://javascript.info/constructor-new#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "OOP Challenges (FCC)",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/object-oriented-programming/",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Define a Constructor Function",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/object-oriented-programming/define-a-constructor-function",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "uMI5cNeHTOc": {
+    "concept": "prototype",
+    "conceptLabel": "Prototypes & Prototype Chain",
+    "practices": [
+      {
+        "title": "Prototypal Inheritance — Tasks",
+        "url": "https://javascript.info/prototype-inheritance#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "F.prototype — Tasks",
+        "url": "https://javascript.info/function-prototype#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Prototype Methods — Tasks",
+        "url": "https://javascript.info/prototype-methods#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Understand the Prototype Chain",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/object-oriented-programming/understand-the-prototype-chain",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "-owpuf4lbyU": {
+    "concept": "call-apply",
+    "conceptLabel": "call(), apply() & this",
+    "practices": [
+      {
+        "title": "Decorators and Forwarding — Tasks",
+        "url": "https://javascript.info/call-apply-decorators#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Function Binding — Tasks",
+        "url": "https://javascript.info/bind#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Object Methods & 'this' — Tasks",
+        "url": "https://javascript.info/object-methods#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "u6mVHkMpoMk": {
+    "concept": "classes",
+    "conceptLabel": "Classes, Constructor & Static",
+    "practices": [
+      {
+        "title": "Class Basic Syntax — Tasks",
+        "url": "https://javascript.info/class#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Class Inheritance — Tasks",
+        "url": "https://javascript.info/class-inheritance#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Static Properties & Methods — Tasks",
+        "url": "https://javascript.info/static-properties-methods#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Use ES6 Class Syntax",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-class-syntax-to-define-a-constructor-function",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "High Scores (Exercism)",
+        "url": "https://exercism.org/tracks/javascript/exercises/high-scores",
+        "platform": "exercism",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  "75dMiOY_4ac": {
+    "concept": "bind",
+    "conceptLabel": "bind() Method",
+    "practices": [
+      {
+        "title": "Function Binding — Tasks (6 exercises)",
+        "url": "https://javascript.info/bind#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Partial Application Practice",
+        "url": "https://javascript.info/bind#partial-functions",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Understand call, apply, and bind",
+        "url": "https://www.freecodecamp.org/news/understand-call-apply-and-bind-in-javascript-with-examples/",
+        "platform": "freecodecamp",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "jss2rL9kv6s": {
+    "concept": "objects-deep",
+    "conceptLabel": "Objects Deep Dive",
+    "practices": [
+      {
+        "title": "Property Flags & Descriptors — Tasks",
+        "url": "https://javascript.info/property-descriptors#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Symbol Type",
+        "url": "https://javascript.info/symbol",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Optional Chaining — Tasks",
+        "url": "https://javascript.info/optional-chaining#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "t6vLhF-iSxQ": {
+    "concept": "getter-setter",
+    "conceptLabel": "Getters, Setters & Descriptors",
+    "practices": [
+      {
+        "title": "Property Getters and Setters — Tasks",
+        "url": "https://javascript.info/property-accessors#tasks",
+        "platform": "javascript.info",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Use Getters and Setters (FCC)",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/es6/use-getters-and-setters-to-control-access-to-an-object",
+        "platform": "freecodecamp",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Private Class Features — Tasks",
+        "url": "https://javascript.info/private-protected-properties-methods#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  "VaH09NXQZ58": {
+    "concept": "closures",
+    "conceptLabel": "Lexical Scoping & Closures",
+    "practices": [
+      {
+        "title": "Closure — Tasks (10 exercises!)",
+        "url": "https://javascript.info/closure#tasks",
+        "platform": "javascript.info",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Counter — LeetCode #2620",
+        "url": "https://leetcode.com/problems/counter/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Counter II — LeetCode #2665",
+        "url": "https://leetcode.com/problems/counter-ii/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Hello World Function — LeetCode #2667",
+        "url": "https://leetcode.com/problems/create-hello-world-function/",
+        "platform": "leetcode",
+        "difficulty": "easy"
+      },
+      {
+        "title": "Closures & Scopes (7 kyu)",
+        "url": "https://www.codewars.com/kata/541ef01e9a28e5e0ec000017",
+        "platform": "codewars",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Windowing System (Exercism)",
+        "url": "https://exercism.org/tracks/javascript/exercises/windowing-system",
+        "platform": "exercism",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "z9PINyinqwo": {
+    "concept": "js-recap",
+    "conceptLabel": "JavaScript Complete Review",
+    "practices": [
+      {
+        "title": "FCC: JS Algorithms & Data Structures (Full Cert)",
+        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/",
+        "platform": "freecodecamp",
+        "difficulty": "hard"
+      },
+      {
+        "title": "LeetCode JS 30 Days Challenge",
+        "url": "https://leetcode.com/studyplan/30-days-of-javascript/",
+        "platform": "leetcode",
+        "difficulty": "medium"
+      },
+      {
+        "title": "JavaScript Track (Exercism)",
+        "url": "https://exercism.org/tracks/javascript",
+        "platform": "exercism",
+        "difficulty": "medium"
+      },
+      {
+        "title": "Codewars JavaScript Kata",
+        "url": "https://www.codewars.com/kata/search/javascript?q=&r%5B%5D=-8&r%5B%5D=-7",
+        "platform": "codewars",
+        "difficulty": "medium"
+      }
+    ]
+  },
+  "ZRS485LxX0s": {
+    "concept": "v8-internals",
+    "conceptLabel": "V8 Internals — PACKED vs HOLEY",
+    "practices": [
+      {
+        "title": "V8 Blog: Elements Kinds",
+        "url": "https://v8.dev/blog/elements-kinds",
+        "platform": "other",
+        "difficulty": "hard"
+      },
+      {
+        "title": "JavaScript Engine Fundamentals",
+        "url": "https://mathiasbynens.be/notes/shapes-ics",
+        "platform": "other",
+        "difficulty": "hard"
+      },
+      {
+        "title": "Performance Benchmark Exercises",
+        "url": "https://www.codewars.com/kata/search/javascript?q=performance",
+        "platform": "codewars",
+        "difficulty": "hard"
+      }
+    ]
+  }
+}
