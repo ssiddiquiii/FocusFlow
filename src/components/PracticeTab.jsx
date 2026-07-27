@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ExternalLink, CheckCircle2, Circle, Lightbulb, ChevronDown, ChevronUp, Target, Filter } from 'lucide-react';
 import jsTopicPractice from '../data/jsTopicPractice.json';
+import CategoryIcon from './CategoryIcon';
 
 /**
  * Mapping lesson concepts to topic practice module IDs.
@@ -172,10 +173,10 @@ export default function PracticeTab({ courseId, lessonId, practiceProgressList, 
       {/* Topic Module Selector Header */}
       <div className="space-y-3 pb-3 border-b border-border/50">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">{currentModule.icon}</span>
+          <div className="flex items-center gap-3">
+            <CategoryIcon id={currentModule.id} size={22} />
             <div>
-              <h3 className="text-sm font-bold text-white">{currentModule.topic}</h3>
+              <h3 className="text-sm font-bold text-white tracking-tight">{currentModule.topic}</h3>
               <p className="text-[10px] text-zinc-400 mt-0.5">{currentModule.description}</p>
             </div>
           </div>

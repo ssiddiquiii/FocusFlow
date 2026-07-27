@@ -7,6 +7,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/FocusFlowDB';
 import PracticeTab from '../components/PracticeTab';
 import ReadingTab from '../components/ReadingTab';
+import CategoryIcon from '../components/CategoryIcon';
 import jsTopicPractice from '../data/jsTopicPractice.json';
 
 const LESSON_TOPIC_MAP = {
@@ -763,11 +764,11 @@ export default function Watch() {
 
             return (
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-primary/10 border border-primary/25 mt-2">
-                <div className="flex items-center gap-2.5">
-                  <span className="text-lg">{catObj.icon}</span>
+                <div className="flex items-center gap-3">
+                  <CategoryIcon id={catObj.id} size={24} />
                   <div>
                     <span className="text-[10px] font-bold text-primary uppercase tracking-widest block">Topic Practice Category</span>
-                    <h4 className="text-xs font-bold text-white">{catObj.topic}</h4>
+                    <h4 className="text-xs font-bold text-white tracking-tight">{catObj.topic}</h4>
                   </div>
                 </div>
                 <button
