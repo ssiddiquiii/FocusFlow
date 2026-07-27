@@ -147,13 +147,13 @@ export default function Watch() {
     db.notes.where({ courseId, lessonId }).sortBy('timestamp')
   , [courseId, lessonId]) || [];
 
-  // Reset play states when navigating to a new lesson
+  // Auto-trigger video playback on load & lesson switch
   useEffect(() => {
     if (lessonId) {
       setActiveLessonId(lessonId);
       setPlayerCurrentTime(0);
       setPlayerDuration(0);
-      setIsPlayerTriggered(false); // require click on new lesson
+      setIsPlayerTriggered(true); // Auto-trigger playback on lesson change
       setPlaybackSpeed(1);
     }
   }, [lessonId]);
@@ -285,20 +285,33 @@ export default function Watch() {
       }
     };
 
+    const targetVideoId = lesson.videoId || lessonId;
+    const startSec = resumeSeconds > 0 ? resumeSeconds : (lesson.startTimestamp || 0);
+
     const initializePlayer = () => {
+      // If player instance already exists, load new video directly
+      if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
+        ytPlayer.loadVideoById({
+          videoId: targetVideoId,
+          startSeconds: startSec
+        });
+        ytPlayer.playVideo();
+        return;
+      }
+
       playerInstance = new window.YT.Player('yt-player-iframe', {
         height: '100%',
         width: '100%',
-        videoId: lesson.videoId || lessonId,
+        videoId: targetVideoId,
         playerVars: {
-          start: lesson.startTimestamp || 0,
+          start: startSec,
           rel: 0,
           iv_load_policy: 3,
           modestbranding: 1,
-          controls: 0, 
-          disablekb: 1,
-          fs: 0,
-          cc_load_policy: 0 
+          controls: 1, 
+          disablekb: 0,
+          fs: 1,
+          autoplay: 1
         },
         events: {
           onReady: onPlayerReady,
@@ -307,7 +320,7 @@ export default function Watch() {
       });
     };
 
-    if (!window.YT) {
+    if (!window.YT || !window.YT.Player) {
       const tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
       const firstScriptTag = document.getElementsByTagName('script')[0];
