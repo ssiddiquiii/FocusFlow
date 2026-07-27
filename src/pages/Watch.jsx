@@ -656,16 +656,42 @@ export default function Watch() {
               {isPlayerTriggered && (
                 <div className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/90 to-transparent p-4 flex flex-col gap-3 z-20 transition-opacity duration-300 ${isControlsVisible || !isPlaying ? 'opacity-100' : 'opacity-0'}`}>
                   
-                  {/* Seek Timeline */}
+                  {/* Seek Timeline Progress Bar with Chapter Timestamp Markers */}
                   <div 
                     ref={progressBarRef}
                     onClick={handleProgressBarClick}
-                    className="w-full h-1.5 bg-zinc-800 rounded-full cursor-pointer relative overflow-hidden group/timeline hover:h-2 transition-all"
+                    className="w-full h-2.5 bg-zinc-800/90 rounded-full cursor-pointer relative overflow-visible group/timeline border border-zinc-700/50"
                   >
+                    {/* Progress Line Fill */}
                     <div 
-                      className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-75"
+                      className="h-full bg-gradient-to-r from-primary via-accent to-yellow-400 rounded-full transition-all duration-75 shadow-lg shadow-primary/30"
                       style={{ width: `${progressPercent}%` }}
                     />
+
+                    {/* Interactive Chapter Timestamp Markers on Progress Bar */}
+                    {playerDuration > 0 && lesson.chapters && lesson.chapters.map((ch, idx) => {
+                      const leftPct = Math.min(100, Math.max(0, (ch.timestamp / playerDuration) * 100));
+                      return (
+                        <div 
+                          key={idx}
+                          style={{ left: `${leftPct}%` }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            triggerPlayerSeek(ch.timestamp);
+                          }}
+                          className="absolute top-1/2 -translate-y-1/2 -ml-1 w-2.5 h-2.5 rounded-full bg-white border-2 border-primary shadow-md hover:scale-150 transition-transform group/marker z-30 cursor-pointer"
+                        >
+                          {/* Chapter Marker Hover Tooltip */}
+                          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/marker:flex flex-col items-center pointer-events-none z-40 whitespace-nowrap">
+                            <div className="px-2.5 py-1 rounded-md bg-zinc-950 text-white border border-primary/40 text-[10px] font-bold shadow-xl flex items-center gap-1.5">
+                              <span className="text-primary font-mono">⏱️ {ch.formattedTime}</span>
+                              <span className="text-zinc-300 font-semibold">{ch.title}</span>
+                            </div>
+                            <div className="w-1.5 h-1.5 bg-zinc-950 rotate-45 border-r border-b border-primary/40 -mt-1" />
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
 
                   {/* Control Actions Row */}
