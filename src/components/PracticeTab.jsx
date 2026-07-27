@@ -72,7 +72,17 @@ const LESSON_TOPIC_MAP = {
   // Batch 10 (Videos 49-51): Closures & V8 Internals
   'VaH09NXQZ58': 'cat-10-closures-v8-internals',
   'z9PINyinqwo': 'cat-10-closures-v8-internals',
-  'ZRS485LxX0s': 'cat-10-closures-v8-internals'
+  'ZRS485LxX0s': 'cat-10-closures-v8-internals',
+
+  // Git & GitHub Masterclass Chapters (Hitesh Choudhary Chai aur Git)
+  'git_ch_1': 'cat-git-1-intro',
+  'git_ch_2': 'cat-git-2-config',
+  'git_ch_3': 'cat-git-3-staging',
+  'git_ch_4': 'cat-git-4-commits',
+  'git_ch_5': 'cat-git-5-branching',
+  'git_ch_6': 'cat-git-6-remotes',
+  'git_ch_7': 'cat-git-7-prs-open-source',
+  'git_ch_8': 'cat-git-8-conflicts-rebase'
 };
 
 const DIFFICULTY_BADGES = {

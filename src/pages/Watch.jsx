@@ -57,7 +57,15 @@ const LESSON_TOPIC_MAP = {
   't6vLhF-iSxQ': 'cat-9-classes-callbind-descriptors',
   'VaH09NXQZ58': 'cat-10-closures-v8-internals',
   'z9PINyinqwo': 'cat-10-closures-v8-internals',
-  'ZRS485LxX0s': 'cat-10-closures-v8-internals'
+  'ZRS485LxX0s': 'cat-10-closures-v8-internals',
+  'git_ch_1': 'cat-git-1-intro',
+  'git_ch_2': 'cat-git-2-config',
+  'git_ch_3': 'cat-git-3-staging',
+  'git_ch_4': 'cat-git-4-commits',
+  'git_ch_5': 'cat-git-5-branching',
+  'git_ch_6': 'cat-git-6-remotes',
+  'git_ch_7': 'cat-git-7-prs-open-source',
+  'git_ch_8': 'cat-git-8-conflicts-rebase'
 };
 
 const SPEED_OPTIONS = [0.5, 1, 1.25, 1.5, 2];
