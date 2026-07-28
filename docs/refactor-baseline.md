@@ -88,9 +88,9 @@ Audited using DOM BoundingRect APIs across all viewports (stored in [`./evidence
 ## 4. Playwright Performance & Web Vitals Baseline
 
 **Measurement Methodology & Environment Configuration**:
-- **Measurement Method**: Custom Playwright Performance & Timings Instrumentation (`PerformanceObserver` for LCP/CLS, `performance.getEntriesByType('navigation')` for DOMContentLoaded and Load Event).
-- **Measurement Limits & Qualification**: Synthetic Playwright automated measurements on an unthrottled local preview server (`http://localhost:4185`), not full Chrome Lighthouse audit scores. Full Lighthouse CLI scores will be evaluated during Phase 10 release testing.
-- **Target Page Verification**: Watch metrics were captured on the **real Watch Workspace screen** reached by UI navigation, not on a error placeholder screen.
+- **Measurement Method**: Custom Playwright Performance & Timings Instrumentation (`PerformanceObserver` for LCP/CLS, `performance.getEntriesByType('navigation')[0]` for DOMContentLoaded and Load Event).
+- **Measurement Limits & Qualification**: Synthetic Playwright automated measurements on an unthrottled local preview server (`http://localhost:4186`), not full Chrome Lighthouse audit scores. Full Lighthouse CLI scores will be evaluated during Phase 10 release testing.
+- **Target Page Verification**: Watch metrics were captured on the **real Watch Workspace screen** reached by UI navigation. DOMContentLoaded and load-event timings are captured from a single navigation entry.
 
 Stored in [`./evidence/performance/playwright_web_vitals_baseline.json`](./evidence/performance/playwright_web_vitals_baseline.json):
 
@@ -101,7 +101,7 @@ Stored in [`./evidence/performance/playwright_web_vitals_baseline.json`](./evide
 
 ### 4.2 Desktop Viewport (1440 × 900)
 - **Dashboard**: LCP = `1228 ms`, CLS = `0.0653`, DOMContentLoaded = `503 ms`, Load = `506 ms`
-- **Watch (Real Screen)**: LCP = `671 ms`, CLS = `0.0082`, DOMContentLoaded = `432 ms`, Load = `435 ms`
+- **Watch (Real Screen)**: LCP = `3360 ms`, CLS = `0.076`, DOMContentLoaded = `2791 ms`, Load = `2795 ms`
 - **Practice**: LCP = `1112 ms`, CLS = `0.0382`, DOMContentLoaded = `472 ms`, Load = `474 ms`
 
 ---
@@ -171,6 +171,6 @@ Audited using Chromium IndexedDB store counts before and after browser reload (s
 
 ## 8. Baseline Audit Summary & Next Phase
 
-- **Phase 0 Status**: **COMPLETED & FULLY DOCUMENTED**
+- **Phase 0 Status**: **COMPLETED & FULLY SYNCHRONIZED**
 - **Application Source Code Status**: **0 files modified in `src/`**.
 - **Exact Next Approved Phase**: **Phase 1 — Correctness, Backup and API Security**.
