@@ -9,6 +9,8 @@ import {
   selectSortedCourses
 } from '../../../src/utils/selectors.js';
 
+const BASE_URL = process.env.FOCUSFLOW_TEST_BASE_URL || 'http://127.0.0.1:4173';
+
 let passed = 0;
 let failed = 0;
 
@@ -112,7 +114,7 @@ async function run() {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
   try {
-    await page.goto('http://localhost:5173/', { waitUntil: 'networkidle' });
+    await page.goto(`${BASE_URL}/`, { waitUntil: 'networkidle' });
     const isolation = await page.evaluate(async () => {
       const { db } = await import('/src/db/FocusFlowDB.js');
       const { liveQuery } = await import('/node_modules/.vite/deps/dexie.js');
@@ -191,7 +193,7 @@ async function run() {
         `/courses/${catalog.courseId}`,
         `/courses/${catalog.courseId}/lessons/${catalog.lessonId}`
       ]) {
-        await page.goto(`http://localhost:5173${route}`, { waitUntil: 'networkidle' });
+        await page.goto(`${BASE_URL}${route}`, { waitUntil: 'networkidle' });
         const routeState = await page.evaluate(() => ({
           overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
           bodyText: document.body.innerText
@@ -205,7 +207,7 @@ async function run() {
     }
     assert(responsiveRoutesPassed, 'Dashboard, Course Detail, and Watch pass the nine-viewport route matrix');
 
-    await page.goto('http://localhost:5173/courses/phase2c-missing-course', { waitUntil: 'networkidle' });
+    await page.goto(`${BASE_URL}/courses/phase2c-missing-course`, { waitUntil: 'networkidle' });
     assert(
       await page.getByText('Course Not Found').isVisible(),
       'resolved missing Course Detail route renders not-found state'

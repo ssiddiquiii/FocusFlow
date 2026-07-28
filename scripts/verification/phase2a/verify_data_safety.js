@@ -1,5 +1,7 @@
 import { chromium } from 'playwright';
 
+const BASE_URL = process.env.FOCUSFLOW_TEST_BASE_URL || 'http://127.0.0.1:4173';
+
 let passed = 0;
 let failed = 0;
 
@@ -19,7 +21,7 @@ async function run() {
   const page = await browser.newPage();
 
   try {
-    await page.goto('http://localhost:5173/', { waitUntil: 'networkidle' });
+    await page.goto(`${BASE_URL}/`, { waitUntil: 'networkidle' });
 
     const result = await page.evaluate(async () => {
       const { db } = await import('/src/db/FocusFlowDB.js');

@@ -1,4 +1,6 @@
 import { chromium } from 'playwright';
+
+const BASE_URL = process.env.FOCUSFLOW_TEST_BASE_URL || 'http://127.0.0.1:4173';
 import path from 'path';
 import fs from 'fs';
 
@@ -22,7 +24,7 @@ async function runPracticeUrlRoundTripTest() {
   const page = await browser.newPage();
 
   try {
-    await page.goto('http://localhost:5173/settings', { waitUntil: 'networkidle' });
+    await page.goto(`${BASE_URL}/settings`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1000);
 
     const testBackupPath = path.resolve('scripts/verification/phase1/practice_urls_backup.json');

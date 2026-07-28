@@ -1,4 +1,6 @@
 import { chromium } from 'playwright';
+
+const BASE_URL = process.env.FOCUSFLOW_TEST_BASE_URL || 'http://127.0.0.1:4173';
 import path from 'path';
 import fs from 'fs';
 
@@ -22,8 +24,8 @@ async function runE2ETests() {
   const page = await browser.newPage();
 
   try {
-    await page.goto('http://localhost:5173/', { waitUntil: 'networkidle' });
-    console.log('Opened http://localhost:5173/');
+    await page.goto(`${BASE_URL}/`, { waitUntil: 'networkidle' });
+    console.log(`Opened ${BASE_URL}/`);
 
     await page.waitForTimeout(1500);
 
@@ -47,7 +49,7 @@ async function runE2ETests() {
     console.log(`Dashboard UI Notes Written text: "${dashboardNotesText}"`);
     assert(parseInt(dashboardNotesText, 10) === noteCountBefore, `Dashboard Notes Written (${dashboardNotesText}) matches IndexedDB count (${noteCountBefore})`);
 
-    await page.goto('http://localhost:5173/settings', { waitUntil: 'networkidle' });
+    await page.goto(`${BASE_URL}/settings`, { waitUntil: 'networkidle' });
     
     const invalidJsonPath = path.resolve('scripts/verification/phase1/invalid_test.json');
     fs.writeFileSync(invalidJsonPath, '{ invalid json payload: ', 'utf-8');

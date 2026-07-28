@@ -1,5 +1,29 @@
 # FocusFlow Refactor State Tracker
 
+## Current Authoritative Status (Phase 3)
+
+Phase 3 — Reproducible Test Foundation is implemented and verified, awaiting user review and commit approval.
+
+No next phase is approved. The next planned phase is Phase 4 — Responsive Application Shell, which requires a new `PROCEED NEXT PHASE` after Phase 3 is approved and committed.
+
+Completed and verified:
+
+- Added explicit `test`, `test:unit`, `test:browser`, `test:security`, `test:runner`, and `test:all` package scripts.
+- Added Playwright 1.62.0 as a lockfile-tracked development dependency; the browser suite no longer depends on an untracked Playwright installation.
+- Added a deterministic single-worker Playwright configuration with a strict local test-server port and retained failure traces.
+- Added a maintained verification orchestrator that starts and stops its own Vite server, runs every existing verification script sequentially, and propagates child failures.
+- Made all seven browser verification scripts consume the runner-provided base URL instead of relying on a personal `localhost:5173` process.
+- Retained fresh, non-persistent browser contexts per verification script so IndexedDB test state is isolated.
+- Added an intentional exit-code-7 fixture and verification proving the runner exits non-zero when a child fails.
+- Completed `npm ci`; the install reported 12 audit advisories (2 moderate, 10 high) for later dependency-roadmap review and made no production dependency change.
+- Verified 39 unit assertions and 91 browser assertions (130 total), including backup roundtrips, invalid-backup preservation, IndexedDB preservation, bootstrap/command behavior, scoped reactive reads, and the nine-viewport route matrix.
+- Quality gates passed: build, frontend secret scan (17 generated assets, 0 exposed key patterns), and lint with 46 warnings / 0 errors.
+- Kept the Dexie application schema at version 3 and did not change application, API, database, backup, public, or runtime configuration behavior.
+
+Detailed evidence is recorded in [`./refactor-phase3-implementation.md`](./refactor-phase3-implementation.md).
+
+The older state entries below are retained as historical handoff context and are superseded by this section.
+
 ## Current Authoritative Status (Phase 2C)
 
 Phase 2C — Scoped Reactive Queries and Pure Selectors is implemented and verified, awaiting user review and commit approval.
