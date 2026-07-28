@@ -237,11 +237,11 @@ export default function Dashboard() {
 
         {/* 2-Column Symmetrical Split Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-          {/* LEFT COLUMN (7 Cols): Resume Hero Banner + Mindset Quote */}
-          <div className="lg:col-span-7 flex flex-col justify-between gap-4">
-            {/* Resume Learning Glass Banner */}
+          {/* LEFT COLUMN (7 Cols): Resume Hero Banner + Mindset Quote (Equal 50/50 Vertical Flex Split) */}
+          <div className="lg:col-span-7 flex flex-col gap-4 items-stretch">
+            {/* Resume Learning Glass Banner (50% Height) */}
             {continuePath ? (
-              <div className="glass-panel rounded-2xl p-5 border border-primary/20 bg-gradient-to-r from-primary/10 via-zinc-950 to-zinc-950 flex flex-col justify-between space-y-4 shadow-xl flex-1">
+              <div className="glass-panel rounded-2xl p-5 border border-primary/20 bg-gradient-to-r from-primary/10 via-zinc-950 to-zinc-950 flex flex-col justify-between space-y-4 shadow-xl flex-1 min-h-[140px]">
                 <div className="flex items-center justify-between">
                   <span className="px-2.5 py-1 rounded-full bg-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/30">
                     Active Learning Session
@@ -263,7 +263,7 @@ export default function Dashboard() {
                 </button>
               </div>
             ) : (
-              <div className="glass-panel rounded-2xl p-5 border border-zinc-800 bg-zinc-950/80 flex flex-col justify-between space-y-3 flex-1">
+              <div className="glass-panel rounded-2xl p-5 border border-zinc-800 bg-zinc-950/80 flex flex-col justify-between space-y-3 flex-1 min-h-[140px]">
                 <div className="flex items-center justify-between">
                   <span className="px-2.5 py-1 rounded-full bg-zinc-800 text-zinc-400 text-[10px] font-bold uppercase tracking-widest">
                     Getting Started
@@ -277,8 +277,8 @@ export default function Dashboard() {
               </div>
             )}
 
-            {/* Dynamic Mindset Quote Sandbox */}
-            <div className="glass-panel rounded-2xl border border-white/10 bg-zinc-950/80 overflow-hidden shadow-lg">
+            {/* Dynamic Mindset Quote Sandbox (50% Height) */}
+            <div className="glass-panel rounded-2xl border border-white/10 bg-zinc-950/80 overflow-hidden shadow-lg flex-1 min-h-[140px] flex flex-col justify-center">
               <QuoteSandbox />
             </div>
           </div>
