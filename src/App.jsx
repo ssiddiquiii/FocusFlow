@@ -209,8 +209,8 @@ function AppContent() {
         </div>
       </aside>
 
-      {/* Main Content View Container (Spacious mobile & desktop offsets) */}
-      <main className={`flex-1 overflow-y-auto min-w-0 pb-20 ${
+      {/* Main Content View Container */}
+      <main className={`flex-1 overflow-y-auto min-w-0 pb-4 ${
         location.pathname.includes('/lessons/') 
           ? 'pt-14 md:pt-0 md:pl-22 lg:pl-24 px-2 sm:px-4' 
           : 'pt-16 md:pt-4 md:pl-22 lg:pl-24 px-3.5 sm:px-6'
@@ -244,8 +244,8 @@ function AppContent() {
           </Suspense>
         </ErrorBoundary>
 
-        {/* One-Line Minimal Global Footer */}
-        <footer className="mt-12 py-4 border-t border-border/40 text-center text-[11px] text-zinc-500 font-medium">
+        {/* One-Line Minimal Global Footer (Tightened top spacing) */}
+        <footer className="mt-6 mb-2 py-3 border-t border-border/30 text-center text-[11px] text-zinc-500 font-medium">
           FocusFlow OS • Built by <span className="text-zinc-300 font-bold">Sameed Siddiqui</span> • Local-First Developer Workspace
         </footer>
       </main>

@@ -596,7 +596,7 @@ export default function Watch() {
   return (
     <div className="flex flex-col lg:flex-row min-h-screen h-auto lg:h-screen overflow-y-auto lg:overflow-hidden bg-background">
       {/* Left Panel: Scrollable main content (Maximized Player + Below Syllabus) */}
-      <div className="flex-1 flex flex-col h-full min-w-0 overflow-y-auto bg-zinc-950/20 pb-12">
+      <div className="flex-1 flex flex-col h-full min-w-0 overflow-y-auto bg-zinc-950/20 pb-4 sm:pb-6">
         
         {/* Navigation header */}
         <div className="flex items-center gap-3 px-3 sm:px-6 py-2.5 sm:py-3.5 bg-zinc-950/95 border-b border-border sticky top-0 z-30 backdrop-blur-xl">
