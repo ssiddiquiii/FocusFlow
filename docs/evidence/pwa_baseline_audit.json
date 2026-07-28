@@ -1,0 +1,15 @@
+{
+  "offlineRouteReachable": true,
+  "appShellCached": true,
+  "indexedDBPersistence": {
+    "dbExists": true,
+    "version": 30,
+    "stores": [
+      "courses",
+      "lessons",
+      "notes",
+      "practiceProgress",
+      "progress"
+    ]
+  }
+}

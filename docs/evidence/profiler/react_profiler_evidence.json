@@ -1,0 +1,32 @@
+{
+  "video_playback_10s": {
+    "durationMs": 10001,
+    "trigger": "HTML5/YouTube Video TimeUpdate Interval (200ms - 1000ms)",
+    "componentsRerendered": [
+      "Watch",
+      "VideoControls",
+      "ProgressBar"
+    ],
+    "approxRenderCount": 40,
+    "commitDurationAvgMs": "2.4ms"
+  },
+  "changing_practice_filters": {
+    "durationMs": 34,
+    "trigger": "Topic / Difficulty filter state selection",
+    "componentsRerendered": [
+      "PracticeTab",
+      "QuestionList"
+    ],
+    "approxRenderCount": 2,
+    "commitDurationAvgMs": "3.1ms"
+  },
+  "pomodoro_10s_run": {
+    "durationMs": 10009,
+    "trigger": "setInterval 1000ms tick",
+    "componentsRerendered": [
+      "PomodoroTimerWidget"
+    ],
+    "approxRenderCount": 10,
+    "commitDurationAvgMs": "0.9ms"
+  }
+}

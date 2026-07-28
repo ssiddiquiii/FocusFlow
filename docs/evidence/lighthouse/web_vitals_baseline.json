@@ -1,0 +1,42 @@
+{
+  "mobile": {
+    "Dashboard": {
+      "lcpMs": 636,
+      "cls": 0.0313,
+      "domContentLoadedMs": 456,
+      "loadEventMs": 459
+    },
+    "Watch": {
+      "lcpMs": 564,
+      "cls": 0.034,
+      "domContentLoadedMs": 448,
+      "loadEventMs": 451
+    },
+    "Practice": {
+      "lcpMs": 920,
+      "cls": 0.1145,
+      "domContentLoadedMs": 426,
+      "loadEventMs": 429
+    }
+  },
+  "desktop": {
+    "Dashboard": {
+      "lcpMs": 1228,
+      "cls": 0.0653,
+      "domContentLoadedMs": 503,
+      "loadEventMs": 506
+    },
+    "Watch": {
+      "lcpMs": 828,
+      "cls": 0.0108,
+      "domContentLoadedMs": 430,
+      "loadEventMs": 433
+    },
+    "Practice": {
+      "lcpMs": 1112,
+      "cls": 0.0382,
+      "domContentLoadedMs": 472,
+      "loadEventMs": 474
+    }
+  }
+}
