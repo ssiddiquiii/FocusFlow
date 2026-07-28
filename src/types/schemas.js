@@ -40,10 +40,14 @@ export const UserProgressSchema = z.object({
   courseId: z.string().min(1),
   lessonId: z.string().min(1),
   completed: z.boolean().default(false),
-  watchTime: z.number().int().nonnegative().default(0), // in seconds
+  watchTime: z.number().int().nonnegative().optional(), // in seconds
+  currentTime: z.number().int().nonnegative().optional(), // legacy playback field
   lastWatched: z.number().int().positive(), // timestamp in ms
   updatedAt: z.number().int().positive().optional() // timestamp in ms
-});
+}).passthrough().transform((progress) => ({
+  ...progress,
+  watchTime: progress.watchTime ?? progress.currentTime ?? 0
+}));
 
 /**
  * Zod validation schema for a Note.
@@ -78,7 +82,7 @@ export const PracticeProgressSchema = z.object({
  * Zod validation schema for the JSON backup export/import wrapper.
  */
 export const BackupSchema = z.object({
-  version: z.number().int().positive(),
+  version: z.union([z.literal(1), z.literal(2)]),
   exportedAt: z.number().int().positive(),
   courses: z.array(CourseSchema),
   lessons: z.array(LessonSchema),
@@ -86,3 +90,56 @@ export const BackupSchema = z.object({
   notes: z.array(NoteSchema),
   practiceProgress: z.array(PracticeProgressSchema).optional().default([])
 });
+
+/**
+ * Verifies cross-table relationships after structural parsing and before import.
+ * Returns the parsed payload so callers cannot accidentally validate one object
+ * and write another.
+ */
+export function parseBackupForImport(rawBackup) {
+  const backup = BackupSchema.parse(rawBackup);
+  const courseIds = new Set();
+  const lessonsById = new Map();
+
+  for (const course of backup.courses) {
+    if (courseIds.has(course.id)) {
+      throw new Error(`Backup contains duplicate course ID "${course.id}".`);
+    }
+    courseIds.add(course.id);
+  }
+
+  for (const lesson of backup.lessons) {
+    if (!courseIds.has(lesson.courseId)) {
+      throw new Error(`Lesson "${lesson.id}" references missing course "${lesson.courseId}".`);
+    }
+    if (lessonsById.has(lesson.id)) {
+      throw new Error(`Backup contains duplicate lesson ID "${lesson.id}".`);
+    }
+    lessonsById.set(lesson.id, lesson);
+  }
+
+  const assertLearningReference = (record, recordType) => {
+    const lesson = lessonsById.get(record.lessonId);
+    if (!courseIds.has(record.courseId)) {
+      throw new Error(`${recordType} "${record.id}" references missing course "${record.courseId}".`);
+    }
+    if (!lesson) {
+      throw new Error(`${recordType} "${record.id}" references missing lesson "${record.lessonId}".`);
+    }
+    if (lesson.courseId !== record.courseId) {
+      throw new Error(`${recordType} "${record.id}" has a course/lesson ownership mismatch.`);
+    }
+  };
+
+  for (const progress of backup.progress) {
+    assertLearningReference(progress, 'Progress record');
+  }
+  for (const note of backup.notes) {
+    assertLearningReference(note, 'Note');
+  }
+  for (const practice of backup.practiceProgress) {
+    assertLearningReference(practice, 'Practice record');
+  }
+
+  return backup;
+}

@@ -113,7 +113,7 @@ export default function Watch() {
   const playerContainerRef = useRef(null);
   const progressBarRef = useRef(null);
   
-  const { courses, lessons, progressList, practiceProgressList, saveProgress, togglePractice } = useFocusFlow();
+  const { courses, lessons, progressList, practiceProgressList, saveProgress, setLessonCompletion, togglePractice } = useFocusFlow();
   const { activeLessonId, isPlaying, seekRequestTime, setActiveLessonId, setIsPlaying, triggerPlayerSeek } = useUIStore();
 
   const [activeTab, setActiveTab] = useState('notes'); // default to notes below video
@@ -561,7 +561,7 @@ export default function Watch() {
   const isUdemyCompleted = udemyProgress ? udemyProgress.completed : false;
 
   const handleUdemyToggle = async () => {
-    await saveProgress(courseId, lessonId, isUdemyCompleted ? 0 : 2700, !isUdemyCompleted);
+    await setLessonCompletion(courseId, lessonId, !isUdemyCompleted, isUdemyCompleted ? 0 : 2700);
   };
 
   // Save note

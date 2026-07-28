@@ -1,5 +1,28 @@
 # FocusFlow Refactor State Tracker
 
+## Current Authoritative Status (Phase 2A)
+
+Phase 2A — Data-Safety and Correctness Closure is implemented and verified, awaiting user review and commit approval.
+
+No next phase is approved. The next planned phase is Phase 2B — Single Bootstrap and Command Boundary, which requires `PROCEED NEXT PHASE`.
+
+Completed and verified:
+
+- Preserved legacy `currentTime` and unknown progress fields through backup parsing and export; missing `watchTime` derives from `currentTime`.
+- Restricted backup compatibility to supported versions 1 and 2.
+- Added pre-mutation referential-integrity validation for courses, lessons, progress, notes, and practice progress.
+- Changed startup seeding to seed only a completely empty five-table database; existing, partial, and legacy-ID databases are untouched.
+- Made factory reset clear and reseed all tables inside one transaction.
+- Made ordinary playback progress saves preserve existing fields and sticky completion.
+- Added an explicit lesson completion command and routed Udemy manual uncompletion through it.
+- Added atomic cross-course lesson-ID collision rejection for playlist imports.
+- Kept the Dexie application schema at version 3.
+- Added `scripts/verification/phase2a/verify_data_safety.js` with 20 passing preservation assertions.
+- Re-ran all Phase 1 verification scripts: 75/75 assertions passed.
+- Quality gates passed: build, frontend secret scan, and lint with 55 warnings / 0 errors.
+
+The older state entries below are retained as historical handoff context and are superseded by this section.
+
 ## Current Branch
 `refactor/focusflow-production-hardening`
 

@@ -1,6 +1,6 @@
 import Dexie from 'dexie';
 import seedData from './seedData.json';
-import { CourseSchema, LessonSchema, UserProgressSchema, NoteSchema, PracticeProgressSchema, BackupSchema } from '../types/schemas';
+import { CourseSchema, LessonSchema, BackupSchema, parseBackupForImport } from '../types/schemas';
 
 /**
  * FocusFlow Local-First Browser Database
@@ -44,29 +44,34 @@ class FocusFlowDB extends Dexie {
   }
 
   /**
-   * Seeds the database with pre-populated course metadata if empty.
-   * Runs inside a Dexie transaction to ensure database integrity.
+   * Seeds defaults only for a genuinely new, completely empty database.
+   * Existing or partially populated databases are never repaired or overwritten.
    * @returns {Promise<void>}
    */
   async seedIfEmpty() {
-    await this.transaction('rw', [this.courses, this.lessons], async () => {
-      // 1. Clean up legacy / removed course IDs
-      const coursesToRemove = ['udemy-agentic-ai', 'PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige', 'PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW', 'PLd1s-PEC5Pio'];
-      for (const id of coursesToRemove) {
-        await this.courses.delete(id);
-        await this.lessons.where('courseId').equals(id).delete();
-      }
+    return this.transaction(
+      'rw',
+      [this.courses, this.lessons, this.progress, this.notes, this.practiceProgress],
+      async () => {
+        const counts = await Promise.all([
+          this.courses.count(),
+          this.lessons.count(),
+          this.progress.count(),
+          this.notes.count(),
+          this.practiceProgress.count()
+        ]);
 
-      // 2. Ensure ALL seed courses (Chai aur JavaScript + Git Masterclass) and their lessons exist in IndexedDB
-      for (const c of seedData.courses) {
-        await this.courses.put(CourseSchema.parse(c));
-        const courseLessons = seedData.lessons.filter(l => l.courseId === c.id);
-        const existingLessonsCount = await this.lessons.where('courseId').equals(c.id).count();
-        if (existingLessonsCount < courseLessons.length) {
-          await this.lessons.bulkPut(courseLessons.map(l => LessonSchema.parse(l)));
+        if (counts.some(count => count > 0)) {
+          return false;
         }
+
+        const courses = seedData.courses.map(course => CourseSchema.parse(course));
+        const lessons = seedData.lessons.map(lesson => LessonSchema.parse(lesson));
+        await this.courses.bulkAdd(courses);
+        await this.lessons.bulkAdd(lessons);
+        return true;
       }
-    });
+    );
   }
 
   /**
@@ -92,8 +97,9 @@ class FocusFlowDB extends Dexie {
       await this.progress.clear();
       await this.notes.clear();
       await this.practiceProgress.clear();
+      await this.courses.bulkAdd(seedData.courses.map(course => CourseSchema.parse(course)));
+      await this.lessons.bulkAdd(seedData.lessons.map(lesson => LessonSchema.parse(lesson)));
     });
-    await this.seedIfEmpty();
   }
 
   /**
@@ -128,7 +134,7 @@ class FocusFlowDB extends Dexie {
    */
   async importBackup(rawBackup) {
     // Validate backup structure via Zod
-    const validatedBackup = BackupSchema.parse(rawBackup);
+    const validatedBackup = parseBackupForImport(rawBackup);
 
     await this.transaction('rw', [this.courses, this.lessons, this.progress, this.notes, this.practiceProgress], async () => {
       // Clear current data

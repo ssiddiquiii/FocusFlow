@@ -1,6 +1,69 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/FocusFlowDB';
 import { useState, useEffect, useMemo } from 'react';
+import { CourseSchema, LessonSchema } from '../types/schemas';
+
+export async function saveProgress(courseId, lessonId, seconds, completed = false) {
+  const progressId = `${courseId}_${lessonId}`;
+  const now = Date.now();
+
+  await db.transaction('rw', db.progress, async () => {
+    const existing = await db.progress.get(progressId);
+    await db.progress.put({
+      ...existing,
+      id: progressId,
+      courseId,
+      lessonId,
+      completed: completed || existing?.completed === true,
+      watchTime: Math.max(0, Math.round(seconds)),
+      lastWatched: now,
+      updatedAt: now
+    });
+  });
+}
+
+export async function setLessonCompletion(courseId, lessonId, completed, seconds = 0) {
+  const progressId = `${courseId}_${lessonId}`;
+  const now = Date.now();
+
+  await db.transaction('rw', db.progress, async () => {
+    const existing = await db.progress.get(progressId);
+    await db.progress.put({
+      ...existing,
+      id: progressId,
+      courseId,
+      lessonId,
+      completed,
+      watchTime: Math.max(0, Math.round(seconds)),
+      lastWatched: now,
+      updatedAt: now
+    });
+  });
+}
+
+export async function importCourse(courseInput, lessonsInput) {
+  const course = CourseSchema.parse(courseInput);
+  const lessons = lessonsInput.map(lesson => LessonSchema.parse(lesson));
+
+  if (lessons.some(lesson => lesson.courseId !== course.id)) {
+    throw new Error('Every imported lesson must belong to the imported course.');
+  }
+
+  await db.transaction('rw', [db.courses, db.lessons], async () => {
+    const existingLessons = await db.lessons.bulkGet(lessons.map(lesson => lesson.id));
+    const collision = existingLessons.find(
+      lesson => lesson && lesson.courseId !== course.id
+    );
+    if (collision) {
+      throw new Error(
+        `Cannot import this playlist because lesson "${collision.id}" already belongs to another course.`
+      );
+    }
+
+    await db.courses.put(course);
+    await db.lessons.bulkPut(lessons);
+  });
+}
 
 /**
  * Custom Production-Grade React Hook for FocusFlow core operations.
@@ -151,21 +214,6 @@ export function useFocusFlow() {
    * @param {number} seconds Current watch position seconds.
    * @param {boolean} completed Mark completed flag.
    */
-  async function saveProgress(courseId, lessonId, seconds, completed = false) {
-    const progressId = `${courseId}_${lessonId}`;
-    const now = Date.now();
-
-    await db.progress.put({
-      id: progressId,
-      courseId,
-      lessonId,
-      completed,
-      watchTime: Math.round(seconds),
-      lastWatched: now,
-      updatedAt: now
-    });
-  }
-
   /**
    * Finds the most recently watched lesson for a specific course.
    * Used to enable YouTube-style per-catalog "resume" tracking.
@@ -195,13 +243,6 @@ export function useFocusFlow() {
    * @param {object} course Course model object.
    * @param {Array<object>} lessonsList Lessons list array.
    */
-  async function importCourse(course, lessonsList) {
-    await db.transaction('rw', [db.courses, db.lessons], async () => {
-      await db.courses.put(course);
-      await db.lessons.bulkPut(lessonsList);
-    });
-  }
-
   /**
    * Deletes a course and all associated lessons, progress, and timestamped notes from Dexie IndexedDB.
    * @param {string} courseId Course ID.
@@ -252,6 +293,7 @@ export function useFocusFlow() {
     getContinueLearningPath,
     getLastWatchedLesson,
     saveProgress,
+    setLessonCompletion,
     importCourse,
     deleteCourse,
     togglePractice,
