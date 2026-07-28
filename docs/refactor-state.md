@@ -1,5 +1,33 @@
 # FocusFlow Refactor State Tracker
 
+## Current Authoritative Status (Phase 4)
+
+Phase 4 — Responsive Application Shell is implemented and verified, awaiting user review and commit approval.
+
+No next phase is approved. The next planned phase is Phase 5A — Dashboard and Catalog, which requires a new `PROCEED NEXT PHASE` after Phase 4 is approved and committed.
+
+Completed and verified:
+
+- Changed the shell breakpoint so mobile/tablet navigation is used below 1024px and the desktop dock begins at 1024px.
+- Centralized navigation items and collision-safe active-route matching.
+- Added `aria-current="page"` and accessible names to desktop and drawer navigation.
+- Added an accessible drawer lifecycle with focus entry/trapping, Escape/backdrop/route close, background scroll lock, focus restoration, inert closed state, safe-area padding, and 44px controls.
+- Added a shared accessible dialog primitive and migrated the command palette, playlist importer, and streak calendar without changing their domain behavior.
+- Added dialog focus trapping, Escape/backdrop handling, scroll lock, accessible naming, constrained viewport scrolling, and focus restoration.
+- Replaced the invalid route transition mode, disabled initial route animation, and honored reduced-motion preferences.
+- Removed root `overflow-x` clipping from the application wrapper, `html`, and `body`; layout now passes overflow checks without hiding defects.
+- Removed obsolete sidebar-collapse state from the ephemeral UI store.
+- Added `scripts/verification/phase4/verify_responsive_shell.js` with 32 passing assertions and a dedicated `npm run test:phase4` command.
+- Verified simulated notched-device safe-area spacing and stacked-overlay Escape isolation/focus restoration.
+- Captured and visually reviewed nine Phase 4 viewport screenshots in `docs/evidence/phase4/screenshots/`.
+- Re-ran all Phase 1–3 verification: 130/130 prior assertions passed; the aggregate total is 162/162.
+- Quality gates passed: build, frontend secret scan (17 generated assets, 0 exposed key patterns), and lint with 40 warnings / 0 errors, improving from the 46-warning Phase 3 baseline.
+- Kept the Dexie application schema at version 3 and did not change database, backup, API, public asset, or external-service behavior.
+
+Detailed evidence is recorded in [`./refactor-phase4-implementation.md`](./refactor-phase4-implementation.md).
+
+The older state entries below are retained as historical handoff context and are superseded by this section.
+
 ## Current Authoritative Status (Phase 3)
 
 Phase 3 — Reproducible Test Foundation is implemented and verified, awaiting user review and commit approval.

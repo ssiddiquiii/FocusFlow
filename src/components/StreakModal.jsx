@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Flame, Calendar, ChevronLeft, ChevronRight, X, CheckCircle2 } from 'lucide-react';
 import { getActiveDateSet, calculateStreak, toLocalDateString } from '../utils/streakUtils';
+import Dialog from './ui/Dialog';
 
 /**
  * Compact Fixed-Size Real-Time Streak & Monthly Activity Calendar Modal
@@ -41,11 +42,12 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
   const weekHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   return (
-    <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-in fade-in duration-150">
-      <div 
-        className="bg-zinc-950 border border-zinc-800 rounded-2xl w-full max-w-sm sm:max-w-md shadow-2xl overflow-hidden space-y-4 p-4 sm:p-5 relative"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      titleId="streak-dialog-title"
+      className="relative max-h-[calc(100dvh-2rem)] w-full max-w-sm space-y-4 overflow-y-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-4 shadow-2xl sm:max-w-md sm:p-5"
+    >
         {/* Modal Top Header */}
         <div className="flex items-center justify-between pb-2.5 border-b border-border/60">
           <div className="flex items-center gap-2">
@@ -54,7 +56,7 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <h3 className="text-sm sm:text-base font-extrabold text-white tracking-tight">Streak Calendar</h3>
+                <h3 id="streak-dialog-title" className="text-sm sm:text-base font-extrabold text-white tracking-tight">Streak Calendar</h3>
                 <span className="px-1.5 py-0.5 rounded-full bg-orange-500/20 text-orange-400 text-[9px] font-black uppercase tracking-wider border border-orange-500/30">
                   🔥 {streakCount} {streakCount === 1 ? 'Day' : 'Days'}
                 </span>
@@ -64,7 +66,8 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
           </div>
           <button 
             onClick={onClose}
-            className="p-1 rounded-lg hover:bg-zinc-900 text-zinc-400 hover:text-white transition cursor-pointer"
+            aria-label="Close streak calendar"
+            className="min-h-11 min-w-11 rounded-lg hover:bg-zinc-900 text-zinc-400 hover:text-white transition cursor-pointer flex items-center justify-center"
           >
             <X size={16} />
           </button>
@@ -156,7 +159,6 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
             <span className="text-xs sm:text-sm font-extrabold text-emerald-400 block mt-0.5">{practiceProgressList.filter(p => p.completed).length} Solved</span>
           </div>
         </div>
-      </div>
-    </div>
+    </Dialog>
   );
 }

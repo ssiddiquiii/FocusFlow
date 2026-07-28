@@ -13,6 +13,7 @@
     "test:browser": "node scripts/verification/run-suite.js browser",
     "test:security": "node scripts/verification/phase1/scan_bundle_keys.js",
     "test:runner": "node scripts/verification/phase3/verify_runner_failure.js",
+    "test:phase4": "node scripts/verification/run-suite.js phase4",
     "test:all": "npm run build && npm test && npm run test:security && npm run test:runner"
   },
   "dependencies": {

@@ -1,26 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useState } from 'react';
 import { Plus, Loader2, CheckCircle2, AlertCircle, Link2, X } from 'lucide-react';
 import { extractPlaylistId, fetchYouTubePlaylistData } from '../services/youtubeApi';
 import { importCourse } from '../services/dataCommands';
+import Dialog from './ui/Dialog';
 
 export default function ImportPlaylistModal({ isOpen, onClose }) {
   const [urlInput, setUrlInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
-
-  // Lock body scroll when modal is open to eliminate background page scrollbars
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -59,14 +47,21 @@ export default function ImportPlaylistModal({ isOpen, onClose }) {
     }
   };
 
-  return createPortal(
-    <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-zinc-950 border border-border rounded-2xl max-w-md sm:max-w-lg w-full p-5 sm:p-6 space-y-4 shadow-2xl relative">
+  return (
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      titleId="import-playlist-title"
+      closeOnBackdrop={!loading}
+      closeOnEscape={!loading}
+      className="relative max-h-[calc(100dvh-2rem)] w-full max-w-md space-y-4 overflow-y-auto rounded-2xl border border-border bg-zinc-950 p-5 shadow-2xl sm:max-w-lg sm:p-6"
+    >
         {/* Top Right Close Button */}
         <button
           onClick={onClose}
           disabled={loading}
-          className="absolute top-4 right-4 text-zinc-500 hover:text-white transition p-1.5 rounded-lg hover:bg-zinc-900 cursor-pointer"
+          aria-label="Close import dialog"
+          className="absolute top-3 right-3 min-h-11 min-w-11 text-zinc-500 hover:text-white transition rounded-lg hover:bg-zinc-900 cursor-pointer flex items-center justify-center"
         >
           <X size={18} />
         </button>
@@ -76,7 +71,7 @@ export default function ImportPlaylistModal({ isOpen, onClose }) {
             <Link2 size={18} />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-white leading-snug">Import YouTube Course</h2>
+            <h2 id="import-playlist-title" className="text-lg font-bold text-white leading-snug">Import YouTube Course</h2>
             <p className="text-zinc-400 text-xs mt-0.5">Paste any public YouTube Playlist URL to add it to your catalog.</p>
           </div>
         </div>
@@ -138,8 +133,6 @@ export default function ImportPlaylistModal({ isOpen, onClose }) {
             </button>
           </div>
         </form>
-      </div>
-    </div>,
-    document.body
+    </Dialog>
   );
 }

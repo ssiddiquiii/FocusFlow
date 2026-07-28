@@ -1,11 +1,12 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import { BookOpen, Settings as SettingsIcon, WifiOff, Menu, Target, Zap, Search, X } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { Menu, Search, X } from 'lucide-react';
 import PomodoroTimer from './components/PomodoroTimer';
 import ErrorBoundary from './components/ErrorBoundary';
 import CommandPalette from './components/CommandPalette';
 import { useUIStore } from './hooks/useUIStore';
+import { isNavigationActive, navigationItems } from './components/shell/navigation';
 
 // Lazy-loaded page components with instant hover preloading
 const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -17,24 +18,67 @@ const PracticeHub = lazy(() => import('./pages/PracticeHub'));
 
 // Preload functions for 0ms route switching
 const preloadDashboard = () => import('./pages/Dashboard');
-const preloadCourseDetail = () => import('./pages/CourseDetail');
-const preloadWatch = () => import('./pages/Watch');
 const preloadPractice = () => import('./pages/PracticeHub');
+
+const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 /**
  * Inner shell wrapper to access React Router location hooks.
  */
 function AppContent() {
-  const { 
-    sidebarCollapsed, 
-    toggleSidebar, 
-    commandPaletteOpen, 
-    openCommandPalette, 
-    closeCommandPalette 
-  } = useUIStore();
+  const { commandPaletteOpen, openCommandPalette, closeCommandPalette } = useUIStore();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const menuButtonRef = useRef(null);
+  const commandPaletteReturnFocusRef = useRef(null);
+  const drawerRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const reduceMotion = useReducedMotion();
+
+  const closeMobileSidebar = useCallback(() => setMobileSidebarOpen(false), []);
+
+  useEffect(() => {
+    closeMobileSidebar();
+  }, [location.pathname, closeMobileSidebar]);
+
+  useEffect(() => {
+    if (!mobileSidebarOpen) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    const menuButton = menuButtonRef.current;
+    document.body.style.overflow = 'hidden';
+    drawerRef.current?.querySelector(FOCUSABLE_SELECTOR)?.focus();
+
+    function trapDrawerFocus(event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeMobileSidebar();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+
+      const focusable = [...(drawerRef.current?.querySelectorAll(FOCUSABLE_SELECTOR) ?? [])];
+      const first = focusable[0];
+      const last = focusable.at(-1);
+      if (!first) {
+        event.preventDefault();
+        drawerRef.current?.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener('keydown', trapDrawerFocus);
+    return () => {
+      document.removeEventListener('keydown', trapDrawerFocus);
+      document.body.style.overflow = previousOverflow;
+      menuButton?.focus();
+    };
+  }, [mobileSidebarOpen, closeMobileSidebar]);
 
   useEffect(() => {
     function handleGlobalKeyDown(e) {
@@ -45,7 +89,10 @@ function AppContent() {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         if (commandPaletteOpen) closeCommandPalette();
-        else openCommandPalette();
+        else {
+          commandPaletteReturnFocusRef.current = document.activeElement;
+          openCommandPalette();
+        }
         return;
       }
 
@@ -66,47 +113,33 @@ function AppContent() {
           navigate('/offline');
         }
       }
-
-      // Escape key to close open overlays
-      if (e.key === 'Escape') {
-        if (commandPaletteOpen) closeCommandPalette();
-        if (mobileSidebarOpen) setMobileSidebarOpen(false);
-      }
     }
 
     window.addEventListener('keydown', handleGlobalKeyDown);
     return () => window.removeEventListener('keydown', handleGlobalKeyDown);
-  }, [commandPaletteOpen, mobileSidebarOpen, openCommandPalette, closeCommandPalette, navigate]);
-
-  const navItems = [
-    { name: 'Dashboard', path: '/', icon: BookOpen },
-    { name: 'Practice', path: '/practice', icon: Target },
-    { name: 'Settings', path: '/settings', icon: SettingsIcon },
-    { name: 'Offline', path: '/offline', icon: WifiOff }
-  ];
-
-  const isActive = (path) => {
-    if (path === '/' && location.pathname === '/') return true;
-    if (path !== '/' && location.pathname.startsWith(path)) return true;
-    return false;
-  };
+  }, [commandPaletteOpen, openCommandPalette, closeCommandPalette, navigate]);
 
   return (
-    <div className="flex min-h-screen bg-background text-foreground relative overflow-x-hidden">
+    <div className="relative flex min-h-screen bg-background text-foreground">
       {/* Mobile Backdrop Overlay when Drawer is Open */}
       {mobileSidebarOpen && (
-        <div 
-          onClick={() => setMobileSidebarOpen(false)} 
-          className="fixed inset-0 bg-black/70 z-40 md:hidden backdrop-blur-sm transition-opacity duration-300" 
+        <div
+          data-testid="navigation-backdrop"
+          aria-hidden="true"
+          onClick={closeMobileSidebar}
+          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
         />
       )}
 
       {/* Mobile Glass Header Bar (Fixed Top Bar for Mobile Screens) */}
-      <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-zinc-950/95 border-b border-border backdrop-blur-xl z-40 flex items-center justify-between px-3.5 shadow-md">
+      <header className="safe-area-header fixed inset-x-0 top-0 z-40 flex min-h-14 items-center justify-between border-b border-border bg-zinc-950/95 px-3.5 shadow-md backdrop-blur-xl lg:hidden">
         <button
+          ref={menuButtonRef}
           onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-          className="p-2 rounded-xl bg-zinc-900 border border-border text-white hover:bg-zinc-800 transition cursor-pointer flex items-center justify-center"
-          title="Open Navigation"
+          className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-zinc-900 text-white transition hover:bg-zinc-800 cursor-pointer"
+          aria-label={mobileSidebarOpen ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={mobileSidebarOpen}
+          aria-controls="mobile-navigation"
         >
           {mobileSidebarOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
@@ -117,16 +150,20 @@ function AppContent() {
         </Link>
 
         <button
-          onClick={openCommandPalette}
-          className="p-2 rounded-xl bg-zinc-900 border border-border text-zinc-400 hover:text-white transition cursor-pointer"
-          title="Search / Command Palette (Ctrl+K)"
+          onClick={(event) => {
+            event.currentTarget.focus();
+            commandPaletteReturnFocusRef.current = event.currentTarget;
+            openCommandPalette();
+          }}
+          className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-zinc-900 text-zinc-400 transition hover:text-white cursor-pointer"
+          aria-label="Open command palette"
         >
           <Search size={16} />
         </button>
-      </div>
+      </header>
 
       {/* Desktop Floating Vertical Glass Navigation Dock (Performance Optimized) */}
-      <aside className="hidden md:flex fixed left-3.5 top-1/2 -translate-y-1/2 z-50 flex-col items-center p-2.5 rounded-2xl bg-zinc-950/95 border border-white/10 backdrop-blur-md shadow-[0_15px_35px_rgba(0,0,0,0.6)] space-y-3.5">
+      <aside data-testid="desktop-navigation" aria-label="Primary navigation" className="fixed left-3.5 top-1/2 z-50 hidden -translate-y-1/2 flex-col items-center space-y-3.5 rounded-2xl border border-white/10 bg-zinc-950/95 p-2.5 shadow-[0_15px_35px_rgba(0,0,0,0.6)] backdrop-blur-md lg:flex">
         {/* Integrated Brand Logo Icon at Top of Dock */}
         <Link 
           to="/" 
@@ -144,8 +181,8 @@ function AppContent() {
         <div className="w-6 h-[1px] bg-zinc-800/80 my-0.5" />
 
         {/* Navigation Dock Items */}
-        {navItems.map((item) => {
-          const isActive = location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path));
+        {navigationItems.map((item) => {
+          const isActive = isNavigationActive(location.pathname, item.path);
           const Icon = item.icon;
 
           let handleHover;
@@ -157,6 +194,8 @@ function AppContent() {
               key={item.path}
               to={item.path}
               onMouseEnter={handleHover}
+              aria-label={item.name}
+              aria-current={isActive ? 'page' : undefined}
               className={`relative w-11 h-11 rounded-xl transition duration-200 flex items-center justify-center cursor-pointer group ${
                 isActive 
                   ? 'bg-primary/20 text-primary border border-primary/40 shadow-md' 
@@ -174,8 +213,16 @@ function AppContent() {
       </aside>
 
       {/* Mobile Drawer Navigation (Slide-out) */}
-      <aside 
-        className={`fixed inset-y-0 left-0 z-40 w-64 bg-zinc-950/98 border-r border-border backdrop-blur-2xl p-4 flex flex-col justify-between transition-transform duration-300 md:hidden ${
+      <aside
+        id="mobile-navigation"
+        ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Primary navigation"
+        aria-hidden={!mobileSidebarOpen}
+        inert={!mobileSidebarOpen}
+        tabIndex={-1}
+        className={`safe-area-drawer fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col justify-between border-r border-border bg-zinc-950/98 p-4 backdrop-blur-2xl transition-transform duration-300 lg:hidden ${
           mobileSidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
         }`}
       >
@@ -186,15 +233,16 @@ function AppContent() {
           </div>
 
           <nav className="space-y-2">
-            {navItems.map((item) => {
-              const isActive = location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path));
+            {navigationItems.map((item) => {
+              const isActive = isNavigationActive(location.pathname, item.path);
               const Icon = item.icon;
               return (
                 <Link
                   key={item.path}
                   to={item.path}
-                  onClick={() => setMobileSidebarOpen(false)}
-                  className={`flex items-center gap-3.5 px-4 py-3 rounded-xl font-bold text-xs transition ${
+                  onClick={closeMobileSidebar}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`flex min-h-11 items-center gap-3.5 rounded-xl px-4 py-3 text-xs font-bold transition ${
                     isActive 
                       ? 'bg-primary/20 text-primary border border-primary/30' 
                       : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'
@@ -210,10 +258,10 @@ function AppContent() {
       </aside>
 
       {/* Main Content View Container */}
-      <main className={`flex-1 overflow-y-auto min-w-0 pb-4 ${
+      <main className={`safe-area-main min-w-0 flex-1 pb-4 ${
         location.pathname.includes('/lessons/') 
-          ? 'pt-14 md:pt-0 md:pl-22 lg:pl-24 px-2 sm:px-4' 
-          : 'pt-16 md:pt-4 md:pl-22 lg:pl-24 px-3.5 sm:px-6'
+          ? 'safe-area-main-watch lg:pt-0 lg:pl-22 xl:pl-24 px-2 sm:px-4'
+          : 'pt-16 lg:pt-4 lg:pl-22 xl:pl-24 px-3.5 sm:px-6'
       }`}>
         <ErrorBoundary>
           <Suspense fallback={
@@ -221,12 +269,13 @@ function AppContent() {
               <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
             </div>
           }>
-            <AnimatePresence mode="initial">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.div 
                 key={location.pathname} 
-                initial={{ opacity: 0 }}
+                initial={reduceMotion ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.1, ease: 'easeOut' }}
+                exit={reduceMotion ? undefined : { opacity: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.1, ease: 'easeOut' }}
                 className="h-full min-w-0"
               >
                 <Routes location={location}>
@@ -253,6 +302,7 @@ function AppContent() {
       <CommandPalette 
         isOpen={commandPaletteOpen} 
         onClose={closeCommandPalette} 
+        returnFocusRef={commandPaletteReturnFocusRef}
       />
 
       <PomodoroTimer />

@@ -10,9 +10,6 @@ export const useUIStore = create((set) => ({
   isPlaying: false,
   seekRequestTime: null, // Set to a timestamp in seconds to trigger player seek
   
-  // Sidebar collapsed state
-  sidebarCollapsed: true,
-
   // Command Palette global state
   commandPaletteOpen: false,
   openCommandPalette: () => set({ commandPaletteOpen: true }),
@@ -27,7 +24,6 @@ export const useUIStore = create((set) => ({
   setActiveLessonId: (id) => set({ activeLessonId: id }),
   setIsPlaying: (playing) => set({ isPlaying: playing }),
   triggerPlayerSeek: (seconds) => set({ seekRequestTime: seconds }),
-  toggleSidebar: () => set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
   setIsImporting: (status) => set({ isImporting: status }),
   setImportError: (err) => set({ importError: err }),
   

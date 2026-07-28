@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Command, BookOpen, Target, Settings, Terminal, Sparkles, X, FileText, ArrowRight } from 'lucide-react';
 import jsTopicPractice from '../data/jsTopicPractice.json';
+import Dialog from './ui/Dialog';
 
 /**
  * Command Palette & Global Search Modal (Ctrl + K or ?)
  * Allows power learners to jump to pages, search 100+ interview questions, and see shortcuts.
  */
-export default function CommandPalette({ isOpen, onClose }) {
+export default function CommandPalette({ isOpen, onClose, returnFocusRef }) {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
 
@@ -17,9 +18,6 @@ export default function CommandPalette({ isOpen, onClose }) {
         e.preventDefault();
         if (isOpen) onClose();
         else setQuery('');
-      }
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
       }
     }
     window.addEventListener('keydown', handleKeyDown);
@@ -46,15 +44,20 @@ export default function CommandPalette({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-start justify-center pt-16 sm:pt-24 p-4 animate-in fade-in duration-150">
-      <div 
-        className="bg-zinc-950 border border-zinc-800 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden space-y-0 relative"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      titleId="command-palette-title"
+      placement="top"
+      returnFocusRef={returnFocusRef}
+      className="max-h-[calc(100dvh-5rem)] w-full max-w-2xl overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 shadow-2xl"
+    >
+      <h2 id="command-palette-title" className="sr-only">Command palette</h2>
         {/* Search Header */}
         <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border/80 bg-zinc-900/60">
           <Search size={18} className="text-zinc-400 flex-shrink-0" />
           <input
+            aria-label="Search commands and interview questions"
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -64,7 +67,8 @@ export default function CommandPalette({ isOpen, onClose }) {
           />
           <button 
             onClick={onClose}
-            className="p-1 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-white transition cursor-pointer"
+            aria-label="Close command palette"
+            className="min-h-11 min-w-11 rounded-lg text-zinc-400 transition hover:bg-zinc-800 hover:text-white cursor-pointer flex items-center justify-center"
           >
             <X size={16} />
           </button>
@@ -144,7 +148,6 @@ export default function CommandPalette({ isOpen, onClose }) {
             </div>
           )}
         </div>
-      </div>
-    </div>
+    </Dialog>
   );
 }
