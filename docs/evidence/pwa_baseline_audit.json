@@ -1,15 +1,82 @@
 {
   "offlineRouteReachable": true,
   "appShellCached": true,
-  "indexedDBPersistence": {
-    "dbExists": true,
-    "version": 30,
-    "stores": [
-      "courses",
-      "lessons",
-      "notes",
-      "practiceProgress",
-      "progress"
-    ]
-  }
+  "databasePersistenceVerification": {
+    "dbName": "FocusFlowDB",
+    "beforeReload": {
+      "dbVersion": 30,
+      "stores": {
+        "courses": {
+          "count": 2,
+          "sampleKeys": [
+            "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+            "git-github-masterclass-q8EevlEpQ2A"
+          ]
+        },
+        "lessons": {
+          "count": 52,
+          "sampleKeys": [
+            "-9knnv97wSc",
+            "-GoKoR6aLcY",
+            "-owpuf4lbyU",
+            "0P_YvC6Gg0c",
+            "4lb2pXWWXJI"
+          ]
+        },
+        "notes": {
+          "count": 0,
+          "sampleKeys": []
+        },
+        "practiceProgress": {
+          "count": 0,
+          "sampleKeys": []
+        },
+        "progress": {
+          "count": 0,
+          "sampleKeys": []
+        }
+      }
+    },
+    "afterReload": {
+      "dbVersion": 30,
+      "stores": {
+        "courses": {
+          "count": 2,
+          "sampleKeys": [
+            "PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+            "git-github-masterclass-q8EevlEpQ2A"
+          ]
+        },
+        "lessons": {
+          "count": 52,
+          "sampleKeys": [
+            "-9knnv97wSc",
+            "-GoKoR6aLcY",
+            "-owpuf4lbyU",
+            "0P_YvC6Gg0c",
+            "4lb2pXWWXJI"
+          ]
+        },
+        "notes": {
+          "count": 0,
+          "sampleKeys": []
+        },
+        "practiceProgress": {
+          "count": 0,
+          "sampleKeys": []
+        },
+        "progress": {
+          "count": 0,
+          "sampleKeys": []
+        }
+      }
+    },
+    "recordCountsMatch": true
+  },
+  "unverifiedPwaLimitations": [
+    "Service-worker update notification toast trigger",
+    "Stale-cache recovery after deployment",
+    "Old cache storage deletion/cleanup",
+    "Active-session update behavior during live video playback"
+  ]
 }

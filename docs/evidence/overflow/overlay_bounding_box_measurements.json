@@ -3,11 +3,35 @@
     "viewport": "320x568_small_phone",
     "target": "Practice Flashcard",
     "found": true,
+    "selectorUsed": ".glass-panel, [class*=\"card\"]",
     "boundingRect": {
       "x": 28,
-      "y": 78,
+      "y": -310,
       "width": 264,
       "height": 247
+    },
+    "viewportDimensions": {
+      "width": 320,
+      "height": 568
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": true,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "320x568_small_phone",
+    "target": "Import Playlist Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 16,
+      "y": 145,
+      "width": 288,
+      "height": 277
     },
     "viewportDimensions": {
       "width": 320,
@@ -19,21 +43,36 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": false,
-    "scrollDimensions": {
-      "scrollHeight": 245,
-      "clientHeight": 245
-    }
+    "internalScrollAvailable": false
   },
   {
     "viewport": "320x568_small_phone",
     "target": "Command Palette",
-    "found": false
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 16,
+      "y": 64,
+      "width": 288,
+      "height": 382
+    },
+    "viewportDimensions": {
+      "width": 320,
+      "height": 568
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "320x568_small_phone",
     "target": "Pomodoro Expanded",
     "found": true,
+    "selectorUsed": ".fixed.bottom-3, [class*=\"Pomodoro\"]",
     "boundingRect": {
       "x": -8,
       "y": 206,
@@ -50,16 +89,36 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": false,
-    "scrollDimensions": {
-      "scrollHeight": 350,
-      "clientHeight": 350
-    }
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "320x568_small_phone",
+    "target": "Streak Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 16,
+      "y": 61,
+      "width": 288,
+      "height": 447
+    },
+    "viewportDimensions": {
+      "width": 320,
+      "height": 568
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "320x568_small_phone",
     "target": "Offline Page",
     "found": true,
+    "selectorUsed": "main, .glass-panel",
     "boundingRect": {
       "x": 0,
       "y": 0,
@@ -76,26 +135,82 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": true,
-    "scrollDimensions": {
-      "scrollHeight": 568,
-      "clientHeight": 568
-    }
+    "internalScrollAvailable": true
   },
   {
     "viewport": "360x800_common_phone",
     "target": "Practice Flashcard",
-    "found": false
+    "found": true,
+    "selectorUsed": ".glass-panel, [class*=\"card\"]",
+    "boundingRect": {
+      "x": 28,
+      "y": 78,
+      "width": 304,
+      "height": 219
+    },
+    "viewportDimensions": {
+      "width": 360,
+      "height": 800
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "360x800_common_phone",
+    "target": "Import Playlist Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 16,
+      "y": 282,
+      "width": 328,
+      "height": 236
+    },
+    "viewportDimensions": {
+      "width": 360,
+      "height": 800
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "360x800_common_phone",
     "target": "Command Palette",
-    "found": false
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 16,
+      "y": 64,
+      "width": 328,
+      "height": 348
+    },
+    "viewportDimensions": {
+      "width": 360,
+      "height": 800
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "360x800_common_phone",
     "target": "Pomodoro Expanded",
     "found": true,
+    "selectorUsed": ".fixed.bottom-3, [class*=\"Pomodoro\"]",
     "boundingRect": {
       "x": 32,
       "y": 438,
@@ -112,16 +227,36 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": false,
-    "scrollDimensions": {
-      "scrollHeight": 350,
-      "clientHeight": 350
-    }
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "360x800_common_phone",
+    "target": "Streak Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 16,
+      "y": 185,
+      "width": 328,
+      "height": 431
+    },
+    "viewportDimensions": {
+      "width": 360,
+      "height": 800
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "360x800_common_phone",
     "target": "Offline Page",
     "found": true,
+    "selectorUsed": "main, .glass-panel",
     "boundingRect": {
       "x": 0,
       "y": 0,
@@ -138,26 +273,82 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": true,
-    "scrollDimensions": {
-      "scrollHeight": 800,
-      "clientHeight": 800
-    }
+    "internalScrollAvailable": true
   },
   {
     "viewport": "390x844_modern_phone",
     "target": "Practice Flashcard",
-    "found": false
+    "found": true,
+    "selectorUsed": ".glass-panel, [class*=\"card\"]",
+    "boundingRect": {
+      "x": 28,
+      "y": 78,
+      "width": 334,
+      "height": 219
+    },
+    "viewportDimensions": {
+      "width": 390,
+      "height": 844
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "390x844_modern_phone",
+    "target": "Import Playlist Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 16,
+      "y": 304,
+      "width": 358,
+      "height": 236
+    },
+    "viewportDimensions": {
+      "width": 390,
+      "height": 844
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "390x844_modern_phone",
     "target": "Command Palette",
-    "found": false
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 16,
+      "y": 64,
+      "width": 358,
+      "height": 348
+    },
+    "viewportDimensions": {
+      "width": 390,
+      "height": 844
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "390x844_modern_phone",
     "target": "Pomodoro Expanded",
     "found": true,
+    "selectorUsed": ".fixed.bottom-3, [class*=\"Pomodoro\"]",
     "boundingRect": {
       "x": 62,
       "y": 482,
@@ -174,16 +365,36 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": false,
-    "scrollDimensions": {
-      "scrollHeight": 350,
-      "clientHeight": 350
-    }
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "390x844_modern_phone",
+    "target": "Streak Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 16,
+      "y": 207,
+      "width": 358,
+      "height": 431
+    },
+    "viewportDimensions": {
+      "width": 390,
+      "height": 844
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "390x844_modern_phone",
     "target": "Offline Page",
     "found": true,
+    "selectorUsed": "main, .glass-panel",
     "boundingRect": {
       "x": 0,
       "y": 0,
@@ -200,26 +411,82 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": true,
-    "scrollDimensions": {
-      "scrollHeight": 844,
-      "clientHeight": 844
-    }
+    "internalScrollAvailable": true
   },
   {
     "viewport": "412x915_large_phone",
     "target": "Practice Flashcard",
-    "found": false
+    "found": true,
+    "selectorUsed": ".glass-panel, [class*=\"card\"]",
+    "boundingRect": {
+      "x": 28,
+      "y": 78,
+      "width": 356,
+      "height": 219
+    },
+    "viewportDimensions": {
+      "width": 412,
+      "height": 915
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "412x915_large_phone",
+    "target": "Import Playlist Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 16,
+      "y": 339,
+      "width": 380,
+      "height": 236
+    },
+    "viewportDimensions": {
+      "width": 412,
+      "height": 915
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "412x915_large_phone",
     "target": "Command Palette",
-    "found": false
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 16,
+      "y": 64,
+      "width": 380,
+      "height": 348
+    },
+    "viewportDimensions": {
+      "width": 412,
+      "height": 915
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "412x915_large_phone",
     "target": "Pomodoro Expanded",
     "found": true,
+    "selectorUsed": ".fixed.bottom-3, [class*=\"Pomodoro\"]",
     "boundingRect": {
       "x": 84,
       "y": 553,
@@ -236,16 +503,36 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": false,
-    "scrollDimensions": {
-      "scrollHeight": 350,
-      "clientHeight": 350
-    }
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "412x915_large_phone",
+    "target": "Streak Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 16,
+      "y": 242,
+      "width": 380,
+      "height": 431
+    },
+    "viewportDimensions": {
+      "width": 412,
+      "height": 915
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "412x915_large_phone",
     "target": "Offline Page",
     "found": true,
+    "selectorUsed": "main, .glass-panel",
     "boundingRect": {
       "x": 0,
       "y": 0,
@@ -262,26 +549,82 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": true,
-    "scrollDimensions": {
-      "scrollHeight": 915,
-      "clientHeight": 915
-    }
+    "internalScrollAvailable": true
   },
   {
     "viewport": "768x1024_tablet_portrait",
     "target": "Practice Flashcard",
-    "found": false
+    "found": true,
+    "selectorUsed": ".glass-panel, [class*=\"card\"]",
+    "boundingRect": {
+      "x": 120,
+      "y": 48,
+      "width": 592,
+      "height": 213
+    },
+    "viewportDimensions": {
+      "width": 768,
+      "height": 1024
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "768x1024_tablet_portrait",
+    "target": "Import Playlist Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 128,
+      "y": 396,
+      "width": 512,
+      "height": 233
+    },
+    "viewportDimensions": {
+      "width": 768,
+      "height": 1024
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "768x1024_tablet_portrait",
     "target": "Command Palette",
-    "found": false
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 48,
+      "y": 96,
+      "width": 672,
+      "height": 334
+    },
+    "viewportDimensions": {
+      "width": 768,
+      "height": 1024
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "768x1024_tablet_portrait",
     "target": "Pomodoro Expanded",
     "found": true,
+    "selectorUsed": ".fixed.bottom-3, [class*=\"Pomodoro\"]",
     "boundingRect": {
       "x": 436,
       "y": 661,
@@ -298,16 +641,36 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": false,
-    "scrollDimensions": {
-      "scrollHeight": 351,
-      "clientHeight": 351
-    }
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "768x1024_tablet_portrait",
+    "target": "Streak Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 160,
+      "y": 278,
+      "width": 448,
+      "height": 467
+    },
+    "viewportDimensions": {
+      "width": 768,
+      "height": 1024
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "768x1024_tablet_portrait",
     "target": "Offline Page",
     "found": true,
+    "selectorUsed": "main, .glass-panel",
     "boundingRect": {
       "x": 0,
       "y": 0,
@@ -324,26 +687,82 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": true,
-    "scrollDimensions": {
-      "scrollHeight": 1024,
-      "clientHeight": 1024
-    }
+    "internalScrollAvailable": true
   },
   {
     "viewport": "1024x768_tablet_landscape",
     "target": "Practice Flashcard",
-    "found": false
+    "found": true,
+    "selectorUsed": ".glass-panel, [class*=\"card\"]",
+    "boundingRect": {
+      "x": 128,
+      "y": 48,
+      "width": 840,
+      "height": 177
+    },
+    "viewportDimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "1024x768_tablet_landscape",
+    "target": "Import Playlist Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 256,
+      "y": 268,
+      "width": 512,
+      "height": 233
+    },
+    "viewportDimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "1024x768_tablet_landscape",
     "target": "Command Palette",
-    "found": false
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 176,
+      "y": 96,
+      "width": 672,
+      "height": 334
+    },
+    "viewportDimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "1024x768_tablet_landscape",
     "target": "Pomodoro Expanded",
     "found": true,
+    "selectorUsed": ".fixed.bottom-3, [class*=\"Pomodoro\"]",
     "boundingRect": {
       "x": 692,
       "y": 405,
@@ -360,16 +779,36 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": false,
-    "scrollDimensions": {
-      "scrollHeight": 351,
-      "clientHeight": 351
-    }
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "1024x768_tablet_landscape",
+    "target": "Streak Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 288,
+      "y": 150,
+      "width": 448,
+      "height": 467
+    },
+    "viewportDimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "1024x768_tablet_landscape",
     "target": "Offline Page",
     "found": true,
+    "selectorUsed": "main, .glass-panel",
     "boundingRect": {
       "x": 0,
       "y": 0,
@@ -386,26 +825,82 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": true,
-    "scrollDimensions": {
-      "scrollHeight": 768,
-      "clientHeight": 768
-    }
+    "internalScrollAvailable": true
   },
   {
     "viewport": "1280x800_compact_laptop",
     "target": "Practice Flashcard",
-    "found": false
+    "found": true,
+    "selectorUsed": ".glass-panel, [class*=\"card\"]",
+    "boundingRect": {
+      "x": 196,
+      "y": 48,
+      "width": 960,
+      "height": 177
+    },
+    "viewportDimensions": {
+      "width": 1280,
+      "height": 800
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "1280x800_compact_laptop",
+    "target": "Import Playlist Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 384,
+      "y": 284,
+      "width": 512,
+      "height": 233
+    },
+    "viewportDimensions": {
+      "width": 1280,
+      "height": 800
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "1280x800_compact_laptop",
     "target": "Command Palette",
-    "found": false
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 304,
+      "y": 96,
+      "width": 672,
+      "height": 334
+    },
+    "viewportDimensions": {
+      "width": 1280,
+      "height": 800
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "1280x800_compact_laptop",
     "target": "Pomodoro Expanded",
     "found": true,
+    "selectorUsed": ".fixed.bottom-3, [class*=\"Pomodoro\"]",
     "boundingRect": {
       "x": 948,
       "y": 437,
@@ -422,16 +917,36 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": false,
-    "scrollDimensions": {
-      "scrollHeight": 351,
-      "clientHeight": 351
-    }
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "1280x800_compact_laptop",
+    "target": "Streak Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 416,
+      "y": 166,
+      "width": 448,
+      "height": 467
+    },
+    "viewportDimensions": {
+      "width": 1280,
+      "height": 800
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "1280x800_compact_laptop",
     "target": "Offline Page",
     "found": true,
+    "selectorUsed": "main, .glass-panel",
     "boundingRect": {
       "x": 0,
       "y": 0,
@@ -448,26 +963,82 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": true,
-    "scrollDimensions": {
-      "scrollHeight": 800,
-      "clientHeight": 800
-    }
+    "internalScrollAvailable": true
   },
   {
     "viewport": "1440x900_desktop",
     "target": "Practice Flashcard",
-    "found": false
+    "found": true,
+    "selectorUsed": ".glass-panel, [class*=\"card\"]",
+    "boundingRect": {
+      "x": 276,
+      "y": 48,
+      "width": 960,
+      "height": 177
+    },
+    "viewportDimensions": {
+      "width": 1440,
+      "height": 900
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "1440x900_desktop",
+    "target": "Import Playlist Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 464,
+      "y": 334,
+      "width": 512,
+      "height": 233
+    },
+    "viewportDimensions": {
+      "width": 1440,
+      "height": 900
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "1440x900_desktop",
     "target": "Command Palette",
-    "found": false
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 384,
+      "y": 96,
+      "width": 672,
+      "height": 334
+    },
+    "viewportDimensions": {
+      "width": 1440,
+      "height": 900
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "1440x900_desktop",
     "target": "Pomodoro Expanded",
     "found": true,
+    "selectorUsed": ".fixed.bottom-3, [class*=\"Pomodoro\"]",
     "boundingRect": {
       "x": 1108,
       "y": 537,
@@ -484,16 +1055,36 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": false,
-    "scrollDimensions": {
-      "scrollHeight": 351,
-      "clientHeight": 351
-    }
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "1440x900_desktop",
+    "target": "Streak Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 496,
+      "y": 216,
+      "width": 448,
+      "height": 467
+    },
+    "viewportDimensions": {
+      "width": 1440,
+      "height": 900
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "1440x900_desktop",
     "target": "Offline Page",
     "found": true,
+    "selectorUsed": "main, .glass-panel",
     "boundingRect": {
       "x": 0,
       "y": 0,
@@ -510,26 +1101,82 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": true,
-    "scrollDimensions": {
-      "scrollHeight": 900,
-      "clientHeight": 900
-    }
+    "internalScrollAvailable": true
   },
   {
     "viewport": "844x390_phone_landscape",
     "target": "Practice Flashcard",
-    "found": false
+    "found": true,
+    "selectorUsed": ".glass-panel, [class*=\"card\"]",
+    "boundingRect": {
+      "x": 120,
+      "y": -205,
+      "width": 668,
+      "height": 213
+    },
+    "viewportDimensions": {
+      "width": 844,
+      "height": 390
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": true,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "844x390_phone_landscape",
+    "target": "Import Playlist Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 166,
+      "y": 79,
+      "width": 512,
+      "height": 233
+    },
+    "viewportDimensions": {
+      "width": 844,
+      "height": 390
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "844x390_phone_landscape",
     "target": "Command Palette",
-    "found": false
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 86,
+      "y": 96,
+      "width": 672,
+      "height": 334
+    },
+    "viewportDimensions": {
+      "width": 844,
+      "height": 390
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": true
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "844x390_phone_landscape",
     "target": "Pomodoro Expanded",
     "found": true,
+    "selectorUsed": ".fixed.bottom-3, [class*=\"Pomodoro\"]",
     "boundingRect": {
       "x": 512,
       "y": 27,
@@ -546,16 +1193,36 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": false,
-    "scrollDimensions": {
-      "scrollHeight": 351,
-      "clientHeight": 351
-    }
+    "internalScrollAvailable": false
+  },
+  {
+    "viewport": "844x390_phone_landscape",
+    "target": "Streak Modal",
+    "found": true,
+    "selectorUsed": ".fixed.inset-0 > div, [role=\"dialog\"]",
+    "boundingRect": {
+      "x": 198,
+      "y": -39,
+      "width": 448,
+      "height": 467
+    },
+    "viewportDimensions": {
+      "width": 844,
+      "height": 390
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": true,
+      "bottom": true
+    },
+    "internalScrollAvailable": false
   },
   {
     "viewport": "844x390_phone_landscape",
     "target": "Offline Page",
     "found": true,
+    "selectorUsed": "main, .glass-panel",
     "boundingRect": {
       "x": 0,
       "y": 0,
@@ -572,10 +1239,6 @@
       "top": false,
       "bottom": false
     },
-    "internalScrollAvailable": true,
-    "scrollDimensions": {
-      "scrollHeight": 390,
-      "clientHeight": 390
-    }
+    "internalScrollAvailable": true
   }
 ]

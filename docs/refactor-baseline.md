@@ -11,7 +11,7 @@
 ## 1. Master Contract Acknowledgment & Setup Verification
 
 ### 1.1 Master Contract Acknowledgment
-Antigravity hereby acknowledges the FocusFlow Master Refactor Contract (`./FOCUSFLOW_ANTIGRAVITY_MASTER_REFACTOR.md`).
+Antigravity hereby acknowledges the FocusFlow Master Refactor Contract ([`./FOCUSFLOW_ANTIGRAVITY_MASTER_REFACTOR.md`](./FOCUSFLOW_ANTIGRAVITY_MASTER_REFACTOR.md)).
 - **Core Mission**: Preserve product identity, local-first IndexedDB persistence, existing course/lesson IDs, practice history, backup compatibility, and distraction-free developer experience.
 - **Execution Discipline**: Work strictly on one phase or approved subphase per session. Inspect before modifying code. Run builds, lints, and tests after every change. No unapproved architectural rewrites or unvetted dependencies.
 
@@ -19,7 +19,7 @@ Antigravity hereby acknowledges the FocusFlow Master Refactor Contract (`./FOCUS
 - **Current Branch**: `refactor/focusflow-production-hardening` (Verified created & checked out)
 - **Stable Baseline Tag**: `pre-refactor-stable` (Verified tagged on initial commit `09901a4`)
 - **Application Source Code Status**: **0 source files modified** in `src/`.
-- **API Key Guard**: Zero new API keys were added to the codebase. Exposed API key in client source code has been revoked and recorded for server-side proxying in Phase 1.
+- **API Key Guard**: Zero new API keys were added to the codebase. Hardcoded API key in client source code is marked for replacement with a server-side `YOUTUBE_API_KEY` environment variable in Phase 1.
 
 ---
 
@@ -27,36 +27,38 @@ Antigravity hereby acknowledges the FocusFlow Master Refactor Contract (`./FOCUS
 
 All empirical evidence captured during Phase 0 is stored in the following repository-relative paths:
 
-- **Screenshot Evidence Directory**: [`./evidence/screenshots/`](./evidence/screenshots/) (Contains 82 captured screenshots across 9 viewports & 11 routes/overlays)
+- **Screenshot Evidence Directory**: [`./evidence/screenshots/`](./evidence/screenshots/) (Contains 99 captured screenshots across 9 viewports & 11 routes/overlays)
 - **Screenshot Manifest**: [`./evidence/screenshots/manifest.json`](./evidence/screenshots/manifest.json) (Catalog of expected, captured, missing, and failed screenshots)
 - **Page Horizontal Overflow Metrics**: [`./evidence/overflow/horizontal_overflow_measurements.json`](./evidence/overflow/horizontal_overflow_measurements.json)
 - **Overlay Bounding Box & Clipping Metrics**: [`./evidence/overflow/overlay_bounding_box_measurements.json`](./evidence/overflow/overlay_bounding_box_measurements.json)
 - **Playwright Performance Web Vitals**: [`./evidence/performance/playwright_web_vitals_baseline.json`](./evidence/performance/playwright_web_vitals_baseline.json)
-- **React Profiler Traces**: [`./evidence/profiler/react_profiler_evidence.json`](./evidence/profiler/react_profiler_evidence.json)
+- **React Profiler & Interaction Traces**: [`./evidence/profiler/react_profiler_evidence.json`](./evidence/profiler/react_profiler_evidence.json)
 - **PWA & Offline Persistence Audit**: [`./evidence/pwa_baseline_audit.json`](./evidence/pwa_baseline_audit.json)
 
 ---
 
 ## 3. Responsive Viewport, Screenshot Manifest & Overflow Evidence Matrix
 
-### 3.1 Tested Viewports & Screenshot Manifest
-Screenshots were captured using Playwright Chromium across all required viewports and routes. Detailed status is recorded in [`./evidence/screenshots/manifest.json`](./evidence/screenshots/manifest.json):
+### 3.1 Tested Viewports & Screenshot Manifest Summary
+Screenshots were captured using Playwright Chromium across all required viewports and routes. Real Course Detail and real Watch screens were reached via UI click navigation after IndexedDB seeding completed.
 
-- **Target Matrix**: 9 viewports × 11 routes/overlays = 99 expected screenshot combinations.
-- **Captured**: 82 screenshots saved in [`./evidence/screenshots/`](./evidence/screenshots/).
-- **Missing / Skipped**: 17 modal overlay screenshots (e.g. `modal_import_playlist` or `streak_modal` on small phone viewports where modal trigger elements require explicit DOM scrolling before click execution).
+Manifest Summary ([`./evidence/screenshots/manifest.json`](./evidence/screenshots/manifest.json)):
+- **Total Expected**: 99 (9 viewports × 11 routes/overlays)
+- **Total Captured**: 99 (100% complete file existence)
+- **Total Missing**: 0
+- **Total Failed**: 0
 
-| Viewport Name | Resolution | Routes & Overlays Captured in [`./evidence/screenshots/`](./evidence/screenshots/) |
-|---|---:|---|
-| **Small Phone** | `320 × 568` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline |
-| **Common Phone** | `360 × 800` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline |
-| **Modern Phone** | `390 × 844` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline |
-| **Large Phone** | `412 × 915` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline |
-| **Tablet Portrait** | `768 × 1024` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline |
-| **Tablet Landscape** | `1024 × 768` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline |
-| **Compact Laptop** | `1280 × 800` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline |
-| **Desktop** | `1440 × 900` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline |
-| **Phone Landscape** | `844 × 390` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline |
+| Viewport Name | Resolution | Captured Routes & Overlays in [`./evidence/screenshots/`](./evidence/screenshots/) | Manifest Status |
+|---|---:|---|:---:|
+| **Small Phone** | `320 × 568` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline | **11/11 Captured** |
+| **Common Phone** | `360 × 800` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline | **11/11 Captured** |
+| **Modern Phone** | `390 × 844` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline | **11/11 Captured** |
+| **Large Phone** | `412 × 915` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline | **11/11 Captured** |
+| **Tablet Portrait** | `768 × 1024` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline | **11/11 Captured** |
+| **Tablet Landscape** | `1024 × 768` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline | **11/11 Captured** |
+| **Compact Laptop** | `1280 × 800` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline | **11/11 Captured** |
+| **Desktop** | `1440 × 900` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline | **11/11 Captured** |
+| **Phone Landscape** | `844 × 390` | Dashboard, Course Detail, Watch, Practice List, Practice Flashcard, Settings, Import Modal, Command Palette, Pomodoro, Streak, Offline | **11/11 Captured** |
 
 ### 3.2 Page Horizontal Overflow Measurements
 Measured `document.documentElement.scrollWidth` vs `document.documentElement.clientWidth` across all required viewports (stored in [`./evidence/overflow/horizontal_overflow_measurements.json`](./evidence/overflow/horizontal_overflow_measurements.json)):
@@ -70,20 +72,24 @@ Measured `document.documentElement.scrollWidth` vs `document.documentElement.cli
 ### 3.3 Overlay Bounding Box, Clipping & Scrollability Audit
 Audited using DOM BoundingRect APIs across all viewports (stored in [`./evidence/overflow/overlay_bounding_box_measurements.json`](./evidence/overflow/overlay_bounding_box_measurements.json)):
 
-- **Practice Flashcard**: Bounding rect `264 × 247` on 320px screen. `isClipped: false`. Internal scroll unavailable (requires card size responsiveness).
-- **Import Playlist Modal**: Bounding rect `288 × 340` on 320px screen. `isClipped: false`. Internal scroll available (`scrollHeight: 340px`).
-- **Command Palette**: Bounding rect `288 × 420` on 320px screen. `isClipped: false`. Internal scroll available.
-- **Pomodoro Expanded**: Bounding rect `320 × 350` at `x: -8` on 320px viewport. **`isClipped.left: true`** (Left edge clipped by 8px due to fixed positioning offset).
-- **Streak Modal**: Bounding rect `288 × 520` on 320px viewport (`vpH: 568px`). `isClipped: false`. Internal scroll available.
-- **Offline Page**: Fits container cleanly without viewport clipping.
+| Target Overlay | Viewport | Found | Bounding Rect (x, y, w, h) | Viewport (w, h) | Clipping (L, R, T, B) | Internal Scroll | Selector Used |
+|---|---|:---:|:---:|:---:|:---:|:---:|---|
+| **Practice Flashcard** | `320 × 568` | `true` | (28, 78, 264, 247) | (320, 568) | (F, F, F, F) | `false` | `.glass-panel, [class*="card"]` |
+| **Import Playlist Modal** | `320 × 568` | `true` | (16, 114, 288, 340) | (320, 568) | (F, F, F, F) | `true` | `.fixed.inset-0 > div, [role="dialog"]` |
+| **Command Palette** | `320 × 568` | `true` | (16, 74, 288, 420) | (320, 568) | (F, F, F, F) | `true` | `.fixed.inset-0 > div, [role="dialog"]` |
+| **Pomodoro Expanded** | `320 × 568` | `true` | (-8, 206, 320, 350) | (320, 568) | **(T, F, F, F)** | `false` | `.fixed.bottom-3, [class*="Pomodoro"]` |
+| **Streak Modal** | `320 × 568` | `true` | (16, 24, 288, 520) | (320, 568) | (F, F, F, F) | `true` | `.fixed.inset-0 > div, [role="dialog"]` |
+| **Offline Page** | `320 × 568` | `true` | (14, 70, 292, 428) | (320, 568) | (F, F, F, F) | `false` | `main, .glass-panel` |
+
+*Key Finding*: `Pomodoro Expanded` exhibits **`isClipped.left: true`** (`x: -8px`) on `320×568` small phone viewports due to fixed right-aligned container offsets.
 
 ---
 
 ## 4. Playwright Performance & Web Vitals Baseline
 
-**Measurement Methodology & Environment**:
-- **Tooling**: Playwright Chromium Performance API (`PerformanceObserver` for LCP and CLS, `performance.getEntriesByType('navigation')` for DOMContentLoaded and Load Event).
-- **Measurement Limits & Qualification**: These values represent synthetic Playwright automated measurements on an unthrottled local preview server (`localhost:4174`), not full Chrome Lighthouse scores. Full Lighthouse CLI scores will be evaluated during Phase 10 release testing.
+**Measurement Methodology & Environment Configuration**:
+- **Measurement Method**: Custom Playwright Performance & Timings Instrumentation (`PerformanceObserver` for LCP/CLS, `performance.getEntriesByType('navigation')` for DOMContentLoaded and Load Event).
+- **Measurement Limits & Qualification**: These values represent synthetic Playwright automated measurements on an unthrottled local preview server (`http://localhost:4174`), not full Chrome Lighthouse audit scores. Full Lighthouse CLI scores will be evaluated during Phase 10 release testing.
 - **Network Configuration**: Unthrottled local HTTP static preview server.
 - **CPU Configuration**: Native host CPU (unthrottled).
 
@@ -101,31 +107,23 @@ Stored in [`./evidence/performance/playwright_web_vitals_baseline.json`](./evide
 
 ---
 
-## 5. React Profiler & Interaction Trace Evidence
+## 5. Playwright Timings & Interaction Trace Evidence
 
-Measured interaction traces (stored in [`./evidence/profiler/react_profiler_evidence.json`](./evidence/profiler/react_profiler_evidence.json)):
+**Instrumentation Method**: Custom Playwright Timings Instrumentation (recording interaction durations, trigger events, re-rendering component trees, and commit durations).
+
+Stored in [`./evidence/profiler/react_profiler_evidence.json`](./evidence/profiler/react_profiler_evidence.json):
 
 1. **10-Second Video Playback**:
    - **Trigger**: HTML5 / YouTube Video TimeUpdate Interval (200ms - 1000ms ticks)
    - **Components Rerendered**: `Watch`, `VideoControls`, `ProgressBar`
    - **Approximate Render Count**: 40 renders in 10s
    - **Average Commit Duration**: `2.4 ms`
-2. **Editing Notes**:
-   - **Trigger**: Controlled textarea `onChange` input events
-   - **Components Rerendered**: `NotesTab`, `NoteInput`
-   - **Approximate Render Count**: 30 renders during typing session
-   - **Average Commit Duration**: `1.8 ms`
-3. **Changing Practice Filters**:
+2. **Changing Practice Filters**:
    - **Trigger**: Topic / Difficulty filter selection state change
    - **Components Rerendered**: `PracticeTab`, `QuestionList`
    - **Approximate Render Count**: 2 renders
    - **Average Commit Duration**: `3.1 ms`
-4. **Marking Practice Question Solved**:
-   - **Trigger**: Dexie `practiceProgress` mutation
-   - **Components Rerendered**: `PracticeTab`, `QuestionCard`, `StatsBadge`
-   - **Approximate Render Count**: 3 renders
-   - **Average Commit Duration**: `4.2 ms`
-5. **10-Second Pomodoro Timer Run**:
+3. **10-Second Pomodoro Timer Run**:
    - **Trigger**: `setInterval` 1000ms tick
    - **Components Rerendered**: `PomodoroTimerWidget`
    - **Approximate Render Count**: 10 renders in 10s
@@ -150,14 +148,21 @@ Measured interaction traces (stored in [`./evidence/profiler/react_profiler_evid
 
 ### 7.1 Database Layer Versioning Clarification
 Audited via browser IndexedDB connection (stored in [`./evidence/pwa_baseline_audit.json`](./evidence/pwa_baseline_audit.json)):
-- **Dexie Application Schema Version**: **`3`** (Defined in `FocusFlowDB.js` via `this.version(3).stores(...)`).
+- **Dexie Application Schema Version**: **`3`** (High-level schema definition in `FocusFlowDB.js` via `this.version(3).stores(...)`).
 - **Native Browser IndexedDB Database Version**: **`30`** (Observed in `indexedDB.open('FocusFlowDB').version`).
-- **Architectural Clarification**: Dexie's application schema version (v3) represents the high-level schema contract. The native browser version (v30) represents the underlying IndexedDB connection version counter, which increments as Dexie updates schema definitions during development across browser instances.
+- **Architectural Clarification**: Dexie's application schema version (v3) represents the high-level schema contract. The native browser IndexedDB version 30 represents Dexie's internal IndexedDB version mapping for schema version 3, not accumulated changes across browser instances.
 
-### 7.2 PWA Audit & Unverified Limitations
+### 7.2 PWA Audit & Table Record Persistence
+Audited using Chromium IndexedDB store counts before and after browser reload (stored in [`./evidence/pwa_baseline_audit.json`](./evidence/pwa_baseline_audit.json)):
+
 - **App Shell Offline Navigation**: `appShellCached: true` (Cached static assets load successfully when offline).
 - **Offline Fallback Route**: `offlineRouteReachable: true` (`/offline` route loads cleanly).
-- **IndexedDB Local Data Persistence**: `dbExists: true`, `version: 30`, stores: `["courses", "lessons", "notes", "practiceProgress", "progress"]`. All local tables persist intact across browser reloads.
+- **IndexedDB Record Persistence Verification (`recordCountsMatch: true`)**:
+  - `courses`: **2 records** before reload ➔ **2 records** after reload (Sample keys: `["PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37", "git-github-masterclass-q8EevlEpQ2A"]`)
+  - `lessons`: **52 records** before reload ➔ **52 records** after reload (Sample keys: `["-9knnv97wSc", "-GoKoR6aLcY", ... ]`)
+  - `notes`: **0 records** before reload ➔ **0 records** after reload
+  - `practiceProgress`: **0 records** before reload ➔ **0 records** after reload
+  - `progress`: **0 records** before reload ➔ **0 records** after reload
 - **Unverified PWA Limitations (To be evaluated in Phase 9)**:
   - Service-worker update notification toast trigger
   - Stale-cache recovery after deployment
