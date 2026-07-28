@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { useFocusFlow } from '../hooks/useFocusFlow';
+import { useCourseDetail } from '../hooks/useCourseDetail';
 import { ArrowLeft, Play, CheckCircle2, Circle, Clock, RotateCcw } from 'lucide-react';
-import { buttonVariants } from '../components/ui/button';
 
 /**
  * Course Detail & Syllabus View.
@@ -12,27 +11,27 @@ import { buttonVariants } from '../components/ui/button';
 export default function CourseDetail() {
   const { courseId } = useParams();
   const navigate = useNavigate();
-  const { courses, lessons, progressList, getCourseProgress, getLastWatchedLesson } = useFocusFlow();
-
-  const [courseProgress, setCourseProgress] = useState(0);
+  const {
+    isLoading,
+    courseNotFound,
+    course,
+    courseLessons,
+    courseProgressList,
+    courseProgress,
+    lastWatched,
+    resumeLesson
+  } = useCourseDetail(courseId);
   const [expandedDesc, setExpandedDesc] = useState(false);
-  const [lastWatched, setLastWatched] = useState(null);
 
-  // Retrieve matching course
-  const course = courses.find(c => c.id === courseId);
-  // Retrieve lessons for this course sorted by index
-  const courseLessons = lessons
-    .filter(l => l.courseId === courseId)
-    .sort((a, b) => a.index - b.index);
+  if (isLoading) {
+    return (
+      <div className="p-8 min-h-[60vh] flex items-center justify-center">
+        <div className="animate-spin w-9 h-9 border-4 border-primary border-t-transparent rounded-full" />
+      </div>
+    );
+  }
 
-  useEffect(() => {
-    if (courseId) {
-      getCourseProgress(courseId).then(progress => setCourseProgress(progress));
-      getLastWatchedLesson(courseId).then(lw => setLastWatched(lw));
-    }
-  }, [courseId, progressList]);
-
-  if (!course) {
+  if (courseNotFound) {
     return (
       <div className="p-8 text-center">
         <h2 className="text-2xl font-bold text-red-500 mb-4">Course Not Found</h2>
@@ -40,17 +39,6 @@ export default function CourseDetail() {
       </div>
     );
   }
-
-  // Resume target: last in-progress video first, then first incomplete, then first lesson
-  const resumeLesson = (() => {
-    if (lastWatched) {
-      return courseLessons.find(l => l.id === lastWatched.lessonId);
-    }
-    return courseLessons.find(lesson => {
-      const progress = progressList.find(p => p.id === `${courseId}_${lesson.id}`);
-      return !progress || !progress.completed;
-    }) || courseLessons[0];
-  })();
 
   return (
     <div className="p-3.5 sm:p-8 max-w-5xl mx-auto space-y-6">
@@ -133,7 +121,7 @@ export default function CourseDetail() {
         
         <div className="divide-y divide-border border-y border-border">
           {courseLessons.map((lesson) => {
-            const progress = progressList.find(p => p.id === `${courseId}_${lesson.id}`);
+            const progress = courseProgressList.find(p => p.id === `${courseId}_${lesson.id}`);
             const isCompleted = progress ? progress.completed : false;
 
             const isLastWatched = lastWatched && lesson.id === lastWatched.lessonId;

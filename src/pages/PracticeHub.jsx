@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search } from 'lucide-react';
-import { useFocusFlow } from '../hooks/useFocusFlow';
+import { usePracticeProgress } from '../hooks/usePracticeProgress';
 import { useUIStore } from '../hooks/useUIStore';
 import PracticeTab from '../components/PracticeTab';
 import { JsLogo, GitLogo } from '../components/BrandLogos';
@@ -12,7 +12,7 @@ import { togglePractice } from '../services/dataCommands';
  * across dedicated course catalogs.
  */
 export default function PracticeHub() {
-  const { practiceProgressList } = useFocusFlow();
+  const practiceProgressList = usePracticeProgress();
   const { openCommandPalette } = useUIStore();
 
   return (

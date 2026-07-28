@@ -105,6 +105,7 @@ export function deleteNote(noteId) {
   return db.notes.delete(noteId);
 }
 
+export const exportNotes = () => db.notes.toArray();
 export const exportBackup = () => db.exportBackup();
 export const importBackup = backup => db.importBackup(backup);
 export const clearProgressAndNotes = () => db.clearProgressAndNotes();

@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { useFocusFlow } from '../hooks/useFocusFlow';
+import { useWatchData } from '../hooks/useWatchData';
 import { useUIStore } from '../hooks/useUIStore';
 import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX, Gauge, Type, Sliders, Target, Info } from 'lucide-react';
-import { useLiveQuery } from 'dexie-react-hooks';
-import { db } from '../db/FocusFlowDB';
 import { createNote, deleteNote, saveProgress, setLessonCompletion } from '../services/dataCommands';
+import { getWatchedSeconds } from '../utils/selectors';
 import PracticeTab from '../components/PracticeTab';
 import ReadingTab from '../components/ReadingTab';
 import CategoryIcon from '../components/CategoryIcon';
@@ -114,7 +113,15 @@ export default function Watch() {
   const playerContainerRef = useRef(null);
   const progressBarRef = useRef(null);
   
-  const { courses, lessons, progressList, practiceProgressList } = useFocusFlow();
+  const {
+    isLoading,
+    notFound,
+    course,
+    lesson,
+    courseLessons,
+    progressList,
+    lessonNotes
+  } = useWatchData(courseId, lessonId);
   const { activeLessonId, isPlaying, seekRequestTime, setActiveLessonId, setIsPlaying, triggerPlayerSeek } = useUIStore();
 
   const [activeTab, setActiveTab] = useState('notes'); // default to notes below video
@@ -136,18 +143,6 @@ export default function Watch() {
   // Auto-hide controls state
   const [isControlsVisible, setIsControlsVisible] = useState(true);
   const mouseTimerRef = useRef(null);
-
-  // Retrieve course and lesson metadata
-  const course = courses.find(c => c.id === courseId);
-  const lesson = lessons.find(l => l.courseId === courseId && l.id === lessonId);
-  const courseLessons = lessons
-    .filter(l => l.courseId === courseId)
-    .sort((a, b) => a.index - b.index);
-
-  // Reactive Dexie query for timestamped notes
-  const lessonNotes = useLiveQuery(() => 
-    db.notes.where({ courseId, lessonId }).sortBy('timestamp')
-  , [courseId, lessonId]) || [];
 
   // Reset play states when navigating to a new lesson so thumbnail displays cleanly
   useEffect(() => {
@@ -190,7 +185,9 @@ export default function Watch() {
     let captionTimeout2 = null;
 
     const currentProgress = progressList.find(p => p.id === `${courseId}_${lessonId}`);
-    const resumeSeconds = currentProgress && !currentProgress.completed ? Math.max(0, currentProgress.watchTime - 2) : 0;
+    const resumeSeconds = currentProgress && !currentProgress.completed
+      ? Math.max(0, getWatchedSeconds(currentProgress) - 2)
+      : 0;
 
     const forceCaptionsOff = (player) => {
       try {
@@ -441,7 +438,15 @@ export default function Watch() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [ytPlayer, isPlaying, playerMuted, playerDuration, captionsEnabled, isPlayerTriggered]);
 
-  if (!lesson || !course) {
+  if (isLoading) {
+    return (
+      <div className="p-8 min-h-[60vh] flex items-center justify-center">
+        <div className="animate-spin w-9 h-9 border-4 border-primary border-t-transparent rounded-full" />
+      </div>
+    );
+  }
+
+  if (notFound) {
     return (
       <div className="p-8 text-center">
         <h2 className="text-2xl font-bold text-red-500 mb-4">Lecture Details Not Found</h2>

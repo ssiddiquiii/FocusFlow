@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useFocusFlow } from '../hooks/useFocusFlow';
+import { useDashboardData } from '../hooks/useDashboardData';
 import { useUIStore } from '../hooks/useUIStore';
 import { 
   Play, 
@@ -28,7 +28,7 @@ import QuoteSandbox from '../components/QuoteSandbox';
 import { exportNotesToMarkdown } from '../utils/exportUtils';
 import { calculateStreak } from '../utils/streakUtils';
 import { fetchYouTubePlaylistData } from '../services/youtubeApi';
-import { deleteCourse, importCourse } from '../services/dataCommands';
+import { deleteCourse, exportNotes, importCourse } from '../services/dataCommands';
 
 /**
  * Dashboard Component (Home Catalog).
@@ -39,18 +39,15 @@ import { deleteCourse, importCourse } from '../services/dataCommands';
 export default function Dashboard() {
   const navigate = useNavigate();
   const { openCommandPalette } = useUIStore();
-  const { 
-    courses, 
-    progressList, 
+  const {
+    sortedCourses,
+    progressList,
     practiceProgressList,
-    notes,
     stats,
-    getCourseProgress, 
-    getContinueLearningPath
-  } = useFocusFlow();
+    courseProgressMap,
+    continuePath
+  } = useDashboardData();
 
-  const [courseProgressMap, setCourseProgressMap] = useState({});
-  const [continuePath, setContinuePath] = useState(null);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [isStreakModalOpen, setIsStreakModalOpen] = useState(false);
   const [syncingCourseId, setSyncingCourseId] = useState(null);
@@ -61,62 +58,15 @@ export default function Dashboard() {
     return calculateStreak(progressList, practiceProgressList);
   }, [progressList, practiceProgressList]);
 
-  // Compute progress for each course reactively when list changes (Parallel execution)
-  useEffect(() => {
-    let isCancelled = false;
-
-    async function loadAllProgress() {
-      const progressEntries = await Promise.all(
-        courses.map(async (course) => {
-          const progress = await getCourseProgress(course.id);
-          return [course.id, progress];
-        })
-      );
-
-      if (!isCancelled) {
-        setCourseProgressMap(Object.fromEntries(progressEntries));
-      }
-    }
-    
-    if (courses.length > 0) {
-      loadAllProgress();
-    }
-
-    return () => {
-      isCancelled = true;
-    };
-  }, [courses, progressList, getCourseProgress]);
-
-  // Calculate the "Continue Learning" path on mount
-  useEffect(() => {
-    let isCancelled = false;
-    getContinueLearningPath().then(path => {
-      if (!isCancelled) setContinuePath(path);
-    });
-    return () => {
-      isCancelled = true;
-    };
-  }, [progressList, getContinueLearningPath]);
-
-  const sortedCourses = useMemo(() => {
-    return [...courses].sort((a, b) => {
-      const progressA = progressList.filter(p => p.courseId === a.id);
-      const maxTimeA = progressA.length > 0 ? Math.max(...progressA.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
-
-      const progressB = progressList.filter(p => p.courseId === b.id);
-      const maxTimeB = progressB.length > 0 ? Math.max(...progressB.map(p => p.updatedAt || p.lastWatched || 0)) : 0;
-
-      if (maxTimeA !== maxTimeB) {
-        return maxTimeB - maxTimeA;
-      }
-      return a.title.localeCompare(b.title);
-    });
-  }, [courses, progressList]);
-
   const handleContinueLearning = () => {
     if (continuePath) {
       navigate(`/courses/${continuePath.courseId}/lessons/${continuePath.lessonId}`);
     }
+  };
+
+  const handleExportNotes = async () => {
+    const notes = await exportNotes();
+    exportNotesToMarkdown(notes, 'FocusFlow_Mastery_Notes');
   };
 
   const handleImportSuccess = async (importedCourse, importedLessons) => {
@@ -205,7 +155,7 @@ export default function Dashboard() {
           <div className="flex flex-wrap items-center gap-2.5">
             {/* Quick Export Notes Button */}
             <button
-              onClick={() => exportNotesToMarkdown(notes, 'FocusFlow_Mastery_Notes')}
+              onClick={handleExportNotes}
               className="px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-sm"
               title="Export all written notes to Markdown (.md)"
             >

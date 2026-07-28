@@ -1,5 +1,31 @@
 # FocusFlow Refactor State Tracker
 
+## Current Authoritative Status (Phase 2C)
+
+Phase 2C — Scoped Reactive Queries and Pure Selectors is implemented and verified, awaiting user review and commit approval.
+
+No next phase is approved. The next planned phase is Phase 3 — Reproducible Test Foundation, which requires a new `PROCEED NEXT PHASE` after Phase 2C is approved and committed.
+
+Completed and verified:
+
+- Replaced every remaining `useFocusFlow()` consumer with Dashboard, Course Detail, Watch, or Practice scoped read hooks.
+- Removed the now-unused monolithic `src/hooks/useFocusFlow.js`.
+- Replaced Dashboard per-course query fan-out and imperative Continue Learning reads with pure selectors over one reactive dataset.
+- Changed Dashboard note reactivity from the raw notes table to `notes.count()` and made note export a one-time read.
+- Added deterministic course ordering, course-progress, Continue Learning, dashboard-stat, watched-seconds, and Course Detail selectors.
+- Preserved `watchTime ?? currentTime ?? 0` for Dashboard totals, Course Detail resume, and Watch resume.
+- Guarded Course Detail and Watch route IDs before IndexedDB queries.
+- Added explicit loading and resolved not-found states for Course Detail and Watch.
+- Scoped Course Detail to its course, Watch to its course/lesson, and Watch notes to the `[courseId+lessonId]` compound index.
+- Verified an unrelated course progress write does not emit a course-scoped reactive query.
+- Kept the Dexie application schema at version 3 and did not change any write or backup contract.
+- Added `scripts/verification/phase2c/verify_scoped_reads.js` with 20 passing assertions, including the nine-viewport route matrix.
+- Re-ran all Phase 1 verification scripts: 75/75 assertions passed.
+- Re-ran Phase 2A and Phase 2B verification: 35/35 assertions passed.
+- Quality gates passed: build, frontend secret scan, and lint with 46 warnings / 0 errors.
+
+The older state entries below are retained as historical handoff context and are superseded by this section.
+
 ## Current Authoritative Status (Phase 2B)
 
 Phase 2B — Single Bootstrap and Command Boundary is implemented and verified, awaiting user review and commit approval.
