@@ -43,108 +43,39 @@ function parseISODuration(durationISO) {
 }
 
 /**
- * Fetches full playlist details, all video items, and durations from YouTube Data API.
+ * Fetches full playlist details, all video items, and durations via serverless API proxy.
+ * Protects server-side API Key from browser exposure.
  * @param {string} playlistId The extracted YouTube playlist ID.
  * @returns {Promise<{ course: object, lessons: Array<object> }>}
  */
 export async function fetchYouTubePlaylistData(playlistId) {
-  const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-
-  if (!apiKey) {
-    throw new Error('YouTube API Key missing. Please check your VITE_YOUTUBE_API_KEY environment variable.');
+  if (!playlistId) {
+    throw new Error('Playlist ID is required.');
   }
 
-  // 1. Fetch Playlist Info
-  const playlistUrl = `https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=${playlistId}&key=${apiKey}`;
-  const playlistRes = await fetch(playlistUrl);
+  const endpointUrl = `/api/youtube?playlistId=${encodeURIComponent(playlistId)}`;
+  const response = await fetch(endpointUrl);
   
-  if (!playlistRes.ok) {
-    throw new Error('Failed to fetch playlist details. Check if the playlist is public.');
-  }
-  
-  const playlistData = await playlistRes.json();
-  if (!playlistData.items || playlistData.items.length === 0) {
-    throw new Error('Playlist not found. Please verify the URL or Playlist ID.');
-  }
-
-  const snippet = playlistData.items[0].snippet;
-
-  const course = {
-    id: playlistId,
-    title: snippet.title || 'Untitled Course',
-    description: snippet.description || `YouTube Course Playlist`,
-    thumbnailUrl: snippet.thumbnails?.high?.url || snippet.thumbnails?.medium?.url || '',
-    channelName: snippet.channelTitle || 'YouTube Creator',
-    type: 'youtube',
-    udemyUrl: ''
-  };
-
-  // 2. Fetch All Items with Pagination
-  let nextPageToken = '';
-  let hasNextPage = true;
-  let index = 1;
-  const rawLessons = [];
-
-  while (hasNextPage) {
-    const itemsUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=50&playlistId=${playlistId}&key=${apiKey}${nextPageToken ? `&pageToken=${nextPageToken}` : ''}`;
-    const itemsRes = await fetch(itemsUrl);
-    
-    if (!itemsRes.ok) {
-      throw new Error('Error fetching playlist video items.');
-    }
-    
-    const itemsData = await itemsRes.json();
-
-    if (itemsData.items) {
-      itemsData.items.forEach(item => {
-        // Exclude deleted or private videos
-        if (item.snippet.title !== 'Private video' && item.snippet.title !== 'Deleted video') {
-          rawLessons.push({
-            id: item.contentDetails.videoId,
-            courseId: playlistId,
-            title: item.snippet.title,
-            description: item.snippet.description || '',
-            thumbnailUrl: item.snippet.thumbnails?.high?.url || item.snippet.thumbnails?.medium?.url || '',
-            duration: '0:00',
-            index: index++,
-            type: 'youtube'
-          });
-        }
-      });
-    }
-
-    nextPageToken = itemsData.nextPageToken;
-    hasNextPage = !!nextPageToken;
-  }
-
-  if (rawLessons.length === 0) {
-    throw new Error('No valid public videos found in this playlist.');
-  }
-
-  // 3. Batch Fetch Video Durations (50 at a time)
-  const videoIds = rawLessons.map(l => l.id);
-  const durationMap = {};
-
-  for (let i = 0; i < videoIds.length; i += 50) {
-    const batchIds = videoIds.slice(i, i + 50).join(',');
-    const videosUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${batchIds}&key=${apiKey}`;
-    const videosRes = await fetch(videosUrl);
-    
-    if (videosRes.ok) {
-      const videosData = await videosRes.json();
-      if (videosData.items) {
-        videosData.items.forEach(v => {
-          durationMap[v.id] = parseISODuration(v.contentDetails.duration);
-        });
+  if (!response.ok) {
+    let errorMsg = 'Failed to fetch playlist details.';
+    try {
+      const errData = await response.json();
+      if (errData.error) {
+        errorMsg = errData.error;
       }
+    } catch (_) {
+      // Fallback to HTTP status text if JSON parsing fails
     }
+    throw new Error(errorMsg);
   }
 
-  // Map final durations into lessons array
-  const lessons = rawLessons.map(l => ({
-    ...l,
-    duration: durationMap[l.id] || '0:00'
-  }));
+  const data = await response.json();
+  if (!data.course || !Array.isArray(data.lessons)) {
+    throw new Error('Invalid playlist response structure returned from server API.');
+  }
 
-  return { course, lessons };
+  return {
+    course: data.course,
+    lessons: data.lessons
+  };
 }

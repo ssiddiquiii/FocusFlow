@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Flame, Calendar, ChevronLeft, ChevronRight, X, CheckCircle2 } from 'lucide-react';
+import { getActiveDateSet, calculateStreak, toLocalDateString } from '../utils/streakUtils';
 
 /**
  * Compact Fixed-Size Real-Time Streak & Monthly Activity Calendar Modal
@@ -12,7 +13,7 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
   if (!isOpen) return null;
 
   const today = new Date();
-  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+  const todayStr = toLocalDateString(today);
 
   const currentYear = viewDate.getFullYear();
   const currentMonthIndex = viewDate.getMonth();
@@ -24,51 +25,9 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
   const firstDayOfWeek = new Date(currentYear, currentMonthIndex, 1).getDay(); // 0 = Sun, 1 = Mon, etc.
   const totalDaysInMonth = new Date(currentYear, currentMonthIndex + 1, 0).getDate(); // 28, 30, 31
 
-  // Set of active study dates from IndexedDB
-  const activeDateSet = new Set();
-  
-  // Rule 1: Add progressList activity if completed OR watchTime >= 10 mins (600s)
-  progressList.forEach(p => {
-    const isWatchedTenMins = (p.currentTime && p.currentTime >= 600) || p.completed === true;
-    if (isWatchedTenMins && (p.lastWatched || p.updatedAt)) {
-      const d = new Date(p.lastWatched || p.updatedAt);
-      const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-      activeDateSet.add(dateStr);
-    }
-  });
-
-  // Rule 2: Add practiceProgressList activity if completed === true
-  practiceProgressList.forEach(p => {
-    if (p.completed && (p.completedAt || p.updatedAt)) {
-      const d = new Date(p.completedAt || p.updatedAt);
-      const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-      activeDateSet.add(dateStr);
-    }
-  });
-
-  // Calculate real consecutive streak ending today or yesterday
-  let streakCount = 0;
-  let checkDate = new Date(today);
-  
-  while (true) {
-    const dateStr = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
-    if (activeDateSet.has(dateStr)) {
-      streakCount++;
-      checkDate.setDate(checkDate.getDate() - 1);
-    } else if (streakCount === 0) {
-      // Check if yesterday was active
-      checkDate.setDate(checkDate.getDate() - 1);
-      const yesterdayStr = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
-      if (activeDateSet.has(yesterdayStr)) {
-        streakCount++;
-        checkDate.setDate(checkDate.getDate() - 1);
-      } else {
-        break;
-      }
-    } else {
-      break;
-    }
-  }
+  // Set of active study dates from IndexedDB using unified domain rules
+  const activeDateSet = getActiveDateSet(progressList, practiceProgressList);
+  const streakCount = calculateStreak(progressList, practiceProgressList);
 
   // Month navigation handlers
   const handlePrevMonth = () => {

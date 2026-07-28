@@ -14,6 +14,7 @@ export default function Settings() {
   const [statusMsg, setStatusMsg] = useState({ text: '', type: 'info' });
   const [showConfirmReset, setShowConfirmReset] = useState(false);
   const [resetType, setResetType] = useState('progress'); // 'progress' | 'full'
+  const [isImporting, setIsImporting] = useState(false);
 
   const handleExport = async () => {
     setStatusMsg({ text: 'Generating backup file...', type: 'info' });
@@ -38,16 +39,37 @@ export default function Settings() {
   };
 
   const handleImport = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const input = e.currentTarget;
+    const file = input.files?.[0];
+    if (!file || isImporting) return;
 
-    reader.onerror = () => {
-      setStatusMsg({ text: 'Error reading file from disk.', type: 'error' });
-    };
+    setIsImporting(true);
+    setStatusMsg({ text: 'Reading backup file...', type: 'info' });
 
-    reader.readAsText(file);
-    // Reset file input value so same file can be imported again if needed
-    e.target.value = '';
+    try {
+      const text = await file.text();
+      let parsedData;
+      try {
+        parsedData = JSON.parse(text);
+      } catch (_) {
+        throw new SyntaxError('Invalid JSON file format. Please select a valid JSON backup file.');
+      }
+
+      await importBackup(parsedData);
+      setStatusMsg({ text: 'Backup restored successfully.', type: 'success' });
+    } catch (err) {
+      console.error(err);
+      if (err instanceof SyntaxError) {
+        setStatusMsg({ text: err.message, type: 'error' });
+      } else if (err?.name === 'ZodError' || err?.issues) {
+        setStatusMsg({ text: 'Invalid backup schema structure. Schema validation failed.', type: 'error' });
+      } else {
+        setStatusMsg({ text: `Failed to restore backup: ${err.message || 'Database restoration error'}`, type: 'error' });
+      }
+    } finally {
+      input.value = '';
+      setIsImporting(false);
+    }
   };
 
   const handleExecuteReset = async () => {
@@ -99,13 +121,14 @@ export default function Settings() {
           </button>
 
           {/* Import button wrapper */}
-          <label className="flex items-center justify-center gap-3 px-5 py-4 bg-zinc-900 border border-border hover:bg-zinc-800 transition rounded-xl font-bold text-white text-sm cursor-pointer">
+          <label className={`flex items-center justify-center gap-3 px-5 py-4 bg-zinc-900 border border-border hover:bg-zinc-800 transition rounded-xl font-bold text-white text-sm ${isImporting ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}`}>
             <Upload size={18} />
-            <span>Import Backup JSON</span>
+            <span>{isImporting ? 'Restoring Backup...' : 'Import Backup JSON'}</span>
             <input 
               type="file" 
               accept=".json" 
-              onChange={handleImport} 
+              onChange={handleImport}
+              disabled={isImporting}
               className="hidden" 
             />
           </label>

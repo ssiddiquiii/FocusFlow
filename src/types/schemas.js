@@ -66,7 +66,10 @@ export const PracticeProgressSchema = z.object({
   id: z.string().min(1), // Formatted as "lessonId_practiceIndex"
   courseId: z.string().min(1),
   lessonId: z.string().min(1),
-  practiceUrl: z.string().url(),
+  practiceUrl: z.preprocess(
+    (val) => (val === '' || val === undefined || val === null ? null : val),
+    z.string().url().nullable().optional()
+  ).default(null),
   completed: z.boolean().default(false),
   completedAt: z.number().int().positive().optional() // timestamp in ms
 });

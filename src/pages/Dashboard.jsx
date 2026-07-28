@@ -343,7 +343,7 @@ export default function Dashboard() {
                 </div>
                 <div>
                   <span className="text-zinc-500 text-[9px] font-bold uppercase tracking-wider block">Notes Written</span>
-                  <span className="text-base font-extrabold text-white block mt-0.5">{stats.notesCount || 0}</span>
+                  <span className="text-base font-extrabold text-white block mt-0.5">{stats.totalNotes || 0}</span>
                 </div>
               </div>
             </div>
