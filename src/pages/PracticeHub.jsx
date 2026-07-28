@@ -4,6 +4,7 @@ import { useFocusFlow } from '../hooks/useFocusFlow';
 import { useUIStore } from '../hooks/useUIStore';
 import PracticeTab from '../components/PracticeTab';
 import { JsLogo, GitLogo } from '../components/BrandLogos';
+import { togglePractice } from '../services/dataCommands';
 
 /**
  * Dedicated Global Practice Hub Page (`/practice`).
@@ -11,7 +12,7 @@ import { JsLogo, GitLogo } from '../components/BrandLogos';
  * across dedicated course catalogs.
  */
 export default function PracticeHub() {
-  const { practiceProgressList, togglePractice } = useFocusFlow();
+  const { practiceProgressList } = useFocusFlow();
   const { openCommandPalette } = useUIStore();
 
   return (

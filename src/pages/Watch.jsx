@@ -5,6 +5,7 @@ import { useUIStore } from '../hooks/useUIStore';
 import { ArrowLeft, BookOpen, FileText, CheckCircle2, Circle, Clock, Plus, Trash2, Play, Pause, Maximize, Volume2, VolumeX, Gauge, Type, Sliders, Target, Info } from 'lucide-react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/FocusFlowDB';
+import { createNote, deleteNote, saveProgress, setLessonCompletion } from '../services/dataCommands';
 import PracticeTab from '../components/PracticeTab';
 import ReadingTab from '../components/ReadingTab';
 import CategoryIcon from '../components/CategoryIcon';
@@ -113,7 +114,7 @@ export default function Watch() {
   const playerContainerRef = useRef(null);
   const progressBarRef = useRef(null);
   
-  const { courses, lessons, progressList, practiceProgressList, saveProgress, setLessonCompletion, togglePractice } = useFocusFlow();
+  const { courses, lessons, progressList, practiceProgressList } = useFocusFlow();
   const { activeLessonId, isPlaying, seekRequestTime, setActiveLessonId, setIsPlaying, triggerPlayerSeek } = useUIStore();
 
   const [activeTab, setActiveTab] = useState('notes'); // default to notes below video
@@ -574,21 +575,18 @@ export default function Watch() {
       timestamp = Math.round(ytPlayer.getCurrentTime());
     }
 
-    const now = Date.now();
-    await db.notes.add({
+    await createNote({
       courseId,
       lessonId,
       timestamp,
-      content: noteContent.trim(),
-      createdAt: now,
-      updatedAt: now
+      content: noteContent.trim()
     });
 
     setNoteContent('');
   };
 
   const handleDeleteNote = async (id) => {
-    await db.notes.delete(id);
+    await deleteNote(id);
   };
 
   const progressPercent = playerDuration > 0 ? (playerCurrentTime / playerDuration) * 100 : 0;

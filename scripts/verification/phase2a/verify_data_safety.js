@@ -27,7 +27,7 @@ async function run() {
         saveProgress,
         setLessonCompletion,
         importCourse
-      } = await import('/src/hooks/useFocusFlow.js');
+      } = await import('/src/services/dataCommands.js');
 
       const tables = [db.courses, db.lessons, db.progress, db.notes, db.practiceProgress];
       const clearAll = () => db.transaction('rw', tables, async () => {

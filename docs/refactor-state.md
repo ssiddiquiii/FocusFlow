@@ -1,5 +1,29 @@
 # FocusFlow Refactor State Tracker
 
+## Current Authoritative Status (Phase 2B)
+
+Phase 2B — Single Bootstrap and Command Boundary is implemented and verified, awaiting user review and commit approval.
+
+No next phase is approved. The next planned phase is Phase 2C — Reactive Read Model and Rerender Containment, which requires a new `PROCEED NEXT PHASE` after Phase 2B is approved and committed.
+
+Completed and verified:
+
+- Added one root bootstrap gate that opens and seeds IndexedDB before rendering the application.
+- Made bootstrap single-flight under React Strict Mode and retryable after a failure.
+- Added a visible, non-destructive bootstrap failure state with an explicit retry action.
+- Moved write, import/export, reset, note, practice, progress, and course commands out of `useFocusFlow` into `src/services/dataCommands.js`.
+- Reduced `useFocusFlow` to reactive reads and derived read helpers.
+- Migrated Dashboard, Settings, playlist import, Practice Hub, and Watch command consumers to the command service.
+- Preserved Phase 2A sticky completion, legacy progress fields, collision rejection, backup v2, atomic import/reset, and course-scoped deletion behavior.
+- Kept the Dexie application schema at version 3.
+- Split seed JSON into its own production chunk while retaining atomic seed/reset transactions.
+- Added `scripts/verification/phase2b/verify_bootstrap_commands.js` with 15 passing assertions.
+- Re-ran all Phase 1 verification scripts: 75/75 assertions passed.
+- Re-ran Phase 2A data-safety verification: 20/20 assertions passed.
+- Quality gates passed: build, frontend secret scan, and lint with 53 warnings / 0 errors.
+
+The older state entries below are retained as historical handoff context and are superseded by this section.
+
 ## Current Authoritative Status (Phase 2A)
 
 Phase 2A — Data-Safety and Correctness Closure is implemented and verified, awaiting user review and commit approval.

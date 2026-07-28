@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Plus, Loader2, CheckCircle2, AlertCircle, Link2, X } from 'lucide-react';
 import { extractPlaylistId, fetchYouTubePlaylistData } from '../services/youtubeApi';
-import { useFocusFlow } from '../hooks/useFocusFlow';
+import { importCourse } from '../services/dataCommands';
 
 export default function ImportPlaylistModal({ isOpen, onClose }) {
-  const { importCourse } = useFocusFlow();
   const [urlInput, setUrlInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');

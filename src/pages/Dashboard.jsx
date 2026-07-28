@@ -28,6 +28,7 @@ import QuoteSandbox from '../components/QuoteSandbox';
 import { exportNotesToMarkdown } from '../utils/exportUtils';
 import { calculateStreak } from '../utils/streakUtils';
 import { fetchYouTubePlaylistData } from '../services/youtubeApi';
+import { deleteCourse, importCourse } from '../services/dataCommands';
 
 /**
  * Dashboard Component (Home Catalog).
@@ -43,12 +44,9 @@ export default function Dashboard() {
     progressList, 
     practiceProgressList,
     notes,
-    stats, 
-    isInitializing, 
+    stats,
     getCourseProgress, 
-    getContinueLearningPath,
-    deleteCourse,
-    importCourse
+    getContinueLearningPath
   } = useFocusFlow();
 
   const [courseProgressMap, setCourseProgressMap] = useState({});
@@ -114,15 +112,6 @@ export default function Dashboard() {
       return a.title.localeCompare(b.title);
     });
   }, [courses, progressList]);
-
-  if (isInitializing) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[80vh] space-y-4">
-        <div className="animate-spin w-10 h-10 border-4 border-primary border-t-transparent rounded-full" />
-        <span className="text-sm text-zinc-500 uppercase tracking-widest font-semibold">Initializing FocusFlow Database...</span>
-      </div>
-    );
-  }
 
   const handleContinueLearning = () => {
     if (continuePath) {

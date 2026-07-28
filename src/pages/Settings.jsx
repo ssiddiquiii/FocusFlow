@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useFocusFlow } from '../hooks/useFocusFlow';
 import { Download, Upload, Trash2, ShieldAlert, RotateCcw } from 'lucide-react';
+import { clearProgressAndNotes, exportBackup, importBackup } from '../services/dataCommands';
 
 /**
  * Settings & Console Management Component.
@@ -9,8 +9,6 @@ import { Download, Upload, Trash2, ShieldAlert, RotateCcw } from 'lucide-react';
  * @returns {React.JSX.Element}
  */
 export default function Settings() {
-  const { exportBackup, importBackup, resetDatabase, clearProgressAndNotes } = useFocusFlow();
-  
   const [statusMsg, setStatusMsg] = useState({ text: '', type: 'info' });
   const [showConfirmReset, setShowConfirmReset] = useState(false);
   const [resetType, setResetType] = useState('progress'); // 'progress' | 'full'

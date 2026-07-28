@@ -1,6 +1,7 @@
 import Dexie from 'dexie';
-import seedData from './seedData.json';
 import { CourseSchema, LessonSchema, BackupSchema, parseBackupForImport } from '../types/schemas';
+
+const loadSeedData = async () => (await import('./seedData.json')).default;
 
 /**
  * FocusFlow Local-First Browser Database
@@ -49,6 +50,7 @@ class FocusFlowDB extends Dexie {
    * @returns {Promise<void>}
    */
   async seedIfEmpty() {
+    const seedData = await loadSeedData();
     return this.transaction(
       'rw',
       [this.courses, this.lessons, this.progress, this.notes, this.practiceProgress],
@@ -91,6 +93,7 @@ class FocusFlowDB extends Dexie {
    * @returns {Promise<void>}
    */
   async resetDatabase() {
+    const seedData = await loadSeedData();
     await this.transaction('rw', [this.courses, this.lessons, this.progress, this.notes, this.practiceProgress], async () => {
       await this.courses.clear();
       await this.lessons.clear();
