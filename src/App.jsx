@@ -125,8 +125,8 @@ function AppContent() {
         </button>
       </div>
 
-      {/* Desktop Floating Vertical Glass Navigation Dock (With Brand Logo Integrated at Top) */}
-      <aside className="hidden md:flex fixed left-3.5 top-1/2 -translate-y-1/2 z-50 flex-col items-center p-2.5 rounded-2xl bg-zinc-950/90 border border-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.85)] space-y-3.5">
+      {/* Desktop Floating Vertical Glass Navigation Dock (Performance Optimized) */}
+      <aside className="hidden md:flex fixed left-3.5 top-1/2 -translate-y-1/2 z-50 flex-col items-center p-2.5 rounded-2xl bg-zinc-950/95 border border-white/10 backdrop-blur-md shadow-[0_15px_35px_rgba(0,0,0,0.6)] space-y-3.5">
         {/* Integrated Brand Logo Icon at Top of Dock */}
         <Link 
           to="/" 
@@ -221,13 +221,12 @@ function AppContent() {
               <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
             </div>
           }>
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="initial">
               <motion.div 
                 key={location.pathname} 
-                initial={{ opacity: 0, y: 8, scale: 0.995 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -8, scale: 0.995 }}
-                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.1, ease: 'easeOut' }}
                 className="h-full min-w-0"
               >
                 <Routes location={location}>

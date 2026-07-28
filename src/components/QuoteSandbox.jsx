@@ -1,53 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { Quote, ChevronLeft, ChevronRight, Terminal } from 'lucide-react';
+import React, { useState, useEffect, memo } from 'react';
+import { ChevronLeft, ChevronRight, Terminal } from 'lucide-react';
 import developerQuotes from '../data/developerQuotes.json';
 
 /**
- * Modern Minimalist Developer Quotation Sandbox Component
- * Rotates curated developer quotes every 30 seconds with JetBrains Mono / Mona Lisa code typography.
+ * Performance-Optimized Developer Quotation Sandbox Component
+ * Rotates quotes every 30 seconds with 1-second state updates & React.memo to eliminate CPU re-render overhead.
  */
-export default function QuoteSandbox() {
+function QuoteSandboxComponent() {
   const [index, setIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
+  const [secondsElapsed, setSecondsElapsed] = useState(0);
 
   useEffect(() => {
-    // 30 second timer (30000ms) with 100ms smooth progress updates
-    const intervalMs = 30000;
-    const updateFreqMs = 100;
-    const increment = (updateFreqMs / intervalMs) * 100;
-
+    // 30-second timer updated once per second (1000ms) for 60fps UI performance
     const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
+      setSecondsElapsed((prev) => {
+        if (prev >= 29) {
           setIndex((prevIdx) => (prevIdx + 1) % developerQuotes.length);
           return 0;
         }
-        return prev + increment;
+        return prev + 1;
       });
-    }, updateFreqMs);
+    }, 1000);
 
     return () => clearInterval(timer);
   }, [index]);
 
   const current = developerQuotes[index] || developerQuotes[0];
+  const progressPercent = Math.min(100, Math.round(((secondsElapsed + 1) / 30) * 100));
 
   const handleNext = () => {
     setIndex((prev) => (prev + 1) % developerQuotes.length);
-    setProgress(0);
+    setSecondsElapsed(0);
   };
 
   const handlePrev = () => {
     setIndex((prev) => (prev - 1 + developerQuotes.length) % developerQuotes.length);
-    setProgress(0);
+    setSecondsElapsed(0);
   };
 
   return (
     <div className="p-4 sm:p-5 bg-zinc-950/70 relative overflow-hidden group flex flex-col justify-between h-full space-y-3">
-      {/* 30-Second Animated Progress Bar */}
+      {/* 30-Second Animated Progress Bar (CSS Hardware Accelerated) */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-zinc-900/80">
         <div 
-          className="h-full bg-gradient-to-r from-orange-500 via-primary to-orange-400 transition-all duration-100 ease-linear shadow-sm"
-          style={{ width: `${progress}%` }}
+          className="h-full bg-gradient-to-r from-orange-500 via-primary to-orange-400 transition-all duration-1000 ease-linear shadow-sm"
+          style={{ width: `${progressPercent}%` }}
         />
       </div>
 
@@ -64,8 +61,8 @@ export default function QuoteSandbox() {
 
         {/* Controls & Timer Indicator */}
         <div className="flex items-center gap-1.5 flex-shrink-0">
-          <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-widest mr-1">
-            30s
+          <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-widest mr-1 font-numeric">
+            {30 - secondsElapsed}s
           </span>
           <button
             onClick={handlePrev}
@@ -101,3 +98,5 @@ export default function QuoteSandbox() {
     </div>
   );
 }
+
+export default memo(QuoteSandboxComponent);
