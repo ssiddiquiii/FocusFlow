@@ -355,14 +355,15 @@ export default function Dashboard() {
       <div className="space-y-6">
         <h2 className="text-2xl font-bold text-white tracking-tight">Your Learning Catalog</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Mobile Horizontal Carousel / Desktop Responsive Grid */}
+        <div className="flex md:grid overflow-x-auto md:overflow-visible gap-4 md:gap-6 pb-4 md:pb-0 snap-x snap-mandatory scrollbar-none md:grid-cols-2 lg:grid-cols-3 -mx-3.5 px-3.5 sm:mx-0 sm:px-0">
           {sortedCourses.map((course) => {
             const progress = courseProgressMap[course.id] || 0;
 
             return (
               <div 
                 key={course.id}
-                className="glass-panel rounded-2xl overflow-hidden flex flex-col hover:border-primary/30 transition duration-300 group"
+                className="glass-panel rounded-2xl overflow-hidden flex flex-col hover:border-primary/30 transition duration-300 group flex-shrink-0 w-[85vw] sm:w-[340px] md:w-auto snap-center"
               >
                 {/* Course Header Thumbnail (Compact Height) */}
                 <div className="h-32 sm:h-36 relative bg-zinc-900 overflow-hidden">
