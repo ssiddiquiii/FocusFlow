@@ -12,6 +12,12 @@ export const useUIStore = create((set) => ({
   
   // Sidebar collapsed state
   sidebarCollapsed: true,
+
+  // Command Palette global state
+  commandPaletteOpen: false,
+  openCommandPalette: () => set({ commandPaletteOpen: true }),
+  closeCommandPalette: () => set({ commandPaletteOpen: false }),
+  toggleCommandPalette: () => set((state) => ({ commandPaletteOpen: !state.commandPaletteOpen })),
   
   // Importer state
   isImporting: false,

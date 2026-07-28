@@ -215,8 +215,8 @@ export default function PomodoroTimer() {
         </div>
       )}
 
-      {/* ⏳ FLOATING POMODORO WIDGET */}
-      <div className="fixed bottom-5 right-5 z-50">
+      {/* ⏳ FLOATING POMODORO WIDGET (Positioned cleanly towards the right corner) */}
+      <div className="fixed bottom-4 right-3 sm:right-4 z-50">
         {!isExpanded ? (
           /* Collapsed Pill Button */
           <button

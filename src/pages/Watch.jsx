@@ -596,11 +596,11 @@ export default function Watch() {
   return (
     <div className="flex flex-col lg:flex-row min-h-screen h-auto lg:h-screen overflow-y-auto lg:overflow-hidden bg-background">
       {/* Left Panel: Scrollable main content (Maximized Player + Below Syllabus) */}
-      <div className="flex-1 flex flex-col h-full min-w-0 overflow-y-auto bg-zinc-950/20">
+      <div className="flex-1 flex flex-col h-full min-w-0 overflow-y-auto bg-zinc-950/20 pb-12">
         
         {/* Navigation header */}
-        <div className="flex items-center gap-4 px-6 py-4 bg-zinc-950/80 border-b border-border sticky top-0 z-30 backdrop-blur">
-          <Link to={`/courses/${courseId}`} className="text-zinc-400 hover:text-white transition">
+        <div className="flex items-center gap-3 px-4 sm:px-6 py-3.5 bg-zinc-950/80 border-b border-border sticky top-0 z-30 backdrop-blur">
+          <Link to={`/courses/${courseId}`} className="text-zinc-400 hover:text-white transition p-1 rounded-lg hover:bg-zinc-900 flex-shrink-0" title="Back to Course Detail">
             <ArrowLeft size={18} />
           </Link>
           <div className="min-w-0">
@@ -833,6 +833,111 @@ export default function Watch() {
               </div>
             );
           })()}
+
+          {/* Inline Video Description Section */}
+          {lesson.description && (
+            <div className="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 space-y-2 mt-3">
+              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block">Video Description</span>
+              <p className="text-xs text-zinc-300 leading-relaxed whitespace-pre-wrap">
+                {lesson.description}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Mobile / Tablet Responsive Mode: Dedicated Study Tools Tabs (Notes, Reading, Info) - Rendered RIGHT AFTER VIDEO */}
+        <div className="block lg:hidden px-4 sm:px-6 py-4 border-b border-border/50 bg-zinc-950/60">
+          <div className="glass-panel rounded-2xl border border-border overflow-hidden">
+            {/* Tab Selector Header */}
+            <div className="flex border-b border-border bg-zinc-950 text-xs font-bold uppercase tracking-wider overflow-x-auto">
+              {lesson.type === 'youtube' && (
+                <>
+                  <button
+                    onClick={() => setActiveTab('notes')}
+                    className={`py-3.5 px-4 border-b-2 transition cursor-pointer flex items-center gap-1.5 flex-1 justify-center ${
+                      activeTab === 'notes' ? 'border-primary text-white bg-zinc-900/50' : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                    }`}
+                  >
+                    <FileText size={14} className={activeTab === 'notes' ? 'text-primary' : ''} />
+                    <span>Notes ({lessonNotes.length})</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('reading')}
+                    className={`py-3.5 px-4 border-b-2 transition cursor-pointer flex items-center gap-1.5 flex-1 justify-center ${
+                      activeTab === 'reading' ? 'border-primary text-white bg-zinc-900/50' : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                    }`}
+                  >
+                    <BookOpen size={14} className={activeTab === 'reading' ? 'text-primary' : ''} />
+                    <span>Reading</span>
+                  </button>
+                </>
+              )}
+            </div>
+
+            {/* Active Tab Body */}
+            <div className="p-4 space-y-4 max-h-[450px] overflow-y-auto">
+              {activeTab === 'notes' && lesson.type === 'youtube' && (
+                <div className="space-y-4">
+                  <form onSubmit={handleSaveNote} className="space-y-2">
+                    <textarea
+                      value={noteContent}
+                      onChange={(e) => setNoteContent(e.target.value)}
+                      placeholder="Type a timestamped note... (Press Enter to Save)"
+                      className="w-full h-[70px] p-3 bg-zinc-900 border border-border rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-primary transition resize-none"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault();
+                          handleSaveNote(e);
+                        }
+                      }}
+                    />
+                    <button
+                      type="submit"
+                      disabled={!noteContent.trim()}
+                      className="w-full py-2.5 bg-primary disabled:opacity-50 text-white rounded-xl text-xs font-bold hover:bg-primary/95 transition flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                    >
+                      <Plus size={15} />
+                      <span>Save Note {ytPlayer && `[${formatSeconds(ytPlayer.getCurrentTime())}]`}</span>
+                    </button>
+                  </form>
+
+                  <div className="space-y-3 pt-2">
+                    {lessonNotes.length === 0 ? (
+                      <p className="text-xs text-zinc-500 py-6 text-center">No notes written for this video yet.</p>
+                    ) : (
+                      lessonNotes.map((note) => (
+                        <div key={note.id} className="glass-panel p-3.5 rounded-xl relative group border border-border space-y-2">
+                          <div className="flex items-center justify-between">
+                            <button
+                              onClick={() => triggerPlayerSeek(note.timestamp)}
+                              className="px-2.5 py-1 text-[10px] font-bold rounded bg-accent/20 text-accent hover:bg-accent/30 border border-accent/30 transition flex items-center gap-1 cursor-pointer"
+                            >
+                              <Clock size={10} />
+                              <span>{formatSeconds(note.timestamp)}</span>
+                            </button>
+
+                            <button
+                              onClick={() => handleDeleteNote(note.id)}
+                              className="text-zinc-600 hover:text-red-500 opacity-0 group-hover:opacity-100 transition p-1 cursor-pointer"
+                              title="Delete note"
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          </div>
+                          <p className="text-xs text-zinc-200 leading-relaxed whitespace-pre-line">{note.content}</p>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'reading' && lesson.type === 'youtube' && (
+                <ReadingTab lessonId={lessonId} />
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Interactive Timed Chapter Timeline Navigator (For Masterclass Videos like Git) */}
@@ -925,8 +1030,8 @@ export default function Watch() {
 
       </div>
 
-      {/* Right Sidebar: Dedicated Study Tools Panel (3 Tabs: Notes, Reading, Description) */}
-      <div className="w-full lg:w-[380px] bg-zinc-950 border-t lg:border-t-0 lg:border-l border-border flex flex-col flex-shrink-0 min-h-[450px] lg:h-full overflow-hidden">
+      {/* Right Sidebar: Dedicated Study Tools Panel (2 Tabs: Notes, Reading) - Compact w-80 */}
+      <div className="hidden lg:flex w-72 lg:w-80 bg-zinc-950 border-l border-border flex-col flex-shrink-0 h-full overflow-hidden">
         
         {/* Sidebar Tab Selector Header */}
         <div className="flex border-b border-border bg-zinc-950 text-xs font-bold uppercase tracking-wider flex-shrink-0 overflow-x-auto">
@@ -955,17 +1060,6 @@ export default function Watch() {
               </button>
             </>
           )}
-
-          {/* Description Tab */}
-          <button
-            onClick={() => setActiveTab('desc')}
-            className={`py-3.5 px-4 border-b-2 transition cursor-pointer flex items-center gap-1.5 flex-1 justify-center ${
-              activeTab === 'desc' ? 'border-primary text-white bg-zinc-900/50' : 'border-transparent text-zinc-500 hover:text-zinc-300'
-            }`}
-          >
-            <Info size={14} className={activeTab === 'desc' ? 'text-primary' : ''} />
-            <span>Info</span>
-          </button>
         </div>
 
         {/* Sidebar Active Tab Content Body */}

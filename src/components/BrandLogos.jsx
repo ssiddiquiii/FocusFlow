@@ -1,73 +1,14 @@
 import React from 'react';
+import { FlaticonJS, FlaticonGit, FlaticonGithub } from './FlaticonIcons';
 
-/**
- * Pixel-Perfect Official JavaScript Brand Badge
- * (Standard Yellow Square #F7DF1E with Official JS Typography)
- */
 export function JsLogo({ size = 20, className = '' }) {
-  return (
-    <svg 
-      width={size} 
-      height={size} 
-      viewBox="0 0 128 128" 
-      xmlns="http://www.w3.org/2000/svg"
-      className={`rounded-sm flex-shrink-0 ${className}`}
-    >
-      {/* Official JS Yellow Background */}
-      <rect width="128" height="128" fill="#F7DF1E" rx="8" />
-      {/* Official JS Black Letters */}
-      <path 
-        d="M67.31 104.75c3.5 6.07 9 10.42 17.5 10.42 7.42 0 12.17-3.67 12.17-8.92 0-6.17-4.83-8.42-12.92-11.92l-4.42-1.92c-12.75-5.42-18.42-12.25-18.42-25.08 0-14.75 11.58-25.75 29.58-25.75 13 0 21.67 4.58 26.67 13.75l-10.42 6.67c-3-5.25-6.5-7.58-16.17-7.58-6.42 0-10.75 3.08-10.75 7.42 0 4.92 3.5 7.08 11.33 10.5l4.42 1.92c14.67 6.25 20.33 12.5 20.33 25.5 0 17-13.42 27-32.92 27-16.92 0-26.67-7.67-31.5-17.5l10.42-6.5zm-38.08.33c2.75 4.92 6.08 8.75 12.5 8.75 6.42 0 10.5-2.58 10.5-12.67V42.75h16.25v58.67c0 18.67-10.92 26.75-26.42 26.75-13.75 0-21.75-6.83-25.75-16.08l12.92-7.01z" 
-        fill="#000000" 
-      />
-    </svg>
-  );
+  return <FlaticonJS size={size} className={className} />;
 }
 
-/**
- * Official Git Brand Badge (Orange Diamond with White Branching Nodes)
- */
 export function GitLogo({ size = 20, className = '' }) {
-  return (
-    <svg 
-      width={size} 
-      height={size} 
-      viewBox="0 0 256 256" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg"
-      className={`flex-shrink-0 ${className}`}
-    >
-      <path 
-        d="M246.6 117.4L138.6 9.4c-5.9-5.9-15.4-5.9-21.2 0L9.4 117.4c-5.9 5.9-5.9 15.4 0 21.2l108 108c5.9 5.9 15.4 5.9 21.2 0l108-108c5.9-5.9 5.9-15.3 0-21.2z" 
-        fill="#F05032" 
-      />
-      <path 
-        d="M157.1 123.6c-4.4-4.4-11.2-5.1-16.3-2.1l-20.9-20.9c.7-1.8 1.1-3.7 1.1-5.7 0-8.6-7-15.6-15.6-15.6S89.8 86.3 89.8 94.9c0 7.4 5.2 13.6 12.2 15.2v35.7c-7 1.6-12.2 7.8-12.2 15.2 0 8.6 7 15.6 15.6 15.6s15.6-7 15.6-15.6c0-2.1-.4-4.1-1.2-5.9l19.9-19.9c1.8.7 3.8 1.1 5.9 1.1 8.6 0 15.6-7 15.6-15.6 0-2.5-.6-4.9-1.9-7.1zM105.4 94.9c0-3.1 2.5-5.6 5.6-5.6s5.6 2.5 5.6 5.6-2.5 5.6-5.6 5.6-5.6-2.5-5.6-5.6zm5.6 76.5c-3.1 0-5.6-2.5-5.6-5.6s2.5-5.6 5.6-5.6 5.6 2.5 5.6 5.6-2.5 5.6-5.6 5.6zm35.2-42.2c-3.1 0-5.6-2.5-5.6-5.6s2.5-5.6 5.6-5.6 5.6 2.5 5.6 5.6-2.5 5.6-5.6 5.6z" 
-        fill="#FFFFFF" 
-      />
-    </svg>
-  );
+  return <FlaticonGit size={size} className={className} />;
 }
 
-/**
- * Official GitHub Octocat Badge
- */
 export function GithubLogo({ size = 20, className = '' }) {
-  return (
-    <svg 
-      width={size} 
-      height={size} 
-      viewBox="0 0 98 96" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg"
-      className={`flex-shrink-0 ${className}`}
-    >
-      <path 
-        fillRule="evenodd" 
-        clipRule="evenodd" 
-        d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.869 0 48.854 0z" 
-        fill="#FFFFFF" 
-      />
-    </svg>
-  );
+  return <FlaticonGithub size={size} className={className} />;
 }

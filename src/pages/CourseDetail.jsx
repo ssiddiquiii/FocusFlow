@@ -53,16 +53,16 @@ export default function CourseDetail() {
   })();
 
   return (
-    <div className="p-8 max-w-5xl mx-auto">
+    <div className="p-3.5 sm:p-8 max-w-5xl mx-auto space-y-6">
       {/* Back button */}
-      <Link to="/" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white mb-8 transition">
+      <Link to="/" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition">
         <ArrowLeft size={16} />
         <span>Back to Dashboard</span>
       </Link>
 
       {/* Course Banner Card */}
-      <div className="glass-panel rounded-2xl p-8 mb-8 flex flex-col md:flex-row gap-8 items-start md:items-center">
-        <div className="w-full md:w-64 h-36 rounded-xl overflow-hidden bg-zinc-900 border border-border flex-shrink-0">
+      <div className="glass-panel rounded-2xl p-4 sm:p-8 flex flex-col lg:flex-row gap-6 lg:gap-8 items-start lg:items-center min-w-0 w-full">
+        <div className="w-full lg:w-64 h-48 sm:h-36 rounded-xl overflow-hidden bg-zinc-900 border border-border flex-shrink-0">
           <img 
             src={course.thumbnailUrl} 
             alt={course.title} 
@@ -70,13 +70,13 @@ export default function CourseDetail() {
           />
         </div>
         
-        <div className="flex-1 space-y-4">
-          <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded bg-primary/15 text-primary border border-primary/20 mb-3 select-none">
-            {course.type === 'youtube' ? 'YouTube Course' : 'Udemy manual'}
+        <div className="flex-1 space-y-3 min-w-0">
+          <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded bg-primary/15 text-primary border border-primary/20 select-none">
+            {course.type === 'youtube' ? 'YouTube Course' : 'Udemy Manual'}
           </span>
-          <h1 className="text-3xl font-bold text-white tracking-tight">{course.title}</h1>
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight break-words">{course.title}</h1>
           <div className="space-y-1 max-w-2xl">
-            <p className="text-zinc-400 text-sm leading-relaxed">
+            <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">
               {expandedDesc ? course.description : `${course.description.slice(0, 180)}${course.description.length > 180 ? '...' : ''}`}
             </p>
             {course.description.length > 180 && (
@@ -95,7 +95,7 @@ export default function CourseDetail() {
         {resumeLesson && (
           <button
             onClick={() => navigate(`/courses/${courseId}/lessons/${resumeLesson.id}`)}
-            className="w-full md:w-auto px-6 py-4 rounded-xl font-semibold bg-gradient-to-r from-primary to-accent hover:opacity-90 active:scale-95 transition text-white shadow-lg shadow-primary/25 flex items-center justify-center gap-3"
+            className="w-full lg:w-auto px-6 py-3.5 rounded-xl font-bold bg-gradient-to-r from-primary to-accent hover:opacity-90 active:scale-95 transition text-white shadow-lg shadow-primary/25 flex items-center justify-center gap-2.5 flex-shrink-0 cursor-pointer"
           >
             {lastWatched ? <RotateCcw size={18} /> : <Play size={18} fill="currentColor" />}
             <span>{lastWatched ? 'Resume Last Video' : courseProgress > 0 ? 'Resume Course' : 'Start Course'}</span>

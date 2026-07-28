@@ -108,16 +108,27 @@
   --sidebar-ring: #d97736;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  font-size: 15px;
-  line-height: 1.625;
+  font-size: 14px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+
+@media (min-width: 640px) {
+  body {
+    font-size: 15px;
+    line-height: 1.625;
+  }
 }
 
 code, pre, kbd, samp, .font-mono {
@@ -175,4 +186,11 @@ code, pre, kbd, samp, .font-mono {
 
 .animate-page-entry {
   animation: pageFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* GPU Hardware Acceleration for 120fps Smooth Animations */
+.gpu-layer {
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
