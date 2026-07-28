@@ -57,12 +57,12 @@ class FocusFlowDB extends Dexie {
         await this.lessons.where('courseId').equals(id).delete();
       }
 
-      // 2. Ensure ALL seed courses (Chai aur JavaScript + Git Masterclass) exist in IndexedDB
+      // 2. Ensure ALL seed courses (Chai aur JavaScript + Git Masterclass) and their lessons exist in IndexedDB
       for (const c of seedData.courses) {
-        const existing = await this.courses.get(c.id);
-        if (!existing) {
-          await this.courses.put(CourseSchema.parse(c));
-          const courseLessons = seedData.lessons.filter(l => l.courseId === c.id);
+        await this.courses.put(CourseSchema.parse(c));
+        const courseLessons = seedData.lessons.filter(l => l.courseId === c.id);
+        const existingLessonsCount = await this.lessons.where('courseId').equals(c.id).count();
+        if (existingLessonsCount < courseLessons.length) {
           await this.lessons.bulkPut(courseLessons.map(l => LessonSchema.parse(l)));
         }
       }
