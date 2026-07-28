@@ -1,0 +1,803 @@
+{
+  "totalExpected": 99,
+  "totalCaptured": 82,
+  "totalMissing": 17,
+  "totalFailed": 0,
+  "captured": [
+    {
+      "viewport": "320x568_small_phone",
+      "resolution": "320x568",
+      "routeOrOverlay": "Dashboard",
+      "filename": "320x568_small_phone_dashboard.png",
+      "path": "./evidence/screenshots/320x568_small_phone_dashboard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "320x568_small_phone",
+      "resolution": "320x568",
+      "routeOrOverlay": "Course Detail",
+      "filename": "320x568_small_phone_course_detail.png",
+      "path": "./evidence/screenshots/320x568_small_phone_course_detail.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "320x568_small_phone",
+      "resolution": "320x568",
+      "routeOrOverlay": "Watch",
+      "filename": "320x568_small_phone_watch.png",
+      "path": "./evidence/screenshots/320x568_small_phone_watch.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "320x568_small_phone",
+      "resolution": "320x568",
+      "routeOrOverlay": "Practice List",
+      "filename": "320x568_small_phone_practice_list.png",
+      "path": "./evidence/screenshots/320x568_small_phone_practice_list.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "320x568_small_phone",
+      "resolution": "320x568",
+      "routeOrOverlay": "Practice Flashcard",
+      "filename": "320x568_small_phone_practice_flashcard.png",
+      "path": "./evidence/screenshots/320x568_small_phone_practice_flashcard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "320x568_small_phone",
+      "resolution": "320x568",
+      "routeOrOverlay": "Settings",
+      "filename": "320x568_small_phone_settings.png",
+      "path": "./evidence/screenshots/320x568_small_phone_settings.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "320x568_small_phone",
+      "resolution": "320x568",
+      "routeOrOverlay": "Import Playlist Modal",
+      "filename": "320x568_small_phone_modal_import_playlist.png",
+      "path": "./evidence/screenshots/320x568_small_phone_modal_import_playlist.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "320x568_small_phone",
+      "resolution": "320x568",
+      "routeOrOverlay": "Command Palette",
+      "filename": "320x568_small_phone_command_palette.png",
+      "path": "./evidence/screenshots/320x568_small_phone_command_palette.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "320x568_small_phone",
+      "resolution": "320x568",
+      "routeOrOverlay": "Pomodoro Expanded",
+      "filename": "320x568_small_phone_pomodoro_expanded.png",
+      "path": "./evidence/screenshots/320x568_small_phone_pomodoro_expanded.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "320x568_small_phone",
+      "resolution": "320x568",
+      "routeOrOverlay": "Offline Page",
+      "filename": "320x568_small_phone_offline.png",
+      "path": "./evidence/screenshots/320x568_small_phone_offline.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "360x800_common_phone",
+      "resolution": "360x800",
+      "routeOrOverlay": "Dashboard",
+      "filename": "360x800_common_phone_dashboard.png",
+      "path": "./evidence/screenshots/360x800_common_phone_dashboard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "360x800_common_phone",
+      "resolution": "360x800",
+      "routeOrOverlay": "Course Detail",
+      "filename": "360x800_common_phone_course_detail.png",
+      "path": "./evidence/screenshots/360x800_common_phone_course_detail.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "360x800_common_phone",
+      "resolution": "360x800",
+      "routeOrOverlay": "Watch",
+      "filename": "360x800_common_phone_watch.png",
+      "path": "./evidence/screenshots/360x800_common_phone_watch.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "360x800_common_phone",
+      "resolution": "360x800",
+      "routeOrOverlay": "Practice List",
+      "filename": "360x800_common_phone_practice_list.png",
+      "path": "./evidence/screenshots/360x800_common_phone_practice_list.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "360x800_common_phone",
+      "resolution": "360x800",
+      "routeOrOverlay": "Practice Flashcard",
+      "filename": "360x800_common_phone_practice_flashcard.png",
+      "path": "./evidence/screenshots/360x800_common_phone_practice_flashcard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "360x800_common_phone",
+      "resolution": "360x800",
+      "routeOrOverlay": "Settings",
+      "filename": "360x800_common_phone_settings.png",
+      "path": "./evidence/screenshots/360x800_common_phone_settings.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "360x800_common_phone",
+      "resolution": "360x800",
+      "routeOrOverlay": "Command Palette",
+      "filename": "360x800_common_phone_command_palette.png",
+      "path": "./evidence/screenshots/360x800_common_phone_command_palette.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "360x800_common_phone",
+      "resolution": "360x800",
+      "routeOrOverlay": "Pomodoro Expanded",
+      "filename": "360x800_common_phone_pomodoro_expanded.png",
+      "path": "./evidence/screenshots/360x800_common_phone_pomodoro_expanded.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "360x800_common_phone",
+      "resolution": "360x800",
+      "routeOrOverlay": "Offline Page",
+      "filename": "360x800_common_phone_offline.png",
+      "path": "./evidence/screenshots/360x800_common_phone_offline.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "390x844_modern_phone",
+      "resolution": "390x844",
+      "routeOrOverlay": "Dashboard",
+      "filename": "390x844_modern_phone_dashboard.png",
+      "path": "./evidence/screenshots/390x844_modern_phone_dashboard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "390x844_modern_phone",
+      "resolution": "390x844",
+      "routeOrOverlay": "Course Detail",
+      "filename": "390x844_modern_phone_course_detail.png",
+      "path": "./evidence/screenshots/390x844_modern_phone_course_detail.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "390x844_modern_phone",
+      "resolution": "390x844",
+      "routeOrOverlay": "Watch",
+      "filename": "390x844_modern_phone_watch.png",
+      "path": "./evidence/screenshots/390x844_modern_phone_watch.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "390x844_modern_phone",
+      "resolution": "390x844",
+      "routeOrOverlay": "Practice List",
+      "filename": "390x844_modern_phone_practice_list.png",
+      "path": "./evidence/screenshots/390x844_modern_phone_practice_list.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "390x844_modern_phone",
+      "resolution": "390x844",
+      "routeOrOverlay": "Practice Flashcard",
+      "filename": "390x844_modern_phone_practice_flashcard.png",
+      "path": "./evidence/screenshots/390x844_modern_phone_practice_flashcard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "390x844_modern_phone",
+      "resolution": "390x844",
+      "routeOrOverlay": "Settings",
+      "filename": "390x844_modern_phone_settings.png",
+      "path": "./evidence/screenshots/390x844_modern_phone_settings.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "390x844_modern_phone",
+      "resolution": "390x844",
+      "routeOrOverlay": "Command Palette",
+      "filename": "390x844_modern_phone_command_palette.png",
+      "path": "./evidence/screenshots/390x844_modern_phone_command_palette.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "390x844_modern_phone",
+      "resolution": "390x844",
+      "routeOrOverlay": "Pomodoro Expanded",
+      "filename": "390x844_modern_phone_pomodoro_expanded.png",
+      "path": "./evidence/screenshots/390x844_modern_phone_pomodoro_expanded.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "390x844_modern_phone",
+      "resolution": "390x844",
+      "routeOrOverlay": "Offline Page",
+      "filename": "390x844_modern_phone_offline.png",
+      "path": "./evidence/screenshots/390x844_modern_phone_offline.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "412x915_large_phone",
+      "resolution": "412x915",
+      "routeOrOverlay": "Dashboard",
+      "filename": "412x915_large_phone_dashboard.png",
+      "path": "./evidence/screenshots/412x915_large_phone_dashboard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "412x915_large_phone",
+      "resolution": "412x915",
+      "routeOrOverlay": "Course Detail",
+      "filename": "412x915_large_phone_course_detail.png",
+      "path": "./evidence/screenshots/412x915_large_phone_course_detail.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "412x915_large_phone",
+      "resolution": "412x915",
+      "routeOrOverlay": "Watch",
+      "filename": "412x915_large_phone_watch.png",
+      "path": "./evidence/screenshots/412x915_large_phone_watch.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "412x915_large_phone",
+      "resolution": "412x915",
+      "routeOrOverlay": "Practice List",
+      "filename": "412x915_large_phone_practice_list.png",
+      "path": "./evidence/screenshots/412x915_large_phone_practice_list.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "412x915_large_phone",
+      "resolution": "412x915",
+      "routeOrOverlay": "Practice Flashcard",
+      "filename": "412x915_large_phone_practice_flashcard.png",
+      "path": "./evidence/screenshots/412x915_large_phone_practice_flashcard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "412x915_large_phone",
+      "resolution": "412x915",
+      "routeOrOverlay": "Settings",
+      "filename": "412x915_large_phone_settings.png",
+      "path": "./evidence/screenshots/412x915_large_phone_settings.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "412x915_large_phone",
+      "resolution": "412x915",
+      "routeOrOverlay": "Command Palette",
+      "filename": "412x915_large_phone_command_palette.png",
+      "path": "./evidence/screenshots/412x915_large_phone_command_palette.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "412x915_large_phone",
+      "resolution": "412x915",
+      "routeOrOverlay": "Pomodoro Expanded",
+      "filename": "412x915_large_phone_pomodoro_expanded.png",
+      "path": "./evidence/screenshots/412x915_large_phone_pomodoro_expanded.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "412x915_large_phone",
+      "resolution": "412x915",
+      "routeOrOverlay": "Offline Page",
+      "filename": "412x915_large_phone_offline.png",
+      "path": "./evidence/screenshots/412x915_large_phone_offline.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "768x1024_tablet_portrait",
+      "resolution": "768x1024",
+      "routeOrOverlay": "Dashboard",
+      "filename": "768x1024_tablet_portrait_dashboard.png",
+      "path": "./evidence/screenshots/768x1024_tablet_portrait_dashboard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "768x1024_tablet_portrait",
+      "resolution": "768x1024",
+      "routeOrOverlay": "Course Detail",
+      "filename": "768x1024_tablet_portrait_course_detail.png",
+      "path": "./evidence/screenshots/768x1024_tablet_portrait_course_detail.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "768x1024_tablet_portrait",
+      "resolution": "768x1024",
+      "routeOrOverlay": "Watch",
+      "filename": "768x1024_tablet_portrait_watch.png",
+      "path": "./evidence/screenshots/768x1024_tablet_portrait_watch.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "768x1024_tablet_portrait",
+      "resolution": "768x1024",
+      "routeOrOverlay": "Practice List",
+      "filename": "768x1024_tablet_portrait_practice_list.png",
+      "path": "./evidence/screenshots/768x1024_tablet_portrait_practice_list.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "768x1024_tablet_portrait",
+      "resolution": "768x1024",
+      "routeOrOverlay": "Practice Flashcard",
+      "filename": "768x1024_tablet_portrait_practice_flashcard.png",
+      "path": "./evidence/screenshots/768x1024_tablet_portrait_practice_flashcard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "768x1024_tablet_portrait",
+      "resolution": "768x1024",
+      "routeOrOverlay": "Settings",
+      "filename": "768x1024_tablet_portrait_settings.png",
+      "path": "./evidence/screenshots/768x1024_tablet_portrait_settings.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "768x1024_tablet_portrait",
+      "resolution": "768x1024",
+      "routeOrOverlay": "Command Palette",
+      "filename": "768x1024_tablet_portrait_command_palette.png",
+      "path": "./evidence/screenshots/768x1024_tablet_portrait_command_palette.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "768x1024_tablet_portrait",
+      "resolution": "768x1024",
+      "routeOrOverlay": "Pomodoro Expanded",
+      "filename": "768x1024_tablet_portrait_pomodoro_expanded.png",
+      "path": "./evidence/screenshots/768x1024_tablet_portrait_pomodoro_expanded.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "768x1024_tablet_portrait",
+      "resolution": "768x1024",
+      "routeOrOverlay": "Offline Page",
+      "filename": "768x1024_tablet_portrait_offline.png",
+      "path": "./evidence/screenshots/768x1024_tablet_portrait_offline.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1024x768_tablet_landscape",
+      "resolution": "1024x768",
+      "routeOrOverlay": "Dashboard",
+      "filename": "1024x768_tablet_landscape_dashboard.png",
+      "path": "./evidence/screenshots/1024x768_tablet_landscape_dashboard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1024x768_tablet_landscape",
+      "resolution": "1024x768",
+      "routeOrOverlay": "Course Detail",
+      "filename": "1024x768_tablet_landscape_course_detail.png",
+      "path": "./evidence/screenshots/1024x768_tablet_landscape_course_detail.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1024x768_tablet_landscape",
+      "resolution": "1024x768",
+      "routeOrOverlay": "Watch",
+      "filename": "1024x768_tablet_landscape_watch.png",
+      "path": "./evidence/screenshots/1024x768_tablet_landscape_watch.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1024x768_tablet_landscape",
+      "resolution": "1024x768",
+      "routeOrOverlay": "Practice List",
+      "filename": "1024x768_tablet_landscape_practice_list.png",
+      "path": "./evidence/screenshots/1024x768_tablet_landscape_practice_list.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1024x768_tablet_landscape",
+      "resolution": "1024x768",
+      "routeOrOverlay": "Practice Flashcard",
+      "filename": "1024x768_tablet_landscape_practice_flashcard.png",
+      "path": "./evidence/screenshots/1024x768_tablet_landscape_practice_flashcard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1024x768_tablet_landscape",
+      "resolution": "1024x768",
+      "routeOrOverlay": "Settings",
+      "filename": "1024x768_tablet_landscape_settings.png",
+      "path": "./evidence/screenshots/1024x768_tablet_landscape_settings.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1024x768_tablet_landscape",
+      "resolution": "1024x768",
+      "routeOrOverlay": "Command Palette",
+      "filename": "1024x768_tablet_landscape_command_palette.png",
+      "path": "./evidence/screenshots/1024x768_tablet_landscape_command_palette.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1024x768_tablet_landscape",
+      "resolution": "1024x768",
+      "routeOrOverlay": "Pomodoro Expanded",
+      "filename": "1024x768_tablet_landscape_pomodoro_expanded.png",
+      "path": "./evidence/screenshots/1024x768_tablet_landscape_pomodoro_expanded.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1024x768_tablet_landscape",
+      "resolution": "1024x768",
+      "routeOrOverlay": "Offline Page",
+      "filename": "1024x768_tablet_landscape_offline.png",
+      "path": "./evidence/screenshots/1024x768_tablet_landscape_offline.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1280x800_compact_laptop",
+      "resolution": "1280x800",
+      "routeOrOverlay": "Dashboard",
+      "filename": "1280x800_compact_laptop_dashboard.png",
+      "path": "./evidence/screenshots/1280x800_compact_laptop_dashboard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1280x800_compact_laptop",
+      "resolution": "1280x800",
+      "routeOrOverlay": "Course Detail",
+      "filename": "1280x800_compact_laptop_course_detail.png",
+      "path": "./evidence/screenshots/1280x800_compact_laptop_course_detail.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1280x800_compact_laptop",
+      "resolution": "1280x800",
+      "routeOrOverlay": "Watch",
+      "filename": "1280x800_compact_laptop_watch.png",
+      "path": "./evidence/screenshots/1280x800_compact_laptop_watch.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1280x800_compact_laptop",
+      "resolution": "1280x800",
+      "routeOrOverlay": "Practice List",
+      "filename": "1280x800_compact_laptop_practice_list.png",
+      "path": "./evidence/screenshots/1280x800_compact_laptop_practice_list.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1280x800_compact_laptop",
+      "resolution": "1280x800",
+      "routeOrOverlay": "Practice Flashcard",
+      "filename": "1280x800_compact_laptop_practice_flashcard.png",
+      "path": "./evidence/screenshots/1280x800_compact_laptop_practice_flashcard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1280x800_compact_laptop",
+      "resolution": "1280x800",
+      "routeOrOverlay": "Settings",
+      "filename": "1280x800_compact_laptop_settings.png",
+      "path": "./evidence/screenshots/1280x800_compact_laptop_settings.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1280x800_compact_laptop",
+      "resolution": "1280x800",
+      "routeOrOverlay": "Command Palette",
+      "filename": "1280x800_compact_laptop_command_palette.png",
+      "path": "./evidence/screenshots/1280x800_compact_laptop_command_palette.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1280x800_compact_laptop",
+      "resolution": "1280x800",
+      "routeOrOverlay": "Pomodoro Expanded",
+      "filename": "1280x800_compact_laptop_pomodoro_expanded.png",
+      "path": "./evidence/screenshots/1280x800_compact_laptop_pomodoro_expanded.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1280x800_compact_laptop",
+      "resolution": "1280x800",
+      "routeOrOverlay": "Offline Page",
+      "filename": "1280x800_compact_laptop_offline.png",
+      "path": "./evidence/screenshots/1280x800_compact_laptop_offline.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1440x900_desktop",
+      "resolution": "1440x900",
+      "routeOrOverlay": "Dashboard",
+      "filename": "1440x900_desktop_dashboard.png",
+      "path": "./evidence/screenshots/1440x900_desktop_dashboard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1440x900_desktop",
+      "resolution": "1440x900",
+      "routeOrOverlay": "Course Detail",
+      "filename": "1440x900_desktop_course_detail.png",
+      "path": "./evidence/screenshots/1440x900_desktop_course_detail.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1440x900_desktop",
+      "resolution": "1440x900",
+      "routeOrOverlay": "Watch",
+      "filename": "1440x900_desktop_watch.png",
+      "path": "./evidence/screenshots/1440x900_desktop_watch.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1440x900_desktop",
+      "resolution": "1440x900",
+      "routeOrOverlay": "Practice List",
+      "filename": "1440x900_desktop_practice_list.png",
+      "path": "./evidence/screenshots/1440x900_desktop_practice_list.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1440x900_desktop",
+      "resolution": "1440x900",
+      "routeOrOverlay": "Practice Flashcard",
+      "filename": "1440x900_desktop_practice_flashcard.png",
+      "path": "./evidence/screenshots/1440x900_desktop_practice_flashcard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1440x900_desktop",
+      "resolution": "1440x900",
+      "routeOrOverlay": "Settings",
+      "filename": "1440x900_desktop_settings.png",
+      "path": "./evidence/screenshots/1440x900_desktop_settings.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1440x900_desktop",
+      "resolution": "1440x900",
+      "routeOrOverlay": "Command Palette",
+      "filename": "1440x900_desktop_command_palette.png",
+      "path": "./evidence/screenshots/1440x900_desktop_command_palette.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1440x900_desktop",
+      "resolution": "1440x900",
+      "routeOrOverlay": "Pomodoro Expanded",
+      "filename": "1440x900_desktop_pomodoro_expanded.png",
+      "path": "./evidence/screenshots/1440x900_desktop_pomodoro_expanded.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "1440x900_desktop",
+      "resolution": "1440x900",
+      "routeOrOverlay": "Offline Page",
+      "filename": "1440x900_desktop_offline.png",
+      "path": "./evidence/screenshots/1440x900_desktop_offline.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "844x390_phone_landscape",
+      "resolution": "844x390",
+      "routeOrOverlay": "Dashboard",
+      "filename": "844x390_phone_landscape_dashboard.png",
+      "path": "./evidence/screenshots/844x390_phone_landscape_dashboard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "844x390_phone_landscape",
+      "resolution": "844x390",
+      "routeOrOverlay": "Course Detail",
+      "filename": "844x390_phone_landscape_course_detail.png",
+      "path": "./evidence/screenshots/844x390_phone_landscape_course_detail.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "844x390_phone_landscape",
+      "resolution": "844x390",
+      "routeOrOverlay": "Watch",
+      "filename": "844x390_phone_landscape_watch.png",
+      "path": "./evidence/screenshots/844x390_phone_landscape_watch.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "844x390_phone_landscape",
+      "resolution": "844x390",
+      "routeOrOverlay": "Practice List",
+      "filename": "844x390_phone_landscape_practice_list.png",
+      "path": "./evidence/screenshots/844x390_phone_landscape_practice_list.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "844x390_phone_landscape",
+      "resolution": "844x390",
+      "routeOrOverlay": "Practice Flashcard",
+      "filename": "844x390_phone_landscape_practice_flashcard.png",
+      "path": "./evidence/screenshots/844x390_phone_landscape_practice_flashcard.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "844x390_phone_landscape",
+      "resolution": "844x390",
+      "routeOrOverlay": "Settings",
+      "filename": "844x390_phone_landscape_settings.png",
+      "path": "./evidence/screenshots/844x390_phone_landscape_settings.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "844x390_phone_landscape",
+      "resolution": "844x390",
+      "routeOrOverlay": "Command Palette",
+      "filename": "844x390_phone_landscape_command_palette.png",
+      "path": "./evidence/screenshots/844x390_phone_landscape_command_palette.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "844x390_phone_landscape",
+      "resolution": "844x390",
+      "routeOrOverlay": "Pomodoro Expanded",
+      "filename": "844x390_phone_landscape_pomodoro_expanded.png",
+      "path": "./evidence/screenshots/844x390_phone_landscape_pomodoro_expanded.png",
+      "status": "captured"
+    },
+    {
+      "viewport": "844x390_phone_landscape",
+      "resolution": "844x390",
+      "routeOrOverlay": "Offline Page",
+      "filename": "844x390_phone_landscape_offline.png",
+      "path": "./evidence/screenshots/844x390_phone_landscape_offline.png",
+      "status": "captured"
+    }
+  ],
+  "missing": [
+    {
+      "viewport": "320x568_small_phone",
+      "resolution": "320x568",
+      "routeOrOverlay": "Streak Modal",
+      "filename": "320x568_small_phone_streak_modal.png",
+      "path": "./evidence/screenshots/320x568_small_phone_streak_modal.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "360x800_common_phone",
+      "resolution": "360x800",
+      "routeOrOverlay": "Import Playlist Modal",
+      "filename": "360x800_common_phone_modal_import_playlist.png",
+      "path": "./evidence/screenshots/360x800_common_phone_modal_import_playlist.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "360x800_common_phone",
+      "resolution": "360x800",
+      "routeOrOverlay": "Streak Modal",
+      "filename": "360x800_common_phone_streak_modal.png",
+      "path": "./evidence/screenshots/360x800_common_phone_streak_modal.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "390x844_modern_phone",
+      "resolution": "390x844",
+      "routeOrOverlay": "Import Playlist Modal",
+      "filename": "390x844_modern_phone_modal_import_playlist.png",
+      "path": "./evidence/screenshots/390x844_modern_phone_modal_import_playlist.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "390x844_modern_phone",
+      "resolution": "390x844",
+      "routeOrOverlay": "Streak Modal",
+      "filename": "390x844_modern_phone_streak_modal.png",
+      "path": "./evidence/screenshots/390x844_modern_phone_streak_modal.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "412x915_large_phone",
+      "resolution": "412x915",
+      "routeOrOverlay": "Import Playlist Modal",
+      "filename": "412x915_large_phone_modal_import_playlist.png",
+      "path": "./evidence/screenshots/412x915_large_phone_modal_import_playlist.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "412x915_large_phone",
+      "resolution": "412x915",
+      "routeOrOverlay": "Streak Modal",
+      "filename": "412x915_large_phone_streak_modal.png",
+      "path": "./evidence/screenshots/412x915_large_phone_streak_modal.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "768x1024_tablet_portrait",
+      "resolution": "768x1024",
+      "routeOrOverlay": "Import Playlist Modal",
+      "filename": "768x1024_tablet_portrait_modal_import_playlist.png",
+      "path": "./evidence/screenshots/768x1024_tablet_portrait_modal_import_playlist.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "768x1024_tablet_portrait",
+      "resolution": "768x1024",
+      "routeOrOverlay": "Streak Modal",
+      "filename": "768x1024_tablet_portrait_streak_modal.png",
+      "path": "./evidence/screenshots/768x1024_tablet_portrait_streak_modal.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "1024x768_tablet_landscape",
+      "resolution": "1024x768",
+      "routeOrOverlay": "Import Playlist Modal",
+      "filename": "1024x768_tablet_landscape_modal_import_playlist.png",
+      "path": "./evidence/screenshots/1024x768_tablet_landscape_modal_import_playlist.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "1024x768_tablet_landscape",
+      "resolution": "1024x768",
+      "routeOrOverlay": "Streak Modal",
+      "filename": "1024x768_tablet_landscape_streak_modal.png",
+      "path": "./evidence/screenshots/1024x768_tablet_landscape_streak_modal.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "1280x800_compact_laptop",
+      "resolution": "1280x800",
+      "routeOrOverlay": "Import Playlist Modal",
+      "filename": "1280x800_compact_laptop_modal_import_playlist.png",
+      "path": "./evidence/screenshots/1280x800_compact_laptop_modal_import_playlist.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "1280x800_compact_laptop",
+      "resolution": "1280x800",
+      "routeOrOverlay": "Streak Modal",
+      "filename": "1280x800_compact_laptop_streak_modal.png",
+      "path": "./evidence/screenshots/1280x800_compact_laptop_streak_modal.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "1440x900_desktop",
+      "resolution": "1440x900",
+      "routeOrOverlay": "Import Playlist Modal",
+      "filename": "1440x900_desktop_modal_import_playlist.png",
+      "path": "./evidence/screenshots/1440x900_desktop_modal_import_playlist.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "1440x900_desktop",
+      "resolution": "1440x900",
+      "routeOrOverlay": "Streak Modal",
+      "filename": "1440x900_desktop_streak_modal.png",
+      "path": "./evidence/screenshots/1440x900_desktop_streak_modal.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "844x390_phone_landscape",
+      "resolution": "844x390",
+      "routeOrOverlay": "Import Playlist Modal",
+      "filename": "844x390_phone_landscape_modal_import_playlist.png",
+      "path": "./evidence/screenshots/844x390_phone_landscape_modal_import_playlist.png",
+      "status": "missing"
+    },
+    {
+      "viewport": "844x390_phone_landscape",
+      "resolution": "844x390",
+      "routeOrOverlay": "Streak Modal",
+      "filename": "844x390_phone_landscape_streak_modal.png",
+      "path": "./evidence/screenshots/844x390_phone_landscape_streak_modal.png",
+      "status": "missing"
+    }
+  ],
+  "explanation": "Captured 82 of 99 screenshots. 17 overlay modal captures were skipped due to contextual element triggers on specific viewport configurations."
+}

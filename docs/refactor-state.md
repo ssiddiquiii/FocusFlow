@@ -7,38 +7,46 @@
 `pre-refactor-stable`
 
 ## Last Completed Phase
-**Phase 0 — Baseline and Evidence (COMPLETED)**
+**Phase 0 — Baseline and Evidence (FINALIZED)**
 
 ## Completed Work (Phase 0)
-- Read master specification `docs/FOCUSFLOW_ANTIGRAVITY_MASTER_REFACTOR.md` completely.
+- Read master specification [`./FOCUSFLOW_ANTIGRAVITY_MASTER_REFACTOR.md`](./FOCUSFLOW_ANTIGRAVITY_MASTER_REFACTOR.md) completely.
 - Acknowledged Master Contract rules, data safety guarantees, and phase isolation discipline.
 - Verified repository status and created safety branch `refactor/focusflow-production-hardening`.
 - Created stable tag `pre-refactor-stable` at baseline commit `09901a4`.
-- Captured screenshot matrix for 9 viewports & 11 routes/overlays in [`docs/evidence/screenshots/`](file:///c:/Users/samee/OneDrive/Desktop/focus-flow/docs/evidence/screenshots/).
-- Measured horizontal overflow metrics across all viewports in [`docs/evidence/overflow/horizontal_overflow_measurements.json`](file:///c:/Users/samee/OneDrive/Desktop/focus-flow/docs/evidence/overflow/horizontal_overflow_measurements.json) (`diff: 0px`).
-- Captured Web Vitals (LCP, CLS, DOMContentLoaded) in [`docs/evidence/lighthouse/web_vitals_baseline.json`](file:///c:/Users/samee/OneDrive/Desktop/focus-flow/docs/evidence/lighthouse/web_vitals_baseline.json).
-- Recorded React Profiler traces for video playback, notes editing, practice filtering, practice solving, and pomodoro run in [`docs/evidence/profiler/react_profiler_evidence.json`](file:///c:/Users/samee/OneDrive/Desktop/focus-flow/docs/evidence/profiler/react_profiler_evidence.json).
-- Executed exact bundle audit command verifying API key `AIzaSyAExIAyfPvaaNixl5cz7HZJfNwQdniXP_o` exposure in `dist/assets/Dashboard-DMU5UL-V.js`.
-- Audited PWA offline reachability, App Shell caching, and IndexedDB v30 persistence in [`docs/evidence/pwa_baseline_audit.json`](file:///c:/Users/samee/OneDrive/Desktop/focus-flow/docs/evidence/pwa_baseline_audit.json).
-- Updated baseline report `docs/refactor-baseline.md`.
+- Captured screenshot matrix for 9 viewports & 11 routes/overlays in [`./evidence/screenshots/`](./evidence/screenshots/).
+- Created screenshot manifest cataloging 82 captured screenshots in [`./evidence/screenshots/manifest.json`](./evidence/screenshots/manifest.json).
+- Measured horizontal overflow metrics across all viewports in [`./evidence/overflow/horizontal_overflow_measurements.json`](./evidence/overflow/horizontal_overflow_measurements.json) (`diff: 0px`).
+- Audited overlay bounding boxes, clipping, and internal scrollability in [`./evidence/overflow/overlay_bounding_box_measurements.json`](./evidence/overflow/overlay_bounding_box_measurements.json).
+- Captured Playwright Web Vitals (LCP, CLS, DOMContentLoaded) in [`./evidence/performance/playwright_web_vitals_baseline.json`](./evidence/performance/playwright_web_vitals_baseline.json).
+- Recorded React Profiler traces for video playback, notes editing, practice filtering, practice solving, and pomodoro run in [`./evidence/profiler/react_profiler_evidence.json`](./evidence/profiler/react_profiler_evidence.json).
+- Executed bundle audit command verifying API key exposure in `dist/assets/Dashboard-DMU5UL-V.js`.
+- Redacted all API key string occurrences in documentation and evidence with `[REDACTED_GOOGLE_API_KEY]`.
+- Audited PWA offline reachability, App Shell caching, and IndexedDB persistence (Dexie v3 / Native v30) in [`./evidence/pwa_baseline_audit.json`](./evidence/pwa_baseline_audit.json).
+- Updated baseline report [`./refactor-baseline.md`](./refactor-baseline.md).
 
 ## Evidence Artifact Paths
-- Screenshots: [`docs/evidence/screenshots/`](file:///c:/Users/samee/OneDrive/Desktop/focus-flow/docs/evidence/screenshots/)
-- Overflow JSON: [`docs/evidence/overflow/horizontal_overflow_measurements.json`](file:///c:/Users/samee/OneDrive/Desktop/focus-flow/docs/evidence/overflow/horizontal_overflow_measurements.json)
-- Web Vitals JSON: [`docs/evidence/lighthouse/web_vitals_baseline.json`](file:///c:/Users/samee/OneDrive/Desktop/focus-flow/docs/evidence/lighthouse/web_vitals_baseline.json)
-- Profiler JSON: [`docs/evidence/profiler/react_profiler_evidence.json`](file:///c:/Users/samee/OneDrive/Desktop/focus-flow/docs/evidence/profiler/react_profiler_evidence.json)
-- PWA Audit JSON: [`docs/evidence/pwa_baseline_audit.json`](file:///c:/Users/samee/OneDrive/Desktop/focus-flow/docs/evidence/pwa_baseline_audit.json)
+- Screenshots Directory: [`./evidence/screenshots/`](./evidence/screenshots/)
+- Screenshot Manifest: [`./evidence/screenshots/manifest.json`](./evidence/screenshots/manifest.json)
+- Page Overflow JSON: [`./evidence/overflow/horizontal_overflow_measurements.json`](./evidence/overflow/horizontal_overflow_measurements.json)
+- Overlay Bounding Boxes JSON: [`./evidence/overflow/overlay_bounding_box_measurements.json`](./evidence/overflow/overlay_bounding_box_measurements.json)
+- Playwright Web Vitals JSON: [`./evidence/performance/playwright_web_vitals_baseline.json`](./evidence/performance/playwright_web_vitals_baseline.json)
+- Profiler Traces JSON: [`./evidence/profiler/react_profiler_evidence.json`](./evidence/profiler/react_profiler_evidence.json)
+- PWA Audit JSON: [`./evidence/pwa_baseline_audit.json`](./evidence/pwa_baseline_audit.json)
 
 ## Files Created / Updated in Phase 0
 - `docs/refactor-baseline.md` [UPDATED]
 - `docs/refactor-state.md` [UPDATED]
-- `scratch/capture_phase0_evidence.js` [TEMPORARY SCRIPT]
-- `scratch/capture_perf_and_pwa.js` [TEMPORARY SCRIPT]
-- `docs/evidence/...` [EVIDENCE FILES]
+- `docs/evidence/screenshots/manifest.json` [NEW]
+- `docs/evidence/overflow/overlay_bounding_box_measurements.json` [NEW]
+- `docs/evidence/performance/playwright_web_vitals_baseline.json` [RENAMED & UPDATED]
+- `docs/evidence/profiler/react_profiler_evidence.json` [NEW]
+- `docs/evidence/pwa_baseline_audit.json` [NEW]
 - Application Source Code (`src/`): **0 files modified**.
 
 ## Architecture & Data Migration Status
-- Database schema version: `3` (Dexie IndexedDB)
+- Dexie application schema version: `3`
+- Native browser IndexedDB version: `30`
 - User data integrity: 100% untouched.
 
 ## Tests & Build Verification Passed

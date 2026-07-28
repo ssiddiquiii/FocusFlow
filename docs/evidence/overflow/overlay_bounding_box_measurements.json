@@ -1,0 +1,581 @@
+[
+  {
+    "viewport": "320x568_small_phone",
+    "target": "Practice Flashcard",
+    "found": true,
+    "boundingRect": {
+      "x": 28,
+      "y": 78,
+      "width": 264,
+      "height": 247
+    },
+    "viewportDimensions": {
+      "width": 320,
+      "height": 568
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false,
+    "scrollDimensions": {
+      "scrollHeight": 245,
+      "clientHeight": 245
+    }
+  },
+  {
+    "viewport": "320x568_small_phone",
+    "target": "Command Palette",
+    "found": false
+  },
+  {
+    "viewport": "320x568_small_phone",
+    "target": "Pomodoro Expanded",
+    "found": true,
+    "boundingRect": {
+      "x": -8,
+      "y": 206,
+      "width": 320,
+      "height": 350
+    },
+    "viewportDimensions": {
+      "width": 320,
+      "height": 568
+    },
+    "isClipped": {
+      "left": true,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false,
+    "scrollDimensions": {
+      "scrollHeight": 350,
+      "clientHeight": 350
+    }
+  },
+  {
+    "viewport": "320x568_small_phone",
+    "target": "Offline Page",
+    "found": true,
+    "boundingRect": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 568
+    },
+    "viewportDimensions": {
+      "width": 320,
+      "height": 568
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": true,
+    "scrollDimensions": {
+      "scrollHeight": 568,
+      "clientHeight": 568
+    }
+  },
+  {
+    "viewport": "360x800_common_phone",
+    "target": "Practice Flashcard",
+    "found": false
+  },
+  {
+    "viewport": "360x800_common_phone",
+    "target": "Command Palette",
+    "found": false
+  },
+  {
+    "viewport": "360x800_common_phone",
+    "target": "Pomodoro Expanded",
+    "found": true,
+    "boundingRect": {
+      "x": 32,
+      "y": 438,
+      "width": 320,
+      "height": 350
+    },
+    "viewportDimensions": {
+      "width": 360,
+      "height": 800
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false,
+    "scrollDimensions": {
+      "scrollHeight": 350,
+      "clientHeight": 350
+    }
+  },
+  {
+    "viewport": "360x800_common_phone",
+    "target": "Offline Page",
+    "found": true,
+    "boundingRect": {
+      "x": 0,
+      "y": 0,
+      "width": 360,
+      "height": 800
+    },
+    "viewportDimensions": {
+      "width": 360,
+      "height": 800
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": true,
+    "scrollDimensions": {
+      "scrollHeight": 800,
+      "clientHeight": 800
+    }
+  },
+  {
+    "viewport": "390x844_modern_phone",
+    "target": "Practice Flashcard",
+    "found": false
+  },
+  {
+    "viewport": "390x844_modern_phone",
+    "target": "Command Palette",
+    "found": false
+  },
+  {
+    "viewport": "390x844_modern_phone",
+    "target": "Pomodoro Expanded",
+    "found": true,
+    "boundingRect": {
+      "x": 62,
+      "y": 482,
+      "width": 320,
+      "height": 350
+    },
+    "viewportDimensions": {
+      "width": 390,
+      "height": 844
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false,
+    "scrollDimensions": {
+      "scrollHeight": 350,
+      "clientHeight": 350
+    }
+  },
+  {
+    "viewport": "390x844_modern_phone",
+    "target": "Offline Page",
+    "found": true,
+    "boundingRect": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844
+    },
+    "viewportDimensions": {
+      "width": 390,
+      "height": 844
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": true,
+    "scrollDimensions": {
+      "scrollHeight": 844,
+      "clientHeight": 844
+    }
+  },
+  {
+    "viewport": "412x915_large_phone",
+    "target": "Practice Flashcard",
+    "found": false
+  },
+  {
+    "viewport": "412x915_large_phone",
+    "target": "Command Palette",
+    "found": false
+  },
+  {
+    "viewport": "412x915_large_phone",
+    "target": "Pomodoro Expanded",
+    "found": true,
+    "boundingRect": {
+      "x": 84,
+      "y": 553,
+      "width": 320,
+      "height": 350
+    },
+    "viewportDimensions": {
+      "width": 412,
+      "height": 915
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false,
+    "scrollDimensions": {
+      "scrollHeight": 350,
+      "clientHeight": 350
+    }
+  },
+  {
+    "viewport": "412x915_large_phone",
+    "target": "Offline Page",
+    "found": true,
+    "boundingRect": {
+      "x": 0,
+      "y": 0,
+      "width": 412,
+      "height": 915
+    },
+    "viewportDimensions": {
+      "width": 412,
+      "height": 915
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": true,
+    "scrollDimensions": {
+      "scrollHeight": 915,
+      "clientHeight": 915
+    }
+  },
+  {
+    "viewport": "768x1024_tablet_portrait",
+    "target": "Practice Flashcard",
+    "found": false
+  },
+  {
+    "viewport": "768x1024_tablet_portrait",
+    "target": "Command Palette",
+    "found": false
+  },
+  {
+    "viewport": "768x1024_tablet_portrait",
+    "target": "Pomodoro Expanded",
+    "found": true,
+    "boundingRect": {
+      "x": 436,
+      "y": 661,
+      "width": 320,
+      "height": 351
+    },
+    "viewportDimensions": {
+      "width": 768,
+      "height": 1024
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false,
+    "scrollDimensions": {
+      "scrollHeight": 351,
+      "clientHeight": 351
+    }
+  },
+  {
+    "viewport": "768x1024_tablet_portrait",
+    "target": "Offline Page",
+    "found": true,
+    "boundingRect": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1024
+    },
+    "viewportDimensions": {
+      "width": 768,
+      "height": 1024
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": true,
+    "scrollDimensions": {
+      "scrollHeight": 1024,
+      "clientHeight": 1024
+    }
+  },
+  {
+    "viewport": "1024x768_tablet_landscape",
+    "target": "Practice Flashcard",
+    "found": false
+  },
+  {
+    "viewport": "1024x768_tablet_landscape",
+    "target": "Command Palette",
+    "found": false
+  },
+  {
+    "viewport": "1024x768_tablet_landscape",
+    "target": "Pomodoro Expanded",
+    "found": true,
+    "boundingRect": {
+      "x": 692,
+      "y": 405,
+      "width": 320,
+      "height": 351
+    },
+    "viewportDimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false,
+    "scrollDimensions": {
+      "scrollHeight": 351,
+      "clientHeight": 351
+    }
+  },
+  {
+    "viewport": "1024x768_tablet_landscape",
+    "target": "Offline Page",
+    "found": true,
+    "boundingRect": {
+      "x": 0,
+      "y": 0,
+      "width": 1024,
+      "height": 768
+    },
+    "viewportDimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": true,
+    "scrollDimensions": {
+      "scrollHeight": 768,
+      "clientHeight": 768
+    }
+  },
+  {
+    "viewport": "1280x800_compact_laptop",
+    "target": "Practice Flashcard",
+    "found": false
+  },
+  {
+    "viewport": "1280x800_compact_laptop",
+    "target": "Command Palette",
+    "found": false
+  },
+  {
+    "viewport": "1280x800_compact_laptop",
+    "target": "Pomodoro Expanded",
+    "found": true,
+    "boundingRect": {
+      "x": 948,
+      "y": 437,
+      "width": 320,
+      "height": 351
+    },
+    "viewportDimensions": {
+      "width": 1280,
+      "height": 800
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false,
+    "scrollDimensions": {
+      "scrollHeight": 351,
+      "clientHeight": 351
+    }
+  },
+  {
+    "viewport": "1280x800_compact_laptop",
+    "target": "Offline Page",
+    "found": true,
+    "boundingRect": {
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 800
+    },
+    "viewportDimensions": {
+      "width": 1280,
+      "height": 800
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": true,
+    "scrollDimensions": {
+      "scrollHeight": 800,
+      "clientHeight": 800
+    }
+  },
+  {
+    "viewport": "1440x900_desktop",
+    "target": "Practice Flashcard",
+    "found": false
+  },
+  {
+    "viewport": "1440x900_desktop",
+    "target": "Command Palette",
+    "found": false
+  },
+  {
+    "viewport": "1440x900_desktop",
+    "target": "Pomodoro Expanded",
+    "found": true,
+    "boundingRect": {
+      "x": 1108,
+      "y": 537,
+      "width": 320,
+      "height": 351
+    },
+    "viewportDimensions": {
+      "width": 1440,
+      "height": 900
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false,
+    "scrollDimensions": {
+      "scrollHeight": 351,
+      "clientHeight": 351
+    }
+  },
+  {
+    "viewport": "1440x900_desktop",
+    "target": "Offline Page",
+    "found": true,
+    "boundingRect": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 900
+    },
+    "viewportDimensions": {
+      "width": 1440,
+      "height": 900
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": true,
+    "scrollDimensions": {
+      "scrollHeight": 900,
+      "clientHeight": 900
+    }
+  },
+  {
+    "viewport": "844x390_phone_landscape",
+    "target": "Practice Flashcard",
+    "found": false
+  },
+  {
+    "viewport": "844x390_phone_landscape",
+    "target": "Command Palette",
+    "found": false
+  },
+  {
+    "viewport": "844x390_phone_landscape",
+    "target": "Pomodoro Expanded",
+    "found": true,
+    "boundingRect": {
+      "x": 512,
+      "y": 27,
+      "width": 320,
+      "height": 351
+    },
+    "viewportDimensions": {
+      "width": 844,
+      "height": 390
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": false,
+    "scrollDimensions": {
+      "scrollHeight": 351,
+      "clientHeight": 351
+    }
+  },
+  {
+    "viewport": "844x390_phone_landscape",
+    "target": "Offline Page",
+    "found": true,
+    "boundingRect": {
+      "x": 0,
+      "y": 0,
+      "width": 844,
+      "height": 390
+    },
+    "viewportDimensions": {
+      "width": 844,
+      "height": 390
+    },
+    "isClipped": {
+      "left": false,
+      "right": false,
+      "top": false,
+      "bottom": false
+    },
+    "internalScrollAvailable": true,
+    "scrollDimensions": {
+      "scrollHeight": 390,
+      "clientHeight": 390
+    }
+  }
+]
