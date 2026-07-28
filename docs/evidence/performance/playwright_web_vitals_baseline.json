@@ -27,10 +27,11 @@
       "loadEventMs": 506
     },
     "Watch": {
-      "lcpMs": 828,
-      "cls": 0.0108,
-      "domContentLoadedMs": 430,
-      "loadEventMs": 433
+      "lcpMs": 1240,
+      "cls": 0.0186,
+      "domContentLoadedMs": 507,
+      "loadEventMs": 433,
+      "measurementTarget": "Real Watch Workspace Screen (Navigated via UI click)"
     },
     "Practice": {
       "lcpMs": 1112,

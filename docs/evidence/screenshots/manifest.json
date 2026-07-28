@@ -1,802 +1,1101 @@
 {
   "totalExpected": 99,
   "totalCaptured": 99,
+  "totalValidationsPassed": 99,
   "totalMissing": 0,
   "totalFailed": 0,
   "captured": [
     {
       "viewport": "320x568_small_phone",
       "resolution": "320x568",
+      "expectedScreen": "Dashboard",
       "routeOrOverlay": "Dashboard",
       "filename": "320x568_small_phone_dashboard.png",
       "path": "./evidence/screenshots/320x568_small_phone_dashboard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "320x568_small_phone",
       "resolution": "320x568",
+      "expectedScreen": "Course Detail",
       "routeOrOverlay": "Course Detail",
       "filename": "320x568_small_phone_course_detail.png",
       "path": "./evidence/screenshots/320x568_small_phone_course_detail.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "320x568_small_phone",
       "resolution": "320x568",
+      "expectedScreen": "Watch",
       "routeOrOverlay": "Watch",
       "filename": "320x568_small_phone_watch.png",
       "path": "./evidence/screenshots/320x568_small_phone_watch.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "320x568_small_phone",
       "resolution": "320x568",
+      "expectedScreen": "Practice List",
       "routeOrOverlay": "Practice List",
       "filename": "320x568_small_phone_practice_list.png",
       "path": "./evidence/screenshots/320x568_small_phone_practice_list.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "320x568_small_phone",
       "resolution": "320x568",
+      "expectedScreen": "Practice Flashcard",
       "routeOrOverlay": "Practice Flashcard",
       "filename": "320x568_small_phone_practice_flashcard.png",
       "path": "./evidence/screenshots/320x568_small_phone_practice_flashcard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "320x568_small_phone",
       "resolution": "320x568",
+      "expectedScreen": "Settings",
       "routeOrOverlay": "Settings",
       "filename": "320x568_small_phone_settings.png",
       "path": "./evidence/screenshots/320x568_small_phone_settings.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "320x568_small_phone",
       "resolution": "320x568",
+      "expectedScreen": "Import Playlist Modal",
       "routeOrOverlay": "Import Playlist Modal",
       "filename": "320x568_small_phone_modal_import_playlist.png",
       "path": "./evidence/screenshots/320x568_small_phone_modal_import_playlist.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "320x568_small_phone",
       "resolution": "320x568",
+      "expectedScreen": "Command Palette",
       "routeOrOverlay": "Command Palette",
       "filename": "320x568_small_phone_command_palette.png",
       "path": "./evidence/screenshots/320x568_small_phone_command_palette.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "320x568_small_phone",
       "resolution": "320x568",
+      "expectedScreen": "Pomodoro Expanded",
       "routeOrOverlay": "Pomodoro Expanded",
       "filename": "320x568_small_phone_pomodoro_expanded.png",
       "path": "./evidence/screenshots/320x568_small_phone_pomodoro_expanded.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "320x568_small_phone",
       "resolution": "320x568",
+      "expectedScreen": "Streak Modal",
       "routeOrOverlay": "Streak Modal",
       "filename": "320x568_small_phone_streak_modal.png",
       "path": "./evidence/screenshots/320x568_small_phone_streak_modal.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "320x568_small_phone",
       "resolution": "320x568",
+      "expectedScreen": "Offline Page",
       "routeOrOverlay": "Offline Page",
       "filename": "320x568_small_phone_offline.png",
       "path": "./evidence/screenshots/320x568_small_phone_offline.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "360x800_common_phone",
       "resolution": "360x800",
+      "expectedScreen": "Dashboard",
       "routeOrOverlay": "Dashboard",
       "filename": "360x800_common_phone_dashboard.png",
       "path": "./evidence/screenshots/360x800_common_phone_dashboard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "360x800_common_phone",
       "resolution": "360x800",
+      "expectedScreen": "Course Detail",
       "routeOrOverlay": "Course Detail",
       "filename": "360x800_common_phone_course_detail.png",
       "path": "./evidence/screenshots/360x800_common_phone_course_detail.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "360x800_common_phone",
       "resolution": "360x800",
+      "expectedScreen": "Watch",
       "routeOrOverlay": "Watch",
       "filename": "360x800_common_phone_watch.png",
       "path": "./evidence/screenshots/360x800_common_phone_watch.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "360x800_common_phone",
       "resolution": "360x800",
+      "expectedScreen": "Practice List",
       "routeOrOverlay": "Practice List",
       "filename": "360x800_common_phone_practice_list.png",
       "path": "./evidence/screenshots/360x800_common_phone_practice_list.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "360x800_common_phone",
       "resolution": "360x800",
+      "expectedScreen": "Practice Flashcard",
       "routeOrOverlay": "Practice Flashcard",
       "filename": "360x800_common_phone_practice_flashcard.png",
       "path": "./evidence/screenshots/360x800_common_phone_practice_flashcard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "360x800_common_phone",
       "resolution": "360x800",
+      "expectedScreen": "Settings",
       "routeOrOverlay": "Settings",
       "filename": "360x800_common_phone_settings.png",
       "path": "./evidence/screenshots/360x800_common_phone_settings.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "360x800_common_phone",
       "resolution": "360x800",
+      "expectedScreen": "Import Playlist Modal",
       "routeOrOverlay": "Import Playlist Modal",
       "filename": "360x800_common_phone_modal_import_playlist.png",
       "path": "./evidence/screenshots/360x800_common_phone_modal_import_playlist.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "360x800_common_phone",
       "resolution": "360x800",
+      "expectedScreen": "Command Palette",
       "routeOrOverlay": "Command Palette",
       "filename": "360x800_common_phone_command_palette.png",
       "path": "./evidence/screenshots/360x800_common_phone_command_palette.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "360x800_common_phone",
       "resolution": "360x800",
+      "expectedScreen": "Pomodoro Expanded",
       "routeOrOverlay": "Pomodoro Expanded",
       "filename": "360x800_common_phone_pomodoro_expanded.png",
       "path": "./evidence/screenshots/360x800_common_phone_pomodoro_expanded.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "360x800_common_phone",
       "resolution": "360x800",
+      "expectedScreen": "Streak Modal",
       "routeOrOverlay": "Streak Modal",
       "filename": "360x800_common_phone_streak_modal.png",
       "path": "./evidence/screenshots/360x800_common_phone_streak_modal.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "360x800_common_phone",
       "resolution": "360x800",
+      "expectedScreen": "Offline Page",
       "routeOrOverlay": "Offline Page",
       "filename": "360x800_common_phone_offline.png",
       "path": "./evidence/screenshots/360x800_common_phone_offline.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "390x844_modern_phone",
       "resolution": "390x844",
+      "expectedScreen": "Dashboard",
       "routeOrOverlay": "Dashboard",
       "filename": "390x844_modern_phone_dashboard.png",
       "path": "./evidence/screenshots/390x844_modern_phone_dashboard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "390x844_modern_phone",
       "resolution": "390x844",
+      "expectedScreen": "Course Detail",
       "routeOrOverlay": "Course Detail",
       "filename": "390x844_modern_phone_course_detail.png",
       "path": "./evidence/screenshots/390x844_modern_phone_course_detail.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "390x844_modern_phone",
       "resolution": "390x844",
+      "expectedScreen": "Watch",
       "routeOrOverlay": "Watch",
       "filename": "390x844_modern_phone_watch.png",
       "path": "./evidence/screenshots/390x844_modern_phone_watch.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "390x844_modern_phone",
       "resolution": "390x844",
+      "expectedScreen": "Practice List",
       "routeOrOverlay": "Practice List",
       "filename": "390x844_modern_phone_practice_list.png",
       "path": "./evidence/screenshots/390x844_modern_phone_practice_list.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "390x844_modern_phone",
       "resolution": "390x844",
+      "expectedScreen": "Practice Flashcard",
       "routeOrOverlay": "Practice Flashcard",
       "filename": "390x844_modern_phone_practice_flashcard.png",
       "path": "./evidence/screenshots/390x844_modern_phone_practice_flashcard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "390x844_modern_phone",
       "resolution": "390x844",
+      "expectedScreen": "Settings",
       "routeOrOverlay": "Settings",
       "filename": "390x844_modern_phone_settings.png",
       "path": "./evidence/screenshots/390x844_modern_phone_settings.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "390x844_modern_phone",
       "resolution": "390x844",
+      "expectedScreen": "Import Playlist Modal",
       "routeOrOverlay": "Import Playlist Modal",
       "filename": "390x844_modern_phone_modal_import_playlist.png",
       "path": "./evidence/screenshots/390x844_modern_phone_modal_import_playlist.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "390x844_modern_phone",
       "resolution": "390x844",
+      "expectedScreen": "Command Palette",
       "routeOrOverlay": "Command Palette",
       "filename": "390x844_modern_phone_command_palette.png",
       "path": "./evidence/screenshots/390x844_modern_phone_command_palette.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "390x844_modern_phone",
       "resolution": "390x844",
+      "expectedScreen": "Pomodoro Expanded",
       "routeOrOverlay": "Pomodoro Expanded",
       "filename": "390x844_modern_phone_pomodoro_expanded.png",
       "path": "./evidence/screenshots/390x844_modern_phone_pomodoro_expanded.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "390x844_modern_phone",
       "resolution": "390x844",
+      "expectedScreen": "Streak Modal",
       "routeOrOverlay": "Streak Modal",
       "filename": "390x844_modern_phone_streak_modal.png",
       "path": "./evidence/screenshots/390x844_modern_phone_streak_modal.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "390x844_modern_phone",
       "resolution": "390x844",
+      "expectedScreen": "Offline Page",
       "routeOrOverlay": "Offline Page",
       "filename": "390x844_modern_phone_offline.png",
       "path": "./evidence/screenshots/390x844_modern_phone_offline.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "412x915_large_phone",
       "resolution": "412x915",
+      "expectedScreen": "Dashboard",
       "routeOrOverlay": "Dashboard",
       "filename": "412x915_large_phone_dashboard.png",
       "path": "./evidence/screenshots/412x915_large_phone_dashboard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "412x915_large_phone",
       "resolution": "412x915",
+      "expectedScreen": "Course Detail",
       "routeOrOverlay": "Course Detail",
       "filename": "412x915_large_phone_course_detail.png",
       "path": "./evidence/screenshots/412x915_large_phone_course_detail.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "412x915_large_phone",
       "resolution": "412x915",
+      "expectedScreen": "Watch",
       "routeOrOverlay": "Watch",
       "filename": "412x915_large_phone_watch.png",
       "path": "./evidence/screenshots/412x915_large_phone_watch.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "412x915_large_phone",
       "resolution": "412x915",
+      "expectedScreen": "Practice List",
       "routeOrOverlay": "Practice List",
       "filename": "412x915_large_phone_practice_list.png",
       "path": "./evidence/screenshots/412x915_large_phone_practice_list.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "412x915_large_phone",
       "resolution": "412x915",
+      "expectedScreen": "Practice Flashcard",
       "routeOrOverlay": "Practice Flashcard",
       "filename": "412x915_large_phone_practice_flashcard.png",
       "path": "./evidence/screenshots/412x915_large_phone_practice_flashcard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "412x915_large_phone",
       "resolution": "412x915",
+      "expectedScreen": "Settings",
       "routeOrOverlay": "Settings",
       "filename": "412x915_large_phone_settings.png",
       "path": "./evidence/screenshots/412x915_large_phone_settings.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "412x915_large_phone",
       "resolution": "412x915",
+      "expectedScreen": "Import Playlist Modal",
       "routeOrOverlay": "Import Playlist Modal",
       "filename": "412x915_large_phone_modal_import_playlist.png",
       "path": "./evidence/screenshots/412x915_large_phone_modal_import_playlist.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "412x915_large_phone",
       "resolution": "412x915",
+      "expectedScreen": "Command Palette",
       "routeOrOverlay": "Command Palette",
       "filename": "412x915_large_phone_command_palette.png",
       "path": "./evidence/screenshots/412x915_large_phone_command_palette.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "412x915_large_phone",
       "resolution": "412x915",
+      "expectedScreen": "Pomodoro Expanded",
       "routeOrOverlay": "Pomodoro Expanded",
       "filename": "412x915_large_phone_pomodoro_expanded.png",
       "path": "./evidence/screenshots/412x915_large_phone_pomodoro_expanded.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "412x915_large_phone",
       "resolution": "412x915",
+      "expectedScreen": "Streak Modal",
       "routeOrOverlay": "Streak Modal",
       "filename": "412x915_large_phone_streak_modal.png",
       "path": "./evidence/screenshots/412x915_large_phone_streak_modal.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "412x915_large_phone",
       "resolution": "412x915",
+      "expectedScreen": "Offline Page",
       "routeOrOverlay": "Offline Page",
       "filename": "412x915_large_phone_offline.png",
       "path": "./evidence/screenshots/412x915_large_phone_offline.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "768x1024_tablet_portrait",
       "resolution": "768x1024",
+      "expectedScreen": "Dashboard",
       "routeOrOverlay": "Dashboard",
       "filename": "768x1024_tablet_portrait_dashboard.png",
       "path": "./evidence/screenshots/768x1024_tablet_portrait_dashboard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "768x1024_tablet_portrait",
       "resolution": "768x1024",
+      "expectedScreen": "Course Detail",
       "routeOrOverlay": "Course Detail",
       "filename": "768x1024_tablet_portrait_course_detail.png",
       "path": "./evidence/screenshots/768x1024_tablet_portrait_course_detail.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "768x1024_tablet_portrait",
       "resolution": "768x1024",
+      "expectedScreen": "Watch",
       "routeOrOverlay": "Watch",
       "filename": "768x1024_tablet_portrait_watch.png",
       "path": "./evidence/screenshots/768x1024_tablet_portrait_watch.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "768x1024_tablet_portrait",
       "resolution": "768x1024",
+      "expectedScreen": "Practice List",
       "routeOrOverlay": "Practice List",
       "filename": "768x1024_tablet_portrait_practice_list.png",
       "path": "./evidence/screenshots/768x1024_tablet_portrait_practice_list.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "768x1024_tablet_portrait",
       "resolution": "768x1024",
+      "expectedScreen": "Practice Flashcard",
       "routeOrOverlay": "Practice Flashcard",
       "filename": "768x1024_tablet_portrait_practice_flashcard.png",
       "path": "./evidence/screenshots/768x1024_tablet_portrait_practice_flashcard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "768x1024_tablet_portrait",
       "resolution": "768x1024",
+      "expectedScreen": "Settings",
       "routeOrOverlay": "Settings",
       "filename": "768x1024_tablet_portrait_settings.png",
       "path": "./evidence/screenshots/768x1024_tablet_portrait_settings.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "768x1024_tablet_portrait",
       "resolution": "768x1024",
+      "expectedScreen": "Import Playlist Modal",
       "routeOrOverlay": "Import Playlist Modal",
       "filename": "768x1024_tablet_portrait_modal_import_playlist.png",
       "path": "./evidence/screenshots/768x1024_tablet_portrait_modal_import_playlist.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "768x1024_tablet_portrait",
       "resolution": "768x1024",
+      "expectedScreen": "Command Palette",
       "routeOrOverlay": "Command Palette",
       "filename": "768x1024_tablet_portrait_command_palette.png",
       "path": "./evidence/screenshots/768x1024_tablet_portrait_command_palette.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "768x1024_tablet_portrait",
       "resolution": "768x1024",
+      "expectedScreen": "Pomodoro Expanded",
       "routeOrOverlay": "Pomodoro Expanded",
       "filename": "768x1024_tablet_portrait_pomodoro_expanded.png",
       "path": "./evidence/screenshots/768x1024_tablet_portrait_pomodoro_expanded.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "768x1024_tablet_portrait",
       "resolution": "768x1024",
+      "expectedScreen": "Streak Modal",
       "routeOrOverlay": "Streak Modal",
       "filename": "768x1024_tablet_portrait_streak_modal.png",
       "path": "./evidence/screenshots/768x1024_tablet_portrait_streak_modal.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "768x1024_tablet_portrait",
       "resolution": "768x1024",
+      "expectedScreen": "Offline Page",
       "routeOrOverlay": "Offline Page",
       "filename": "768x1024_tablet_portrait_offline.png",
       "path": "./evidence/screenshots/768x1024_tablet_portrait_offline.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1024x768_tablet_landscape",
       "resolution": "1024x768",
+      "expectedScreen": "Dashboard",
       "routeOrOverlay": "Dashboard",
       "filename": "1024x768_tablet_landscape_dashboard.png",
       "path": "./evidence/screenshots/1024x768_tablet_landscape_dashboard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1024x768_tablet_landscape",
       "resolution": "1024x768",
+      "expectedScreen": "Course Detail",
       "routeOrOverlay": "Course Detail",
       "filename": "1024x768_tablet_landscape_course_detail.png",
       "path": "./evidence/screenshots/1024x768_tablet_landscape_course_detail.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1024x768_tablet_landscape",
       "resolution": "1024x768",
+      "expectedScreen": "Watch",
       "routeOrOverlay": "Watch",
       "filename": "1024x768_tablet_landscape_watch.png",
       "path": "./evidence/screenshots/1024x768_tablet_landscape_watch.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1024x768_tablet_landscape",
       "resolution": "1024x768",
+      "expectedScreen": "Practice List",
       "routeOrOverlay": "Practice List",
       "filename": "1024x768_tablet_landscape_practice_list.png",
       "path": "./evidence/screenshots/1024x768_tablet_landscape_practice_list.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1024x768_tablet_landscape",
       "resolution": "1024x768",
+      "expectedScreen": "Practice Flashcard",
       "routeOrOverlay": "Practice Flashcard",
       "filename": "1024x768_tablet_landscape_practice_flashcard.png",
       "path": "./evidence/screenshots/1024x768_tablet_landscape_practice_flashcard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1024x768_tablet_landscape",
       "resolution": "1024x768",
+      "expectedScreen": "Settings",
       "routeOrOverlay": "Settings",
       "filename": "1024x768_tablet_landscape_settings.png",
       "path": "./evidence/screenshots/1024x768_tablet_landscape_settings.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1024x768_tablet_landscape",
       "resolution": "1024x768",
+      "expectedScreen": "Import Playlist Modal",
       "routeOrOverlay": "Import Playlist Modal",
       "filename": "1024x768_tablet_landscape_modal_import_playlist.png",
       "path": "./evidence/screenshots/1024x768_tablet_landscape_modal_import_playlist.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1024x768_tablet_landscape",
       "resolution": "1024x768",
+      "expectedScreen": "Command Palette",
       "routeOrOverlay": "Command Palette",
       "filename": "1024x768_tablet_landscape_command_palette.png",
       "path": "./evidence/screenshots/1024x768_tablet_landscape_command_palette.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1024x768_tablet_landscape",
       "resolution": "1024x768",
+      "expectedScreen": "Pomodoro Expanded",
       "routeOrOverlay": "Pomodoro Expanded",
       "filename": "1024x768_tablet_landscape_pomodoro_expanded.png",
       "path": "./evidence/screenshots/1024x768_tablet_landscape_pomodoro_expanded.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1024x768_tablet_landscape",
       "resolution": "1024x768",
+      "expectedScreen": "Streak Modal",
       "routeOrOverlay": "Streak Modal",
       "filename": "1024x768_tablet_landscape_streak_modal.png",
       "path": "./evidence/screenshots/1024x768_tablet_landscape_streak_modal.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1024x768_tablet_landscape",
       "resolution": "1024x768",
+      "expectedScreen": "Offline Page",
       "routeOrOverlay": "Offline Page",
       "filename": "1024x768_tablet_landscape_offline.png",
       "path": "./evidence/screenshots/1024x768_tablet_landscape_offline.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1280x800_compact_laptop",
       "resolution": "1280x800",
+      "expectedScreen": "Dashboard",
       "routeOrOverlay": "Dashboard",
       "filename": "1280x800_compact_laptop_dashboard.png",
       "path": "./evidence/screenshots/1280x800_compact_laptop_dashboard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1280x800_compact_laptop",
       "resolution": "1280x800",
+      "expectedScreen": "Course Detail",
       "routeOrOverlay": "Course Detail",
       "filename": "1280x800_compact_laptop_course_detail.png",
       "path": "./evidence/screenshots/1280x800_compact_laptop_course_detail.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1280x800_compact_laptop",
       "resolution": "1280x800",
+      "expectedScreen": "Watch",
       "routeOrOverlay": "Watch",
       "filename": "1280x800_compact_laptop_watch.png",
       "path": "./evidence/screenshots/1280x800_compact_laptop_watch.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1280x800_compact_laptop",
       "resolution": "1280x800",
+      "expectedScreen": "Practice List",
       "routeOrOverlay": "Practice List",
       "filename": "1280x800_compact_laptop_practice_list.png",
       "path": "./evidence/screenshots/1280x800_compact_laptop_practice_list.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1280x800_compact_laptop",
       "resolution": "1280x800",
+      "expectedScreen": "Practice Flashcard",
       "routeOrOverlay": "Practice Flashcard",
       "filename": "1280x800_compact_laptop_practice_flashcard.png",
       "path": "./evidence/screenshots/1280x800_compact_laptop_practice_flashcard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1280x800_compact_laptop",
       "resolution": "1280x800",
+      "expectedScreen": "Settings",
       "routeOrOverlay": "Settings",
       "filename": "1280x800_compact_laptop_settings.png",
       "path": "./evidence/screenshots/1280x800_compact_laptop_settings.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1280x800_compact_laptop",
       "resolution": "1280x800",
+      "expectedScreen": "Import Playlist Modal",
       "routeOrOverlay": "Import Playlist Modal",
       "filename": "1280x800_compact_laptop_modal_import_playlist.png",
       "path": "./evidence/screenshots/1280x800_compact_laptop_modal_import_playlist.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1280x800_compact_laptop",
       "resolution": "1280x800",
+      "expectedScreen": "Command Palette",
       "routeOrOverlay": "Command Palette",
       "filename": "1280x800_compact_laptop_command_palette.png",
       "path": "./evidence/screenshots/1280x800_compact_laptop_command_palette.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1280x800_compact_laptop",
       "resolution": "1280x800",
+      "expectedScreen": "Pomodoro Expanded",
       "routeOrOverlay": "Pomodoro Expanded",
       "filename": "1280x800_compact_laptop_pomodoro_expanded.png",
       "path": "./evidence/screenshots/1280x800_compact_laptop_pomodoro_expanded.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1280x800_compact_laptop",
       "resolution": "1280x800",
+      "expectedScreen": "Streak Modal",
       "routeOrOverlay": "Streak Modal",
       "filename": "1280x800_compact_laptop_streak_modal.png",
       "path": "./evidence/screenshots/1280x800_compact_laptop_streak_modal.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1280x800_compact_laptop",
       "resolution": "1280x800",
+      "expectedScreen": "Offline Page",
       "routeOrOverlay": "Offline Page",
       "filename": "1280x800_compact_laptop_offline.png",
       "path": "./evidence/screenshots/1280x800_compact_laptop_offline.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1440x900_desktop",
       "resolution": "1440x900",
+      "expectedScreen": "Dashboard",
       "routeOrOverlay": "Dashboard",
       "filename": "1440x900_desktop_dashboard.png",
       "path": "./evidence/screenshots/1440x900_desktop_dashboard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1440x900_desktop",
       "resolution": "1440x900",
+      "expectedScreen": "Course Detail",
       "routeOrOverlay": "Course Detail",
       "filename": "1440x900_desktop_course_detail.png",
       "path": "./evidence/screenshots/1440x900_desktop_course_detail.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1440x900_desktop",
       "resolution": "1440x900",
+      "expectedScreen": "Watch",
       "routeOrOverlay": "Watch",
       "filename": "1440x900_desktop_watch.png",
       "path": "./evidence/screenshots/1440x900_desktop_watch.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1440x900_desktop",
       "resolution": "1440x900",
+      "expectedScreen": "Practice List",
       "routeOrOverlay": "Practice List",
       "filename": "1440x900_desktop_practice_list.png",
       "path": "./evidence/screenshots/1440x900_desktop_practice_list.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1440x900_desktop",
       "resolution": "1440x900",
+      "expectedScreen": "Practice Flashcard",
       "routeOrOverlay": "Practice Flashcard",
       "filename": "1440x900_desktop_practice_flashcard.png",
       "path": "./evidence/screenshots/1440x900_desktop_practice_flashcard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1440x900_desktop",
       "resolution": "1440x900",
+      "expectedScreen": "Settings",
       "routeOrOverlay": "Settings",
       "filename": "1440x900_desktop_settings.png",
       "path": "./evidence/screenshots/1440x900_desktop_settings.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1440x900_desktop",
       "resolution": "1440x900",
+      "expectedScreen": "Import Playlist Modal",
       "routeOrOverlay": "Import Playlist Modal",
       "filename": "1440x900_desktop_modal_import_playlist.png",
       "path": "./evidence/screenshots/1440x900_desktop_modal_import_playlist.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1440x900_desktop",
       "resolution": "1440x900",
+      "expectedScreen": "Command Palette",
       "routeOrOverlay": "Command Palette",
       "filename": "1440x900_desktop_command_palette.png",
       "path": "./evidence/screenshots/1440x900_desktop_command_palette.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1440x900_desktop",
       "resolution": "1440x900",
+      "expectedScreen": "Pomodoro Expanded",
       "routeOrOverlay": "Pomodoro Expanded",
       "filename": "1440x900_desktop_pomodoro_expanded.png",
       "path": "./evidence/screenshots/1440x900_desktop_pomodoro_expanded.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1440x900_desktop",
       "resolution": "1440x900",
+      "expectedScreen": "Streak Modal",
       "routeOrOverlay": "Streak Modal",
       "filename": "1440x900_desktop_streak_modal.png",
       "path": "./evidence/screenshots/1440x900_desktop_streak_modal.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "1440x900_desktop",
       "resolution": "1440x900",
+      "expectedScreen": "Offline Page",
       "routeOrOverlay": "Offline Page",
       "filename": "1440x900_desktop_offline.png",
       "path": "./evidence/screenshots/1440x900_desktop_offline.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "844x390_phone_landscape",
       "resolution": "844x390",
+      "expectedScreen": "Dashboard",
       "routeOrOverlay": "Dashboard",
       "filename": "844x390_phone_landscape_dashboard.png",
       "path": "./evidence/screenshots/844x390_phone_landscape_dashboard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "844x390_phone_landscape",
       "resolution": "844x390",
+      "expectedScreen": "Course Detail",
       "routeOrOverlay": "Course Detail",
       "filename": "844x390_phone_landscape_course_detail.png",
       "path": "./evidence/screenshots/844x390_phone_landscape_course_detail.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "844x390_phone_landscape",
       "resolution": "844x390",
+      "expectedScreen": "Watch",
       "routeOrOverlay": "Watch",
       "filename": "844x390_phone_landscape_watch.png",
       "path": "./evidence/screenshots/844x390_phone_landscape_watch.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "844x390_phone_landscape",
       "resolution": "844x390",
+      "expectedScreen": "Practice List",
       "routeOrOverlay": "Practice List",
       "filename": "844x390_phone_landscape_practice_list.png",
       "path": "./evidence/screenshots/844x390_phone_landscape_practice_list.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "844x390_phone_landscape",
       "resolution": "844x390",
+      "expectedScreen": "Practice Flashcard",
       "routeOrOverlay": "Practice Flashcard",
       "filename": "844x390_phone_landscape_practice_flashcard.png",
       "path": "./evidence/screenshots/844x390_phone_landscape_practice_flashcard.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "844x390_phone_landscape",
       "resolution": "844x390",
+      "expectedScreen": "Settings",
       "routeOrOverlay": "Settings",
       "filename": "844x390_phone_landscape_settings.png",
       "path": "./evidence/screenshots/844x390_phone_landscape_settings.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "844x390_phone_landscape",
       "resolution": "844x390",
+      "expectedScreen": "Import Playlist Modal",
       "routeOrOverlay": "Import Playlist Modal",
       "filename": "844x390_phone_landscape_modal_import_playlist.png",
       "path": "./evidence/screenshots/844x390_phone_landscape_modal_import_playlist.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "844x390_phone_landscape",
       "resolution": "844x390",
+      "expectedScreen": "Command Palette",
       "routeOrOverlay": "Command Palette",
       "filename": "844x390_phone_landscape_command_palette.png",
       "path": "./evidence/screenshots/844x390_phone_landscape_command_palette.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "844x390_phone_landscape",
       "resolution": "844x390",
+      "expectedScreen": "Pomodoro Expanded",
       "routeOrOverlay": "Pomodoro Expanded",
       "filename": "844x390_phone_landscape_pomodoro_expanded.png",
       "path": "./evidence/screenshots/844x390_phone_landscape_pomodoro_expanded.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "844x390_phone_landscape",
       "resolution": "844x390",
+      "expectedScreen": "Streak Modal",
       "routeOrOverlay": "Streak Modal",
       "filename": "844x390_phone_landscape_streak_modal.png",
       "path": "./evidence/screenshots/844x390_phone_landscape_streak_modal.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     },
     {
       "viewport": "844x390_phone_landscape",
       "resolution": "844x390",
+      "expectedScreen": "Offline Page",
       "routeOrOverlay": "Offline Page",
       "filename": "844x390_phone_landscape_offline.png",
       "path": "./evidence/screenshots/844x390_phone_landscape_offline.png",
-      "status": "captured"
+      "fileExists": true,
+      "validationPassed": true,
+      "validationFailureReason": null
     }
   ],
   "missing": [],
-  "explanation": "All 99 expected screenshot combinations (9 viewports × 11 routes/overlays) were successfully captured."
+  "failed": [],
+  "explanation": "All 99 expected screenshot combinations (9 viewports × 11 routes/overlays) were successfully captured, verified on disk, and validated for correct screen content."
 }

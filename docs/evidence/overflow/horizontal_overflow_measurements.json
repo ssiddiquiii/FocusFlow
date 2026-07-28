@@ -15,6 +15,13 @@
   },
   {
     "viewport": "320x568_small_phone",
+    "route": "Watch",
+    "scrollWidth": 320,
+    "clientWidth": 320,
+    "diff": 0
+  },
+  {
+    "viewport": "320x568_small_phone",
     "route": "Practice List",
     "scrollWidth": 320,
     "clientWidth": 320,
@@ -43,6 +50,13 @@
   },
   {
     "viewport": "360x800_common_phone",
+    "route": "Watch",
+    "scrollWidth": 360,
+    "clientWidth": 360,
+    "diff": 0
+  },
+  {
+    "viewport": "360x800_common_phone",
     "route": "Practice List",
     "scrollWidth": 360,
     "clientWidth": 360,
@@ -71,6 +85,13 @@
   },
   {
     "viewport": "390x844_modern_phone",
+    "route": "Watch",
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "diff": 0
+  },
+  {
+    "viewport": "390x844_modern_phone",
     "route": "Practice List",
     "scrollWidth": 390,
     "clientWidth": 390,
@@ -99,6 +120,13 @@
   },
   {
     "viewport": "412x915_large_phone",
+    "route": "Watch",
+    "scrollWidth": 412,
+    "clientWidth": 412,
+    "diff": 0
+  },
+  {
+    "viewport": "412x915_large_phone",
     "route": "Practice List",
     "scrollWidth": 412,
     "clientWidth": 412,
@@ -127,6 +155,13 @@
   },
   {
     "viewport": "768x1024_tablet_portrait",
+    "route": "Watch",
+    "scrollWidth": 768,
+    "clientWidth": 768,
+    "diff": 0
+  },
+  {
+    "viewport": "768x1024_tablet_portrait",
     "route": "Practice List",
     "scrollWidth": 768,
     "clientWidth": 768,
@@ -155,6 +190,13 @@
   },
   {
     "viewport": "1024x768_tablet_landscape",
+    "route": "Watch",
+    "scrollWidth": 1024,
+    "clientWidth": 1024,
+    "diff": 0
+  },
+  {
+    "viewport": "1024x768_tablet_landscape",
     "route": "Practice List",
     "scrollWidth": 1024,
     "clientWidth": 1024,
@@ -183,6 +225,13 @@
   },
   {
     "viewport": "1280x800_compact_laptop",
+    "route": "Watch",
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "diff": 0
+  },
+  {
+    "viewport": "1280x800_compact_laptop",
     "route": "Practice List",
     "scrollWidth": 1280,
     "clientWidth": 1280,
@@ -211,6 +260,13 @@
   },
   {
     "viewport": "1440x900_desktop",
+    "route": "Watch",
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "diff": 0
+  },
+  {
+    "viewport": "1440x900_desktop",
     "route": "Practice List",
     "scrollWidth": 1440,
     "clientWidth": 1440,
@@ -233,6 +289,13 @@
   {
     "viewport": "844x390_phone_landscape",
     "route": "Course Detail",
+    "scrollWidth": 844,
+    "clientWidth": 844,
+    "diff": 0
+  },
+  {
+    "viewport": "844x390_phone_landscape",
+    "route": "Watch",
     "scrollWidth": 844,
     "clientWidth": 844,
     "diff": 0
