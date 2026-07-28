@@ -209,11 +209,11 @@ function AppContent() {
         </div>
       </aside>
 
-      {/* Main Content View Container (Spacious left offset to guarantee dock clearance) */}
-      <main className={`flex-1 overflow-y-auto min-w-0 ${
+      {/* Main Content View Container (Spacious mobile & desktop offsets) */}
+      <main className={`flex-1 overflow-y-auto min-w-0 pb-20 ${
         location.pathname.includes('/lessons/') 
-          ? 'pt-14 md:pt-0 md:pl-22 lg:pl-24 pr-2 sm:pr-4' 
-          : 'pt-16 md:pt-4 md:pl-22 lg:pl-24 pr-3 sm:pr-6'
+          ? 'pt-14 md:pt-0 md:pl-22 lg:pl-24 px-2 sm:px-4' 
+          : 'pt-16 md:pt-4 md:pl-22 lg:pl-24 px-3.5 sm:px-6'
       }`}>
         <ErrorBoundary>
           <Suspense fallback={

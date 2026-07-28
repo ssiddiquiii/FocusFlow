@@ -49,49 +49,24 @@ class FocusFlowDB extends Dexie {
    * @returns {Promise<void>}
    */
   async seedIfEmpty() {
-    // Auto-migration: Clean up unneeded courses (React, Backend, Computer Network, Legacy Udemy)
-    const coursesToRemove = ['udemy-agentic-ai', 'PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige', 'PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW', 'PLd1s-PEC5Pio'];
     await this.transaction('rw', [this.courses, this.lessons], async () => {
+      // 1. Clean up legacy / removed course IDs
+      const coursesToRemove = ['udemy-agentic-ai', 'PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige', 'PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW', 'PLd1s-PEC5Pio'];
       for (const id of coursesToRemove) {
-        const exists = await this.courses.get(id);
-        if (exists) {
-          await this.courses.delete(id);
-          await this.lessons.where('courseId').equals(id).delete();
+        await this.courses.delete(id);
+        await this.lessons.where('courseId').equals(id).delete();
+      }
+
+      // 2. Ensure ALL seed courses (Chai aur JavaScript + Git Masterclass) exist in IndexedDB
+      for (const c of seedData.courses) {
+        const existing = await this.courses.get(c.id);
+        if (!existing) {
+          await this.courses.put(CourseSchema.parse(c));
+          const courseLessons = seedData.lessons.filter(l => l.courseId === c.id);
+          await this.lessons.bulkPut(courseLessons.map(l => LessonSchema.parse(l)));
         }
       }
     });
-
-    // Auto-migration: Ensure Git & GitHub Masterclass is seeded & updated to single masterclass video
-    const gitCourseId = 'git-github-masterclass-q8EevlEpQ2A';
-    const gitSeedCourse = seedData.courses.find(c => c.id === gitCourseId);
-    const gitSeedLessons = seedData.lessons.filter(l => l.courseId === gitCourseId);
-    if (gitSeedCourse) {
-      await this.transaction('rw', [this.courses, this.lessons], async () => {
-        await this.courses.put(CourseSchema.parse(gitSeedCourse));
-        // Remove legacy multi-chapter lessons and insert 1 single masterclass video
-        await this.lessons.where('courseId').equals(gitCourseId).delete();
-        await this.lessons.bulkPut(gitSeedLessons.map(l => LessonSchema.parse(l)));
-      });
-    }
-
-    const courseCount = await this.courses.count();
-    if (courseCount > 0) {
-      return;
-    }
-
-    console.log('Seeding FocusFlow database with default courses...');
-    
-    await this.transaction('rw', [this.courses, this.lessons], async () => {
-      // Validate and insert courses
-      const validatedCourses = seedData.courses.map(c => CourseSchema.parse(c));
-      await this.courses.bulkPut(validatedCourses);
-
-      // Validate and insert lessons
-      const validatedLessons = seedData.lessons.map(l => LessonSchema.parse(l));
-      await this.lessons.bulkPut(validatedLessons);
-    });
-    
-    console.log('Seeding completed successfully.');
   }
 
   /**

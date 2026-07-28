@@ -599,7 +599,7 @@ export default function Watch() {
       <div className="flex-1 flex flex-col h-full min-w-0 overflow-y-auto bg-zinc-950/20 pb-12">
         
         {/* Navigation header */}
-        <div className="flex items-center gap-3 px-4 sm:px-6 py-3.5 bg-zinc-950/80 border-b border-border sticky top-0 z-30 backdrop-blur">
+        <div className="flex items-center gap-3 px-3 sm:px-6 py-2.5 sm:py-3.5 bg-zinc-950/95 border-b border-border sticky top-0 z-30 backdrop-blur-xl">
           <Link to={`/courses/${courseId}`} className="text-zinc-400 hover:text-white transition p-1 rounded-lg hover:bg-zinc-900 flex-shrink-0" title="Back to Course Detail">
             <ArrowLeft size={18} />
           </Link>
@@ -607,17 +607,17 @@ export default function Watch() {
             <span className="text-[10px] text-zinc-500 uppercase tracking-widest block font-bold truncate">
               {course.title}
             </span>
-            <h2 className="text-sm font-semibold text-white truncate">{lesson.title}</h2>
+            <h2 className="text-xs sm:text-sm font-semibold text-white truncate">{lesson.title}</h2>
           </div>
         </div>
 
         {/* Player Container: Maximized Video View */}
-        <div className="w-full max-w-7xl mx-auto mt-2 sm:mt-4 px-2 sm:px-6">
+        <div className="w-full max-w-7xl mx-auto mt-1 sm:mt-4 px-1 sm:px-6">
           <div 
             ref={playerContainerRef} 
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className={`w-full aspect-video relative bg-[#1E1E1E] rounded-2xl overflow-hidden shadow-2xl flex-shrink-0 group/player border border-border ${!isControlsVisible && isPlaying ? 'cursor-none' : ''}`}
+            className={`w-full aspect-video min-h-[210px] sm:min-h-[300px] relative bg-[#1E1E1E] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl flex-shrink-0 group/player border border-border ${!isControlsVisible && isPlaying ? 'cursor-none' : ''}`}
           >
           {lesson.type === 'youtube' ? (
             <div className="w-full h-full relative">
