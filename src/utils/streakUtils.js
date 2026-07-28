@@ -9,7 +9,8 @@ export function calculateStreak(progressList = [], practiceProgressList = []) {
 
   // Rule 1: Video watched >= 10 mins (600s) or completed
   progressList.forEach(p => {
-    const isWatchedTenMins = (p.currentTime && p.currentTime >= 600) || p.completed === true;
+    const watchTimeSecs = p.watchTime || p.currentTime || 0;
+    const isWatchedTenMins = watchTimeSecs >= 600 || p.completed === true;
     if (isWatchedTenMins && (p.lastWatched || p.updatedAt)) {
       const d = new Date(p.lastWatched || p.updatedAt);
       const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;

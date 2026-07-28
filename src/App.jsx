@@ -244,9 +244,9 @@ function AppContent() {
           </Suspense>
         </ErrorBoundary>
 
-        {/* One-Line Global Footer (Reflects Across All Pages) */}
+        {/* One-Line Minimal Global Footer */}
         <footer className="mt-12 py-4 border-t border-border/40 text-center text-[11px] text-zinc-500 font-medium">
-          FocusFlow OS v2.0 • Built by <span className="text-zinc-300 font-bold">Sameed Siddiqui</span> • Distraction-Free Developer Learning & Mastery • Built with React & Local-First IndexedDB
+          FocusFlow OS • Built by <span className="text-zinc-300 font-bold">Sameed Siddiqui</span> • Local-First Developer Workspace
         </footer>
       </main>
 
