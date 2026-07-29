@@ -1,5 +1,28 @@
 # FocusFlow Refactor State Tracker
 
+## Current Authoritative Status (Phase 6A)
+
+Phase 6A â€” Watch Decomposition is implemented, verified, and approved for commit.
+
+No next phase is approved. The next planned slice is Phase 6B â€” Watch responsive workspace, which requires a new `PROCEED NEXT PHASE` after Phase 6A is committed.
+
+Completed and verified:
+
+- Reduced `Watch.jsx` to route/data orchestration and extracted focused Watch feature modules.
+- Established `useWatchPlayerController` as the only YouTube lifecycle and command boundary with one player construction site.
+- Preserved click-to-play initialization, cleanup, controls, resume, captions, 10-second saves, pause/end saves, and 90% completion.
+- Preserved scoped timestamped note creation/deletion, chapter seeks, syllabus routes, Reading, and Practice entry behavior.
+- Preserved all existing responsive layout classes and breakpoints; Phase 6B was not started.
+- Removed only repository-proven unused Watch bindings: `PracticeTab`, `Info`, `activeLessonId`, and `isFullscreen`.
+- Added Phase 6A characterization with 19 passing assertions and included it in the maintained browser suite.
+- Full maintained suite passed: 200 assertions, 0 failures.
+- Quality gates passed: build, frontend secret scan (17 generated JS assets, 0 exposed key patterns), and lint with 31 warnings / 0 errors, improving from the 39-warning Phase 5 baseline.
+- Kept Dexie schema version 3 and all database, backup, ID, legacy-field, Watch persistence, Practice, and Pomodoro contracts unchanged.
+
+Detailed evidence is recorded in [`./refactor-phase6a-implementation.md`](./refactor-phase6a-implementation.md).
+
+The older state entries below are retained as historical handoff context and are superseded by this section.
+
 ## Current Authoritative Status (Phase 5)
 
 Phase 5A — Dashboard and Catalog and Phase 5B — Course Detail and Streak are implemented, verified, and approved for commit.
