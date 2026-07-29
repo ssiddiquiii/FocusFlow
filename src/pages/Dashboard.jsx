@@ -26,9 +26,10 @@ import ImportPlaylistModal from '../components/ImportPlaylistModal';
 import StreakModal from '../components/StreakModal';
 import QuoteSandbox from '../components/QuoteSandbox';
 import { exportNotesToMarkdown } from '../utils/exportUtils';
-import { calculateStreak } from '../utils/streakUtils';
+import { calculateStreak, getActiveDateSet } from '../utils/streakUtils';
 import { fetchYouTubePlaylistData } from '../services/youtubeApi';
 import { deleteCourse, exportNotes, importCourse } from '../services/dataCommands';
+import { DeleteCourseDialog } from '../features/dashboard/DashboardSections';
 
 /**
  * Dashboard Component (Home Catalog).
@@ -40,6 +41,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const { openCommandPalette } = useUIStore();
   const {
+    isLoading,
     sortedCourses,
     progressList,
     practiceProgressList,
@@ -52,11 +54,17 @@ export default function Dashboard() {
   const [isStreakModalOpen, setIsStreakModalOpen] = useState(false);
   const [syncingCourseId, setSyncingCourseId] = useState(null);
   const [actionMsg, setActionMsg] = useState(null);
+  const [courseToDelete, setCourseToDelete] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Dynamic Real-Time Streak Calculation
   const streakCount = useMemo(() => {
     return calculateStreak(progressList, practiceProgressList);
   }, [progressList, practiceProgressList]);
+  const activeDates = useMemo(
+    () => getActiveDateSet(progressList, practiceProgressList),
+    [progressList, practiceProgressList]
+  );
 
   const handleContinueLearning = () => {
     if (continuePath) {
@@ -80,17 +88,19 @@ export default function Dashboard() {
     }
   };
 
-  const handleDeleteCourse = async (course) => {
-    const confirmDelete = window.confirm(`Are you sure you want to delete "${course.title}"?\n\nAll progress, checkmarks, and timestamped notes for this course will be permanently removed.`);
-    if (!confirmDelete) return;
-
+  const handleDeleteCourse = async () => {
+    if (!courseToDelete) return;
+    setIsDeleting(true);
     try {
-      await deleteCourse(course.id);
-      setActionMsg({ text: `Course "${course.title}" deleted successfully.`, type: 'info' });
+      await deleteCourse(courseToDelete.id);
+      setActionMsg({ text: `Course "${courseToDelete.title}" deleted successfully.`, type: 'info' });
       setTimeout(() => setActionMsg(null), 3500);
+      setCourseToDelete(null);
     } catch (err) {
       console.error(err);
       setActionMsg({ text: `Failed to delete course: ${err.message}`, type: 'error' });
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -118,7 +128,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="p-4 sm:p-8 max-w-6xl mx-auto space-y-8 sm:space-y-12">
+    <div aria-busy={isLoading} className="p-4 sm:p-8 max-w-6xl mx-auto space-y-8 sm:space-y-12">
       {/* Status Action Banner */}
       {actionMsg && (
         <div className={`p-4 rounded-xl text-xs font-semibold border flex items-center justify-between ${
@@ -127,7 +137,7 @@ export default function Dashboard() {
           'bg-zinc-800 text-zinc-300 border-zinc-700/50'
         }`}>
           <span>{actionMsg.text}</span>
-          <button onClick={() => setActionMsg(null)} className="text-zinc-500 hover:text-white ml-4">✕</button>
+          <button onClick={() => setActionMsg(null)} className="text-zinc-500 hover:text-white ml-4">&times;</button>
         </div>
       )}
 
@@ -142,11 +152,11 @@ export default function Dashboard() {
               </h1>
               <button
                 onClick={() => setIsStreakModalOpen(true)}
-                className="px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 hover:border-orange-500/60 text-orange-400 text-xs font-bold flex items-center gap-1.5 backdrop-blur-md cursor-pointer transition"
+                aria-label={`Open streak calendar, ${streakCount} day streak`} className="min-h-11 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 hover:border-orange-500/60 text-orange-400 text-xs font-bold flex items-center gap-1.5 backdrop-blur-md cursor-pointer transition"
                 title="Click to view 30-Day Activity Heatmap Calendar"
               >
                 <Flame size={13} className="fill-orange-400 animate-pulse" />
-                <span>{streakCount} {streakCount === 1 ? 'Day' : 'Days'} Streak 🔥</span>
+                <span>{streakCount} {streakCount === 1 ? 'Day' : 'Days'} Streak</span>
               </button>
             </div>
             <p className="text-zinc-400 text-xs sm:text-sm font-medium">Your distraction-free developer learning workspace.</p>
@@ -225,9 +235,8 @@ export default function Dashboard() {
           {/* RIGHT COLUMN (5 Cols): Search Capsule + 2x2 Micro Stats Grid */}
           <div className="lg:col-span-5 flex flex-col gap-4">
             {/* Sleek Search Trigger Capsule */}
-            <div 
-              onClick={openCommandPalette}
-              className="glass-panel rounded-2xl border border-white/10 bg-zinc-950/90 p-4 flex items-center justify-between cursor-pointer hover:border-primary/40 transition shadow-lg group"
+            <button type="button" aria-label="Search courses, topics, questions, and notes" onClick={openCommandPalette}
+              className="glass-panel w-full min-w-0 max-w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/90 p-4 flex items-center justify-between cursor-pointer hover:border-primary/40 transition shadow-lg group"
             >
               <div className="flex items-center gap-3 min-w-0">
                 <Search size={17} className="text-zinc-400 group-hover:text-primary transition flex-shrink-0" />
@@ -238,7 +247,7 @@ export default function Dashboard() {
               <kbd className="px-2 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-[11px] font-mono text-zinc-400 font-bold flex-shrink-0">
                 Ctrl K
               </kbd>
-            </div>
+            </button>
 
             {/* 2x2 Micro KPI Grid */}
             <div className="grid grid-cols-2 gap-3 flex-1">
@@ -331,8 +340,8 @@ export default function Dashboard() {
                     )}
 
                     <button
-                      onClick={(e) => { e.preventDefault(); handleDeleteCourse(course); }}
-                      className="p-2 rounded-xl bg-black/70 hover:bg-red-950/90 text-zinc-300 hover:text-red-400 border border-zinc-700/50 backdrop-blur transition cursor-pointer"
+                      onClick={(e) => { e.preventDefault(); setCourseToDelete(course); }}
+                      className="min-h-11 min-w-11 rounded-xl bg-black/70 hover:bg-red-950/90 text-zinc-300 hover:text-red-400 border border-zinc-700/50 backdrop-blur transition cursor-pointer"
                       title="Delete Course"
                     >
                       <Trash2 size={14} />
@@ -388,6 +397,8 @@ export default function Dashboard() {
         </div>
       </div>
 
+      <DeleteCourseDialog course={courseToDelete} isDeleting={isDeleting} onCancel={() => !isDeleting && setCourseToDelete(null)} onConfirm={handleDeleteCourse} />
+
       {/* Import YouTube Playlist Modal */}
       <ImportPlaylistModal 
         isOpen={isImportModalOpen} 
@@ -399,9 +410,9 @@ export default function Dashboard() {
       <StreakModal
         isOpen={isStreakModalOpen}
         onClose={() => setIsStreakModalOpen(false)}
-        stats={stats}
-        progressList={progressList}
-        practiceProgressList={practiceProgressList}
+        stats={{ ...stats, practicesSolved: practiceProgressList.filter(item => item.completed).length }}
+        streakCount={streakCount}
+        activeDates={activeDates}
       />
     </div>
   );

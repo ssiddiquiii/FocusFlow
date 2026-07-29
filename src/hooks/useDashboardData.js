@@ -11,12 +11,23 @@ import {
 const EMPTY_LIST = Object.freeze([]);
 
 export function useDashboardData() {
-  const courses = useLiveQuery(() => db.courses.toArray()) ?? EMPTY_LIST;
-  const lessons = useLiveQuery(() => db.lessons.toArray()) ?? EMPTY_LIST;
-  const progressList = useLiveQuery(() => db.progress.toArray()) ?? EMPTY_LIST;
-  const practiceProgressList =
-    useLiveQuery(() => db.practiceProgress.toArray()) ?? EMPTY_LIST;
-  const totalNotes = useLiveQuery(() => db.notes.count()) ?? 0;
+  const coursesResult = useLiveQuery(() => db.courses.toArray());
+  const lessonsResult = useLiveQuery(() => db.lessons.toArray());
+  const progressResult = useLiveQuery(() => db.progress.toArray());
+  const practiceProgressResult = useLiveQuery(() => db.practiceProgress.toArray());
+  const totalNotesResult = useLiveQuery(() => db.notes.count());
+  const courses = coursesResult ?? EMPTY_LIST;
+  const lessons = lessonsResult ?? EMPTY_LIST;
+  const progressList = progressResult ?? EMPTY_LIST;
+  const practiceProgressList = practiceProgressResult ?? EMPTY_LIST;
+  const totalNotes = totalNotesResult ?? 0;
+  const isLoading = [
+    coursesResult,
+    lessonsResult,
+    progressResult,
+    practiceProgressResult,
+    totalNotesResult
+  ].some(result => result === undefined);
 
   const courseProgressMap = useMemo(
     () => selectCourseProgressMap(courses, lessons, progressList),
@@ -36,6 +47,7 @@ export function useDashboardData() {
   );
 
   return {
+    isLoading,
     progressList,
     practiceProgressList,
     courseProgressMap,

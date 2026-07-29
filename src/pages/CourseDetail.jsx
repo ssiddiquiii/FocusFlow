@@ -16,7 +16,7 @@ export default function CourseDetail() {
     courseNotFound,
     course,
     courseLessons,
-    courseProgressList,
+    progressByLessonId,
     courseProgress,
     lastWatched,
     resumeLesson
@@ -118,10 +118,13 @@ export default function CourseDetail() {
       {/* Syllabus checklist */}
       <div className="space-y-4">
         <h2 className="text-xl font-bold text-white mb-4">Syllabus Curriculum</h2>
+        {courseLessons.length === 0 && (
+          <div className="rounded-xl border border-dashed border-zinc-700 p-8 text-center text-sm text-zinc-400">This course does not contain any lessons yet.</div>
+        )}
         
         <div className="divide-y divide-border border-y border-border">
           {courseLessons.map((lesson) => {
-            const progress = courseProgressList.find(p => p.id === `${courseId}_${lesson.id}`);
+            const progress = progressByLessonId.get(lesson.id);
             const isCompleted = progress ? progress.completed : false;
 
             const isLastWatched = lastWatched && lesson.id === lastWatched.lessonId;
@@ -133,9 +136,9 @@ export default function CourseDetail() {
               <Link 
                 key={lesson.id}
                 to={`/courses/${courseId}/lessons/${lesson.id}`}
-                className={`py-4 px-3 flex items-center justify-between hover:bg-zinc-900/50 transition group rounded-lg ${isLastWatched ? 'bg-primary/5 border border-primary/20' : ''}`}
+                className={`py-4 px-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-zinc-900/50 transition group rounded-lg min-w-0 ${isLastWatched ? 'bg-primary/5 border border-primary/20' : ''}`}
               >
-                <div className="flex items-center gap-4">
+                <div className="flex min-w-0 items-start gap-4">
                   {/* Status Indicator */}
                   {isCompleted ? (
                     <CheckCircle2 className="text-accent flex-shrink-0" size={20} fill="currentColor" />
@@ -147,7 +150,7 @@ export default function CourseDetail() {
                     <span className="text-xs text-zinc-500 font-bold uppercase tracking-wider block mb-1">
                       Lecture {lesson.index}
                     </span>
-                    <span className="text-sm font-medium text-zinc-200 group-hover:text-white transition">
+                    <span className="block break-words text-sm font-medium text-zinc-200 group-hover:text-white transition">
                       {lesson.title}
                     </span>
                     {/* In-progress mini progress bar */}
@@ -159,7 +162,7 @@ export default function CourseDetail() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 text-zinc-500 text-xs">
+                <div className="flex w-full sm:w-auto items-center justify-between sm:justify-end gap-4 text-zinc-500 text-xs">
                   {isLastWatched && (
                     <span className="text-[10px] font-bold text-primary uppercase tracking-wider">In Progress</span>
                   )}

@@ -86,3 +86,26 @@ export function calculateStreak(progressList = [], practiceProgressList = []) {
 
   return streakCount;
 }
+
+export function buildMonthlyActivityCalendar(activeDateSet, viewDate, today = new Date()) {
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+  const firstDayOfWeek = new Date(year, month, 1).getDay();
+  const totalDays = new Date(year, month + 1, 0).getDate();
+  const todayString = toLocalDateString(today);
+
+  return {
+    label: viewDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+    days: Array.from({ length: totalDays }, (_, index) => {
+      const day = index + 1;
+      const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      return {
+        day,
+        date,
+        isActive: activeDateSet.has(date),
+        isToday: date === todayString
+      };
+    }),
+    leadingEmptyDays: firstDayOfWeek
+  };
+}

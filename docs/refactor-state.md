@@ -1,5 +1,30 @@
 # FocusFlow Refactor State Tracker
 
+## Current Authoritative Status (Phase 5)
+
+Phase 5A — Dashboard and Catalog and Phase 5B — Course Detail and Streak are implemented, verified, and approved for commit.
+
+No next phase is approved. The next planned phase is Phase 6A — Watch decomposition, which requires a new `PROCEED NEXT PHASE` after Phase 5 is approved and committed.
+
+Completed and verified:
+
+- Added explicit Dashboard reactive-query loading state and semantic, responsive command search.
+- Replaced native course deletion confirmation with the shared accessible dialog and exact local-record deletion copy.
+- Kept the existing atomic course-scoped deletion command and all data identities unchanged.
+- Made Dashboard/streak/delete controls touch safe and corrected narrow-phone intrinsic overflow.
+- Moved monthly streak calendar derivation into a pure domain model and passed derived activity data to the modal.
+- Made Course Detail lesson rows responsive, reused its precomputed progress map, and added an empty syllabus state.
+- Preserved deterministic ordering, Continue Learning, course progress, legacy `currentTime`, and streak parity.
+- Added `scripts/verification/phase5/verify_dashboard_course_streak.js` with 19 passing assertions.
+- Captured Dashboard and Course Detail evidence for all nine required viewports in `docs/evidence/phase5/screenshots/`.
+- Full maintained suite passed: 181 assertions, 0 failures.
+- Quality gates passed: build, frontend secret scan (17 generated JS assets, 0 exposed key patterns), and lint with 39 warnings / 0 errors, improving from the 40-warning Phase 4 baseline.
+- Kept Dexie schema version 3; database, backup, API, external-service, Watch, Practice, and Pomodoro behavior are unchanged.
+
+Detailed evidence is recorded in [`./refactor-phase5-implementation.md`](./refactor-phase5-implementation.md).
+
+The older state entries below are retained as historical handoff context and are superseded by this section.
+
 ## Current Authoritative Status (Phase 4)
 
 Phase 4 — Responsive Application Shell is implemented and verified, awaiting user review and commit approval.
