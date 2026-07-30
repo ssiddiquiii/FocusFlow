@@ -33,12 +33,21 @@ export function useWatchPlayerController({ courseId, lessonId, lesson, progressL
   const playerRef = useRef(null);
   const lessonRef = useRef(lesson);
   const progressListRef = useRef(progressList);
+  const pendingSeekRef = useRef(null);
   const timeStoreRef = useRef(null);
   if (!timeStoreRef.current) timeStoreRef.current = createPlayerTimeStore();
   lessonRef.current = lesson;
   progressListRef.current = progressList;
 
-  const { isPlaying, seekRequestTime, setActiveLessonId, setIsPlaying, triggerPlayerSeek } = useUIStore();
+  const {
+    isPlaying,
+    seekRequestTime,
+    setActiveLessonId,
+    setIsPlaying,
+    triggerPlayerSeek,
+    registerPlayerCommands,
+    unregisterPlayerCommands
+  } = useUIStore();
   const [ytPlayer, setYtPlayer] = useState(null);
   const [isPlayerTriggered, setIsPlayerTriggered] = useState(false);
   const [playerMuted, setPlayerMuted] = useState(false);
@@ -80,6 +89,7 @@ export function useWatchPlayerController({ courseId, lessonId, lesson, progressL
     let progressTimer = null;
     let uiSyncTimer = null;
     let initializeTimer = null;
+    let playerCommands = null;
     const timeStore = timeStoreRef.current;
     const currentProgress = progressListRef.current.find(progress => progress.id === `${courseId}_${lessonId}`);
     const persistence = createPlaybackPersistenceSession({ courseId, lessonId, writeProgress: saveProgress });
@@ -131,12 +141,23 @@ export function useWatchPlayerController({ courseId, lessonId, lesson, progressL
       const player = event.target;
       playerRef.current = player;
       setYtPlayer(player);
+      playerCommands = {
+        lessonId,
+        pause: () => {
+          if (!disposed && playerRef.current === player) player.pauseVideo();
+        }
+      };
+      registerPlayerCommands(playerCommands);
       const duration = player.getDuration();
       timeStore.set(player.getCurrentTime?.() || 0, duration);
       setPlayerMuted(player.isMuted());
       player.setPlaybackRate(1);
       applyCaptionPreference(player, captionsEnabledRef.current);
-      const startSeconds = getBoundedResumeSeconds(currentProgress, duration, activeLesson.startTimestamp || 0);
+      const requestedSeconds = pendingSeekRef.current;
+      pendingSeekRef.current = null;
+      const startSeconds = requestedSeconds === null
+        ? getBoundedResumeSeconds(currentProgress, duration, activeLesson.startTimestamp || 0)
+        : Math.max(0, Math.min(requestedSeconds, duration || requestedSeconds));
       player.seekTo(startSeconds, true);
       timeStore.set(startSeconds, duration);
       player.playVideo();
@@ -190,11 +211,12 @@ export function useWatchPlayerController({ courseId, lessonId, lesson, progressL
       if (playerInstance) {
         try { playerInstance.destroy(); } catch {}
       }
+      if (playerCommands) unregisterPlayerCommands(playerCommands);
       if (playerRef.current === playerInstance) playerRef.current = null;
       setYtPlayer(null);
       setIsPlaying(false);
     };
-  }, [courseId, isPlayerTriggered, lessonId, setIsPlaying]);
+  }, [courseId, isPlayerTriggered, lessonId, registerPlayerCommands, setIsPlaying, unregisterPlayerCommands]);
 
   useEffect(() => () => {
     if (mouseTimerRef.current) clearTimeout(mouseTimerRef.current);
@@ -340,6 +362,29 @@ export function useWatchPlayerController({ courseId, lessonId, lesson, progressL
     timeStoreRef.current.set(seekSeconds, duration);
   }, []);
 
+  const seekTo = useCallback(seconds => {
+    const requestedSeconds = Math.max(0, Number(seconds) || 0);
+    const player = playerRef.current;
+    if (!player) {
+      pendingSeekRef.current = requestedSeconds;
+      setIsPlayerTriggered(true);
+      return;
+    }
+    const duration = player.getDuration?.() || requestedSeconds;
+    const boundedSeconds = Math.min(requestedSeconds, duration || requestedSeconds);
+    player.seekTo(boundedSeconds, true);
+    timeStoreRef.current.set(boundedSeconds, duration);
+    player.playVideo();
+  }, []);
+
+  const getCurrentTime = useCallback(() => {
+    try {
+      return playerRef.current?.getCurrentTime?.() || 0;
+    } catch {
+      return 0;
+    }
+  }, []);
+
   return {
     playerContainerRef,
     progressBarRef,
@@ -353,7 +398,8 @@ export function useWatchPlayerController({ courseId, lessonId, lesson, progressL
     captionsEnabled,
     isControlsVisible,
     isPlaying,
-    triggerPlayerSeek,
+    triggerPlayerSeek: seekTo,
+    getCurrentTime,
     handlePlayPause,
     handleMuteToggle,
     handleSpeedCycle,

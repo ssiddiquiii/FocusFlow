@@ -101,6 +101,19 @@ export async function createNote({ courseId, lessonId, timestamp, content }) {
   });
 }
 
+export async function updateNote(noteId, content) {
+  const now = Date.now();
+  return db.transaction('rw', db.notes, async () => {
+    const existing = await db.notes.get(noteId);
+    if (!existing) throw new Error('The note no longer exists.');
+    await db.notes.put({
+      ...existing,
+      content,
+      updatedAt: now
+    });
+  });
+}
+
 export function deleteNote(noteId) {
   return db.notes.delete(noteId);
 }

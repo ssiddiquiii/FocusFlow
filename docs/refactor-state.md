@@ -1,5 +1,30 @@
 # FocusFlow Refactor State Tracker
 
+## Current Authoritative Status (Phase 6D)
+
+Phase 6D — Notes, Reading, Chapters and Pomodoro Player Command is implemented and verified.
+
+No later phase is approved. Phase 7A and all later roadmap work remain unstarted.
+
+Completed and verified:
+
+- Consolidated Watch Notes into one live implementation at every responsive breakpoint, with draft state retained across layout changes.
+- Added intentional note create/edit/delete-confirmation flows, timestamp capture and seek, duplicate-submit locking, and explicit saving/error/empty states.
+- Preserved note IDs, timestamps, creation times, course ownership, and lesson ownership during edits.
+- Documented Reading state as non-persistent and contained long prose, code, titles, and external links without horizontal page overflow.
+- Added safe external-link attributes and accessible link names.
+- Routed Notes and Chapters seeks through the active player controller and added accessible, responsive chapter navigation plus an empty state.
+- Registered a lesson-scoped live-player command so Pomodoro transitions pause the actual player and reject stale lesson commands.
+- Preserved all Phase 6A–6C player, responsive, persistence, completion, caption, and one-instance behavior.
+- Added Phase 6D verification with 21 passing interaction assertions and responsive screenshot evidence.
+- Full maintained suite passed: 301 assertions, 0 failures.
+- Quality gates passed: build, frontend secret scan (18 generated JS assets, 0 exposed key patterns), and lint with 28 warnings / 0 errors, unchanged from Phase 6C.
+- Kept Dexie schema version 3, backup format, IDs, legacy fields, persistence intervals, captions, routes, Practice, and Pomodoro timing/storage/UI contracts unchanged.
+
+Detailed evidence is recorded in [`./refactor-phase6d-implementation.md`](./refactor-phase6d-implementation.md).
+
+The older state entries below are retained as historical handoff context and are superseded by this section.
+
 ## Current Authoritative Status (Phase 6C)
 
 Phase 6C — Player Timing, Lifecycle Persistence and Captions is implemented, verified, and approved for commit.

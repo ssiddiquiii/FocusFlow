@@ -29,7 +29,7 @@ export function MobileWatchWorkspace(props) {
     <section data-testid="watch-inline-workspace" className="block border-b border-border/50 bg-zinc-950/60 px-3 py-4 sm:px-6 xl:hidden">
       <div className="glass-panel rounded-2xl border border-border overflow-hidden">
         <WorkspaceTabs lessonType={props.lessonType} activeTab={props.activeTab} noteCount={props.notesProps.notes.length} onTabChange={props.onTabChange} />
-        <div className="min-w-0 space-y-4 p-3 sm:p-4"><WorkspaceContent {...props} /></div>
+        <div className="min-w-0 space-y-4 p-3 sm:p-4">{!props.isDesktop && <WorkspaceContent {...props} />}</div>
       </div>
     </section>
   );
@@ -39,7 +39,7 @@ export function DesktopWatchWorkspace(props) {
   return (
     <aside data-testid="watch-side-workspace" className="hidden h-full w-80 flex-shrink-0 flex-col overflow-hidden border-l border-border bg-zinc-950 xl:flex">
       <WorkspaceTabs lessonType={props.lessonType} activeTab={props.activeTab} noteCount={props.notesProps.notes.length} onTabChange={props.onTabChange} />
-      <div className="flex-1 overflow-y-auto p-4 space-y-4"><WorkspaceContent {...props} /></div>
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">{props.isDesktop && <WorkspaceContent {...props} />}</div>
     </aside>
   );
 }

@@ -26,17 +26,20 @@ export default function ReadingTab({ lessonId }) {
   const { conceptLabel, readingMaterials, summaryArticle } = lessonData;
 
   return (
-    <div className="space-y-6">
+    <div className="min-w-0 space-y-6" data-testid="reading-workspace">
       {/* Header */}
       <div className="flex items-center gap-3 pb-3 border-b border-border/50">
         <div className="w-9 h-9 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center flex-shrink-0 border border-blue-500/20">
           <BookOpen size={18} />
         </div>
-        <div>
+        <div className="min-w-0">
           <h3 className="text-sm font-bold text-white tracking-tight">{conceptLabel} — Study Guide</h3>
           <p className="text-[10px] text-zinc-400 mt-0.5">In-app concept breakdown, code cheat sheet & docs</p>
         </div>
       </div>
+      <p className="rounded-xl border border-blue-500/20 bg-blue-500/10 p-3 text-[11px] leading-relaxed text-blue-200">
+        Reading position and article state are not saved. Your lesson video progress is saved separately.
+      </p>
 
       {/* 📖 IN-APP DIAGNOSED STUDY ARTICLE / CHEAT SHEET */}
       {summaryArticle && (
@@ -50,7 +53,7 @@ export default function ReadingTab({ lessonId }) {
 
           {/* Overview Paragraph */}
           {summaryArticle.overview && (
-            <p className="text-xs text-zinc-300 leading-relaxed font-medium">
+            <p className="break-words text-xs text-zinc-300 leading-relaxed font-medium">
               {summaryArticle.overview}
             </p>
           )}
@@ -63,7 +66,7 @@ export default function ReadingTab({ lessonId }) {
                 {summaryArticle.keyPoints.map((point, idx) => (
                   <div key={idx} className="flex items-start gap-2 text-xs text-zinc-300">
                     <CheckCircle2 size={13} className="text-emerald-400 flex-shrink-0 mt-0.5" />
-                    <span className="leading-snug">{point}</span>
+                    <span className="min-w-0 break-words leading-snug">{point}</span>
                   </div>
                 ))}
               </div>
@@ -77,7 +80,7 @@ export default function ReadingTab({ lessonId }) {
                 <span className="flex items-center gap-1"><Code size={12} /> Code Example</span>
                 <span>JavaScript</span>
               </div>
-              <pre className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 font-mono text-[11px] text-emerald-300 overflow-x-auto leading-relaxed shadow-inner">
+              <pre className="max-w-full overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950 p-3.5 font-mono text-[11px] leading-relaxed text-emerald-300 shadow-inner">
                 <code>{summaryArticle.codeSnippet}</code>
               </pre>
             </div>
@@ -120,10 +123,11 @@ export default function ReadingTab({ lessonId }) {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group glass-panel rounded-xl p-3.5 border border-border hover:border-blue-500/40 transition duration-200 block space-y-2"
+                  aria-label={`${item.title} — opens external reference in a new tab`}
+                  className="group glass-panel block min-w-0 space-y-2 overflow-hidden rounded-xl border border-border p-3.5 transition duration-200 hover:border-blue-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <h4 className="text-xs font-semibold text-white group-hover:text-blue-400 transition leading-snug">
+                    <h4 className="min-w-0 break-all text-xs font-semibold leading-snug text-white transition group-hover:text-blue-400">
                       {item.title}
                     </h4>
                     <ExternalLink size={13} className="text-zinc-500 group-hover:text-blue-400 transition flex-shrink-0 mt-0.5" />

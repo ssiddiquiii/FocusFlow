@@ -116,6 +116,7 @@ async function run() {
     const note = await page.evaluate(async () => (await (await import('/src/db/FocusFlowDB.js')).db.notes.toArray())[0]);
     assert(note.content === 'Phase 6A note' && note.timestamp === 55, 'note creation preserves content and player timestamp');
     await page.getByTitle('Delete note').first().click({ force: true });
+    await page.getByRole('dialog').getByRole('button', { name: 'Delete note' }).click();
     await page.waitForFunction(async () => (await (await import('/src/db/FocusFlowDB.js')).db.notes.count()) === 0);
     assert(true, 'note deletion removes the selected note');
 

@@ -1,0 +1,93 @@
+{
+  "phase": "6D",
+  "checks": [
+    {
+      "description": "one Notes implementation is mounted at the phone layout",
+      "passed": true
+    },
+    {
+      "description": "typing a note performs no database write",
+      "passed": true
+    },
+    {
+      "description": "created note retains course and lesson ownership",
+      "passed": true
+    },
+    {
+      "description": "note creation captures the active player timestamp",
+      "passed": true
+    },
+    {
+      "description": "rapid duplicate submit creates only one note",
+      "passed": true
+    },
+    {
+      "description": "save failure preserves the user draft",
+      "passed": true
+    },
+    {
+      "description": "editing preserves the note ID, timestamp and creation time",
+      "passed": true
+    },
+    {
+      "description": "delete cancellation preserves the note",
+      "passed": true
+    },
+    {
+      "description": "confirmed delete removes only the selected note",
+      "passed": true
+    },
+    {
+      "description": "keyboard-activated note timestamp seeks the active player",
+      "passed": true
+    },
+    {
+      "description": "keyboard-activated chapter seeks the active player",
+      "passed": true
+    },
+    {
+      "description": "Reading accurately communicates non-persistent state",
+      "passed": true
+    },
+    {
+      "description": "320px Reading content has no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "description": "external Reading links use safe attributes and accessible names",
+      "passed": true
+    },
+    {
+      "description": "long Reading code remains contained",
+      "passed": true
+    },
+    {
+      "description": "844x390 Reading and workspace have no horizontal overflow",
+      "passed": true
+    },
+    {
+      "description": "one Notes implementation is mounted at the desktop layout",
+      "passed": true
+    },
+    {
+      "description": "Pomodoro rest transition pauses the actual active player",
+      "passed": true
+    },
+    {
+      "description": "stale lesson player commands are rejected",
+      "passed": true
+    },
+    {
+      "description": "empty chapter state is explicit",
+      "passed": true
+    },
+    {
+      "description": "lesson change destroys the previous player instance",
+      "passed": true
+    }
+  ],
+  "results": {
+    "passed": 21,
+    "failed": 0
+  }
+}

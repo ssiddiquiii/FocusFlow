@@ -20,7 +20,7 @@ const STORAGE_KEYS = {
  * - Auto-pauses active YouTube player during break lock.
  */
 export default function PomodoroTimer() {
-  const { setIsPlaying } = useUIStore();
+  const { pauseActivePlayer } = useUIStore();
 
   // Load custom durations or defaults (in minutes)
   const [focusMins, setFocusMins] = useState(() => parseInt(localStorage.getItem(STORAGE_KEYS.CUSTOM_FOCUS) || '25', 10));
@@ -109,7 +109,7 @@ export default function PomodoroTimer() {
       localStorage.setItem(STORAGE_KEYS.SESSIONS, nextCount.toString());
 
       // Auto-pause any active video
-      setIsPlaying(false);
+      pauseActivePlayer();
 
       // Trigger Rest Break & Fullscreen Lock
       setMode('break');
@@ -385,7 +385,7 @@ export default function PomodoroTimer() {
             <button
               onClick={() => {
                 setStrictLockActive(true);
-                setIsPlaying(false);
+                pauseActivePlayer();
               }}
               className="w-full py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 text-[11px] font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
             >
