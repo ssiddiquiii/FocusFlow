@@ -1,5 +1,30 @@
 # FocusFlow Refactor State Tracker
 
+## Current Authoritative Status (Phase 6C)
+
+Phase 6C — Player Timing, Lifecycle Persistence and Captions is implemented, verified, and approved for commit.
+
+No later phase is approved. Phase 6D and all later roadmap work remain unstarted.
+
+Completed and verified:
+
+- Moved 200ms player time snapshots into a `useSyncExternalStore` timing store consumed only by `PlayerControls`.
+- Render-counter evidence recorded a timing-tick delta of `PlayerControls: +2`, `NotesPanel: 0`, `CourseSyllabus: 0`, and `ChaptersPanel: 0`.
+- Added a lesson-scoped serialized persistence session with identical-event deduplication and ordered writes.
+- Persisted current playback every 10 seconds and on pause, visibility hidden, page hide, lesson change, route exit/unmount, and video end.
+- Preserved the 90% completion threshold and sticky completion across overlapping lifecycle writes.
+- Bounded legacy `currentTime`, current `watchTime`, and lesson-start resume values to the playable duration while retaining the two-second rewind.
+- Persisted caption preference locally, synchronized it on player initialization and lesson changes, and removed forced caption disabling during ready/play events.
+- Preserved one YouTube player construction site and exactly one active player per lesson.
+- Added Phase 6C verification with 30 passing assertions covering lifecycle persistence, render isolation, captions, resume bounds, completion, legacy fields, deduplication, and player ownership.
+- Full maintained suite passed: 280 assertions, 0 failures.
+- Quality gates passed: build, frontend secret scan (18 generated JS assets, 0 exposed key patterns), and lint with 28 warnings / 0 errors, improving from the 31-warning Phase 6B baseline.
+- Kept Dexie schema version 3 and all database, backup, ID, Notes, Reading, Chapters, Practice, Pomodoro, route, and responsive contracts unchanged.
+
+Detailed evidence is recorded in [`./refactor-phase6c-implementation.md`](./refactor-phase6c-implementation.md).
+
+The older state entries below are retained as historical handoff context and are superseded by this section.
+
 ## Current Authoritative Status (Phase 6B)
 
 Phase 6B — Watch Responsive Workspace is implemented, verified, and approved for commit.

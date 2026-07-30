@@ -3,6 +3,7 @@ import { Clock, Plus, Trash2 } from 'lucide-react';
 import { formatSeconds } from './watchConstants';
 
 export function NotesPanel({ noteContent, notes, currentTime, onContentChange, onSave, onDelete, onSeek }) {
+  globalThis.__focusFlowRenderProbe?.('NotesPanel');
   return (
     <div className="space-y-4">
       <form onSubmit={onSave} className="space-y-2">

@@ -1,28 +1,31 @@
 import React from 'react';
 import { Gauge, Maximize, Pause, Play, Settings, Sliders, Type, Volume2, VolumeX } from 'lucide-react';
 import { formatSeconds, QUALITY_OPTIONS } from './watchConstants';
+import { usePlayerTime } from './playerTimeStore';
 
 const controlClass = 'flex h-11 w-11 items-center justify-center rounded text-zinc-200 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
 
 export function PlayerControls({ controller, chapters }) {
-  const progressPercent = controller.playerDuration > 0 ? (controller.playerCurrentTime / controller.playerDuration) * 100 : 0;
+  globalThis.__focusFlowRenderProbe?.('PlayerControls');
+  const { currentTime, duration } = usePlayerTime(controller.timeStore);
+  const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
   const handleTimelineKeyDown = event => {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
     const nextTime = event.key === 'Home'
       ? 0
       : event.key === 'End'
-        ? controller.playerDuration
-        : Math.min(controller.playerDuration, Math.max(0, controller.playerCurrentTime + (event.key === 'ArrowRight' ? 5 : -5)));
+      ? duration
+      : Math.min(duration, Math.max(0, currentTime + (event.key === 'ArrowRight' ? 5 : -5)));
     controller.triggerPlayerSeek(nextTime);
   };
   return (
     <div data-testid="player-controls" className={`absolute inset-x-0 bottom-0 z-20 flex flex-col gap-1 bg-gradient-to-t from-black via-black/90 to-transparent px-2 pb-[max(.25rem,env(safe-area-inset-bottom))] pt-4 transition-opacity duration-300 sm:gap-2 sm:px-4 sm:pb-3 sm:pt-6 ${controller.isControlsVisible || !controller.isPlaying ? 'opacity-100' : 'pointer-events-none opacity-0'}`}>
-      <div role="slider" aria-label="Seek video" aria-valuemin={0} aria-valuemax={Math.round(controller.playerDuration)} aria-valuenow={Math.round(controller.playerCurrentTime)} tabIndex={0} ref={controller.progressBarRef} onClick={controller.handleProgressBarClick} onKeyDown={handleTimelineKeyDown} className="group/timeline relative flex h-6 w-full cursor-pointer items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+      <div role="slider" aria-label="Seek video" aria-valuemin={0} aria-valuemax={Math.round(duration)} aria-valuenow={Math.round(currentTime)} tabIndex={0} ref={controller.progressBarRef} onClick={controller.handleProgressBarClick} onKeyDown={handleTimelineKeyDown} className="group/timeline relative flex h-6 w-full cursor-pointer items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
         <span className="relative block h-1.5 w-full overflow-visible rounded-full border border-zinc-700/50 bg-zinc-800/90 sm:h-2">
           <span className="block h-full rounded-full bg-gradient-to-r from-primary via-accent to-yellow-400 shadow-lg shadow-primary/30 transition-all duration-75" style={{ width: `${progressPercent}%` }} />
-          {controller.playerDuration > 0 && chapters?.map((chapter, index) => {
-            const left = Math.min(100, Math.max(0, (chapter.timestamp / controller.playerDuration) * 100));
+          {duration > 0 && chapters?.map((chapter, index) => {
+            const left = Math.min(100, Math.max(0, (chapter.timestamp / duration) * 100));
             return (
               <button type="button" key={index} aria-label={`Seek to ${chapter.title} at ${chapter.formattedTime}`} style={{ left: `${left}%` }} onClick={event => { event.stopPropagation(); controller.triggerPlayerSeek(chapter.timestamp); }} className="group/marker absolute top-1/2 z-30 -ml-2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-primary bg-white shadow-md transition-transform hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
                 <span className="pointer-events-none absolute bottom-full left-1/2 z-40 mb-2 hidden -translate-x-1/2 flex-col items-center whitespace-nowrap group-hover/marker:flex">
@@ -45,7 +48,7 @@ export function PlayerControls({ controller, chapters }) {
             {controller.playerMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
           </button>
           <span className="min-w-0 select-none truncate px-1 text-[10px] font-semibold text-zinc-300 sm:text-xs">
-            {formatSeconds(controller.playerCurrentTime)} / {formatSeconds(controller.playerDuration)}
+            {formatSeconds(currentTime)} / {formatSeconds(duration)}
           </span>
         </div>
         <div className="flex flex-shrink-0 items-center gap-0.5 sm:gap-1">

@@ -24,10 +24,10 @@ async function readWatchSources() {
 async function run() {
   const source = await readWatchSources();
   assert((source.match(/new window\.YT\.Player/g) || []).length === 1, 'Watch defines exactly one YouTube player construction site');
-  assert(source.includes('}, 10000)'), 'progress-save frequency remains ten seconds');
-  assert(source.includes('>= 0.90'), 'automatic completion threshold remains ninety percent');
-  assert(source.includes('cc_load_policy: 0'), 'YouTube caption initialization remains disabled');
-  assert(source.includes('getWatchedSeconds(currentProgress) - 2'), 'resume position retains the two-second rewind');
+  assert(source.includes('PROGRESS_SAVE_INTERVAL_MS = 10000'), 'progress-save frequency remains ten seconds');
+  assert(source.includes('COMPLETION_THRESHOLD = 0.9'), 'automatic completion threshold remains ninety percent');
+  assert(source.includes('cc_load_policy:'), 'YouTube caption initialization remains explicitly configured');
+  assert(source.includes('watchedSeconds - 2'), 'resume position retains the two-second rewind');
 
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext();
@@ -101,7 +101,8 @@ async function run() {
     await page.keyboard.press('m');
     assert(await page.evaluate(() => window.__watchPlayers.at(-1).muted === true), 'keyboard mute control updates the active player');
     await page.keyboard.press('c');
-    assert(await page.evaluate(() => window.__watchPlayerLog.captions === 1), 'caption control loads the existing captions module');
+    await page.waitForFunction(() => window.__watchPlayerLog.captions > 0);
+    assert(await page.evaluate(() => window.__watchPlayerLog.captions >= 1), 'caption control loads the existing captions module');
     await page.getByLabel('Player settings').click();
     await page.getByTitle('Change Playback Speed').click();
     assert(await page.evaluate(() => window.__watchPlayerLog.rates.at(-1) === 1.25), 'speed control preserves the existing option cycle');

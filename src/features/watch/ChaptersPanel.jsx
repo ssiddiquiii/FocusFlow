@@ -2,6 +2,7 @@ import React from 'react';
 import { Clock, Play } from 'lucide-react';
 
 export function ChaptersPanel({ chapters, onSelect }) {
+  globalThis.__focusFlowRenderProbe?.('ChaptersPanel');
   if (!chapters?.length) return null;
   return (
     <div className="px-6 py-5 max-w-7xl w-full mx-auto space-y-3 border-b border-border/50">

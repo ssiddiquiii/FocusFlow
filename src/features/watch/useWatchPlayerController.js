@@ -1,186 +1,200 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useUIStore } from '../../hooks/useUIStore';
 import { saveProgress } from '../../services/dataCommands';
-import { getWatchedSeconds } from '../../utils/selectors';
 import { QUALITY_OPTIONS, SPEED_OPTIONS } from './watchConstants';
+import { createPlaybackPersistenceSession, getBoundedResumeSeconds, PROGRESS_SAVE_INTERVAL_MS } from './playbackPersistence';
+import { createPlayerTimeStore } from './playerTimeStore';
+
+const CAPTION_PREFERENCE_KEY = 'focusflow:watch:captions-enabled';
+
+function readCaptionPreference() {
+  try {
+    return localStorage.getItem(CAPTION_PREFERENCE_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+function applyCaptionPreference(player, enabled) {
+  if (!player) return;
+  try {
+    if (enabled) player.loadModule?.('captions');
+    else {
+      player.unloadModule?.('captions');
+      player.unloadModule?.('cc');
+    }
+  } catch {}
+}
 
 export function useWatchPlayerController({ courseId, lessonId, lesson, progressList }) {
   const playerContainerRef = useRef(null);
   const progressBarRef = useRef(null);
   const mouseTimerRef = useRef(null);
+  const playerRef = useRef(null);
+  const lessonRef = useRef(lesson);
+  const progressListRef = useRef(progressList);
+  const timeStoreRef = useRef(null);
+  if (!timeStoreRef.current) timeStoreRef.current = createPlayerTimeStore();
+  lessonRef.current = lesson;
+  progressListRef.current = progressList;
+
   const { isPlaying, seekRequestTime, setActiveLessonId, setIsPlaying, triggerPlayerSeek } = useUIStore();
   const [ytPlayer, setYtPlayer] = useState(null);
   const [isPlayerTriggered, setIsPlayerTriggered] = useState(false);
-  const [playerCurrentTime, setPlayerCurrentTime] = useState(0);
-  const [playerDuration, setPlayerDuration] = useState(0);
   const [playerMuted, setPlayerMuted] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [qualityLevel, setQualityLevel] = useState('auto');
-  const [captionsEnabled, setCaptionsEnabled] = useState(false);
+  const [captionsEnabled, setCaptionsEnabled] = useState(readCaptionPreference);
   const [isControlsVisible, setIsControlsVisible] = useState(true);
+  const captionsEnabledRef = useRef(captionsEnabled);
 
   useEffect(() => {
-    if (lessonId) {
-      setActiveLessonId(lessonId);
-      setPlayerCurrentTime(0);
-      setPlayerDuration(0);
-      setIsPlayerTriggered(false);
-      setPlaybackSpeed(1);
-    }
-  }, [lessonId]);
+    captionsEnabledRef.current = captionsEnabled;
+    try {
+      localStorage.setItem(CAPTION_PREFERENCE_KEY, String(captionsEnabled));
+    } catch {}
+  }, [captionsEnabled]);
 
   useEffect(() => {
-    if (ytPlayer && seekRequestTime !== null) {
-      if (!isPlayerTriggered) {
-        setIsPlayerTriggered(true);
-        setTimeout(() => {
-          if (ytPlayer) {
-            ytPlayer.seekTo(seekRequestTime, true);
-            ytPlayer.playVideo();
-          }
-        }, 1000);
-      } else {
-        ytPlayer.seekTo(seekRequestTime, true);
-        ytPlayer.playVideo();
-      }
-      triggerPlayerSeek(null);
-    }
-  }, [seekRequestTime, ytPlayer, isPlayerTriggered]);
+    if (!lessonId) return;
+    setActiveLessonId(lessonId);
+    timeStoreRef.current.reset();
+    setIsPlayerTriggered(false);
+    setPlaybackSpeed(1);
+  }, [lessonId, setActiveLessonId]);
 
   useEffect(() => {
-    if (!lesson || lesson.type !== 'youtube' || !isPlayerTriggered) return;
+    const player = playerRef.current;
+    if (!player || seekRequestTime === null) return;
+    player.seekTo(seekRequestTime, true);
+    player.playVideo();
+    triggerPlayerSeek(null);
+  }, [seekRequestTime, triggerPlayerSeek]);
 
+  useEffect(() => {
+    const activeLesson = lessonRef.current;
+    if (!activeLesson || activeLesson.type !== 'youtube' || !isPlayerTriggered) return;
+
+    let disposed = false;
     let playerInstance = null;
     let progressTimer = null;
     let uiSyncTimer = null;
-    let captionTimeout1 = null;
-    let captionTimeout2 = null;
-    const currentProgress = progressList.find(p => p.id === `${courseId}_${lessonId}`);
-    const resumeSeconds = currentProgress && !currentProgress.completed
-      ? Math.max(0, getWatchedSeconds(currentProgress) - 2)
-      : 0;
+    let initializeTimer = null;
+    const timeStore = timeStoreRef.current;
+    const currentProgress = progressListRef.current.find(progress => progress.id === `${courseId}_${lessonId}`);
+    const persistence = createPlaybackPersistenceSession({ courseId, lessonId, writeProgress: saveProgress });
 
-    const forceCaptionsOff = (player) => {
-      try {
-        if (player && typeof player.unloadModule === 'function') {
-          player.unloadModule('captions');
-          player.unloadModule('cc');
-          player.setOption('captions', 'track', {});
-          player.setOption('captions', 'reload', true);
-        }
-      } catch {}
-      setCaptionsEnabled(false);
-    };
-
-    const stopProgressTracking = () => {
-      if (progressTimer) {
-        clearInterval(progressTimer);
-        progressTimer = null;
-      }
-      if (uiSyncTimer) {
-        clearInterval(uiSyncTimer);
-        uiSyncTimer = null;
-      }
-    };
-
-    const startProgressTracking = (player) => {
+    const persistPlayer = options => persistence.persistPlayer(playerRef.current || playerInstance, options);
+    const stopTracking = () => {
       if (progressTimer) clearInterval(progressTimer);
-      progressTimer = setInterval(() => {
-        const currentTime = player.getCurrentTime();
-        const duration = player.getDuration();
-        if (duration > 0) {
-          const isCompleted = (currentTime / duration) >= 0.90;
-          saveProgress(courseId, lessonId, currentTime, isCompleted);
-        }
-      }, 10000);
-
+      if (uiSyncTimer) clearInterval(uiSyncTimer);
+      progressTimer = null;
+      uiSyncTimer = null;
+    };
+    const startTracking = player => {
+      stopTracking();
+      progressTimer = setInterval(() => persistPlayer(), PROGRESS_SAVE_INTERVAL_MS);
       let lastStep = -1;
       uiSyncTimer = setInterval(() => {
-        if (player && typeof player.getCurrentTime === 'function') {
+        try {
           const time = player.getCurrentTime();
           const duration = player.getDuration();
-          if (duration > 0) setPlayerDuration(duration);
           const step = Math.floor(time * 4);
           if (step !== lastStep) {
             lastStep = step;
-            setPlayerCurrentTime(time);
+            timeStore.set(time, duration);
           }
-        }
+        } catch {}
       }, 200);
     };
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') persistPlayer();
+    };
+    const handlePageHide = () => persistPlayer();
 
-    const onPlayerStateChange = (event) => {
+    const onPlayerStateChange = event => {
+      if (disposed) return;
       const state = event.data;
       if (state === window.YT.PlayerState.PLAYING) {
         setIsPlaying(true);
-        startProgressTracking(event.target);
-        forceCaptionsOff(event.target);
+        startTracking(event.target);
       } else {
         setIsPlaying(false);
-        stopProgressTracking();
-        if (state === window.YT.PlayerState.PAUSED) {
-          const currentTime = event.target.getCurrentTime();
-          const duration = event.target.getDuration();
-          const isCompleted = duration > 0 ? (currentTime / duration) >= 0.90 : false;
-          saveProgress(courseId, lessonId, currentTime, isCompleted);
-        }
-        if (state === window.YT.PlayerState.ENDED) {
-          const duration = event.target.getDuration();
-          saveProgress(courseId, lessonId, duration, true);
-        }
+        stopTracking();
+        if (state === window.YT.PlayerState.PAUSED) persistPlayer();
+        if (state === window.YT.PlayerState.ENDED) persistPlayer({ ended: true });
       }
     };
 
-    const onPlayerReady = (event) => {
+    const onPlayerReady = event => {
+      if (disposed) return;
       const player = event.target;
+      playerRef.current = player;
       setYtPlayer(player);
-      setPlayerDuration(player.getDuration());
+      const duration = player.getDuration();
+      timeStore.set(player.getCurrentTime?.() || 0, duration);
       setPlayerMuted(player.isMuted());
-      player.setPlaybackRate(playbackSpeed);
-      forceCaptionsOff(player);
-      captionTimeout1 = setTimeout(() => forceCaptionsOff(player), 500);
-      captionTimeout2 = setTimeout(() => forceCaptionsOff(player), 1500);
-      const startSec = resumeSeconds > 0 ? resumeSeconds : (lesson.startTimestamp || 0);
-      player.seekTo(startSec, true);
+      player.setPlaybackRate(1);
+      applyCaptionPreference(player, captionsEnabledRef.current);
+      const startSeconds = getBoundedResumeSeconds(currentProgress, duration, activeLesson.startTimestamp || 0);
+      player.seekTo(startSeconds, true);
+      timeStore.set(startSeconds, duration);
       player.playVideo();
     };
 
-    const targetVideoId = lesson.videoId || lessonId;
-    const startSec = resumeSeconds > 0 ? resumeSeconds : (lesson.startTimestamp || 0);
     const initializePlayer = () => {
-      if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
-        ytPlayer.loadVideoById({ videoId: targetVideoId, startSeconds: startSec });
-        ytPlayer.playVideo();
-        return;
-      }
+      if (disposed) return;
+      const estimatedDuration = activeLesson.durationSeconds || 0;
+      const startSeconds = getBoundedResumeSeconds(currentProgress, estimatedDuration, activeLesson.startTimestamp || 0);
       playerInstance = new window.YT.Player('yt-player-iframe', {
-        height: '100%', width: '100%', videoId: targetVideoId,
-        playerVars: { start: startSec, rel: 0, iv_load_policy: 3, modestbranding: 1, controls: 0, disablekb: 1, fs: 0, autoplay: 1, cc_load_policy: 0 },
+        height: '100%',
+        width: '100%',
+        videoId: activeLesson.videoId || lessonId,
+        playerVars: {
+          start: startSeconds,
+          rel: 0,
+          iv_load_policy: 3,
+          modestbranding: 1,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          autoplay: 1,
+          cc_load_policy: captionsEnabledRef.current ? 1 : 0
+        },
         events: { onReady: onPlayerReady, onStateChange: onPlayerStateChange }
       });
     };
 
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('pagehide', handlePageHide);
     if (!window.YT) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      const existingScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
+      if (!existingScript) {
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        document.head.appendChild(tag);
+      }
       window.onYouTubeIframeAPIReady = initializePlayer;
     } else {
-      setTimeout(initializePlayer, 50);
+      initializeTimer = setTimeout(initializePlayer, 50);
     }
 
     return () => {
-      stopProgressTracking();
-      if (captionTimeout1) clearTimeout(captionTimeout1);
-      if (captionTimeout2) clearTimeout(captionTimeout2);
+      disposed = true;
+      persistPlayer();
+      stopTracking();
+      if (initializeTimer) clearTimeout(initializeTimer);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('pagehide', handlePageHide);
+      if (window.onYouTubeIframeAPIReady === initializePlayer) window.onYouTubeIframeAPIReady = null;
       if (playerInstance) {
         try { playerInstance.destroy(); } catch {}
       }
+      if (playerRef.current === playerInstance) playerRef.current = null;
       setYtPlayer(null);
       setIsPlaying(false);
     };
-  }, [lessonId, courseId, isPlayerTriggered]);
+  }, [courseId, isPlayerTriggered, lessonId, setIsPlaying]);
 
   useEffect(() => () => {
     if (mouseTimerRef.current) clearTimeout(mouseTimerRef.current);
@@ -188,40 +202,41 @@ export function useWatchPlayerController({ courseId, lessonId, lesson, progressL
 
   useEffect(() => {
     if (!isPlayerTriggered) return;
-    const handleKeyDown = (event) => {
+    const handleKeyDown = event => {
       const tag = event.target.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || event.target.isContentEditable || event.target.closest('button, a, summary, [role="slider"]')) return;
+      const player = playerRef.current;
       switch (event.key) {
         case ' ': case 'k': case 'K':
           event.preventDefault();
-          if (ytPlayer) {
-            if (isPlaying) ytPlayer.pauseVideo();
-            else ytPlayer.playVideo();
+          if (player) {
+            if (isPlaying) player.pauseVideo();
+            else player.playVideo();
           }
           break;
         case 'ArrowLeft': case 'j': case 'J': {
           event.preventDefault();
-          if (ytPlayer) {
-            const time = Math.max(0, ytPlayer.getCurrentTime() - 5);
-            ytPlayer.seekTo(time, true);
-            setPlayerCurrentTime(time);
+          if (player) {
+            const time = Math.max(0, player.getCurrentTime() - 5);
+            player.seekTo(time, true);
+            timeStoreRef.current.set(time, player.getDuration());
           }
           break;
         }
         case 'ArrowRight': case 'l': case 'L': {
           event.preventDefault();
-          if (ytPlayer) {
-            const time = Math.min(playerDuration, ytPlayer.getCurrentTime() + 5);
-            ytPlayer.seekTo(time, true);
-            setPlayerCurrentTime(time);
+          if (player) {
+            const time = Math.min(player.getDuration(), player.getCurrentTime() + 5);
+            player.seekTo(time, true);
+            timeStoreRef.current.set(time, player.getDuration());
           }
           break;
         }
         case 'm': case 'M':
           event.preventDefault();
-          if (ytPlayer) {
-            if (playerMuted) { ytPlayer.unMute(); setPlayerMuted(false); }
-            else { ytPlayer.mute(); setPlayerMuted(true); }
+          if (player) {
+            if (playerMuted) { player.unMute(); setPlayerMuted(false); }
+            else { player.mute(); setPlayerMuted(true); }
           }
           break;
         case 'f': case 'F':
@@ -233,78 +248,120 @@ export function useWatchPlayerController({ courseId, lessonId, lesson, progressL
           break;
         case 'c': case 'C':
           event.preventDefault();
-          if (ytPlayer) {
-            if (captionsEnabled) { ytPlayer.unloadModule('captions'); setCaptionsEnabled(false); }
-            else { ytPlayer.loadModule('captions'); setCaptionsEnabled(true); }
-          }
+          if (player) setCaptionsEnabled(previous => {
+            const next = !previous;
+            applyCaptionPreference(player, next);
+            return next;
+          });
           break;
         default: break;
       }
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [ytPlayer, isPlaying, playerMuted, playerDuration, captionsEnabled, isPlayerTriggered]);
+  }, [isPlayerTriggered, isPlaying, playerMuted]);
 
-  const handlePlayPause = () => {
-    if (!ytPlayer) return;
+  const handlePlayPause = useCallback(() => {
+    const player = playerRef.current;
+    if (!player) return;
     try {
-      const state = typeof ytPlayer.getPlayerState === 'function' ? ytPlayer.getPlayerState() : -1;
-      if (state === 1 || isPlaying) { ytPlayer.pauseVideo(); setIsPlaying(false); }
-      else { ytPlayer.playVideo(); setIsPlaying(true); }
-    } catch { setIsPlaying(previous => !previous); }
-  };
-  const handleMuteToggle = () => {
-    if (!ytPlayer) return;
-    if (playerMuted) { ytPlayer.unMute(); setPlayerMuted(false); }
-    else { ytPlayer.mute(); setPlayerMuted(true); }
-  };
-  const handleSpeedCycle = () => {
-    if (!ytPlayer) return;
-    const nextSpeed = SPEED_OPTIONS[(SPEED_OPTIONS.indexOf(playbackSpeed) + 1) % SPEED_OPTIONS.length];
-    ytPlayer.setPlaybackRate(nextSpeed);
-    setPlaybackSpeed(nextSpeed);
-  };
-  const handleQualityCycle = () => {
-    if (!ytPlayer) return;
-    const currentIndex = QUALITY_OPTIONS.findIndex(option => option.value === qualityLevel);
-    const nextQuality = QUALITY_OPTIONS[(currentIndex + 1) % QUALITY_OPTIONS.length];
-    try { ytPlayer.setPlaybackQuality(nextQuality.value); } catch {}
-    setQualityLevel(nextQuality.value);
-  };
-  const handleFullscreenToggle = () => {
+      const state = typeof player.getPlayerState === 'function' ? player.getPlayerState() : -1;
+      if (state === 1 || isPlaying) player.pauseVideo();
+      else player.playVideo();
+    } catch {}
+  }, [isPlaying]);
+
+  const handleMuteToggle = useCallback(() => {
+    const player = playerRef.current;
+    if (!player) return;
+    if (playerMuted) { player.unMute(); setPlayerMuted(false); }
+    else { player.mute(); setPlayerMuted(true); }
+  }, [playerMuted]);
+
+  const handleSpeedCycle = useCallback(() => {
+    const player = playerRef.current;
+    if (!player) return;
+    setPlaybackSpeed(current => {
+      const next = SPEED_OPTIONS[(SPEED_OPTIONS.indexOf(current) + 1) % SPEED_OPTIONS.length];
+      player.setPlaybackRate(next);
+      return next;
+    });
+  }, []);
+
+  const handleQualityCycle = useCallback(() => {
+    const player = playerRef.current;
+    if (!player) return;
+    setQualityLevel(current => {
+      const currentIndex = QUALITY_OPTIONS.findIndex(option => option.value === current);
+      const next = QUALITY_OPTIONS[(currentIndex + 1) % QUALITY_OPTIONS.length];
+      try { player.setPlaybackQuality(next.value); } catch {}
+      return next.value;
+    });
+  }, []);
+
+  const handleFullscreenToggle = useCallback(() => {
     const container = playerContainerRef.current;
     if (!container) return;
     if (!document.fullscreenElement) container.requestFullscreen().catch(error => console.error('Fullscreen Error:', error));
     else document.exitFullscreen();
-  };
-  const handleCCToggle = () => {
-    if (!ytPlayer) return;
-    if (captionsEnabled) { ytPlayer.unloadModule('captions'); setCaptionsEnabled(false); }
-    else { ytPlayer.loadModule('captions'); setCaptionsEnabled(true); }
-  };
-  const handleMouseMove = () => {
+  }, []);
+
+  const handleCCToggle = useCallback(() => {
+    const player = playerRef.current;
+    if (!player) return;
+    setCaptionsEnabled(previous => {
+      const next = !previous;
+      applyCaptionPreference(player, next);
+      return next;
+    });
+  }, []);
+
+  const handleMouseMove = useCallback(() => {
     setIsControlsVisible(true);
     if (mouseTimerRef.current) clearTimeout(mouseTimerRef.current);
-    mouseTimerRef.current = setTimeout(() => { if (isPlaying) setIsControlsVisible(false); }, 800);
-  };
-  const handleMouseLeave = () => {
+    mouseTimerRef.current = setTimeout(() => {
+      if (useUIStore.getState().isPlaying) setIsControlsVisible(false);
+    }, 800);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
     if (mouseTimerRef.current) clearTimeout(mouseTimerRef.current);
-    if (isPlaying) setIsControlsVisible(false);
-  };
-  const handleProgressBarClick = (event) => {
-    if (!ytPlayer || !progressBarRef.current || playerDuration === 0) return;
+    if (useUIStore.getState().isPlaying) setIsControlsVisible(false);
+  }, []);
+
+  const handleProgressBarClick = useCallback(event => {
+    const player = playerRef.current;
+    if (!player || !progressBarRef.current) return;
+    const duration = player.getDuration();
+    if (!duration) return;
     const rect = progressBarRef.current.getBoundingClientRect();
-    const seekSeconds = ((event.clientX - rect.left) / rect.width) * playerDuration;
-    ytPlayer.seekTo(seekSeconds, true);
-    setPlayerCurrentTime(seekSeconds);
-  };
+    const seekSeconds = ((event.clientX - rect.left) / rect.width) * duration;
+    player.seekTo(seekSeconds, true);
+    timeStoreRef.current.set(seekSeconds, duration);
+  }, []);
 
   return {
-    playerContainerRef, progressBarRef, ytPlayer, isPlayerTriggered, setIsPlayerTriggered,
-    playerCurrentTime, playerDuration, playerMuted, playbackSpeed, qualityLevel,
-    captionsEnabled, isControlsVisible, isPlaying, triggerPlayerSeek,
-    handlePlayPause, handleMuteToggle, handleSpeedCycle, handleQualityCycle,
-    handleFullscreenToggle, handleCCToggle, handleMouseMove, handleMouseLeave,
+    playerContainerRef,
+    progressBarRef,
+    ytPlayer,
+    timeStore: timeStoreRef.current,
+    isPlayerTriggered,
+    setIsPlayerTriggered,
+    playerMuted,
+    playbackSpeed,
+    qualityLevel,
+    captionsEnabled,
+    isControlsVisible,
+    isPlaying,
+    triggerPlayerSeek,
+    handlePlayPause,
+    handleMuteToggle,
+    handleSpeedCycle,
+    handleQualityCycle,
+    handleFullscreenToggle,
+    handleCCToggle,
+    handleMouseMove,
+    handleMouseLeave,
     handleProgressBarClick
   };
 }

@@ -1,0 +1,29 @@
+{
+  "phase": "6C",
+  "intervalMs": 10000,
+  "completionThreshold": 0.9,
+  "renderIsolation": {
+    "before": {
+      "NotesPanel": 16,
+      "ChaptersPanel": 8,
+      "CourseSyllabus": 8,
+      "PlayerControls": 6
+    },
+    "after": {
+      "NotesPanel": 16,
+      "ChaptersPanel": 8,
+      "CourseSyllabus": 8,
+      "PlayerControls": 8
+    },
+    "delta": {
+      "NotesPanel": 0,
+      "ChaptersPanel": 0,
+      "CourseSyllabus": 0,
+      "PlayerControls": 2
+    }
+  },
+  "results": {
+    "passed": 30,
+    "failed": 0
+  }
+}
