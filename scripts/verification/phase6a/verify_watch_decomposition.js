@@ -102,6 +102,7 @@ async function run() {
     assert(await page.evaluate(() => window.__watchPlayers.at(-1).muted === true), 'keyboard mute control updates the active player');
     await page.keyboard.press('c');
     assert(await page.evaluate(() => window.__watchPlayerLog.captions === 1), 'caption control loads the existing captions module');
+    await page.getByLabel('Player settings').click();
     await page.getByTitle('Change Playback Speed').click();
     assert(await page.evaluate(() => window.__watchPlayerLog.rates.at(-1) === 1.25), 'speed control preserves the existing option cycle');
     await page.getByTitle('Change Video Quality / Resolution').click();

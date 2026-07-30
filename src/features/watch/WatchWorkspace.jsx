@@ -13,12 +13,12 @@ function WorkspaceContent(props) {
   return null;
 }
 
-function WorkspaceTabs({ activeTab, noteCount, onTabChange, lessonType, mobile = false }) {
+function WorkspaceTabs({ activeTab, noteCount, onTabChange, lessonType }) {
   return (
-    <div className={`flex border-b border-border bg-zinc-950 text-xs font-bold uppercase tracking-wider overflow-x-auto ${mobile ? '' : 'flex-shrink-0'}`}>
+    <div className="flex flex-shrink-0 border-b border-border bg-zinc-950 text-xs font-bold uppercase tracking-wider">
       {lessonType === 'youtube' && <>
-        <button onClick={() => onTabChange('notes')} className={`py-3.5 px-4 border-b-2 transition cursor-pointer flex items-center gap-1.5 flex-1 justify-center ${activeTab === 'notes' ? 'border-primary text-white bg-zinc-900/50' : 'border-transparent text-zinc-500 hover:text-zinc-300'}`}><FileText size={14} className={activeTab === 'notes' ? 'text-primary' : ''} /><span>Notes ({noteCount})</span></button>
-        <button onClick={() => onTabChange('reading')} className={`py-3.5 px-4 border-b-2 transition cursor-pointer flex items-center gap-1.5 flex-1 justify-center ${activeTab === 'reading' ? 'border-primary text-white bg-zinc-900/50' : 'border-transparent text-zinc-500 hover:text-zinc-300'}`}><BookOpen size={14} className={activeTab === 'reading' ? 'text-primary' : ''} /><span>Reading</span></button>
+        <button type="button" aria-pressed={activeTab === 'notes'} onClick={() => onTabChange('notes')} className={`flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-1.5 border-b-2 px-3 py-3 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset ${activeTab === 'notes' ? 'border-primary text-white bg-zinc-900/50' : 'border-transparent text-zinc-500 hover:text-zinc-300'}`}><FileText size={14} className={activeTab === 'notes' ? 'text-primary' : ''} /><span>Notes ({noteCount})</span></button>
+        <button type="button" aria-pressed={activeTab === 'reading'} onClick={() => onTabChange('reading')} className={`flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-1.5 border-b-2 px-3 py-3 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset ${activeTab === 'reading' ? 'border-primary text-white bg-zinc-900/50' : 'border-transparent text-zinc-500 hover:text-zinc-300'}`}><BookOpen size={14} className={activeTab === 'reading' ? 'text-primary' : ''} /><span>Reading</span></button>
       </>}
     </div>
   );
@@ -26,20 +26,20 @@ function WorkspaceTabs({ activeTab, noteCount, onTabChange, lessonType, mobile =
 
 export function MobileWatchWorkspace(props) {
   return (
-    <div className="block lg:hidden px-4 sm:px-6 py-4 border-b border-border/50 bg-zinc-950/60">
+    <section data-testid="watch-inline-workspace" className="block border-b border-border/50 bg-zinc-950/60 px-3 py-4 sm:px-6 xl:hidden">
       <div className="glass-panel rounded-2xl border border-border overflow-hidden">
-        <WorkspaceTabs mobile lessonType={props.lessonType} activeTab={props.activeTab} noteCount={props.notesProps.notes.length} onTabChange={props.onTabChange} />
-        <div className="p-4 space-y-4 max-h-[450px] overflow-y-auto"><WorkspaceContent {...props} /></div>
+        <WorkspaceTabs lessonType={props.lessonType} activeTab={props.activeTab} noteCount={props.notesProps.notes.length} onTabChange={props.onTabChange} />
+        <div className="min-w-0 space-y-4 p-3 sm:p-4"><WorkspaceContent {...props} /></div>
       </div>
-    </div>
+    </section>
   );
 }
 
 export function DesktopWatchWorkspace(props) {
   return (
-    <div className="hidden lg:flex w-72 lg:w-80 bg-zinc-950 border-l border-border flex-col flex-shrink-0 h-full overflow-hidden">
+    <aside data-testid="watch-side-workspace" className="hidden h-full w-80 flex-shrink-0 flex-col overflow-hidden border-l border-border bg-zinc-950 xl:flex">
       <WorkspaceTabs lessonType={props.lessonType} activeTab={props.activeTab} noteCount={props.notesProps.notes.length} onTabChange={props.onTabChange} />
       <div className="flex-1 overflow-y-auto p-4 space-y-4"><WorkspaceContent {...props} /></div>
-    </div>
+    </aside>
   );
 }

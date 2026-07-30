@@ -1,5 +1,29 @@
 # FocusFlow Refactor State Tracker
 
+## Current Authoritative Status (Phase 6B)
+
+Phase 6B — Watch Responsive Workspace is implemented, verified, and approved for commit.
+
+No later phase is approved. Phase 6C, Phase 6D, and all later roadmap work remain unstarted.
+
+Completed and verified:
+
+- Removed conflicting player minimum heights so the reserved media surface remains a true 16:9 at every required viewport.
+- Kept Play, mute, time, settings, fullscreen, and timeline controls compact and touch safe; moved speed, quality, and captions into the player settings surface without changing their controller behavior.
+- Changed mobile and tablet Watch layouts to one document-level scroll and removed the inline workspace's nested scroll region.
+- Delayed the side workspace until 1280px (`xl`) and retained bounded desktop workspace scrolling.
+- Added safe-area padding, semantic click-to-play, keyboard timeline operation, focus-visible controls, and 44px primary targets.
+- Preserved exactly one YouTube player construction site and all Phase 6A initialization, cleanup, resume, completion, note, navigation, caption, and control assertions.
+- Added Phase 6B responsive verification with 50 passing assertions across all nine required viewports, 200% zoom, reduced motion, overflow, single-scroll, touch, keyboard, layout-shift, clipping, and geometry checks.
+- Captured and visually reviewed nine full-page viewport screenshots plus phone control/settings evidence in `docs/evidence/phase6b/screenshots/`.
+- Full maintained suite passed: 250 assertions, 0 failures.
+- Quality gates passed: build, frontend secret scan (17 generated JS assets, 0 exposed key patterns), and lint with 31 warnings / 0 errors, unchanged from Phase 6A.
+- Kept Dexie schema version 3 and all database, backup, ID, legacy-field, persistence, Notes, captions, Practice, and Pomodoro contracts unchanged.
+
+Detailed evidence is recorded in [`./refactor-phase6b-implementation.md`](./refactor-phase6b-implementation.md).
+
+The older state entries below are retained as historical handoff context and are superseded by this section.
+
 ## Current Authoritative Status (Phase 6A)
 
 Phase 6A â€” Watch Decomposition is implemented, verified, and approved for commit.

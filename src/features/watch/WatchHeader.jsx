@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 export function WatchHeader({ courseId, courseTitle, lessonTitle }) {
   return (
-    <div className="flex items-center gap-3 px-3 sm:px-6 py-2.5 sm:py-3.5 bg-zinc-950/95 border-b border-border sticky top-0 z-30 backdrop-blur-xl">
-      <Link to={`/courses/${courseId}`} className="text-zinc-400 hover:text-white transition p-1 rounded-lg hover:bg-zinc-900 flex-shrink-0" title="Back to Course Detail">
+    <div className="sticky top-0 z-30 flex items-center gap-2 border-b border-border bg-zinc-950/95 px-[max(.5rem,env(safe-area-inset-left))] py-1.5 backdrop-blur-xl sm:gap-3 sm:px-6 sm:py-2.5">
+      <Link to={`/courses/${courseId}`} aria-label="Back to Course Detail" className="flex min-h-11 min-w-11 flex-shrink-0 items-center justify-center rounded-lg text-zinc-400 transition hover:bg-zinc-900 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" title="Back to Course Detail">
         <ArrowLeft size={18} />
       </Link>
       <div className="min-w-0">

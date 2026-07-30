@@ -4,16 +4,16 @@ import { PlayerControls } from './PlayerControls';
 
 export function PlayerSurface({ course, lesson, lessonId, controller, isUdemyCompleted, onUdemyToggle }) {
   return (
-    <div className="w-full max-w-7xl mx-auto mt-1 sm:mt-4 px-1 sm:px-6">
-      <div ref={controller.playerContainerRef} onMouseMove={controller.handleMouseMove} onMouseLeave={controller.handleMouseLeave} className={`w-full aspect-video min-h-[210px] sm:min-h-[300px] relative bg-[#1E1E1E] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl flex-shrink-0 group/player border border-border ${!controller.isControlsVisible && controller.isPlaying ? 'cursor-none' : ''}`}>
+    <div className="mx-auto mt-1 w-full max-w-7xl px-1 sm:mt-4 sm:px-6">
+      <div data-testid="watch-player" ref={controller.playerContainerRef} onMouseMove={controller.handleMouseMove} onMouseLeave={controller.handleMouseLeave} className={`group/player relative aspect-video w-full flex-shrink-0 overflow-hidden rounded-lg border border-border bg-[#1E1E1E] shadow-2xl sm:rounded-2xl ${!controller.isControlsVisible && controller.isPlaying ? 'cursor-none' : ''}`}>
         {lesson.type === 'youtube' ? (
           <div className="w-full h-full relative">
             {!controller.isPlayerTriggered ? (
-              <div onClick={() => controller.setIsPlayerTriggered(true)} className="w-full h-full absolute inset-0 cursor-pointer flex items-center justify-center bg-zinc-900 group/thumb z-20">
+              <button type="button" aria-label={`Play ${lesson.title}`} onClick={() => controller.setIsPlayerTriggered(true)} className="group/thumb absolute inset-0 z-20 flex h-full w-full cursor-pointer items-center justify-center bg-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset">
                 <img src={lesson.thumbnailUrl || `https://i.ytimg.com/vi/${lesson.videoId || lessonId}/hqdefault.jpg`} alt={lesson.title} className="w-full h-full object-cover opacity-85 group-hover/thumb:scale-[1.01] transition duration-500" />
                 <div className="absolute inset-0 bg-black/35 group-hover/thumb:bg-black/20 transition duration-300" />
-                <div className="w-16 h-16 rounded-full flex items-center justify-center bg-primary text-white border-2 border-white/20 shadow-2xl shadow-primary/45 group-hover/thumb:scale-110 transition duration-300 absolute z-30"><Play size={24} fill="currentColor" className="ml-1" /></div>
-              </div>
+                <span className="absolute z-30 flex h-14 w-14 items-center justify-center rounded-full border-2 border-white/20 bg-primary text-white shadow-2xl shadow-primary/45 transition duration-300 group-hover/thumb:scale-110 sm:h-16 sm:w-16"><Play size={24} fill="currentColor" className="ml-1" /></span>
+              </button>
             ) : <div id="yt-player-iframe" className="w-full h-full absolute inset-0 z-10" />}
             {controller.isPlayerTriggered && <div onClick={controller.handlePlayPause} className={`w-full h-[calc(100%-60px)] absolute inset-x-0 top-0 z-20 bg-transparent ${!controller.isControlsVisible && controller.isPlaying ? 'cursor-none' : 'cursor-pointer'}`} />}
             {controller.isPlayerTriggered && <PlayerControls controller={controller} chapters={lesson.chapters} />}

@@ -16,6 +16,7 @@
     "test:phase4": "node scripts/verification/run-suite.js phase4",
     "test:phase5": "node scripts/verification/run-suite.js phase5",
     "test:phase6a": "node scripts/verification/run-suite.js phase6a",
+    "test:phase6b": "node scripts/verification/run-suite.js phase6b",
     "test:all": "npm run build && npm test && npm run test:security && npm run test:runner"
   },
   "dependencies": {

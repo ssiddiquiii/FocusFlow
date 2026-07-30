@@ -21,7 +21,8 @@ export const browserScripts = [
   'scripts/verification/phase2c/verify_scoped_reads.js',
   'scripts/verification/phase4/verify_responsive_shell.js',
   'scripts/verification/phase5/verify_dashboard_course_streak.js',
-  'scripts/verification/phase6a/verify_watch_decomposition.js'
+  'scripts/verification/phase6a/verify_watch_decomposition.js',
+  'scripts/verification/phase6b/verify_watch_responsive.js'
 ];
 
 export function runNodeScript(script, extraEnv = {}) {
@@ -104,7 +105,13 @@ export async function runSuite(suite) {
       { FOCUSFLOW_TEST_BASE_URL: TEST_BASE_URL }
     ));
   }
-  if (!['unit', 'browser', 'phase4', 'phase5', 'phase6a', 'all'].includes(suite)) {
+  if (suite === 'phase6b') {
+    await withTestServer(() => runScripts(
+      ['scripts/verification/phase6a/verify_watch_decomposition.js', 'scripts/verification/phase6b/verify_watch_responsive.js'],
+      { FOCUSFLOW_TEST_BASE_URL: TEST_BASE_URL }
+    ));
+  }
+  if (!['unit', 'browser', 'phase4', 'phase5', 'phase6a', 'phase6b', 'all'].includes(suite)) {
     throw new Error(`Unknown verification suite: ${suite}`);
   }
   return 0;

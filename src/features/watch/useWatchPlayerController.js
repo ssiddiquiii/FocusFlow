@@ -190,7 +190,7 @@ export function useWatchPlayerController({ courseId, lessonId, lesson, progressL
     if (!isPlayerTriggered) return;
     const handleKeyDown = (event) => {
       const tag = event.target.tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || event.target.isContentEditable) return;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || event.target.isContentEditable || event.target.closest('button, a, summary, [role="slider"]')) return;
       switch (event.key) {
         case ' ': case 'k': case 'K':
           event.preventDefault();
