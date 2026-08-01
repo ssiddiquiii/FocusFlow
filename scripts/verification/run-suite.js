@@ -8,7 +8,8 @@ export const unitScripts = [
   'scripts/verification/phase1/verify_streak_logic.js',
   'scripts/verification/phase1/verify_youtube_api.js',
   'scripts/verification/phase1/verify_serverless_api_full.js',
-  'scripts/verification/phase1/verify_live_smoke_test.js'
+  'scripts/verification/phase1/verify_live_smoke_test.js',
+  'scripts/verification/phase7a/verify_practice_identity.js'
 ];
 
 export const browserScripts = [
@@ -24,7 +25,8 @@ export const browserScripts = [
   'scripts/verification/phase6a/verify_watch_decomposition.js',
   'scripts/verification/phase6b/verify_watch_responsive.js',
   'scripts/verification/phase6c/verify_watch_persistence_captions.js',
-  'scripts/verification/phase6d/verify_watch_workspace_interactions.js'
+  'scripts/verification/phase6d/verify_watch_workspace_interactions.js',
+  'scripts/verification/phase7a/verify_practice_identity_browser.js'
 ];
 
 export function runNodeScript(script, extraEnv = {}) {
@@ -134,7 +136,14 @@ export async function runSuite(suite) {
       { FOCUSFLOW_TEST_BASE_URL: TEST_BASE_URL }
     ));
   }
-  if (!['unit', 'browser', 'phase4', 'phase5', 'phase6a', 'phase6b', 'phase6c', 'phase6d', 'all'].includes(suite)) {
+  if (suite === 'phase7a') {
+    await runScripts(['scripts/verification/phase7a/verify_practice_identity.js']);
+    await withTestServer(() => runScripts(
+      ['scripts/verification/phase7a/verify_practice_identity_browser.js'],
+      { FOCUSFLOW_TEST_BASE_URL: TEST_BASE_URL }
+    ));
+  }
+  if (!['unit', 'browser', 'phase4', 'phase5', 'phase6a', 'phase6b', 'phase6c', 'phase6d', 'phase7a', 'all'].includes(suite)) {
     throw new Error(`Unknown verification suite: ${suite}`);
   }
   return 0;

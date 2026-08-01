@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ExternalLink, CheckCircle2, Circle, Lightbulb, ChevronDown, ChevronUp, Target, Filter, Check } from 'lucide-react';
-import jsTopicPractice from '../data/jsTopicPractice.json';
+import { practiceCatalog, practiceModules as jsTopicPractice } from '../features/practice/practiceCatalog';
+import { getCatalogId, getQuestionSolvedState } from '../features/practice/practiceIdentity';
 import CategoryIcon from './CategoryIcon';
 import { JsLogo, GitLogo } from './BrandLogos';
 
@@ -190,13 +191,24 @@ export default function PracticeTab({ courseId, lessonId, practiceProgressList, 
 
   // Fallback to first module in active catalog if current selection belongs to other catalog
   const currentModule = activeModules.find(t => t.id === selectedTopicId) || activeModules[0];
+  const questionDescriptor = q => ({
+    catalogId: getCatalogId(currentModule.id),
+    topicId: currentModule.id,
+    questionId: q.id
+  });
+  const isQuestionCompleted = q =>
+    getQuestionSolvedState(practiceProgressList, questionDescriptor(q), practiceCatalog);
+  const toggleQuestion = (q, completed) => togglePractice(courseId, lessonId, {
+    ...questionDescriptor(q),
+    practiceUrl: q.link || null
+  }, completed);
 
   const filteredQuestions = currentModule.questions.filter(q => 
     filterDifficulty === 'all' ? true : q.difficulty === filterDifficulty
   );
 
   const completedCount = currentModule.questions.filter(q =>
-    practiceProgressList.some(p => p.id === `${lessonId}_${q.id}` && p.completed)
+    isQuestionCompleted(q)
   ).length;
 
   const toggleSolution = (id) => {
@@ -322,7 +334,7 @@ export default function PracticeTab({ courseId, lessonId, practiceProgressList, 
           {/* 3D Interactive Flashcard */}
           {(() => {
             const q = filteredQuestions[flashcardIndex] || filteredQuestions[0];
-            const isCompleted = practiceProgressList.some(p => p.id === `${lessonId}_${q.id}` && p.completed);
+            const isCompleted = isQuestionCompleted(q);
             const diffBadge = DIFFICULTY_BADGES[q.difficulty] || DIFFICULTY_BADGES['easy'];
 
             return (
@@ -377,7 +389,7 @@ export default function PracticeTab({ courseId, lessonId, practiceProgressList, 
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      togglePractice(courseId, lessonId, q.id, q.link || '', !isCompleted);
+                      toggleQuestion(q, !isCompleted);
                     }}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
                       isCompleted 
@@ -429,9 +441,7 @@ export default function PracticeTab({ courseId, lessonId, practiceProgressList, 
           <p className="text-xs text-zinc-500 py-6 text-center">No questions matching selected difficulty filter.</p>
         ) : (
           filteredQuestions.map((q) => {
-            const isCompleted = practiceProgressList.some(
-              p => p.id === `${lessonId}_${q.id}` && p.completed
-            );
+            const isCompleted = isQuestionCompleted(q);
             const isSolutionOpen = expandedSolutionId === q.id;
             const diffBadge = DIFFICULTY_BADGES[q.difficulty] || DIFFICULTY_BADGES['easy'];
 
@@ -448,7 +458,7 @@ export default function PracticeTab({ courseId, lessonId, practiceProgressList, 
                 <div className="flex items-start gap-2.5 min-w-0 w-full">
                   {/* Completion Checkbox */}
                   <button
-                    onClick={() => togglePractice(courseId, lessonId, q.id, q.link || '', !isCompleted)}
+                    onClick={() => toggleQuestion(q, !isCompleted)}
                     className="mt-0.5 flex-shrink-0 cursor-pointer transition hover:scale-110"
                     title={isCompleted ? 'Mark as incomplete' : 'Mark as solved'}
                   >

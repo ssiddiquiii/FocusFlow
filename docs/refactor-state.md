@@ -1,5 +1,29 @@
 # FocusFlow Refactor State Tracker
 
+## Current Authoritative Status (Phase 7A)
+
+Phase 7A — Practice Identity Decision and Safe Migration is implemented and verified without a Dexie schema migration.
+
+No later phase is approved. Phase 7B, Phase 7C, Phase 7D, and all later roadmap work remain unstarted.
+
+Completed and verified:
+
+- Replaced route-derived new Practice mastery IDs with stable `practice-question:v1:<catalogId>:<topicId>:<questionId>` identities in the existing version-3 primary-key field.
+- Added pure catalog, identity, classification, and solved-state adapters shared by global and lesson contexts.
+- Preserved legacy rows; unambiguous records map lazily, duplicates deduplicate in reads, and ambiguous/stale records remain recoverable without silent reconciliation or deletion.
+- Kept the legacy Practice command signature compatible while routing current UI writes through canonical identity descriptors.
+- Added stable identity metadata to backup validation/export while retaining backup versions 1/2, nullable URL normalization, passthrough legacy fields, and atomic rejection.
+- Validated 18 topics, 140 questions, 140 unique identities, zero current duplicate question IDs, and zero Practice/Reading key collisions.
+- Proved both educational JSON files are byte-for-byte unchanged by recorded SHA-256 hashes.
+- Added 22 Phase 7A assertions covering identity, longest-suffix Git/JavaScript disambiguation, duplicates, ambiguity, parity, normalization, catalogs, content hashes, old/new backups, atomic rejection, record counts, IndexedDB version, and legacy `currentTime`.
+- Full maintained suite passed: 323 assertions, 0 failures, including all Phase 1–6, exactly-one-player, backup, IndexedDB, responsive, and 22 Phase 7A regressions.
+- Quality gates passed: build, frontend secret scan (18 JS assets, 0 exposed key patterns), and lint with 28 warnings / 0 errors, unchanged from Phase 6D.
+- Kept Dexie schema version 3. No table, index, schema primary key, course ID, lesson ID, educational content, external service, production dependency, or deployment changed.
+
+Detailed evidence is recorded in [`./refactor-phase7a-implementation.md`](./refactor-phase7a-implementation.md).
+
+The older state entries below are retained as historical handoff context and are superseded by this section.
+
 ## Current Authoritative Status (Phase 6D)
 
 Phase 6D — Notes, Reading, Chapters and Pomodoro Player Command is implemented and verified.

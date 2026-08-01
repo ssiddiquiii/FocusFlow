@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { createQuestionIdentity } from '../features/practice/practiceIdentity.js';
 
 /**
  * Zod validation schema for a Course.
@@ -67,15 +68,30 @@ export const NoteSchema = z.object({
  * Tracks whether a user has completed a specific coding practice challenge.
  */
 export const PracticeProgressSchema = z.object({
-  id: z.string().min(1), // Formatted as "lessonId_practiceIndex"
+  id: z.string().min(1), // Legacy lesson/question ID or stable Practice question identity
   courseId: z.string().min(1),
   lessonId: z.string().min(1),
   practiceUrl: z.preprocess(
     (val) => (val === '' || val === undefined || val === null ? null : val),
     z.string().url().nullable().optional()
   ).default(null),
+  identityVersion: z.literal(1).optional(),
+  catalogId: z.preprocess(value => value === '' ? null : value, z.string().min(1).nullable().optional()),
+  topicId: z.preprocess(value => value === '' ? null : value, z.string().min(1).nullable().optional()),
+  questionId: z.preprocess(value => value === '' ? null : value, z.string().min(1).nullable().optional()),
   completed: z.boolean().default(false),
   completedAt: z.number().int().positive().optional() // timestamp in ms
+}).passthrough().superRefine((practice, context) => {
+  const identityFields = [practice.catalogId, practice.topicId, practice.questionId];
+  const hasIdentityMetadata = practice.identityVersion !== undefined || identityFields.some(value => value != null);
+  if (!hasIdentityMetadata) return;
+  if (practice.identityVersion !== 1 || identityFields.some(value => value == null)) {
+    context.addIssue({ code: 'custom', message: 'Stable Practice identity metadata must be complete.' });
+    return;
+  }
+  if (practice.id !== createQuestionIdentity(practice)) {
+    context.addIssue({ code: 'custom', path: ['id'], message: 'Practice record ID does not match its stable identity metadata.' });
+  }
 });
 
 /**
