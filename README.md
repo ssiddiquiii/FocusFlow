@@ -148,7 +148,3 @@ For in-depth architecture reports, technical feasibility evaluations, and produc
 FocusFlow operates entirely on a **local-first** architecture. None of your notes, progress statistics, or personal learning data are sent to external servers. Data is stored locally using IndexedDB in your browser. You can export a JSON backup at any time from the **Settings** page.
 
 ---
-
-## 📄 License
-
-This project is licensed under the MIT License.
