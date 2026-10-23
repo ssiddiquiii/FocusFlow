@@ -17,7 +17,7 @@ export default function ReadingTab({ lessonId }) {
   if (!lessonData) {
     return (
       <div className="py-8 text-center space-y-3">
-        <span className="text-zinc-600 text-4xl block">📖</span>
+        <div className="w-10 h-10 rounded-xl bg-muted/60 border border-border flex items-center justify-center mx-auto text-muted-foreground"><BookOpen size={20} /></div>
         <p className="text-sm text-zinc-500">No reading materials mapped for this lesson yet.</p>
       </div>
     );

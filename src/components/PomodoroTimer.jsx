@@ -343,7 +343,7 @@ export default function PomodoroTimer() {
             </span>
             {sessionsCompleted > 0 && (
               <span className="px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 text-[10px] font-bold border border-amber-500/30">
-                🔥 {sessionsCompleted}
+                {sessionsCompleted}
               </span>
             )}
           </button>

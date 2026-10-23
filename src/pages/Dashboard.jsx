@@ -24,21 +24,24 @@ import { DeleteCourseDialog } from '../features/dashboard/DashboardSections';
 
 const STARTER_COURSES = [
   {
+    tag: 'JS',
+    tagColor: 'text-amber-500 bg-amber-500/10 border-amber-500/25',
     title: 'JavaScript Masterclass',
     channel: 'Chai aur Code',
-    emoji: '⚡',
     url: 'https://www.youtube.com/playlist?list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37'
   },
   {
+    tag: 'WEB',
+    tagColor: 'text-blue-500 bg-blue-500/10 border-blue-500/25',
     title: 'Modern Web Dev',
     channel: 'Net Ninja',
-    emoji: '🌐',
     url: 'https://www.youtube.com/playlist?list=PL4cUxeGkcC9gksOX3Kd9KPo-O68ncT05o'
   },
   {
+    tag: 'PY',
+    tagColor: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/25',
     title: 'Python Crash Course',
     channel: 'freeCodeCamp',
-    emoji: '🐍',
     url: 'https://www.youtube.com/watch?v=rfscVS0vtbw'
   }
 ];
@@ -172,10 +175,10 @@ export default function Dashboard() {
   };
 
   return (
-    <div aria-busy={isLoading} className="p-4 sm:p-8 max-w-6xl mx-auto space-y-7 sm:space-y-9 animate-page-entry">
+    <div aria-busy={isLoading} className="p-3.5 sm:p-6 lg:p-8 max-w-6xl w-full mx-auto animate-page-entry flex-1 flex flex-col justify-center">
       {/* Status Action Banner */}
       {actionMsg && (
-        <div className={`p-4 rounded-xl text-xs font-semibold border flex items-center justify-between shadow-sm ${
+        <div className={`p-3.5 mb-5 rounded-xl text-xs font-semibold border flex items-center justify-between shadow-sm ${
           actionMsg.type === 'success' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
           actionMsg.type === 'error' ? 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20' :
           'bg-muted text-muted-foreground border-border'
@@ -185,87 +188,54 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Clean Studio Header with Generous Typography */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border">
-        <div>
-          <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-normal">
-              Welcome to FocusFlow
-            </h1>
-            <button
-              onClick={() => setIsStreakModalOpen(true)}
-              aria-label={`Open streak calendar, ${streakCount} day streak`}
-              className="px-3 py-1 rounded-full bg-primary/10 border border-primary/25 hover:border-primary/50 text-primary text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition shadow-sm"
-              title="Click to view 30-Day Activity Heatmap Calendar"
-            >
-              <Flame size={13} className="fill-primary animate-pulse" />
-              <span>{streakCount} {streakCount === 1 ? 'Day' : 'Days'} Streak</span>
-            </button>
-          </div>
-          <p className="text-muted-foreground text-xs sm:text-sm font-normal mt-1 leading-relaxed">
-            Your distraction-free developer learning workspace.
-          </p>
-        </div>
-
-        {/* Clean Header Action */}
-        <button
-          onClick={handleExportNotes}
-          className="self-start sm:self-auto px-4 py-2 rounded-xl bg-card hover:bg-muted border border-border text-foreground text-xs font-semibold transition flex items-center gap-2 cursor-pointer shadow-sm hover:shadow"
-          title="Export all written notes to Markdown (.md)"
-        >
-          <Download size={14} className="text-muted-foreground" />
-          <span>Export Notes (.md)</span>
-        </button>
-      </div>
-
       {/* Newly Imported Course Quick Launch Banner */}
       {newlyImportedCourse && (
-        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-between gap-3 animate-in fade-in shadow-sm">
+        <div className="p-3.5 mb-5 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-between gap-3 animate-in fade-in shadow-sm">
           <div className="flex items-center gap-2.5 min-w-0">
-            <CheckCircle2 size={18} className="text-emerald-500 flex-shrink-0" />
+            <CheckCircle2 size={17} className="text-emerald-500 flex-shrink-0" />
             <span className="text-xs sm:text-sm font-semibold text-foreground truncate">
               Ready to study: <span className="text-emerald-600 dark:text-emerald-400 font-bold">{newlyImportedCourse.course.title}</span>
             </span>
           </div>
           <button
             onClick={() => navigate(`/courses/${newlyImportedCourse.course.id}/lessons/${newlyImportedCourse.firstLessonId}`)}
-            className="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition cursor-pointer flex-shrink-0 flex items-center gap-1 shadow-sm"
+            className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition cursor-pointer flex-shrink-0 flex items-center gap-1 shadow-sm"
           >
             <span>Start Lesson 1 →</span>
           </button>
         </div>
       )}
 
-      {/* 🚀 CONDITIONAL RENDERING: SOLUTION 1 INTERACTIVE HERO (IF 0 COURSES) vs FULL DASHBOARD (IF HAS COURSES) */}
+      {/* 🚀 CONDITIONAL RENDERING: ZERO-COURSE COMMAND CENTER vs REGULAR CATALOG */}
       {sortedCourses.length === 0 ? (
-        /* 🔥 SOLUTION 1: INTERACTIVE HERO STUDIO WITH 1-CLICK DEMO COURSES */
-        <div className="glass-panel p-6 sm:p-12 rounded-3xl border border-border bg-card text-center max-w-3xl mx-auto space-y-7 shadow-sm transition hover:shadow-md animate-page-entry my-2">
-          {/* Subtle Pill Tag */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-semibold">
-            <Sparkles size={14} />
-            <span>Ad-Free & Distraction-Free Study Studio</span>
+        /* ⚡ OPTION 1: "COMMAND CENTER STUDIO" — ABOVE-THE-FOLD ZERO-SCROLL HERO */
+        <div className="my-auto py-2 sm:py-6 max-w-3xl w-full mx-auto space-y-6 text-center animate-page-entry">
+          {/* Subtle Local-First Tech Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-semibold">
+            <Sparkles size={13} />
+            <span>Local-First Developer Workspace</span>
           </div>
 
-          {/* Hero Headline & Subtitle */}
-          <div className="space-y-3 max-w-xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-foreground tracking-normal leading-tight">
-              Turn Any YouTube Course Into a Deep-Work Studio
-            </h2>
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-              Paste any tutorial playlist or video link. Study with synced timestamped notes, zero ads, no algorithm rabbit holes, and 100% local progress.
+          {/* Direct Impactful Headline & Subtitle */}
+          <div className="space-y-2.5 max-w-2xl mx-auto">
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-tight">
+              Turn YouTube Into Your Distraction-Free Deep Work Studio
+            </h1>
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-lg mx-auto">
+              Paste any tutorial playlist or video link to study with synchronized timestamped notes, zero ads, no algorithm feeds, and 100% offline-ready local storage.
             </p>
           </div>
 
-          {/* Direct Interactive Importer Bar */}
-          <form onSubmit={(e) => handleDirectImport(e)} className="max-w-2xl mx-auto">
-            <div className="flex flex-col sm:flex-row gap-2.5 p-2 bg-muted/50 border border-border focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 rounded-2xl transition shadow-xs">
+          {/* Direct Importer Input Bar */}
+          <form onSubmit={(e) => handleDirectImport(e)} className="max-w-xl mx-auto">
+            <div className="flex flex-col sm:flex-row gap-2 p-1.5 bg-card border border-border focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 rounded-2xl transition shadow-sm">
               <div className="flex items-center gap-2.5 px-3 flex-1 min-w-0">
-                <Play size={17} className="text-primary fill-primary flex-shrink-0" />
+                <Play size={15} className="text-primary fill-primary flex-shrink-0" />
                 <input
                   type="text"
                   value={directUrl}
                   onChange={(e) => setDirectUrl(e.target.value)}
-                  placeholder="Paste YouTube playlist or video link here..."
+                  placeholder="Paste YouTube playlist or video link..."
                   disabled={isDirectImporting}
                   className="w-full bg-transparent text-foreground text-xs sm:text-sm placeholder:text-muted-foreground focus:outline-none font-normal py-2"
                 />
@@ -273,34 +243,36 @@ export default function Dashboard() {
               <button
                 type="submit"
                 disabled={isDirectImporting || !directUrl.trim()}
-                className="px-5 py-3 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm shadow-primary/25 cursor-pointer disabled:opacity-50 flex-shrink-0"
+                className="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm cursor-pointer disabled:opacity-50 flex-shrink-0"
               >
                 {isDirectImporting ? (
-                  <Loader2 size={16} className="animate-spin" />
+                  <Loader2 size={15} className="animate-spin" />
                 ) : (
-                  <Sparkles size={16} />
+                  <Sparkles size={15} />
                 )}
-                <span>{isDirectImporting ? 'Importing Course...' : 'Import Course'}</span>
+                <span>{isDirectImporting ? 'Importing Course...' : 'Import Course →'}</span>
               </button>
             </div>
           </form>
 
-          {/* 1-Click Starter Masterclass Demo Pills */}
-          <div className="space-y-3 pt-1">
-            <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
+          {/* 1-Click Starter Masterclasses with Monospace Tech Tags (NO EMOJIS / NO SNAKES) */}
+          <div className="space-y-2.5 pt-1">
+            <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider block">
               Or test-drive immediately with 1-click popular courses:
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-2.5">
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-2">
               {STARTER_COURSES.map((item) => (
                 <button
                   key={item.url}
                   type="button"
                   disabled={isDirectImporting}
                   onClick={() => handleQuickStart(item.url)}
-                  className="group flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-card hover:bg-muted hover:border-primary/40 text-foreground text-xs font-medium transition cursor-pointer shadow-xs disabled:opacity-50"
+                  className="group flex items-center gap-2 px-3.5 py-2 rounded-xl border border-border bg-card hover:bg-muted hover:border-primary/40 text-foreground text-xs font-medium transition cursor-pointer shadow-xs disabled:opacity-50"
                   title={`Import ${item.title} by ${item.channel}`}
                 >
-                  <span className="text-sm">{item.emoji}</span>
+                  <span className={`px-1.5 py-0.5 rounded font-mono text-[10px] font-bold border ${item.tagColor}`}>
+                    {item.tag}
+                  </span>
                   <span className="font-semibold group-hover:text-primary transition">{item.title}</span>
                   <span className="text-[10px] text-muted-foreground">• {item.channel}</span>
                 </button>
@@ -308,34 +280,60 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Feature Highlights Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-6 border-t border-border text-left">
-            <div className="p-3.5 rounded-xl bg-muted/30 border border-border flex items-start gap-2.5">
-              <CheckCircle2 size={16} className="text-emerald-500 flex-shrink-0 mt-0.5" />
-              <div>
-                <span className="text-xs font-semibold text-foreground block">Zero Distractions</span>
-                <span className="text-[11px] text-muted-foreground leading-relaxed">No ads, no clickbait recommended sidebar.</span>
-              </div>
-            </div>
-            <div className="p-3.5 rounded-xl bg-muted/30 border border-border flex items-start gap-2.5">
-              <FileText size={16} className="text-purple-500 flex-shrink-0 mt-0.5" />
-              <div>
-                <span className="text-xs font-semibold text-foreground block">Timestamped Notes</span>
-                <span className="text-[11px] text-muted-foreground leading-relaxed">Write notes synced to exact seconds in video.</span>
-              </div>
-            </div>
-            <div className="p-3.5 rounded-xl bg-muted/30 border border-border flex items-start gap-2.5">
-              <Clock size={16} className="text-primary flex-shrink-0 mt-0.5" />
-              <div>
-                <span className="text-xs font-semibold text-foreground block">100% Local-First</span>
-                <span className="text-[11px] text-muted-foreground leading-relaxed">All progress stored safely in your browser.</span>
-              </div>
-            </div>
+          {/* 3 Minimalist Micro-Trust Chips */}
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-3 text-[11px] text-muted-foreground font-medium">
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 size={13} className="text-emerald-500" />
+              <span>Zero Ads & Distractions</span>
+            </span>
+            <span className="text-muted-foreground/30">•</span>
+            <span className="flex items-center gap-1.5">
+              <FileText size={13} className="text-primary" />
+              <span>Timestamped Code Notes</span>
+            </span>
+            <span className="text-muted-foreground/30">•</span>
+            <span className="flex items-center gap-1.5">
+              <Clock size={13} className="text-blue-500" />
+              <span>100% Local IndexedDB</span>
+            </span>
           </div>
         </div>
       ) : (
         /* 📚 REGULAR WORKSPACE WITH ACTIVE RESUME + CATALOG GRID */
-        <div className="space-y-7">
+        <div className="space-y-6 sm:space-y-8">
+          {/* Enrolled Courses Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border">
+            <div>
+              <div className="flex flex-wrap items-center gap-3">
+                <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
+                  Your Learning Studio
+                </h1>
+                <button
+                  onClick={() => setIsStreakModalOpen(true)}
+                  aria-label={`Open streak calendar, ${streakCount} day streak`}
+                  className="px-3 py-1 rounded-full bg-primary/10 border border-primary/25 hover:border-primary/50 text-primary text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition shadow-sm"
+                  title="Click to view 30-Day Activity Heatmap Calendar"
+                >
+                  <Flame size={13} className="fill-primary animate-pulse" />
+                  <span>{streakCount} {streakCount === 1 ? 'Day' : 'Days'} Streak</span>
+                </button>
+              </div>
+              <p className="text-muted-foreground text-xs sm:text-sm font-normal mt-1 leading-relaxed">
+                {sortedCourses.length} {sortedCourses.length === 1 ? 'course' : 'courses'} enrolled in your local workspace.
+              </p>
+            </div>
+
+            {/* Clean Header Action */}
+            <button
+              onClick={handleExportNotes}
+              className="self-start sm:self-auto px-4 py-2 rounded-xl bg-card hover:bg-muted border border-border text-foreground text-xs font-semibold transition flex items-center gap-2 cursor-pointer shadow-sm hover:shadow"
+              title="Export all written notes to Markdown (.md)"
+            >
+              <Download size={14} className="text-muted-foreground" />
+              <span>Export Notes (.md)</span>
+            </button>
+          </div>
+
           {/* Top Action Row: Importer + Resume Session */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Left: YouTube Course Importer */}

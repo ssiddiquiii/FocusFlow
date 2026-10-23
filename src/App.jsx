@@ -291,78 +291,64 @@ function AppContent() {
       </aside>
 
       {/* Main Content View Container */}
-      <main className={`safe-area-main min-w-0 flex-1 pb-4 ${
+      <main className={`min-w-0 flex-1 flex flex-col justify-between ${
         location.pathname.includes('/lessons/') 
           ? 'lg:pl-20 xl:pl-22 p-0'
-          : 'pt-16 lg:pt-4 lg:pl-20 xl:pl-22 px-3.5 sm:px-6 pb-4'
+          : 'safe-area-main pt-16 lg:pt-5 lg:pl-20 xl:pl-22 px-3.5 sm:px-6'
       }`}>
-        <ErrorBoundary>
-          <Suspense fallback={
-            <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
-              <div className="animate-spin w-8 h-8 border-3 border-primary border-t-transparent rounded-full" />
-            </div>
-          }>
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div 
-                key={location.pathname} 
-                initial={reduceMotion ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={reduceMotion ? undefined : { opacity: 0 }}
-                transition={{ duration: reduceMotion ? 0 : 0.1, ease: 'easeOut' }}
-                className="h-full min-w-0"
-              >
-                <Routes location={location}>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/courses/:courseId" element={<CourseDetail />} />
-                  <Route path="/courses/:courseId/lessons/:lessonId" element={<Watch />} />
-                  <Route path="/settings" element={<Settings />} />
-                  <Route path="*" element={<Dashboard />} />
-                </Routes>
-              </motion.div>
-            </AnimatePresence>
-          </Suspense>
-        </ErrorBoundary>
+        <div className="flex-1 w-full min-w-0 flex flex-col">
+          <ErrorBoundary>
+            <Suspense fallback={
+              <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
+                <div className="animate-spin w-8 h-8 border-3 border-primary border-t-transparent rounded-full" />
+              </div>
+            }>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div 
+                  key={location.pathname} 
+                  initial={reduceMotion ? false : { opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={reduceMotion ? undefined : { opacity: 0 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.1, ease: 'easeOut' }}
+                  className="flex-1 min-w-0 w-full flex flex-col"
+                >
+                  <Routes location={location}>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/courses/:courseId" element={<CourseDetail />} />
+                    <Route path="/courses/:courseId/lessons/:lessonId" element={<Watch />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="*" element={<Dashboard />} />
+                  </Routes>
+                </motion.div>
+              </AnimatePresence>
+            </Suspense>
+          </ErrorBoundary>
+        </div>
 
-        {/* Redesigned Studio Footer with Catchy Statement (shown only outside watch studio) */}
+        {/* Compact Single-Tier Studio Footer */}
         {!location.pathname.includes('/lessons/') && (
-          <footer className="mt-14 pt-8 pb-6 border-t border-border/70 text-xs text-muted-foreground">
-            <div className="max-w-6xl mx-auto px-2 sm:px-4 flex flex-col md:flex-row items-center justify-between gap-5">
-              {/* Left: Brand Identity & Catchy Statement */}
-              <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
-                <div className="flex items-center gap-2">
-                  <img src="/logo.svg" alt="FocusFlow" className="w-5 h-5 flex-shrink-0" />
-                  <span className="font-bold text-foreground text-sm tracking-normal">FocusFlow OS</span>
-                </div>
-                <span className="hidden sm:inline text-muted-foreground/40">&bull;</span>
-                <p className="text-muted-foreground text-xs font-normal">
-                  Engineered for deep work &mdash; <span className="text-foreground font-semibold">less noise, more mastery.</span>
-                </p>
+          <footer className="mt-8 py-5 border-t border-border/60 text-xs text-muted-foreground w-full">
+            <div className="max-w-6xl mx-auto px-2 sm:px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+              {/* Left: Brand Identity */}
+              <div className="flex items-center gap-2.5 text-center sm:text-left">
+                <img src="/logo.svg" alt="FocusFlow" className="w-4 h-4 flex-shrink-0" />
+                <span className="font-bold text-foreground text-xs tracking-tight">FocusFlow OS</span>
+                <span className="text-muted-foreground/40">•</span>
+                <span className="text-muted-foreground text-xs font-normal">
+                  Less noise, more mastery.
+                </span>
               </div>
 
               {/* Right: Local-First Status & Creator Tag */}
-              <div className="flex flex-wrap items-center justify-center gap-4 text-[11px]">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-semibold shadow-xs">
+              <div className="flex flex-wrap items-center justify-center gap-3 text-[11px]">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   <span>100% Local-First & Ad-Free</span>
                 </div>
-
-                <div className="text-muted-foreground font-medium">
-                  Crafted with precision by <span className="text-foreground font-semibold">Sameed Siddiqui</span>
+                <span className="text-muted-foreground/40 hidden sm:inline">•</span>
+                <div className="text-muted-foreground">
+                  Crafted by <span className="text-foreground font-semibold">Sameed Siddiqui</span>
                 </div>
-              </div>
-            </div>
-
-            {/* Catchy Bottom Quote & Privacy Pledge */}
-            <div className="max-w-6xl mx-auto px-2 sm:px-4 mt-5 pt-3.5 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-[11px] text-muted-foreground">
-              <span className="italic font-normal text-muted-foreground/90">
-                &ldquo;Stop scrolling the algorithm. Build your craft in peace.&rdquo;
-              </span>
-              <div className="flex items-center gap-3 font-mono text-[10px] text-muted-foreground/75">
-                <span>Zero Cookies</span>
-                <span>&bull;</span>
-                <span>Zero Tracking</span>
-                <span>&bull;</span>
-                <span>IndexedDB Storage</span>
               </div>
             </div>
           </footer>
