@@ -124,19 +124,3 @@ FocusFlow follows a strict **privacy-first** approach:
 - 📤 **Data Portability**: You own your data. Export your entire workspace into a clean Markdown bundle or a single JSON backup file anytime from Settings.
 
 ---
-
-## 🏗️ Production Build
-
-To test or build the optimized production bundle:
-
-```bash
-npm run build
-```
-
-The compiled assets will be generated in `dist/`, ready to deploy to Vercel, Netlify, Cloudflare Pages, or GitHub Pages.
-
----
-
-## 📄 License
-
-FocusFlow is open-source software licensed under the **MIT License**.
