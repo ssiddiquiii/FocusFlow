@@ -8,8 +8,7 @@ import {
   Clock, 
   BookOpen, 
   Plus, 
-  Trash2, 
-  Target,
+  Trash2,
   FileText,
   Sparkles,
   ExternalLink,
@@ -241,7 +240,7 @@ export default function Dashboard() {
               <div className="flex items-center gap-3 min-w-0">
                 <Search size={17} className="text-zinc-400 group-hover:text-primary transition flex-shrink-0" />
                 <span className="text-xs font-medium text-zinc-400 group-hover:text-white transition truncate">
-                  Search 140+ Qs, topics, or notes...
+                  Search courses, topics, or notes...
                 </span>
               </div>
               <kbd className="px-2 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-[11px] font-mono text-zinc-400 font-bold flex-shrink-0">
@@ -273,14 +272,14 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* Practices Solved */}
+              {/* Total Courses */}
               <div className="glass-panel rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-500/40 transition shadow-sm bg-zinc-950/70 border border-zinc-800/80">
                 <div className="w-8 h-8 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mb-2">
-                  <Target size={16} />
+                  <BookOpen size={16} />
                 </div>
                 <div>
-                  <span className="text-zinc-500 text-[9px] font-bold uppercase tracking-wider block">Practices Solved</span>
-                  <span className="text-base font-extrabold text-white block mt-0.5">{practiceProgressList.filter(p => p.completed).length}</span>
+                  <span className="text-zinc-500 text-[9px] font-bold uppercase tracking-wider block">Total Courses</span>
+                  <span className="text-base font-extrabold text-white block mt-0.5">{sortedCourses.length}</span>
                 </div>
               </div>
 
@@ -410,7 +409,7 @@ export default function Dashboard() {
       <StreakModal
         isOpen={isStreakModalOpen}
         onClose={() => setIsStreakModalOpen(false)}
-        stats={{ ...stats, practicesSolved: practiceProgressList.filter(item => item.completed).length }}
+        stats={{ ...stats, totalCourses: sortedCourses.length }}
         streakCount={streakCount}
         activeDates={activeDates}
       />

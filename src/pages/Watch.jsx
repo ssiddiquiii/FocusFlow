@@ -52,7 +52,7 @@ export default function Watch() {
     <>
       <WatchHeader courseId={courseId} courseTitle={course.title} lessonTitle={lesson.title} />
       <PlayerSurface course={course} lesson={lesson} lessonId={lessonId} controller={player} isUdemyCompleted={isUdemyCompleted} onUdemyToggle={handleUdemyToggle} />
-      <WatchDetails course={course} lesson={lesson} lessonId={lessonId} onOpenPractice={() => navigate('/practice')} />
+      <WatchDetails course={course} lesson={lesson} lessonId={lessonId} />
       <MobileWatchWorkspace {...workspaceProps} />
       <ChaptersPanel key={lessonId} chapters={lesson.chapters} onSelect={player.triggerPlayerSeek} />
       <CourseSyllabus courseId={courseId} lessonId={lessonId} lessons={courseLessons} progressList={progressList} onNavigate={nextLessonId => navigate(`/courses/${courseId}/lessons/${nextLessonId}`)} />

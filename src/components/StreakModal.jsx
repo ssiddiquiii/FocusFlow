@@ -48,7 +48,7 @@ export default function StreakModal({ isOpen, onClose, stats, streakCount, activ
                   {streakCount} {streakCount === 1 ? 'Day' : 'Days'}
                 </span>
               </div>
-              <p className="text-[10px] text-zinc-400">Watch at least 10 minutes or solve one question daily.</p>
+              <p className="text-[10px] text-zinc-400">Watch at least 10 minutes daily to maintain your streak.</p>
             </div>
           </div>
           <button 
@@ -137,8 +137,8 @@ export default function StreakModal({ isOpen, onClose, stats, streakCount, activ
           </div>
 
           <div className="p-2.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
-            <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider block">Practices Solved</span>
-            <span className="text-xs sm:text-sm font-extrabold text-emerald-400 block mt-0.5">{stats.practicesSolved} Solved</span>
+            <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider block">Total Courses</span>
+            <span className="text-xs sm:text-sm font-extrabold text-emerald-400 block mt-0.5">{stats.totalCourses ?? 0} Enrolled</span>
           </div>
         </div>
     </Dialog>

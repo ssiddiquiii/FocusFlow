@@ -13,13 +13,8 @@ const Dashboard = lazy(() => import('./pages/Dashboard'));
 const CourseDetail = lazy(() => import('./pages/CourseDetail'));
 const Watch = lazy(() => import('./pages/Watch'));
 const Settings = lazy(() => import('./pages/Settings'));
-const Offline = lazy(() => import('./pages/Offline'));
-const PracticeHub = lazy(() => import('./pages/PracticeHub'));
-
 // Preload functions for 0ms route switching
 const preloadDashboard = () => import('./pages/Dashboard');
-const preloadPractice = () => import('./pages/PracticeHub');
-
 const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 /**
@@ -102,15 +97,9 @@ function AppContent() {
         if (key === 'd') {
           e.preventDefault();
           navigate('/');
-        } else if (key === 'p') {
-          e.preventDefault();
-          navigate('/practice');
         } else if (key === 's') {
           e.preventDefault();
           navigate('/settings');
-        } else if (key === 'o') {
-          e.preventDefault();
-          navigate('/offline');
         }
       }
     }
@@ -187,8 +176,6 @@ function AppContent() {
 
           let handleHover;
           if (item.path === '/') handleHover = preloadDashboard;
-          if (item.path === '/practice') handleHover = preloadPractice;
-
           return (
             <Link
               key={item.path}
@@ -282,9 +269,7 @@ function AppContent() {
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/courses/:courseId" element={<CourseDetail />} />
                   <Route path="/courses/:courseId/lessons/:lessonId" element={<Watch />} />
-                  <Route path="/practice" element={<PracticeHub />} />
                   <Route path="/settings" element={<Settings />} />
-                  <Route path="/offline" element={<Offline />} />
                   <Route path="*" element={<Dashboard />} />
                 </Routes>
               </motion.div>
