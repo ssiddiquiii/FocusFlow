@@ -175,10 +175,10 @@ export default function Dashboard() {
   };
 
   return (
-    <div aria-busy={isLoading} className="p-3.5 sm:p-6 lg:p-8 max-w-6xl w-full mx-auto animate-page-entry flex-1 flex flex-col justify-center">
+    <div aria-busy={isLoading} className="p-4 sm:p-6 lg:p-8 max-w-5xl w-full mx-auto animate-page-entry flex-1 flex flex-col">
       {/* Status Action Banner */}
       {actionMsg && (
-        <div className={`p-3.5 mb-5 rounded-xl text-xs font-semibold border flex items-center justify-between shadow-sm ${
+        <div className={`p-3.5 mb-5 rounded-xl text-xs font-semibold border flex items-center justify-between shadow-xs ${
           actionMsg.type === 'success' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
           actionMsg.type === 'error' ? 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20' :
           'bg-muted text-muted-foreground border-border'
@@ -190,45 +190,43 @@ export default function Dashboard() {
 
       {/* Newly Imported Course Quick Launch Banner */}
       {newlyImportedCourse && (
-        <div className="p-3.5 mb-5 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-between gap-3 animate-in fade-in shadow-sm">
+        <div className="p-3.5 mb-5 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-between gap-3 animate-in fade-in shadow-xs">
           <div className="flex items-center gap-2.5 min-w-0">
-            <CheckCircle2 size={17} className="text-emerald-500 flex-shrink-0" />
+            <CheckCircle2 size={16} className="text-emerald-500 flex-shrink-0" />
             <span className="text-xs sm:text-sm font-semibold text-foreground truncate">
               Ready to study: <span className="text-emerald-600 dark:text-emerald-400 font-bold">{newlyImportedCourse.course.title}</span>
             </span>
           </div>
           <button
             onClick={() => navigate(`/courses/${newlyImportedCourse.course.id}/lessons/${newlyImportedCourse.firstLessonId}`)}
-            className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition cursor-pointer flex-shrink-0 flex items-center gap-1 shadow-sm"
+            className="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition cursor-pointer flex-shrink-0 shadow-xs"
           >
-            <span>Start Lesson 1 →</span>
+            Start Lesson 1 →
           </button>
         </div>
       )}
 
-      {/* 🚀 CONDITIONAL RENDERING: ZERO-COURSE COMMAND CENTER vs REGULAR CATALOG */}
+      {/* CONDITIONAL RENDERING: ZERO COURSES vs ENROLLED CATALOG */}
       {sortedCourses.length === 0 ? (
-        /* ⚡ OPTION 1: "COMMAND CENTER STUDIO" — ABOVE-THE-FOLD ZERO-SCROLL HERO */
-        <div className="my-auto py-2 sm:py-6 max-w-3xl w-full mx-auto space-y-6 text-center animate-page-entry">
-          {/* Subtle Local-First Tech Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-semibold">
-            <Sparkles size={13} />
-            <span>Local-First Developer Workspace</span>
-          </div>
-
-          {/* Direct Impactful Headline & Subtitle */}
-          <div className="space-y-2.5 max-w-2xl mx-auto">
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-tight">
-              Turn YouTube Into Your Distraction-Free Deep Work Studio
+        /* SLEEK, LEFT-ALIGNED STUDIO HERO (NO CENTER OVER-TEXTING, NO NESTED BOXES) */
+        <div className="my-auto py-6 sm:py-12 max-w-2xl w-full mx-auto space-y-8 animate-page-entry text-left">
+          {/* Header */}
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-[11px] font-semibold">
+              <Sparkles size={12} />
+              <span>Distraction-Free YouTube Studio</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-foreground tracking-tight leading-tight">
+              Study without distractions
             </h1>
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-lg mx-auto">
-              Paste any tutorial playlist or video link to study with synchronized timestamped notes, zero ads, no algorithm feeds, and 100% offline-ready local storage.
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              Paste any YouTube playlist or tutorial link to take timestamped notes with zero ads, algorithm feeds, or comment rabbit holes.
             </p>
           </div>
 
-          {/* Direct Importer Input Bar */}
-          <form onSubmit={(e) => handleDirectImport(e)} className="max-w-xl mx-auto">
-            <div className="flex flex-col sm:flex-row gap-2 p-1.5 bg-card border border-border focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 rounded-2xl transition shadow-sm">
+          {/* Spotlight Importer Input Bar */}
+          <form onSubmit={(e) => handleDirectImport(e)} className="w-full">
+            <div className="flex flex-col sm:flex-row gap-2 p-1.5 bg-card border border-border focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 rounded-2xl transition shadow-xs">
               <div className="flex items-center gap-2.5 px-3 flex-1 min-w-0">
                 <Play size={15} className="text-primary fill-primary flex-shrink-0" />
                 <input
@@ -237,298 +235,255 @@ export default function Dashboard() {
                   onChange={(e) => setDirectUrl(e.target.value)}
                   placeholder="Paste YouTube playlist or video link..."
                   disabled={isDirectImporting}
-                  className="w-full bg-transparent text-foreground text-xs sm:text-sm placeholder:text-muted-foreground focus:outline-none font-normal py-2"
+                  className="w-full bg-transparent text-foreground text-xs sm:text-sm placeholder:text-muted-foreground focus:outline-none py-2"
                 />
               </div>
               <button
                 type="submit"
                 disabled={isDirectImporting || !directUrl.trim()}
-                className="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm cursor-pointer disabled:opacity-50 flex-shrink-0"
+                className="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-xs cursor-pointer disabled:opacity-50 flex-shrink-0"
               >
                 {isDirectImporting ? (
                   <Loader2 size={15} className="animate-spin" />
                 ) : (
-                  <Sparkles size={15} />
+                  <span>Import Playlist →</span>
                 )}
-                <span>{isDirectImporting ? 'Importing Course...' : 'Import Course →'}</span>
               </button>
             </div>
           </form>
 
-          {/* 1-Click Starter Masterclasses with Monospace Tech Tags (NO EMOJIS / NO SNAKES) */}
-          <div className="space-y-2.5 pt-1">
-            <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider block">
-              Or test-drive immediately with 1-click popular courses:
+          {/* Quick Test Starter Courses (Clean Flat Cards) */}
+          <div className="space-y-3 pt-1">
+            <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider block">
+              Or try a popular starter playlist:
             </span>
-            <div className="flex flex-wrap items-center justify-center gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
               {STARTER_COURSES.map((item) => (
                 <button
                   key={item.url}
                   type="button"
                   disabled={isDirectImporting}
                   onClick={() => handleQuickStart(item.url)}
-                  className="group flex items-center gap-2 px-3.5 py-2 rounded-xl border border-border bg-card hover:bg-muted hover:border-primary/40 text-foreground text-xs font-medium transition cursor-pointer shadow-xs disabled:opacity-50"
+                  className="flex items-center justify-between p-3 rounded-xl bg-card border border-border hover:border-primary/40 hover:bg-muted/40 transition text-left cursor-pointer group shadow-xs disabled:opacity-50"
                   title={`Import ${item.title} by ${item.channel}`}
                 >
-                  <span className={`px-1.5 py-0.5 rounded font-mono text-[10px] font-bold border ${item.tagColor}`}>
+                  <div className="min-w-0">
+                    <span className="text-xs font-semibold text-foreground group-hover:text-primary transition block truncate">
+                      {item.title}
+                    </span>
+                    <span className="text-[10px] text-muted-foreground block truncate">
+                      {item.channel}
+                    </span>
+                  </div>
+                  <span className={`px-1.5 py-0.5 rounded font-mono text-[9px] font-bold border ${item.tagColor} flex-shrink-0 ml-2`}>
                     {item.tag}
                   </span>
-                  <span className="font-semibold group-hover:text-primary transition">{item.title}</span>
-                  <span className="text-[10px] text-muted-foreground">• {item.channel}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* 3 Minimalist Micro-Trust Chips */}
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-3 text-[11px] text-muted-foreground font-medium">
+          {/* 3 Clean Features */}
+          <div className="flex flex-wrap items-center gap-5 pt-4 text-xs text-muted-foreground border-t border-border/50">
             <span className="flex items-center gap-1.5">
               <CheckCircle2 size={13} className="text-emerald-500" />
-              <span>Zero Ads & Distractions</span>
+              <span>Zero ads & feeds</span>
             </span>
-            <span className="text-muted-foreground/30">•</span>
             <span className="flex items-center gap-1.5">
               <FileText size={13} className="text-primary" />
-              <span>Timestamped Code Notes</span>
+              <span>Timestamped code notes</span>
             </span>
-            <span className="text-muted-foreground/30">•</span>
             <span className="flex items-center gap-1.5">
               <Clock size={13} className="text-blue-500" />
-              <span>100% Local IndexedDB</span>
+              <span>100% offline IndexedDB</span>
             </span>
           </div>
         </div>
       ) : (
-        /* 📚 REGULAR WORKSPACE WITH ACTIVE RESUME + CATALOG GRID */
+        /* REGULAR WORKSPACE: CLEAN SINGLE-COLUMN RESPONSIVE LAYOUT */
         <div className="space-y-6 sm:space-y-8">
-          {/* Enrolled Courses Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border">
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border/60">
             <div>
               <div className="flex flex-wrap items-center gap-3">
                 <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
-                  Your Learning Studio
+                  Learning Studio
                 </h1>
                 <button
                   onClick={() => setIsStreakModalOpen(true)}
-                  aria-label={`Open streak calendar, ${streakCount} day streak`}
-                  className="px-3 py-1 rounded-full bg-primary/10 border border-primary/25 hover:border-primary/50 text-primary text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition shadow-sm"
-                  title="Click to view 30-Day Activity Heatmap Calendar"
+                  className="px-2.5 py-1 rounded-full bg-primary/10 border border-primary/25 hover:border-primary/50 text-primary text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition shadow-xs"
+                  title="View 30-Day Activity Heatmap"
                 >
                   <Flame size={13} className="fill-primary animate-pulse" />
                   <span>{streakCount} {streakCount === 1 ? 'Day' : 'Days'} Streak</span>
                 </button>
               </div>
-              <p className="text-muted-foreground text-xs sm:text-sm font-normal mt-1 leading-relaxed">
-                {sortedCourses.length} {sortedCourses.length === 1 ? 'course' : 'courses'} enrolled in your local workspace.
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                {sortedCourses.length} {sortedCourses.length === 1 ? 'course' : 'courses'} enrolled • {stats.totalHours} hrs watched • {stats.completedLessons} lectures done
               </p>
             </div>
 
-            {/* Clean Header Action */}
-            <button
-              onClick={handleExportNotes}
-              className="self-start sm:self-auto px-4 py-2 rounded-xl bg-card hover:bg-muted border border-border text-foreground text-xs font-semibold transition flex items-center gap-2 cursor-pointer shadow-sm hover:shadow"
-              title="Export all written notes to Markdown (.md)"
-            >
-              <Download size={14} className="text-muted-foreground" />
-              <span>Export Notes (.md)</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={openCommandPalette}
+                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-card border border-border text-muted-foreground text-xs hover:text-foreground hover:bg-muted transition cursor-pointer shadow-xs"
+              >
+                <Search size={14} />
+                <span className="hidden sm:inline">Search...</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-muted text-[10px] font-mono border border-border">Ctrl K</kbd>
+              </button>
+              <button
+                onClick={handleExportNotes}
+                className="px-3.5 py-2 rounded-xl bg-card hover:bg-muted border border-border text-foreground text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer shadow-xs"
+                title="Export Notes (.md)"
+              >
+                <Download size={14} className="text-muted-foreground" />
+                <span className="hidden sm:inline">Export Notes</span>
+              </button>
+            </div>
           </div>
 
-          {/* Top Action Row: Importer + Resume Session */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* Left: YouTube Course Importer */}
-            <div className="glass-panel p-6 rounded-2xl border border-border bg-card flex flex-col justify-between gap-4 transition duration-200 hover:border-border/80">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-red-500/10 text-red-500 border border-red-500/20 flex items-center justify-center flex-shrink-0">
-                  <Play size={16} fill="currentColor" />
-                </div>
-                <div>
-                  <h2 className="text-sm sm:text-base font-semibold text-foreground tracking-normal">
-                    Import YouTube Course
-                  </h2>
-                  <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">
-                    Paste any playlist or video tutorial link
-                  </p>
-                </div>
+          {/* Action Row: Importer + Resume Session */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Quick Importer */}
+            <div className="p-4 sm:p-5 rounded-2xl border border-border bg-card space-y-3 shadow-xs">
+              <div>
+                <h2 className="text-xs sm:text-sm font-semibold text-foreground tracking-normal">
+                  Import YouTube Playlist
+                </h2>
+                <p className="text-[11px] text-muted-foreground mt-0.5">
+                  Paste any public or unlisted tutorial link
+                </p>
               </div>
-
-              <form onSubmit={(e) => handleDirectImport(e)} className="flex gap-2.5">
+              <form onSubmit={(e) => handleDirectImport(e)} className="flex gap-2">
                 <input
                   type="text"
                   value={directUrl}
                   onChange={(e) => setDirectUrl(e.target.value)}
                   placeholder="Paste YouTube playlist or video link..."
                   disabled={isDirectImporting}
-                  className="flex-1 min-w-0 bg-muted/60 border border-border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-normal transition"
+                  className="flex-1 min-w-0 bg-muted/50 border border-border rounded-xl px-3.5 py-2 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary font-normal transition"
                 />
                 <button
                   type="submit"
                   disabled={isDirectImporting || !directUrl.trim()}
-                  className="px-4 py-2.5 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs transition flex items-center justify-center gap-1.5 shadow-sm shadow-primary/20 cursor-pointer disabled:opacity-50 flex-shrink-0"
+                  className="px-4 py-2 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs transition cursor-pointer disabled:opacity-50 flex-shrink-0 shadow-xs"
                 >
-                  {isDirectImporting ? (
-                    <Loader2 size={14} className="animate-spin" />
-                  ) : (
-                    <Sparkles size={14} />
-                  )}
-                  <span>Import</span>
+                  {isDirectImporting ? <Loader2 size={13} className="animate-spin" /> : 'Import'}
                 </button>
               </form>
             </div>
 
-            {/* Right: Active Learning Session */}
-            <div className="glass-panel p-6 rounded-2xl border border-border bg-card flex flex-col justify-between gap-4 transition duration-200 hover:border-border/80">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary border border-primary/20 flex items-center justify-center flex-shrink-0">
-                  <Flame size={16} />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <h2 className="text-sm sm:text-base font-semibold text-foreground tracking-normal truncate">
-                    {continueCourse ? continueCourse.title : 'Ready to dive in?'}
-                  </h2>
-                  <p className="text-xs text-muted-foreground leading-relaxed truncate mt-0.5">
-                    {continueCourse ? 'Pick up right where you left off' : 'Import your first course above to begin'}
-                  </p>
-                </div>
-              </div>
-
+            {/* Resume Last Session */}
+            <div className="p-4 sm:p-5 rounded-2xl border border-border bg-card flex flex-col justify-between gap-3 shadow-xs">
               <div>
-                <button
-                  onClick={handleContinueLearning}
-                  disabled={!continuePath}
-                  className="w-full px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-primary hover:bg-primary/90 text-primary-foreground transition duration-200 active:scale-95 shadow-sm shadow-primary/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Play size={13} fill="currentColor" />
-                  <span>{continuePath ? 'Resume Next Lesson' : 'Awaiting First Course'}</span>
-                </button>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block">
+                  Active Learning
+                </span>
+                <h2 className="text-xs sm:text-sm font-semibold text-foreground truncate mt-0.5">
+                  {continueCourse ? continueCourse.title : 'Ready to dive in?'}
+                </h2>
+                <p className="text-[11px] text-muted-foreground mt-0.5">
+                  {continueCourse ? 'Pick up right where you left off' : 'Import a course to start learning'}
+                </p>
               </div>
+              <button
+                onClick={handleContinueLearning}
+                disabled={!continuePath}
+                className="w-full px-4 py-2 rounded-xl font-semibold text-xs bg-primary hover:bg-primary/90 text-primary-foreground transition flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-xs"
+              >
+                <Play size={12} fill="currentColor" />
+                <span>{continuePath ? 'Resume Next Lesson' : 'Awaiting First Course'}</span>
+              </button>
             </div>
           </div>
 
-          {/* Catalog Section Header with Live Stats & Search */}
-          <div className="space-y-5 pt-2">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-              <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-normal">
-                  Your Learning Catalog
-                </h2>
-                <div className="flex flex-wrap items-center gap-3 pt-1.5 text-xs text-muted-foreground font-normal">
-                  <span className="text-foreground font-semibold">{sortedCourses.length} Courses</span>
-                  <span className="text-muted-foreground/40">•</span>
-                  <span className="flex items-center gap-1.5">
-                    <Clock size={13} className="text-primary" />
-                    <span>{stats.totalHours} hrs watched</span>
-                  </span>
-                  <span className="text-muted-foreground/40">•</span>
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle2 size={13} className="text-emerald-500" />
-                    <span>{stats.completedLessons} lectures done</span>
-                  </span>
-                  <span className="text-muted-foreground/40">•</span>
-                  <span className="flex items-center gap-1.5">
-                    <FileText size={13} className="text-purple-500" />
-                    <span>{stats.totalNotes || 0} notes written</span>
-                  </span>
-                </div>
-              </div>
+          {/* Catalog Section: PURE SINGLE-COLUMN ON MOBILE (NO HORIZONTAL SNAP SCROLL!) */}
+          <div className="space-y-4 pt-1">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Your Catalog ({sortedCourses.length})
+            </h2>
 
-              {/* Quick Search Button */}
-              <button
-                type="button"
-                onClick={openCommandPalette}
-                className="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-card border border-border text-muted-foreground text-xs hover:text-foreground hover:bg-muted transition cursor-pointer self-start md:self-auto shadow-sm"
-              >
-                <Search size={14} className="text-muted-foreground" />
-                <span>Search courses & notes...</span>
-                <kbd className="px-1.5 py-0.5 rounded bg-muted text-[10px] font-mono text-muted-foreground font-semibold ml-1 border border-border">
-                  Ctrl K
-                </kbd>
-              </button>
-            </div>
-
-            {/* Courses Responsive Grid */}
-            <div className="flex md:grid overflow-x-auto md:overflow-visible gap-4 md:gap-6 pb-4 md:pb-0 snap-x snap-mandatory scrollbar-none md:grid-cols-2 lg:grid-cols-3 -mx-3.5 px-3.5 sm:mx-0 sm:px-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {sortedCourses.map((course) => {
                 const progress = courseProgressMap[course.id] || 0;
 
                 return (
                   <div 
                     key={course.id}
-                    className="glass-panel rounded-2xl overflow-hidden flex flex-col hover:border-primary/40 hover:shadow-md transition duration-300 group flex-shrink-0 w-[85vw] sm:w-[340px] md:w-auto snap-center bg-card border border-border"
+                    className="rounded-2xl overflow-hidden flex flex-col hover:border-primary/40 hover:shadow-md transition duration-200 group bg-card border border-border w-full shadow-xs"
                   >
                     {/* Course Header Thumbnail */}
-                    <div className="h-34 sm:h-38 relative bg-muted overflow-hidden">
+                    <div className="aspect-video w-full relative bg-muted overflow-hidden">
                       <img 
                         src={course.thumbnailUrl} 
                         alt={course.title} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                        className="w-full h-full object-cover group-hover:scale-102 transition duration-300"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                       
-                      {/* Top-Right Action Buttons: Sync Playlist & Delete Course */}
-                      <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20">
+                      {/* Top-Right Action Buttons */}
+                      <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 z-20">
                         {course.type === 'youtube' && (
                           <button
                             onClick={(e) => { e.preventDefault(); handleSyncCourse(course); }}
                             disabled={syncingCourseId === course.id}
-                            className="p-2 rounded-xl bg-black/60 hover:bg-black/80 text-white/90 border border-white/20 backdrop-blur transition cursor-pointer disabled:opacity-50"
+                            className="p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white/90 border border-white/20 backdrop-blur transition cursor-pointer disabled:opacity-50"
                             title="Sync Playlist with YouTube"
                           >
                             {syncingCourseId === course.id ? (
-                              <Loader2 size={14} className="animate-spin text-primary" />
+                              <Loader2 size={13} className="animate-spin text-primary" />
                             ) : (
-                              <RefreshCw size={14} />
+                              <RefreshCw size={13} />
                             )}
                           </button>
                         )}
 
                         <button
                           onClick={(e) => { e.preventDefault(); setCourseToDelete(course); }}
-                          className="min-h-10 min-w-10 rounded-xl bg-black/60 hover:bg-red-600/90 text-white/90 hover:text-white border border-white/20 backdrop-blur transition cursor-pointer flex items-center justify-center"
+                          className="p-1.5 rounded-lg bg-black/60 hover:bg-red-600/90 text-white/90 hover:text-white border border-white/20 backdrop-blur transition cursor-pointer"
                           title="Delete Course"
                         >
-                          <Trash2 size={14} />
+                          <Trash2 size={13} />
                         </button>
                       </div>
 
-                      <span className="absolute bottom-3 left-3 px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase rounded bg-black/70 text-white/90 border border-white/20 shadow-sm">
+                      <span className="absolute bottom-2.5 left-2.5 px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase rounded bg-black/70 text-white/90 border border-white/20">
                         {course.type === 'youtube' ? 'YouTube' : 'Udemy'}
                       </span>
                     </div>
 
                     {/* Course Content */}
-                    <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                      <div className="space-y-1.5">
-                        <h3 className="text-sm sm:text-base font-semibold text-foreground tracking-normal leading-snug group-hover:text-primary transition line-clamp-1">
+                    <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
+                      <div>
+                        <h3 className="text-xs sm:text-sm font-semibold text-foreground tracking-normal group-hover:text-primary transition line-clamp-1">
                           {course.title}
                         </h3>
-                        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
-                          {course.description}
-                        </p>
+                        <span className="text-[11px] text-muted-foreground block truncate mt-0.5">
+                          {course.channelName}
+                        </span>
                       </div>
 
                       {/* Progress bar gauge */}
-                      <div className="space-y-1.5">
-                        <div className="flex items-center justify-between text-xs font-medium">
+                      <div className="space-y-1">
+                        <div className="flex items-center justify-between text-[11px] font-medium">
                           <span className="text-muted-foreground">Progress</span>
                           <span className="text-foreground font-semibold">{progress}%</span>
                         </div>
-                        <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden border border-border">
+                        <div className="w-full h-1 bg-muted rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-gradient-to-r from-primary to-orange-400 transition-all duration-300"
+                            className="h-full bg-primary transition-all duration-300"
                             style={{ width: `${progress}%` }}
                           />
                         </div>
                       </div>
 
                       {/* Actions footer */}
-                      <div className="flex items-center justify-between pt-2 border-t border-border">
-                        <span className="text-[11px] font-medium text-muted-foreground truncate max-w-[140px]">
-                          {course.channelName}
-                        </span>
+                      <div className="pt-2 border-t border-border/50">
                         <Link
                           to={`/courses/${course.id}`}
-                          className="px-3.5 py-1.5 text-xs font-semibold rounded-xl border border-border bg-muted/50 text-foreground hover:bg-muted hover:border-primary/40 transition shadow-sm"
+                          className="w-full py-2 text-center text-xs font-semibold rounded-xl bg-muted/40 hover:bg-primary hover:text-primary-foreground border border-border transition block shadow-2xs"
                         >
                           Open Syllabus →
                         </Link>
