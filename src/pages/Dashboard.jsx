@@ -4,26 +4,18 @@ import { useDashboardData } from '../hooks/useDashboardData';
 import { useUIStore } from '../hooks/useUIStore';
 import { 
   Play, 
-  CheckCircle2, 
   Clock, 
-  BookOpen, 
-  Plus, 
-  Trash2,
-  FileText,
-  Sparkles,
-  ExternalLink,
-  Flame,
-  Command,
-  Download,
-  RotateCcw,
-  RefreshCw,
-  Loader2,
-  AlertCircle,
-  Search
+  Trash2, 
+  FileText, 
+  Sparkles, 
+  Flame, 
+  Download, 
+  RefreshCw, 
+  Loader2, 
+  Search, 
+  CheckCircle2 
 } from 'lucide-react';
-import ImportPlaylistModal from '../components/ImportPlaylistModal';
 import StreakModal from '../components/StreakModal';
-import QuoteSandbox from '../components/QuoteSandbox';
 import { exportNotesToMarkdown } from '../utils/exportUtils';
 import { calculateStreak, getActiveDateSet } from '../utils/streakUtils';
 import { fetchYouTubePlaylistData } from '../services/youtubeApi';
@@ -31,10 +23,11 @@ import { deleteCourse, exportNotes, importCourse } from '../services/dataCommand
 import { DeleteCourseDialog } from '../features/dashboard/DashboardSections';
 
 /**
- * Dashboard Component (Home Catalog).
- * Renders user learning statistics, a "Continue Learning" quick-action button,
- * and a list of course cards showing progress meters.
- * @returns {React.JSX.Element}
+ * Clean & Minimalist Dashboard Component.
+ * - Single direct YouTube playlist/video course importer.
+ * - Minimalist inline stats summary (zero cluttered boxes).
+ * - Distraction-free active learning resume banner.
+ * - Clean responsive course catalog grid.
  */
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -49,12 +42,13 @@ export default function Dashboard() {
     continuePath
   } = useDashboardData();
 
-  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [isStreakModalOpen, setIsStreakModalOpen] = useState(false);
   const [syncingCourseId, setSyncingCourseId] = useState(null);
   const [actionMsg, setActionMsg] = useState(null);
   const [courseToDelete, setCourseToDelete] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  // Direct Importer States
   const [directUrl, setDirectUrl] = useState('');
   const [isDirectImporting, setIsDirectImporting] = useState(false);
   const [newlyImportedCourse, setNewlyImportedCourse] = useState(null);
@@ -63,12 +57,23 @@ export default function Dashboard() {
   const streakCount = useMemo(() => {
     return calculateStreak(progressList, practiceProgressList);
   }, [progressList, practiceProgressList]);
+
   const activeDates = useMemo(
     () => getActiveDateSet(progressList, practiceProgressList),
     [progressList, practiceProgressList]
   );
 
-  
+  const handleContinueLearning = () => {
+    if (continuePath) {
+      navigate(`/courses/${continuePath.courseId}/lessons/${continuePath.lessonId}`);
+    }
+  };
+
+  const handleExportNotes = async () => {
+    const notes = await exportNotes();
+    exportNotesToMarkdown(notes, 'FocusFlow_Mastery_Notes');
+  };
+
   const handleDirectImport = async (e, customUrl) => {
     if (e) e.preventDefault();
     const urlToUse = (customUrl || directUrl).trim();
@@ -83,7 +88,7 @@ export default function Dashboard() {
       setDirectUrl('');
       setNewlyImportedCourse({ course, firstLessonId: lessons[0]?.id });
       setActionMsg({ 
-        text: `Successfully imported "${course.title}" with ${lessons.length} lectures! Ready to start learning.`, 
+        text: `Successfully imported "${course.title}" with ${lessons.length} lectures!`, 
         type: 'success' 
       });
       setTimeout(() => setActionMsg(null), 5000);
@@ -95,29 +100,6 @@ export default function Dashboard() {
       setIsDirectImporting(false);
     }
   };
-
-  const handleContinueLearning = () => {
-    if (continuePath) {
-      navigate(`/courses/${continuePath.courseId}/lessons/${continuePath.lessonId}`);
-    }
-  };
-
-  const handleExportNotes = async () => {
-    const notes = await exportNotes();
-    exportNotesToMarkdown(notes, 'FocusFlow_Mastery_Notes');
-  };
-
-  const handleImportSuccess = async (importedCourse, importedLessons) => {
-    try {
-      await importCourse(importedCourse, importedLessons);
-      setActionMsg({ text: `Course "${importedCourse.title}" imported successfully! (${importedLessons.length} lectures added)`, type: 'success' });
-      setTimeout(() => setActionMsg(null), 3500);
-    } catch (err) {
-      console.error(err);
-      setActionMsg({ text: `Failed to import course: ${err.message}`, type: 'error' });
-    }
-  };
-
   const handleDeleteCourse = async () => {
     if (!courseToDelete) return;
     setIsDeleting(true);
@@ -158,7 +140,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div aria-busy={isLoading} className="p-4 sm:p-8 max-w-6xl mx-auto space-y-8 sm:space-y-12">
+    <div aria-busy={isLoading} className="p-4 sm:p-8 max-w-6xl mx-auto space-y-6 sm:space-y-8">
       {/* Status Action Banner */}
       {actionMsg && (
         <div className={`p-4 rounded-xl text-xs font-semibold border flex items-center justify-between ${
@@ -171,283 +153,217 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Option B: Vercel / Apple Split Hero Section */}
-      <div className="space-y-6">
-        {/* Sleek Top Header & Actions Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
-                Welcome to FocusFlow
-              </h1>
-              <button
-                onClick={() => setIsStreakModalOpen(true)}
-                aria-label={`Open streak calendar, ${streakCount} day streak`} className="min-h-11 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 hover:border-orange-500/60 text-orange-400 text-xs font-bold flex items-center gap-1.5 backdrop-blur-md cursor-pointer transition"
-                title="Click to view 30-Day Activity Heatmap Calendar"
-              >
-                <Flame size={13} className="fill-orange-400 animate-pulse" />
-                <span>{streakCount} {streakCount === 1 ? 'Day' : 'Days'} Streak</span>
-              </button>
-            </div>
-            <p className="text-zinc-400 text-xs sm:text-sm font-medium">Your distraction-free developer learning workspace.</p>
-          </div>
-
+      {/* Clean Top Header (No duplicate buttons) */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-border/40">
+        <div>
           <div className="flex flex-wrap items-center gap-2.5">
-            {/* Quick Export Notes Button */}
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Welcome to FocusFlow
+            </h1>
             <button
-              onClick={handleExportNotes}
-              className="px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-sm"
-              title="Export all written notes to Markdown (.md)"
+              onClick={() => setIsStreakModalOpen(true)}
+              aria-label={`Open streak calendar, ${streakCount} day streak`}
+              className="px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 hover:border-orange-500/60 text-orange-400 text-xs font-bold flex items-center gap-1.5 backdrop-blur-md cursor-pointer transition"
+              title="Click to view 30-Day Activity Heatmap Calendar"
             >
-              <Download size={14} />
-              <span>Export Notes (.md)</span>
-            </button>
-
-            {/* Import Course Button */}
-            <button
-              onClick={() => setIsImportModalOpen(true)}
-              className="px-4 py-2 rounded-xl bg-primary hover:bg-primary/90 text-white text-xs font-bold transition shadow-lg shadow-primary/20 flex items-center justify-center gap-1.5 cursor-pointer flex-shrink-0"
-            >
-              <Plus size={15} />
-              <span>Import Course</span>
+              <Flame size={13} className="fill-orange-400 animate-pulse" />
+              <span>{streakCount} {streakCount === 1 ? 'Day' : 'Days'} Streak</span>
             </button>
           </div>
+          <p className="text-zinc-400 text-xs sm:text-sm font-medium mt-1">
+            Your distraction-free developer learning workspace.
+          </p>
         </div>
 
-        {/* 🚀 DIRECT YOUTUBE COURSE & PLAYLIST IMPORTER */}
-        <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/15 via-zinc-950 to-zinc-950 shadow-2xl space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center flex-shrink-0">
-                <Play size={16} fill="currentColor" />
-              </div>
-              <div>
-                <h2 className="text-sm sm:text-base font-extrabold text-white tracking-tight">
-                  Import Any YouTube Playlist or Course
-                </h2>
-                <p className="text-[11px] text-zinc-400">
-                  Zero ads, zero algorithmic distractions, timestamped notes, and local progress tracking.
-                </p>
-              </div>
-            </div>
-            <span className="self-start sm:self-auto px-2.5 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/30">
-              Instant 1-Click Study
-            </span>
-          </div>
-
-          {/* Input & Import Button Form */}
-          <form onSubmit={handleDirectImport} className="flex flex-col sm:flex-row gap-2.5">
-            <div className="relative flex-1">
-              <input
-                type="text"
-                value={directUrl}
-                onChange={(e) => setDirectUrl(e.target.value)}
-                placeholder="Paste YouTube playlist or video link (e.g. https://www.youtube.com/playlist?list=...)"
-                disabled={isDirectImporting}
-                className="w-full bg-zinc-900/90 border border-zinc-700/80 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-medium transition"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={isDirectImporting || !directUrl.trim()}
-              className="px-6 py-3 rounded-xl bg-primary hover:bg-primary/90 text-white font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-primary/25 cursor-pointer disabled:opacity-50 flex-shrink-0"
-            >
-              {isDirectImporting ? (
-                <>
-                  <Loader2 size={16} className="animate-spin" />
-                  <span>Importing...</span>
-                </>
-              ) : (
-                <>
-                  <Sparkles size={16} />
-                  <span>Import Course</span>
-                </>
-              )}
-            </button>
-          </form>
-
-          {/* Quick 1-Click Curated Starters */}
-          <div className="flex flex-wrap items-center gap-2 pt-1">
-            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1 mr-1">
-              ⚡ Quick Starters:
-            </span>
-            <button
-              type="button"
-              disabled={isDirectImporting}
-              onClick={() => handleDirectImport(null, 'https://www.youtube.com/playlist?list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37')}
-              className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-yellow-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
-            >
-              <span className="text-yellow-400">💛</span>
-              <span>Chai aur JavaScript</span>
-            </button>
-            <button
-              type="button"
-              disabled={isDirectImporting}
-              onClick={() => handleDirectImport(null, 'https://www.youtube.com/playlist?list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige')}
-              className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-blue-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
-            >
-              <span className="text-cyan-400">⚛️</span>
-              <span>Chai aur React</span>
-            </button>
-            <button
-              type="button"
-              disabled={isDirectImporting}
-              onClick={() => handleDirectImport(null, 'https://www.youtube.com/watch?v=kqtD5dpn9C8')}
-              className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
-            >
-              <span className="text-emerald-400">🐍</span>
-              <span>Python 1-Hr Tutorial</span>
-            </button>
-            <button
-              type="button"
-              disabled={isDirectImporting}
-              onClick={() => handleDirectImport(null, 'https://www.youtube.com/playlist?list=PLu71SKxNbfoDBNF5s-WHQu9khAU40bKGd')}
-              className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-orange-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
-            >
-              <span className="text-orange-400">🌐</span>
-              <span>Git & GitHub</span>
-            </button>
-          </div>
-
-          {/* Newly Imported Quick Launch Banner */}
-          {newlyImportedCourse && (
-            <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-between gap-3 animate-in fade-in">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <CheckCircle2 size={18} className="text-emerald-400 flex-shrink-0" />
-                <span className="text-xs font-bold text-white truncate">
-                  Ready to study: <span className="text-emerald-300">{newlyImportedCourse.course.title}</span>
-                </span>
-              </div>
-              <button
-                onClick={() => navigate(`/courses/${newlyImportedCourse.course.id}/lessons/${newlyImportedCourse.firstLessonId}`)}
-                className="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-extrabold text-xs transition cursor-pointer flex-shrink-0 flex items-center gap-1"
-              >
-                <span>Start Lesson 1 →</span>
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* 2-Column Symmetrical Split Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-          {/* LEFT COLUMN (7 Cols): Resume Hero Banner + Mindset Quote (Equal 50/50 Vertical Flex Split) */}
-          <div className="lg:col-span-7 flex flex-col gap-4 items-stretch">
-            {/* Resume Learning Glass Banner (50% Height) */}
-            {continuePath ? (
-              <div className="glass-panel rounded-2xl p-5 border border-primary/20 bg-gradient-to-r from-primary/10 via-zinc-950 to-zinc-950 flex flex-col justify-between space-y-4 shadow-xl flex-1 min-h-[140px]">
-                <div className="flex items-center justify-between">
-                  <span className="px-2.5 py-1 rounded-full bg-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/30">
-                    Active Learning Session
-                  </span>
-                  <Sparkles size={16} className="text-primary animate-pulse" />
-                </div>
-
-                <div className="space-y-1">
-                  <h3 className="text-lg font-black text-white tracking-tight">Ready to dive back in?</h3>
-                  <p className="text-xs text-zinc-400 font-medium">Pick up exactly where you left off in your active course.</p>
-                </div>
-
-                <button
-                  onClick={handleContinueLearning}
-                  className="w-full sm:w-auto px-5 py-3 rounded-xl font-extrabold text-xs bg-primary hover:bg-primary/90 text-white transition duration-200 active:scale-95 shadow-lg shadow-primary/25 flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <Play size={15} fill="currentColor" />
-                  <span>Resume Next Lesson</span>
-                </button>
-              </div>
-            ) : (
-              <div className="glass-panel rounded-2xl p-5 border border-zinc-800 bg-zinc-950/80 flex flex-col justify-between space-y-3 flex-1 min-h-[140px]">
-                <div className="flex items-center justify-between">
-                  <span className="px-2.5 py-1 rounded-full bg-zinc-800 text-zinc-400 text-[10px] font-bold uppercase tracking-widest">
-                    Getting Started
-                  </span>
-                  <BookOpen size={16} className="text-zinc-500" />
-                </div>
-                <div className="space-y-1">
-                  <h3 className="text-base font-extrabold text-white">Start your developer journey</h3>
-                  <p className="text-xs text-zinc-400">Import a YouTube playlist or select a course from your catalog below.</p>
-                </div>
-              </div>
-            )}
-
-            {/* Dynamic Mindset Quote Sandbox (50% Height) */}
-            <div className="glass-panel rounded-2xl border border-white/10 bg-zinc-950/80 overflow-hidden shadow-lg flex-1 min-h-[140px] flex flex-col justify-center">
-              <QuoteSandbox />
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN (5 Cols): Search Capsule + 2x2 Micro Stats Grid */}
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            {/* Sleek Search Trigger Capsule */}
-            <button type="button" aria-label="Search courses, topics, questions, and notes" onClick={openCommandPalette}
-              className="glass-panel w-full min-w-0 max-w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/90 p-4 flex items-center justify-between cursor-pointer hover:border-primary/40 transition shadow-lg group"
-            >
-              <div className="flex items-center gap-3 min-w-0">
-                <Search size={17} className="text-zinc-400 group-hover:text-primary transition flex-shrink-0" />
-                <span className="text-xs font-medium text-zinc-400 group-hover:text-white transition truncate">
-                  Search courses, topics, or notes...
-                </span>
-              </div>
-              <kbd className="px-2 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-[11px] font-mono text-zinc-400 font-bold flex-shrink-0">
-                Ctrl K
-              </kbd>
-            </button>
-
-            {/* 2x2 Micro KPI Grid */}
-            <div className="grid grid-cols-2 gap-3 flex-1">
-              {/* Watch Time */}
-              <div className="glass-panel rounded-2xl p-4 flex flex-col justify-between hover:border-primary/40 transition shadow-sm bg-zinc-950/70 border border-zinc-800/80">
-                <div className="w-8 h-8 rounded-xl bg-primary/15 text-primary flex items-center justify-center mb-2">
-                  <Clock size={16} />
-                </div>
-                <div>
-                  <span className="text-zinc-500 text-[9px] font-bold uppercase tracking-wider block">Watch Time</span>
-                  <span className="text-base font-extrabold text-white block mt-0.5">{stats.totalHours} hrs</span>
-                </div>
-              </div>
-
-              {/* Lectures Done */}
-              <div className="glass-panel rounded-2xl p-4 flex flex-col justify-between hover:border-accent/40 transition shadow-sm bg-zinc-950/70 border border-zinc-800/80">
-                <div className="w-8 h-8 rounded-xl bg-accent/15 text-accent flex items-center justify-center mb-2">
-                  <BookOpen size={16} />
-                </div>
-                <div>
-                  <span className="text-zinc-500 text-[9px] font-bold uppercase tracking-wider block">Lectures Done</span>
-                  <span className="text-base font-extrabold text-white block mt-0.5">{stats.completedLessons}</span>
-                </div>
-              </div>
-
-              {/* Total Courses */}
-              <div className="glass-panel rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-500/40 transition shadow-sm bg-zinc-950/70 border border-zinc-800/80">
-                <div className="w-8 h-8 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mb-2">
-                  <BookOpen size={16} />
-                </div>
-                <div>
-                  <span className="text-zinc-500 text-[9px] font-bold uppercase tracking-wider block">Total Courses</span>
-                  <span className="text-base font-extrabold text-white block mt-0.5">{sortedCourses.length}</span>
-                </div>
-              </div>
-
-              {/* Notes Written */}
-              <div className="glass-panel rounded-2xl p-4 flex flex-col justify-between hover:border-purple-500/40 transition shadow-sm bg-zinc-950/70 border border-zinc-800/80">
-                <div className="w-8 h-8 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center mb-2">
-                  <FileText size={16} />
-                </div>
-                <div>
-                  <span className="text-zinc-500 text-[9px] font-bold uppercase tracking-wider block">Notes Written</span>
-                  <span className="text-base font-extrabold text-white block mt-0.5">{stats.totalNotes || 0}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Clean Header Action */}
+        <button
+          onClick={handleExportNotes}
+          className="self-start sm:self-auto px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-zinc-300 hover:text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-sm"
+          title="Export all written notes to Markdown (.md)"
+        >
+          <Download size={14} />
+          <span>Export Notes (.md)</span>
+        </button>
       </div>
 
-      {/* Courses Grid */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-white tracking-tight">Your Learning Catalog</h2>
+      {/* 🚀 DIRECT YOUTUBE PLAYLIST & COURSE IMPORTER (Hero Centerpiece) */}
+      <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 via-zinc-950 to-zinc-950 shadow-xl space-y-3.5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center flex-shrink-0">
+              <Play size={15} fill="currentColor" />
+            </div>
+            <div>
+              <h2 className="text-sm sm:text-base font-extrabold text-white tracking-tight">
+                Import Any YouTube Playlist or Course
+              </h2>
+              <p className="text-[11px] text-zinc-400">
+                Paste any link to start studying with timestamped notes, progress tracking, and zero ads.
+              </p>
+            </div>
+          </div>
+          <span className="self-start sm:self-auto px-2.5 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/30">
+            Instant Study
+          </span>
+        </div>
 
-        {/* Mobile Horizontal Carousel / Desktop Responsive Grid */}
+        {/* Input & Import Button Form */}
+        <form onSubmit={handleDirectImport} className="flex flex-col sm:flex-row gap-2.5">
+          <div className="relative flex-1">
+            <input
+              type="text"
+              value={directUrl}
+              onChange={(e) => setDirectUrl(e.target.value)}
+              placeholder="Paste YouTube playlist or video tutorial link (e.g. https://www.youtube.com/playlist?list=...)"
+              disabled={isDirectImporting}
+              className="w-full bg-zinc-900/90 border border-zinc-700/80 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-medium transition"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={isDirectImporting || !directUrl.trim()}
+            className="px-6 py-3 rounded-xl bg-primary hover:bg-primary/90 text-white font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-primary/25 cursor-pointer disabled:opacity-50 flex-shrink-0"
+          >
+            {isDirectImporting ? (
+              <>
+                <Loader2 size={15} className="animate-spin" />
+                <span>Importing...</span>
+              </>
+            ) : (
+              <>
+                <Sparkles size={15} />
+                <span>Import Course</span>
+              </>
+            )}
+          </button>
+        </form>
+
+        {/* Quick 1-Click Curated Starters */}
+        <div className="flex flex-wrap items-center gap-2 pt-0.5">
+          <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1 mr-1">
+            ⚡ Quick Starters:
+          </span>
+          <button
+            type="button"
+            disabled={isDirectImporting}
+            onClick={() => handleDirectImport(null, 'https://www.youtube.com/playlist?list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37')}
+            className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-yellow-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
+          >
+            <span className="text-yellow-400">💛</span>
+            <span>Chai aur JavaScript</span>
+          </button>
+          <button
+            type="button"
+            disabled={isDirectImporting}
+            onClick={() => handleDirectImport(null, 'https://www.youtube.com/playlist?list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige')}
+            className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-blue-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
+          >
+            <span className="text-cyan-400">⚛️</span>
+            <span>Chai aur React</span>
+          </button>
+          <button
+            type="button"
+            disabled={isDirectImporting}
+            onClick={() => handleDirectImport(null, 'https://www.youtube.com/watch?v=kqtD5dpn9C8')}
+            className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
+          >
+            <span className="text-emerald-400">🐍</span>
+            <span>Python 1-Hr Tutorial</span>
+          </button>
+          <button
+            type="button"
+            disabled={isDirectImporting}
+            onClick={() => handleDirectImport(null, 'https://www.youtube.com/playlist?list=PLu71SKxNbfoDBNF5s-WHQu9khAU40bKGd')}
+            className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-orange-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
+          >
+            <span className="text-orange-400">🌐</span>
+            <span>Git & GitHub</span>
+          </button>
+        </div>
+
+        {/* Newly Imported Course Quick Launch Banner */}
+        {newlyImportedCourse && (
+          <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-between gap-3 animate-in fade-in">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <CheckCircle2 size={18} className="text-emerald-400 flex-shrink-0" />
+              <span className="text-xs font-bold text-white truncate">
+                Ready to study: <span className="text-emerald-300 font-extrabold">{newlyImportedCourse.course.title}</span>
+              </span>
+            </div>
+            <button
+              onClick={() => navigate(`/courses/${newlyImportedCourse.course.id}/lessons/${newlyImportedCourse.firstLessonId}`)}
+              className="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-extrabold text-xs transition cursor-pointer flex-shrink-0 flex items-center gap-1"
+            >
+              <span>Start Lesson 1 →</span>
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* 🎯 RESUME LEARNING HERO (Only shows when user has an active course in progress) */}
+      {continuePath && (
+        <div className="glass-panel p-4 sm:p-5 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/10 via-zinc-950 to-zinc-950 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-lg">
+          <div className="space-y-1">
+            <span className="px-2.5 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/30">
+              Active Learning Session
+            </span>
+            <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+              Ready to dive back in? Pick up where you left off.
+            </h3>
+          </div>
+          <button
+            onClick={handleContinueLearning}
+            className="px-5 py-2.5 rounded-xl font-extrabold text-xs bg-primary hover:bg-primary/90 text-white transition duration-200 active:scale-95 shadow-lg shadow-primary/25 flex items-center justify-center gap-2 cursor-pointer self-start sm:self-auto"
+          >
+            <Play size={14} fill="currentColor" />
+            <span>Resume Next Lesson</span>
+          </button>
+        </div>
+      )}
+
+      {/* 📚 LEARNING CATALOG HEADER WITH CLEAN INLINE STATS & SEARCH */}
+      <div className="space-y-4 pt-2">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              Your Learning Catalog
+            </h2>
+            {/* Elegant Minimalist Single-Line Stats (Zero Clutter) */}
+            <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-zinc-400 font-medium">
+              <span className="text-zinc-200 font-bold">{sortedCourses.length} Courses</span>
+              <span className="text-zinc-600">•</span>
+              <span className="flex items-center gap-1">
+                <Clock size={13} className="text-primary" />
+                <span>{stats.totalHours} hrs watched</span>
+              </span>
+              <span className="text-zinc-600">•</span>
+              <span className="flex items-center gap-1">
+                <CheckCircle2 size={13} className="text-emerald-400" />
+                <span>{stats.completedLessons} lectures done</span>
+              </span>
+              <span className="text-zinc-600">•</span>
+              <span className="flex items-center gap-1">
+                <FileText size={13} className="text-purple-400" />
+                <span>{stats.totalNotes || 0} notes written</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Quick Search Button */}
+          <button
+            type="button"
+            onClick={openCommandPalette}
+            className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs hover:border-zinc-700 hover:text-white transition cursor-pointer self-start md:self-auto shadow-sm"
+          >
+            <Search size={14} className="text-zinc-400" />
+            <span>Search courses & notes...</span>
+            <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300 font-bold ml-1 border border-zinc-700">
+              Ctrl K
+            </kbd>
+          </button>
+        </div>
+
+        {/* Courses Responsive Grid */}
         <div className="flex md:grid overflow-x-auto md:overflow-visible gap-4 md:gap-6 pb-4 md:pb-0 snap-x snap-mandatory scrollbar-none md:grid-cols-2 lg:grid-cols-3 -mx-3.5 px-3.5 sm:mx-0 sm:px-0">
           {sortedCourses.map((course) => {
             const progress = courseProgressMap[course.id] || 0;
@@ -457,7 +373,7 @@ export default function Dashboard() {
                 key={course.id}
                 className="glass-panel rounded-2xl overflow-hidden flex flex-col hover:border-primary/30 transition duration-300 group flex-shrink-0 w-[85vw] sm:w-[340px] md:w-auto snap-center"
               >
-                {/* Course Header Thumbnail (Compact Height) */}
+                {/* Course Header Thumbnail */}
                 <div className="h-32 sm:h-36 relative bg-zinc-900 overflow-hidden">
                   <img 
                     src={course.thumbnailUrl} 
@@ -485,22 +401,22 @@ export default function Dashboard() {
 
                     <button
                       onClick={(e) => { e.preventDefault(); setCourseToDelete(course); }}
-                      className="min-h-11 min-w-11 rounded-xl bg-black/70 hover:bg-red-950/90 text-zinc-300 hover:text-red-400 border border-zinc-700/50 backdrop-blur transition cursor-pointer"
+                      className="min-h-11 min-w-11 rounded-xl bg-black/70 hover:bg-red-950/90 text-zinc-300 hover:text-red-400 border border-zinc-700/50 backdrop-blur transition cursor-pointer flex items-center justify-center"
                       title="Delete Course"
                     >
                       <Trash2 size={14} />
                     </button>
                   </div>
 
-                  <span className="absolute bottom-6 left-6 px-1.5 py-0.5 text-[9px] font-bold tracking-widest uppercase rounded bg-black/70 text-zinc-300 border border-zinc-700/50 shadow-md">
+                  <span className="absolute bottom-3 left-3 px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase rounded bg-black/70 text-zinc-300 border border-zinc-700/50 shadow-md">
                     {course.type === 'youtube' ? 'YouTube' : 'Udemy'}
                   </span>
                 </div>
 
                 {/* Course Content */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-6">
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-bold text-white tracking-tight leading-snug group-hover:text-primary transition">
+                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="space-y-1.5">
+                    <h3 className="text-base font-bold text-white tracking-tight leading-snug group-hover:text-primary transition line-clamp-1">
                       {course.title}
                     </h3>
                     <p className="text-xs text-zinc-400 leading-relaxed line-clamp-2">
@@ -509,12 +425,12 @@ export default function Dashboard() {
                   </div>
 
                   {/* Progress bar gauge */}
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <div className="flex items-center justify-between text-xs font-semibold">
                       <span className="text-zinc-500">Progress</span>
-                      <span className="text-white">{progress}%</span>
+                      <span className="text-white font-bold">{progress}%</span>
                     </div>
-                    <div className="w-full h-2 bg-zinc-900 rounded-full overflow-hidden border border-border">
+                    <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden border border-border">
                       <div 
                         className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-300"
                         style={{ width: `${progress}%` }}
@@ -524,14 +440,14 @@ export default function Dashboard() {
 
                   {/* Actions footer */}
                   <div className="flex items-center justify-between pt-2 border-t border-border/50">
-                    <span className="text-[10px] font-semibold text-zinc-500">
-                      Instructor: {course.channelName}
+                    <span className="text-[10px] font-semibold text-zinc-500 truncate max-w-[140px]">
+                      {course.channelName}
                     </span>
                     <Link
                       to={`/courses/${course.id}`}
-                      className="px-4 py-2 text-xs font-bold rounded-lg border border-border bg-zinc-900/50 text-white hover:bg-zinc-900 hover:border-primary/50 transition"
+                      className="px-3.5 py-1.5 text-xs font-bold rounded-lg border border-border bg-zinc-900/50 text-white hover:bg-zinc-900 hover:border-primary/50 transition"
                     >
-                      Open Syllabus
+                      Open Syllabus →
                     </Link>
                   </div>
                 </div>
@@ -541,13 +457,11 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <DeleteCourseDialog course={courseToDelete} isDeleting={isDeleting} onCancel={() => !isDeleting && setCourseToDelete(null)} onConfirm={handleDeleteCourse} />
-
-      {/* Import YouTube Playlist Modal */}
-      <ImportPlaylistModal 
-        isOpen={isImportModalOpen} 
-        onClose={() => setIsImportModalOpen(false)} 
-        onImportSuccess={handleImportSuccess}
+      <DeleteCourseDialog 
+        course={courseToDelete} 
+        isDeleting={isDeleting} 
+        onCancel={() => !isDeleting && setCourseToDelete(null)} 
+        onConfirm={handleDeleteCourse} 
       />
 
       {/* Streak Activity Heatmap Calendar Modal */}
