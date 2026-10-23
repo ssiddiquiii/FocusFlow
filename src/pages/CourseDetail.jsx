@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { useFocusFlow } from '../hooks/useFocusFlow';
+import { useCourseDetail } from '../hooks/useCourseDetail';
 import { ArrowLeft, Play, CheckCircle2, Circle, Clock, RotateCcw } from 'lucide-react';
-import { buttonVariants } from '../components/ui/button';
 
 /**
  * Course Detail & Syllabus View.
@@ -12,27 +11,27 @@ import { buttonVariants } from '../components/ui/button';
 export default function CourseDetail() {
   const { courseId } = useParams();
   const navigate = useNavigate();
-  const { courses, lessons, progressList, getCourseProgress, getLastWatchedLesson } = useFocusFlow();
-
-  const [courseProgress, setCourseProgress] = useState(0);
+  const {
+    isLoading,
+    courseNotFound,
+    course,
+    courseLessons,
+    progressByLessonId,
+    courseProgress,
+    lastWatched,
+    resumeLesson
+  } = useCourseDetail(courseId);
   const [expandedDesc, setExpandedDesc] = useState(false);
-  const [lastWatched, setLastWatched] = useState(null);
 
-  // Retrieve matching course
-  const course = courses.find(c => c.id === courseId);
-  // Retrieve lessons for this course sorted by index
-  const courseLessons = lessons
-    .filter(l => l.courseId === courseId)
-    .sort((a, b) => a.index - b.index);
+  if (isLoading) {
+    return (
+      <div className="p-8 min-h-[60vh] flex items-center justify-center">
+        <div className="animate-spin w-9 h-9 border-4 border-primary border-t-transparent rounded-full" />
+      </div>
+    );
+  }
 
-  useEffect(() => {
-    if (courseId) {
-      getCourseProgress(courseId).then(progress => setCourseProgress(progress));
-      getLastWatchedLesson(courseId).then(lw => setLastWatched(lw));
-    }
-  }, [courseId, progressList]);
-
-  if (!course) {
+  if (courseNotFound) {
     return (
       <div className="p-8 text-center">
         <h2 className="text-2xl font-bold text-red-500 mb-4">Course Not Found</h2>
@@ -40,17 +39,6 @@ export default function CourseDetail() {
       </div>
     );
   }
-
-  // Resume target: last in-progress video first, then first incomplete, then first lesson
-  const resumeLesson = (() => {
-    if (lastWatched) {
-      return courseLessons.find(l => l.id === lastWatched.lessonId);
-    }
-    return courseLessons.find(lesson => {
-      const progress = progressList.find(p => p.id === `${courseId}_${lesson.id}`);
-      return !progress || !progress.completed;
-    }) || courseLessons[0];
-  })();
 
   return (
     <div className="p-3.5 sm:p-8 max-w-5xl mx-auto space-y-6">
@@ -130,10 +118,13 @@ export default function CourseDetail() {
       {/* Syllabus checklist */}
       <div className="space-y-4">
         <h2 className="text-xl font-bold text-white mb-4">Syllabus Curriculum</h2>
+        {courseLessons.length === 0 && (
+          <div className="rounded-xl border border-dashed border-zinc-700 p-8 text-center text-sm text-zinc-400">This course does not contain any lessons yet.</div>
+        )}
         
         <div className="divide-y divide-border border-y border-border">
           {courseLessons.map((lesson) => {
-            const progress = progressList.find(p => p.id === `${courseId}_${lesson.id}`);
+            const progress = progressByLessonId.get(lesson.id);
             const isCompleted = progress ? progress.completed : false;
 
             const isLastWatched = lastWatched && lesson.id === lastWatched.lessonId;
@@ -145,9 +136,9 @@ export default function CourseDetail() {
               <Link 
                 key={lesson.id}
                 to={`/courses/${courseId}/lessons/${lesson.id}`}
-                className={`py-4 px-3 flex items-center justify-between hover:bg-zinc-900/50 transition group rounded-lg ${isLastWatched ? 'bg-primary/5 border border-primary/20' : ''}`}
+                className={`py-4 px-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-zinc-900/50 transition group rounded-lg min-w-0 ${isLastWatched ? 'bg-primary/5 border border-primary/20' : ''}`}
               >
-                <div className="flex items-center gap-4">
+                <div className="flex min-w-0 items-start gap-4">
                   {/* Status Indicator */}
                   {isCompleted ? (
                     <CheckCircle2 className="text-accent flex-shrink-0" size={20} fill="currentColor" />
@@ -159,7 +150,7 @@ export default function CourseDetail() {
                     <span className="text-xs text-zinc-500 font-bold uppercase tracking-wider block mb-1">
                       Lecture {lesson.index}
                     </span>
-                    <span className="text-sm font-medium text-zinc-200 group-hover:text-white transition">
+                    <span className="block break-words text-sm font-medium text-zinc-200 group-hover:text-white transition">
                       {lesson.title}
                     </span>
                     {/* In-progress mini progress bar */}
@@ -171,7 +162,7 @@ export default function CourseDetail() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 text-zinc-500 text-xs">
+                <div className="flex w-full sm:w-auto items-center justify-between sm:justify-end gap-4 text-zinc-500 text-xs">
                   {isLastWatched && (
                     <span className="text-[10px] font-bold text-primary uppercase tracking-wider">In Progress</span>
                   )}

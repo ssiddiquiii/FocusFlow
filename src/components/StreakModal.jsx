@@ -1,74 +1,21 @@
 import React, { useState } from 'react';
-import { Flame, Calendar, ChevronLeft, ChevronRight, X, CheckCircle2 } from 'lucide-react';
+import { Flame, Calendar, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { buildMonthlyActivityCalendar } from '../utils/streakUtils';
+import Dialog from './ui/Dialog';
 
 /**
  * Compact Fixed-Size Real-Time Streak & Monthly Activity Calendar Modal
  * Day cells are smaller (h-8), layout is fixed and shrink-wrapped so month navigation
- * (‹ Prev | Next ›) maintains a perfectly centered, stable modal dialog.
+ * Previous and next controls maintain a perfectly centered, stable modal dialog.
  */
-export default function StreakModal({ isOpen, onClose, stats, progressList = [], practiceProgressList = [] }) {
+export default function StreakModal({ isOpen, onClose, stats, streakCount, activeDates }) {
   const [viewDate, setViewDate] = useState(new Date());
 
   if (!isOpen) return null;
 
-  const today = new Date();
-  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-
   const currentYear = viewDate.getFullYear();
   const currentMonthIndex = viewDate.getMonth();
-  
-  // Format Month Name and Year (e.g., "July 2026", "August 2026")
-  const monthYearLabel = viewDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-
-  // Calculate days in selected month
-  const firstDayOfWeek = new Date(currentYear, currentMonthIndex, 1).getDay(); // 0 = Sun, 1 = Mon, etc.
-  const totalDaysInMonth = new Date(currentYear, currentMonthIndex + 1, 0).getDate(); // 28, 30, 31
-
-  // Set of active study dates from IndexedDB
-  const activeDateSet = new Set();
-  
-  // Rule 1: Add progressList activity if completed OR watchTime >= 10 mins (600s)
-  progressList.forEach(p => {
-    const isWatchedTenMins = (p.currentTime && p.currentTime >= 600) || p.completed === true;
-    if (isWatchedTenMins && (p.lastWatched || p.updatedAt)) {
-      const d = new Date(p.lastWatched || p.updatedAt);
-      const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-      activeDateSet.add(dateStr);
-    }
-  });
-
-  // Rule 2: Add practiceProgressList activity if completed === true
-  practiceProgressList.forEach(p => {
-    if (p.completed && (p.completedAt || p.updatedAt)) {
-      const d = new Date(p.completedAt || p.updatedAt);
-      const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-      activeDateSet.add(dateStr);
-    }
-  });
-
-  // Calculate real consecutive streak ending today or yesterday
-  let streakCount = 0;
-  let checkDate = new Date(today);
-  
-  while (true) {
-    const dateStr = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
-    if (activeDateSet.has(dateStr)) {
-      streakCount++;
-      checkDate.setDate(checkDate.getDate() - 1);
-    } else if (streakCount === 0) {
-      // Check if yesterday was active
-      checkDate.setDate(checkDate.getDate() - 1);
-      const yesterdayStr = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
-      if (activeDateSet.has(yesterdayStr)) {
-        streakCount++;
-        checkDate.setDate(checkDate.getDate() - 1);
-      } else {
-        break;
-      }
-    } else {
-      break;
-    }
-  }
+  const calendar = buildMonthlyActivityCalendar(activeDates, viewDate);
 
   // Month navigation handlers
   const handlePrevMonth = () => {
@@ -82,11 +29,12 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
   const weekHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   return (
-    <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-in fade-in duration-150">
-      <div 
-        className="bg-zinc-950 border border-zinc-800 rounded-2xl w-full max-w-sm sm:max-w-md shadow-2xl overflow-hidden space-y-4 p-4 sm:p-5 relative"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      titleId="streak-dialog-title"
+      className="relative max-h-[calc(100dvh-2rem)] w-full max-w-sm space-y-4 overflow-y-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-4 shadow-2xl sm:max-w-md sm:p-5"
+    >
         {/* Modal Top Header */}
         <div className="flex items-center justify-between pb-2.5 border-b border-border/60">
           <div className="flex items-center gap-2">
@@ -95,17 +43,18 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <h3 className="text-sm sm:text-base font-extrabold text-white tracking-tight">Streak Calendar</h3>
+                <h3 id="streak-dialog-title" className="text-sm sm:text-base font-extrabold text-white tracking-tight">Streak Calendar</h3>
                 <span className="px-1.5 py-0.5 rounded-full bg-orange-500/20 text-orange-400 text-[9px] font-black uppercase tracking-wider border border-orange-500/30">
-                  🔥 {streakCount} {streakCount === 1 ? 'Day' : 'Days'}
+                  {streakCount} {streakCount === 1 ? 'Day' : 'Days'}
                 </span>
               </div>
-              <p className="text-[10px] text-zinc-400">Watch ≥ 10 mins or solve 1 Q daily to grow streak!</p>
+              <p className="text-[10px] text-zinc-400">Watch at least 10 minutes daily to maintain your streak.</p>
             </div>
           </div>
           <button 
             onClick={onClose}
-            className="p-1 rounded-lg hover:bg-zinc-900 text-zinc-400 hover:text-white transition cursor-pointer"
+            aria-label="Close streak calendar"
+            className="min-h-11 min-w-11 rounded-lg hover:bg-zinc-900 text-zinc-400 hover:text-white transition cursor-pointer flex items-center justify-center"
           >
             <X size={16} />
           </button>
@@ -116,7 +65,7 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
           <div className="flex items-center justify-between bg-zinc-900/80 p-2 rounded-xl border border-zinc-800">
             <button
               onClick={handlePrevMonth}
-              className="p-1 rounded-lg hover:bg-zinc-800 text-zinc-300 hover:text-white transition cursor-pointer flex items-center gap-1 text-[11px] font-bold"
+              className="min-h-11 min-w-11 rounded-lg hover:bg-zinc-800 text-zinc-300 hover:text-white transition cursor-pointer flex items-center gap-1 text-[11px] font-bold"
               title="Previous Month"
             >
               <ChevronLeft size={14} />
@@ -125,12 +74,12 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
 
             <div className="flex items-center gap-1.5 text-white font-extrabold text-xs sm:text-sm tracking-tight">
               <Calendar size={14} className="text-primary" />
-              <span>{monthYearLabel}</span>
+              <span>{calendar.label}</span>
             </div>
 
             <button
               onClick={handleNextMonth}
-              className="p-1 rounded-lg hover:bg-zinc-800 text-zinc-300 hover:text-white transition cursor-pointer flex items-center gap-1 text-[11px] font-bold"
+              className="min-h-11 min-w-11 rounded-lg hover:bg-zinc-800 text-zinc-300 hover:text-white transition cursor-pointer flex items-center gap-1 text-[11px] font-bold"
               title="Next Month"
             >
               <span>Next</span>
@@ -152,17 +101,12 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
             {/* Compact Monthly Calendar Days (1 to 30 / 31 Grid) */}
             <div className="grid grid-cols-7 gap-1 pt-0.5">
               {/* Empty Offset Cells before Day 1 */}
-              {Array.from({ length: firstDayOfWeek }).map((_, idx) => (
+              {Array.from({ length: calendar.leadingEmptyDays }).map((_, idx) => (
                 <div key={`empty-${idx}`} className="h-7 rounded-lg bg-transparent" />
               ))}
 
               {/* Days of the Month (1 to 30/31) */}
-              {Array.from({ length: totalDaysInMonth }).map((_, idx) => {
-                const dayNum = idx + 1;
-                const cellDateStr = `${currentYear}-${String(currentMonthIndex + 1).padStart(2, '0')}-${String(dayNum).padStart(2, '0')}`;
-                
-                const isToday = cellDateStr === todayStr;
-                const isActive = activeDateSet.has(cellDateStr);
+              {calendar.days.map(({ day: dayNum, isToday, isActive }) => {
 
                 return (
                   <div
@@ -172,7 +116,7 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
                         ? 'bg-orange-500/20 border-orange-500/40 text-orange-300 font-extrabold shadow-sm' 
                         : 'bg-zinc-950/70 border-zinc-800/80 text-zinc-500'
                     } ${isToday ? 'ring-2 ring-primary ring-offset-1 ring-offset-zinc-950' : ''}`}
-                    title={`${monthYearLabel} ${dayNum}: ${isActive ? 'Active Learning Session Completed 🔥' : 'No activity recorded'}`}
+                    title={`${calendar.label} ${dayNum}: ${isActive ? 'Active learning recorded' : 'No activity recorded'}`}
                   >
                     <span className="text-[11px] font-bold block leading-none">{dayNum}</span>
                     {isActive && (
@@ -193,11 +137,10 @@ export default function StreakModal({ isOpen, onClose, stats, progressList = [],
           </div>
 
           <div className="p-2.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
-            <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider block">Practices Solved</span>
-            <span className="text-xs sm:text-sm font-extrabold text-emerald-400 block mt-0.5">{practiceProgressList.filter(p => p.completed).length} Solved</span>
+            <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider block">Total Courses</span>
+            <span className="text-xs sm:text-sm font-extrabold text-emerald-400 block mt-0.5">{stats.totalCourses ?? 0} Enrolled</span>
           </div>
         </div>
-      </div>
-    </div>
+    </Dialog>
   );
 }

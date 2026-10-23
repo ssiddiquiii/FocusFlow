@@ -4,15 +4,13 @@ import { create } from 'zustand';
  * Zustand Store for Ephemeral UI State only.
  * Persistent domain data remains strictly in Dexie/IndexedDB.
  */
-export const useUIStore = create((set) => ({
+export const useUIStore = create((set, get) => ({
   // Active states for the video watch player
   activeLessonId: null,
   isPlaying: false,
   seekRequestTime: null, // Set to a timestamp in seconds to trigger player seek
+  activePlayerCommands: null,
   
-  // Sidebar collapsed state
-  sidebarCollapsed: true,
-
   // Command Palette global state
   commandPaletteOpen: false,
   openCommandPalette: () => set({ commandPaletteOpen: true }),
@@ -27,10 +25,19 @@ export const useUIStore = create((set) => ({
   setActiveLessonId: (id) => set({ activeLessonId: id }),
   setIsPlaying: (playing) => set({ isPlaying: playing }),
   triggerPlayerSeek: (seconds) => set({ seekRequestTime: seconds }),
-  toggleSidebar: () => set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
+  registerPlayerCommands: commands => set({ activePlayerCommands: commands }),
+  unregisterPlayerCommands: commands => set(state => (
+    state.activePlayerCommands === commands ? { activePlayerCommands: null } : {}
+  )),
+  pauseActivePlayer: () => {
+    const commands = get().activePlayerCommands;
+    if (!commands || commands.lessonId !== get().activeLessonId) return false;
+    commands.pause();
+    return true;
+  },
   setIsImporting: (status) => set({ isImporting: status }),
   setImportError: (err) => set({ importError: err }),
   
   // Reset watch state
-  resetPlayerState: () => set({ activeLessonId: null, isPlaying: false, seekRequestTime: null })
+  resetPlayerState: () => set({ activeLessonId: null, isPlaying: false, seekRequestTime: null, activePlayerCommands: null })
 }));
