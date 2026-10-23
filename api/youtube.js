@@ -47,15 +47,19 @@ function setCache(key, data) {
   CACHE.set(key, { data, expiresAt: Date.now() + CACHE_TTL_MS });
 }
 
-// Circuit Breaker State (Trips for 1 hour when Google returns 403 Quota Exceeded)
-let circuitBreakerOpenUntil = 0;
+const EXPIRED_KEYS = new Set([
+  'AIzaSyAExIAyfPvaaNixl5cz7HZJfNwQdniXP_o'
+]);
 
-function isCircuitBreakerOpen() {
-  return Date.now() < circuitBreakerOpenUntil;
-}
+const VERIFIED_FALLBACK_KEY = 'AIzaSyD4eD8BPi4NPRemy4L9UwrXamaGiEHcN-U';
 
-function tripCircuitBreaker() {
-  circuitBreakerOpenUntil = Date.now() + 60 * 60 * 1000;
+function resolveCandidateKeys(clientKey = '') {
+  const envKey = process.env.YOUTUBE_API_KEY || process.env.VITE_YOUTUBE_API_KEY;
+  const candidates = [clientKey, envKey, VERIFIED_FALLBACK_KEY]
+    .map(k => (typeof k === 'string' ? k.trim() : ''))
+    .filter(k => k.length > 10 && !EXPIRED_KEYS.has(k));
+  
+  return [...new Set(candidates)];
 }
 
 /**
@@ -218,7 +222,7 @@ export default async function handler(request, response) {
     });
   }
 
-  const { playlistId, videoId } = request.query || {};
+  const { playlistId, videoId, apiKey: clientApiKey } = request.query || {};
 
   // Validate parameters
   if (!playlistId && !videoId) {
@@ -227,22 +231,21 @@ export default async function handler(request, response) {
 
   const targetId = (playlistId || videoId).trim();
   const isSingleVideo = !playlistId && !!videoId;
-  const cacheKey = `v2_${isSingleVideo ? 'v' : 'pl'}_${targetId}`;
+  const cacheKey = `v3_${isSingleVideo ? 'v' : 'pl'}_${targetId}`;
 
   // 2. Check Cache First (Saves 95%+ YouTube API quota)
   const cachedResult = getCached(cacheKey);
-  if (cachedResult && (!cachedResult.lessons || cachedResult.lessons.length > 15)) {
+  if (cachedResult && cachedResult.lessons && cachedResult.lessons.length > 0) {
     response.setHeader('X-Cache', 'HIT');
     response.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=604800');
     return response.status(200).json(cachedResult);
   }
 
+  const candidateKeys = resolveCandidateKeys(clientApiKey);
+
   // 3. Handle Single Video Crash Courses
   if (isSingleVideo) {
-    const apiKey = process.env.YOUTUBE_API_KEY || process.env.VITE_YOUTUBE_API_KEY || 'AIzaSyD4eD8BPi4NPRemy4L9UwrXamaGiEHcN-U';
-
-    // If API key is available and circuit breaker is closed, try official Google API
-    if (apiKey && !isCircuitBreakerOpen()) {
+    for (const apiKey of candidateKeys) {
       try {
         const videoUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${encodeURIComponent(targetId)}&key=${apiKey}`;
         const res = await fetch(videoUrl, { signal: AbortSignal.timeout(8000) });
@@ -283,11 +286,9 @@ export default async function handler(request, response) {
             response.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=604800');
             return response.status(200).json(result);
           }
-        } else if (res.status === 403 || res.status === 429) {
-          tripCircuitBreaker();
         }
       } catch (_) {
-        // Fall through to Zero-Key fallback
+        // Try next candidate key
       }
     }
 
@@ -304,9 +305,7 @@ export default async function handler(request, response) {
   }
 
   // 4. Handle Playlist Imports
-  const apiKey = process.env.YOUTUBE_API_KEY || process.env.VITE_YOUTUBE_API_KEY || 'AIzaSyD4eD8BPi4NPRemy4L9UwrXamaGiEHcN-U';
-
-  if (apiKey && !isCircuitBreakerOpen()) {
+  for (const apiKey of candidateKeys) {
     try {
       // Fetch Playlist Snippet
       const plUrl = `https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=${encodeURIComponent(targetId)}&key=${apiKey}`;
@@ -326,7 +325,7 @@ export default async function handler(request, response) {
             udemyUrl: ''
           };
 
-          // Fetch Playlist Items (max 200)
+          // Fetch Playlist Items (max 500)
           let rawLessons = [];
           let nextPageToken = '';
           let hasNextPage = true;
@@ -357,7 +356,7 @@ export default async function handler(request, response) {
               }
             }
 
-            if (rawLessons.length > MAX_ITEMS) break;
+            if (rawLessons.length >= MAX_ITEMS) break;
             nextPageToken = itemsData.nextPageToken;
             hasNextPage = !!nextPageToken;
           }
@@ -393,18 +392,17 @@ export default async function handler(request, response) {
             return response.status(200).json(result);
           }
         }
-      } else if (plRes.status === 403 || plRes.status === 429) {
-        tripCircuitBreaker();
       }
     } catch (_) {
-      // Fall through to Zero-Key fallback
+      // Try next candidate key
     }
   }
 
   // 5. Zero-Key Fallback for Playlists (RSS Atom Feed)
   try {
-    const result = await fetchZeroKeyPlaylist(targetId, apiKey);
-    setCache(cacheKey, result);
+    const activeKey = candidateKeys[0] || VERIFIED_FALLBACK_KEY;
+    const result = await fetchZeroKeyPlaylist(targetId, activeKey);
+    // Don't cache short-lived RSS fallbacks long term if incomplete
     response.setHeader('X-Cache', 'FALLBACK-RSS');
     response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     return response.status(200).json(result);

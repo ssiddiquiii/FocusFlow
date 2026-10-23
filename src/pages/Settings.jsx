@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Download, Upload, ShieldAlert, RotateCcw, Key, CheckCircle2, Sun, Moon } from 'lucide-react';
 import { clearProgressAndNotes, exportBackup, importBackup } from '../services/dataCommands';
 import { useTheme } from '../hooks/useTheme';
@@ -18,9 +18,14 @@ export default function Settings() {
   const [isImporting, setIsImporting] = useState(false);
 
   // Custom YouTube API Key state
-  const [customKey, setCustomKey] = useState(() => 
-    localStorage.getItem('focusflow_custom_youtube_api_key') || ''
-  );
+  const [customKey, setCustomKey] = useState(() => {
+    const stored = localStorage.getItem('focusflow_custom_youtube_api_key') || '';
+    if (stored.trim() === 'AIzaSyAExIAyfPvaaNixl5cz7HZJfNwQdniXP_o') {
+      localStorage.removeItem('focusflow_custom_youtube_api_key');
+      return '';
+    }
+    return stored;
+  });
   const [keySaved, setKeySaved] = useState(false);
 
   const handleSaveApiKey = (e) => {

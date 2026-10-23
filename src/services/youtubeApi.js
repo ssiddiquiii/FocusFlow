@@ -7,14 +7,33 @@
  * - Custom user API keys from Settings / localStorage
  */
 
-// Fallback Google Cloud YouTube Data API v3 Key
-const DEFAULT_API_KEY = import.meta.env?.VITE_YOUTUBE_API_KEY || 'AIzaSyD4eD8BPi4NPRemy4L9UwrXamaGiEHcN-U';
+// Known expired or revoked keys to automatically purge and ignore
+const EXPIRED_KEYS = new Set([
+  'AIzaSyAExIAyfPvaaNixl5cz7HZJfNwQdniXP_o'
+]);
+
+// Fallback Google Cloud YouTube Data API v3 Key (verified active)
+const DEFAULT_API_KEY = import.meta.env?.VITE_YOUTUBE_API_KEY && !EXPIRED_KEYS.has(import.meta.env.VITE_YOUTUBE_API_KEY)
+  ? import.meta.env.VITE_YOUTUBE_API_KEY
+  : 'AIzaSyD4eD8BPi4NPRemy4L9UwrXamaGiEHcN-U';
 
 export function getActiveApiKey() {
-  const customKey = typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function' ? localStorage.getItem('focusflow_custom_youtube_api_key') : null;
-  if (customKey && customKey.trim().length > 10) {
-    return customKey.trim();
-  }
+  try {
+    const customKey = typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function' 
+      ? localStorage.getItem('focusflow_custom_youtube_api_key') 
+      : null;
+    if (customKey) {
+      const trimmed = customKey.trim();
+      if (EXPIRED_KEYS.has(trimmed)) {
+        // Auto-purge known expired key from browser storage
+        localStorage.removeItem('focusflow_custom_youtube_api_key');
+        return DEFAULT_API_KEY;
+      }
+      if (trimmed.length > 10) {
+        return trimmed;
+      }
+    }
+  } catch (_) {}
   return DEFAULT_API_KEY;
 }
 
@@ -89,7 +108,7 @@ export function parseISODuration(durationISO) {
 /**
  * Direct client-side fetch for YouTube Playlist using YouTube Data API v3.
  */
-async function fetchPlaylistDirectClient(playlistId, apiKey) {
+async function executePlaylistDirectClient(playlistId, apiKey) {
   // 1. Fetch Playlist Info
   const playlistUrl = `https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=${encodeURIComponent(playlistId)}&key=${apiKey}`;
   const playlistRes = await fetch(playlistUrl, { signal: AbortSignal.timeout(10000) });
@@ -193,10 +212,23 @@ async function fetchPlaylistDirectClient(playlistId, apiKey) {
   return { course, lessons };
 }
 
+async function fetchPlaylistDirectClient(playlistId, apiKey) {
+  const primaryKey = apiKey || DEFAULT_API_KEY;
+  try {
+    return await executePlaylistDirectClient(playlistId, primaryKey);
+  } catch (err) {
+    if (primaryKey !== DEFAULT_API_KEY) {
+      console.warn(`Primary YouTube API key failed (${err.message}). Retrying with verified fallback key...`);
+      return await executePlaylistDirectClient(playlistId, DEFAULT_API_KEY);
+    }
+    throw err;
+  }
+}
+
 /**
  * Direct client-side fetch for a single YouTube video tutorial/crash course.
  */
-async function fetchSingleVideoDirectClient(videoId, apiKey) {
+async function executeSingleVideoDirectClient(videoId, apiKey) {
   const fetchOptions = { signal: AbortSignal.timeout(15000) };
   const videosUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${encodeURIComponent(videoId)}&key=${apiKey}`;
   const res = await fetch(videosUrl, fetchOptions);
@@ -236,6 +268,19 @@ async function fetchSingleVideoDirectClient(videoId, apiKey) {
   }];
 
   return { course, lessons };
+}
+
+async function fetchSingleVideoDirectClient(videoId, apiKey) {
+  const primaryKey = apiKey || DEFAULT_API_KEY;
+  try {
+    return await executeSingleVideoDirectClient(videoId, primaryKey);
+  } catch (err) {
+    if (primaryKey !== DEFAULT_API_KEY) {
+      console.warn(`Primary key failed (${err.message}). Retrying with verified fallback key...`);
+      return await executeSingleVideoDirectClient(videoId, DEFAULT_API_KEY);
+    }
+    throw err;
+  }
 }
 
 /**
@@ -278,8 +323,14 @@ async function fetchZeroKeyVideoClient(videoId) {
  */
 async function fetchZeroKeyPlaylistClient(playlistId) {
   const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${encodeURIComponent(playlistId)}`;
-  const res = await fetch(rssUrl, { signal: AbortSignal.timeout(8000) });
-  if (!res.ok) throw new Error('Public RSS feed unavailable.');
+  let res;
+  try {
+    res = await fetch(rssUrl, { signal: AbortSignal.timeout(8000) });
+  } catch (_) {
+    throw new Error('Direct YouTube RSS is restricted by browser CORS security. Please try again or provide an API key in Settings.');
+  }
+
+  if (!res || !res.ok) throw new Error('Public RSS feed unavailable.');
 
   const xml = await res.text();
   const feedTitleMatch = xml.match(/<feed[^>]*>[\s\S]*?<title>([\s\S]*?)<\/title>/);
@@ -374,9 +425,9 @@ export async function fetchYouTubePlaylistData(inputUrlOrId) {
 
   // If it is a playlist:
   if (playlistId) {
-    // 1. Try serverless proxy if running in serverless environment (e.g. Vercel production)
+    // 1. Try serverless proxy first
     try {
-      const endpointUrl = `/api/youtube?playlistId=${encodeURIComponent(playlistId)}`;
+      const endpointUrl = `/api/youtube?playlistId=${encodeURIComponent(playlistId)}&apiKey=${encodeURIComponent(apiKey || '')}`;
       const response = await fetch(endpointUrl, { signal: AbortSignal.timeout(25000) });
       const contentType = response.headers.get('content-type') || '';
 
@@ -385,36 +436,14 @@ export async function fetchYouTubePlaylistData(inputUrlOrId) {
         if (data.course && Array.isArray(data.lessons) && data.lessons.length > 15) {
           return { course: data.course, lessons: data.lessons };
         }
-      }
-    } catch (_) {
-      // Fallback
-    }
-
-    // 2. Client-side API fallback (if custom key is available)
-    if (apiKey) {
-      try {
-        return await fetchPlaylistDirectClient(playlistId, apiKey);
-      } catch (_) {
-        // Fallback to Zero-Key RSS
-      }
-    }
-
-    // 3. Zero-Key Public RSS Fallback (Zero quota, zero key required)
-    return await fetchZeroKeyPlaylistClient(playlistId);
-  }
-
-  // If it's a single video tutorial (e.g. 1-hour to 12-hour crash courses)
-  const videoId = extractVideoId(inputUrlOrId);
-  if (videoId) {
-    // 1. Try serverless proxy
-    try {
-      const endpointUrl = `/api/youtube?videoId=${encodeURIComponent(videoId)}`;
-      const response = await fetch(endpointUrl, { signal: AbortSignal.timeout(6000) });
-      const contentType = response.headers.get('content-type') || '';
-
-      if (response.ok && contentType.includes('application/json')) {
-        const data = await response.json();
-        if (data.course && Array.isArray(data.lessons)) {
+        // If serverless proxy returned 15 or fewer lessons, try direct client to see if more exist
+        if (data.course && Array.isArray(data.lessons) && data.lessons.length > 0) {
+          try {
+            const directResult = await fetchPlaylistDirectClient(playlistId, apiKey);
+            if (directResult && directResult.lessons && directResult.lessons.length > data.lessons.length) {
+              return directResult;
+            }
+          } catch (_) {}
           return { course: data.course, lessons: data.lessons };
         }
       }
@@ -422,13 +451,45 @@ export async function fetchYouTubePlaylistData(inputUrlOrId) {
       // Fallback
     }
 
-    // 2. Client-side API fallback (if custom key is available)
-    if (apiKey) {
-      try {
-        return await fetchSingleVideoDirectClient(videoId, apiKey);
-      } catch (_) {
-        // Fallback to Zero-Key oEmbed
+    // 2. Client-side API fallback (with automatic key rotation to DEFAULT_API_KEY)
+    try {
+      return await fetchPlaylistDirectClient(playlistId, apiKey);
+    } catch (err) {
+      console.warn('Direct client API fetch error:', err.message);
+    }
+
+    // 3. Zero-Key Public RSS Fallback (Zero quota, zero key required)
+    try {
+      return await fetchZeroKeyPlaylistClient(playlistId);
+    } catch (_) {
+      throw new Error(`Unable to import playlist. Please check your internet connection or verify the playlist is Public or Unlisted.`);
+    }
+  }
+
+  // If it's a single video tutorial (e.g. 1-hour to 12-hour crash courses)
+  const videoId = extractVideoId(inputUrlOrId);
+  if (videoId) {
+    // 1. Try serverless proxy
+    try {
+      const endpointUrl = `/api/youtube?videoId=${encodeURIComponent(videoId)}&apiKey=${encodeURIComponent(apiKey || '')}`;
+      const response = await fetch(endpointUrl, { signal: AbortSignal.timeout(10000) });
+      const contentType = response.headers.get('content-type') || '';
+
+      if (response.ok && contentType.includes('application/json')) {
+        const data = await response.json();
+        if (data.course && Array.isArray(data.lessons) && data.lessons.length > 0) {
+          return { course: data.course, lessons: data.lessons };
+        }
       }
+    } catch (_) {
+      // Fallback
+    }
+
+    // 2. Client-side API fallback (with automatic key rotation to DEFAULT_API_KEY)
+    try {
+      return await fetchSingleVideoDirectClient(videoId, apiKey);
+    } catch (err) {
+      console.warn('Direct client video fetch error:', err.message);
     }
 
     // 3. Zero-Key Public oEmbed Fallback (Zero quota, zero key required)
