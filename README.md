@@ -1,126 +1,157 @@
-# FocusFlow OS 🎯
+# FocusFlow
 
-> **A distraction-free, local-first learning workspace for YouTube developer courses, playlists, and tutorials.**
+> A distraction-free, local-first learning workspace for YouTube developer courses, playlists, and tutorials.
 
-FocusFlow transforms noisy YouTube tutorials into a structured, distraction-free study environment. No algorithmic recommendations, no clickbait thumbnails, no comment distractions, and zero tracking.
-
----
-
-## 🚀 What Makes FocusFlow Special?
-
-- ⚡ **Direct 1-Click Course Importer**: Paste any public YouTube playlist URL or single-video crash course directly on the Dashboard. It instantly fetches video metadata and builds your interactive course catalog.
-- 🎯 **Distraction-Free Video Workspace**: Embedded theater player with auto-fading controls, playback memory, and zero YouTube homepage feeds or recommended sidebars.
-- 📝 **Timestamped Note-Taking**: Capture study notes while watching videos. Click any `[MM:SS]` timestamp to seek instantly to that exact moment.
-- ⏱️ **Smooth Pomodoro Focus & Recovery**: Integrated focus timer with automatic rest break countdowns, eye-strain relief tips, browser tab title countdown sync (`(24:45) 🎯 Focus`), and Web Audio chimes.
-- 🔥 **Streak & Activity Calendar**: Real-time 30-day activity heatmap tracking daily learning sessions and milestones.
-- ⌘ **Command Palette (`Ctrl + K`)**: Quick keyboard navigation between masterclasses, dashboard, and settings with power learner shortcuts.
-- 💾 **100% Local-First & Private**: Powered by IndexedDB (`Dexie.js`). All progress, watch timestamps, and notes stay entirely inside your browser. No account or remote tracking required.
-- 📦 **JSON Backup & Migration**: Effortlessly export and import your entire learning workspace as a validated JSON file to sync across devices.
-- 📱 **Fully Responsive PWA**: Optimized for mobile, tablet, and ultra-wide displays with installable offline PWA capabilities.
+**Live Demo**: [https://focus-flow-puce.vercel.app/](https://focus-flow-puce.vercel.app/)  
+**Source Code**: [https://github.com/ssiddiquiii/FocusFlow](https://github.com/ssiddiquiii/FocusFlow)
 
 ---
 
-## 🛠️ Tech Stack
+## Overview
 
-| Category | Technology |
-|---|---|
-| **Frontend Framework** | React 19, React Router v7 |
-| **Build Tool** | Vite 8 (with `@vitejs/plugin-react`) |
-| **Local Database** | Dexie.js (IndexedDB wrapper) & `dexie-react-hooks` |
-| **Validation** | Zod (strict schema enforcement for courses, lessons, and backups) |
-| **State Management** | Zustand |
-| **Styling** | Tailwind CSS v4, Lucide Icons, tw-animate-css |
-| **Animations** | Framer Motion (with `prefers-reduced-motion` compliance) |
-| **PWA** | `vite-plugin-pwa` (Workbox service worker) |
+YouTube is one of the richest free resources for software engineering tutorials, but it is built for engagement and algorithmic consumption. Autoplay feeds, recommendation rabbit holes, clickbait thumbnails, and distracting comment sections disrupt focused study.
+
+FocusFlow bridges this gap by transforming public YouTube playlists and single-video crash courses into a focused learning environment with zero ads, timestamped markdown notes, and local progress tracking.
 
 ---
 
-## 📁 Clean Architecture
+## System Architecture
 
-```text
-focus-flow/
-├── public/                 # Static assets, PWA icons, favicon, logo
-├── src/
-│   ├── components/         # Reusable UI widgets (Pomodoro, CommandPalette, StreakModal, Dialog)
-│   ├── db/                 # Dexie.js database instance & seed data
-│   │   ├── FocusFlowDB.js
-│   │   └── seedData.json
-│   ├── features/
-│   │   ├── dashboard/      # Dashboard catalog sections & dialogs
-│   │   └── watch/          # Video player workspace, syllabus, notes & chapters
-│   ├── hooks/              # Custom hooks (useDashboardData, useWatchData, useUIStore)
-│   ├── pages/              # Clean page routes (Dashboard, CourseDetail, Watch, Settings)
-│   ├── services/           # Data commands (Dexie transactions) & YouTube API service
-│   ├── types/              # Zod validation schemas
-│   ├── utils/              # Export markdown, streak calculations, selectors
-│   ├── App.jsx             # Shell layout, vertical navigation dock & router
-│   ├── index.css           # Modern design system & Tailwind tokens
-│   └── main.jsx            # Application entrypoint
-├── api/                    # Vercel serverless proxy (api/youtube.js)
-├── package.json
-└── vite.config.js
+FocusFlow combines a **Local-First client storage model** with a **protected edge serverless proxy** to ensure speed, privacy, and zero server infrastructure costs.
+
+### Architecture Diagram
+
+```mermaid
+graph TD
+    User([User Browser])
+    
+    subgraph Client Application [Local-First Client / PWA]
+        UI[React 19 + Tailwind UI]
+        DB[(IndexedDB / Dexie.js)]
+        Player[Theater Video Workspace]
+        Notes[Timestamped Notes Engine]
+        Timer[Web Audio Pomodoro Timer]
+        
+        UI --> Player
+        UI --> Notes
+        UI --> Timer
+        Player <--> DB
+        Notes <--> DB
+        Timer <--> DB
+    end
+
+    subgraph Edge Layer [Vercel Edge & Serverless]
+        Proxy[Serverless Proxy: /api/youtube]
+        RateLimit[IP Rate Limiter: 15 req/min]
+        Cache[Edge CDN Cache: 24h TTL]
+        CircuitBreaker[Circuit Breaker]
+    end
+
+    subgraph Upstream Services [External APIs]
+        GoogleAPI[Google Cloud YouTube Data API v3]
+        PublicRSS[YouTube Public Atom RSS & oEmbed Feeds]
+    end
+
+    User -->|Paste Playlist / Video Link| UI
+    UI -->|Import Request| Proxy
+    Proxy --> RateLimit
+    RateLimit --> Cache
+    Cache -->|Cache Hit: 15ms| UI
+    Cache -->|Cache Miss| CircuitBreaker
+    CircuitBreaker -->|Active Key| GoogleAPI
+    CircuitBreaker -->|Quota Exceeded / Keyless Fallback| PublicRSS
+    GoogleAPI -->|Course Metadata| Proxy
+    PublicRSS -->|Course Metadata| Proxy
+    Proxy -->|Save to Cache & Return| UI
+    UI -->|Persist Locally| DB
 ```
 
 ---
 
-## ⚡ Quick Start
+## Architectural Principles
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- `npm` or `pnpm`
+### 1. Local-First Client Architecture
+- **Complete Data Ownership**: All notes, course catalogs, timestamps, and activity streaks are stored directly on the user's device using browser IndexedDB (Dexie.js).
+- **Zero Server Database Costs**: No remote PostgreSQL/MongoDB servers required. The application scales to tens of thousands of users at zero database hosting cost.
+- **Privacy by Default**: User study habits, notes, and progress are never tracked or transmitted to external servers.
+- **Data Portability**: Full JSON backup export/import and Markdown note exports are built directly into the client.
 
-### Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/ssiddiquiii/FocusFlow.git
-   cd focus-flow
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment:**
-   A built-in fallback key is pre-configured for local testing. If you want to use your own personal YouTube Data API v3 key:
-   - Copy `.env.example` to `.env`:
-     ```env
-     VITE_YOUTUBE_API_KEY=your_google_cloud_api_key_here
-     ```
-   - *Alternatively*, you can paste your API key directly in the **Settings** page within the app without touching code.
-
-4. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-
-5. Open [http://localhost:5173](http://localhost:5173) in your browser.
+### 2. Edge API Proxy and Defense
+- **API Key Isolation**: The Google Cloud YouTube API key is stored strictly within serverless environment variables and is never exposed in client bundles.
+- **Edge CDN & Memory Caching**: Popular courses are cached at the edge for 24 hours (s-maxage=86400, stale-while-revalidate=604800). Subsequent imports for the same course resolve in ~15ms without consuming YouTube API quotas.
+- **IP Rate Limiting**: An in-memory sliding window rate limiter restricts each IP address to 15 requests per minute, preventing Denial of Service (DoS) attacks and scraper abuse.
+- **Circuit Breaker & Zero-Key Fallback**: If upstream Google API quotas are exceeded, the system automatically trips a circuit breaker and routes requests to YouTube's public Atom/RSS and oEmbed feeds, allowing course imports to continue with zero API key dependency.
 
 ---
 
-## ⌨️ Power Learner Shortcuts
+## Core Features
+
+- **Direct Course Importer**: Import any YouTube playlist or single-video crash course with automated metadata extraction.
+- **Clean Slate Onboarding**: New users start with a clean workspace and clear guidance to import their own learning materials.
+- **Distraction-Free Video Workspace**: Theater-style player with keyboard shortcuts, auto-fading controls, and playback memory.
+- **Timestamped Note Taking**: Take markdown notes while watching; click timestamps to seek the video to specific concepts.
+- **Pomodoro Timer**: Synchronized study timer with rest intervals, browser tab countdown sync, and Web Audio alerts.
+- **Activity Streak Heatmap**: 30-day activity heatmap tracking daily learning consistency.
+- **Command Palette (Ctrl + K)**: Keyboard-driven navigation across courses, settings, and search.
+- **Installable PWA**: Offline-capable Progressive Web Application across mobile, tablet, and desktop.
+
+---
+
+## Tech Stack
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| **Frontend Framework** | React 19, React Router v7 | UI rendering and routing |
+| **Build Tool** | Vite 8 | Development server and production bundling |
+| **Styling** | Tailwind CSS v4, Lucide Icons | Responsive modern design system |
+| **Local Database** | Dexie.js (IndexedDB wrapper) | Client-side persistent storage |
+| **Data Validation** | Zod | Runtime schema validation for courses and backups |
+| **State Management** | Zustand | Global UI and player state |
+| **PWA** | Vite PWA / Workbox | Service worker caching and installability |
+| **Edge Proxy** | Vercel Serverless Functions | Secure API gateway, rate limiting, and caching |
+
+---
+
+## Quick Start
+
+### Prerequisites
+- Node.js (v18 or higher recommended)
+- npm or pnpm
+
+### Setup
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/ssiddiquiii/FocusFlow.git
+cd focus-flow
+
+# 2. Install dependencies
+npm install
+
+# 3. Start local development server
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## Keyboard Shortcuts
 
 | Shortcut | Scope | Action |
 |---|---|---|
-| `Ctrl + K` / `⌘K` | Global | Open Command Palette & Quick Navigation |
-| `Alt + D` | Global | Jump to Dashboard |
-| `Alt + S` | Global | Jump to Settings & Backup |
-| `Space` / `K` | Watch View | Play / Pause Video |
-| `←` / `J` | Watch View | Seek backward 5 seconds |
-| `→` / `L` | Watch View | Seek forward 5 seconds |
-| `M` | Watch View | Toggle Mute / Unmute |
-| `F` | Watch View | Toggle Theater / Fullscreen |
-| `C` | Watch View | Toggle Captions (CC) |
-| `Esc` | Modals | Close modal dialogs / Command Palette |
+| Ctrl + K / Cmd + K | Global | Open Command Palette & Search |
+| Alt + D | Global | Navigate to Dashboard |
+| Alt + S | Global | Navigate to Settings & Backup |
+| Space / K | Video Player | Play / Pause |
+| Left Arrow / J | Video Player | Seek backward 5 seconds |
+| Right Arrow / L | Video Player | Seek forward 5 seconds |
+| M | Video Player | Mute / Unmute |
+| F | Video Player | Toggle Fullscreen |
+| Esc | Modals | Close open dialog or palette |
 
 ---
 
-## 🔒 Privacy & Local-First Philosophy
+## License
 
-FocusFlow follows a strict **privacy-first** approach:
-- 🛡️ **Zero Tracking**: No Google Analytics, telemetry, or user behavior tracking.
-- 💾 **Local Storage**: All notes, watch progress, bookmarks, and streaks stay inside your browser's IndexedDB.
-- 📤 **Data Portability**: You own your data. Export your entire workspace into a clean Markdown bundle or a single JSON backup file anytime from Settings.
-
----
+FocusFlow is open-source software licensed under the [MIT License](LICENSE).
