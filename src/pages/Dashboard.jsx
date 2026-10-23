@@ -55,6 +55,9 @@ export default function Dashboard() {
   const [actionMsg, setActionMsg] = useState(null);
   const [courseToDelete, setCourseToDelete] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [directUrl, setDirectUrl] = useState('');
+  const [isDirectImporting, setIsDirectImporting] = useState(false);
+  const [newlyImportedCourse, setNewlyImportedCourse] = useState(null);
 
   // Dynamic Real-Time Streak Calculation
   const streakCount = useMemo(() => {
@@ -64,6 +67,34 @@ export default function Dashboard() {
     () => getActiveDateSet(progressList, practiceProgressList),
     [progressList, practiceProgressList]
   );
+
+  
+  const handleDirectImport = async (e, customUrl) => {
+    if (e) e.preventDefault();
+    const urlToUse = (customUrl || directUrl).trim();
+    if (!urlToUse) return;
+
+    setIsDirectImporting(true);
+    setActionMsg({ text: 'Connecting to YouTube and importing course...', type: 'info' });
+
+    try {
+      const { course, lessons } = await fetchYouTubePlaylistData(urlToUse);
+      await importCourse(course, lessons);
+      setDirectUrl('');
+      setNewlyImportedCourse({ course, firstLessonId: lessons[0]?.id });
+      setActionMsg({ 
+        text: `Successfully imported "${course.title}" with ${lessons.length} lectures! Ready to start learning.`, 
+        type: 'success' 
+      });
+      setTimeout(() => setActionMsg(null), 5000);
+    } catch (err) {
+      console.error(err);
+      setActionMsg({ text: `Import failed: ${err.message}`, type: 'error' });
+      setTimeout(() => setActionMsg(null), 5000);
+    } finally {
+      setIsDirectImporting(false);
+    }
+  };
 
   const handleContinueLearning = () => {
     if (continuePath) {
@@ -181,6 +212,120 @@ export default function Dashboard() {
               <span>Import Course</span>
             </button>
           </div>
+        </div>
+
+        {/* 🚀 DIRECT YOUTUBE COURSE & PLAYLIST IMPORTER */}
+        <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/15 via-zinc-950 to-zinc-950 shadow-2xl space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center flex-shrink-0">
+                <Play size={16} fill="currentColor" />
+              </div>
+              <div>
+                <h2 className="text-sm sm:text-base font-extrabold text-white tracking-tight">
+                  Import Any YouTube Playlist or Course
+                </h2>
+                <p className="text-[11px] text-zinc-400">
+                  Zero ads, zero algorithmic distractions, timestamped notes, and local progress tracking.
+                </p>
+              </div>
+            </div>
+            <span className="self-start sm:self-auto px-2.5 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/30">
+              Instant 1-Click Study
+            </span>
+          </div>
+
+          {/* Input & Import Button Form */}
+          <form onSubmit={handleDirectImport} className="flex flex-col sm:flex-row gap-2.5">
+            <div className="relative flex-1">
+              <input
+                type="text"
+                value={directUrl}
+                onChange={(e) => setDirectUrl(e.target.value)}
+                placeholder="Paste YouTube playlist or video link (e.g. https://www.youtube.com/playlist?list=...)"
+                disabled={isDirectImporting}
+                className="w-full bg-zinc-900/90 border border-zinc-700/80 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-medium transition"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={isDirectImporting || !directUrl.trim()}
+              className="px-6 py-3 rounded-xl bg-primary hover:bg-primary/90 text-white font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-primary/25 cursor-pointer disabled:opacity-50 flex-shrink-0"
+            >
+              {isDirectImporting ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" />
+                  <span>Importing...</span>
+                </>
+              ) : (
+                <>
+                  <Sparkles size={16} />
+                  <span>Import Course</span>
+                </>
+              )}
+            </button>
+          </form>
+
+          {/* Quick 1-Click Curated Starters */}
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1 mr-1">
+              ⚡ Quick Starters:
+            </span>
+            <button
+              type="button"
+              disabled={isDirectImporting}
+              onClick={() => handleDirectImport(null, 'https://www.youtube.com/playlist?list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37')}
+              className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-yellow-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
+            >
+              <span className="text-yellow-400">💛</span>
+              <span>Chai aur JavaScript</span>
+            </button>
+            <button
+              type="button"
+              disabled={isDirectImporting}
+              onClick={() => handleDirectImport(null, 'https://www.youtube.com/playlist?list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige')}
+              className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-blue-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
+            >
+              <span className="text-cyan-400">⚛️</span>
+              <span>Chai aur React</span>
+            </button>
+            <button
+              type="button"
+              disabled={isDirectImporting}
+              onClick={() => handleDirectImport(null, 'https://www.youtube.com/watch?v=kqtD5dpn9C8')}
+              className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
+            >
+              <span className="text-emerald-400">🐍</span>
+              <span>Python 1-Hr Tutorial</span>
+            </button>
+            <button
+              type="button"
+              disabled={isDirectImporting}
+              onClick={() => handleDirectImport(null, 'https://www.youtube.com/playlist?list=PLu71SKxNbfoDBNF5s-WHQu9khAU40bKGd')}
+              className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-orange-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
+            >
+              <span className="text-orange-400">🌐</span>
+              <span>Git & GitHub</span>
+            </button>
+          </div>
+
+          {/* Newly Imported Quick Launch Banner */}
+          {newlyImportedCourse && (
+            <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-between gap-3 animate-in fade-in">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <CheckCircle2 size={18} className="text-emerald-400 flex-shrink-0" />
+                <span className="text-xs font-bold text-white truncate">
+                  Ready to study: <span className="text-emerald-300">{newlyImportedCourse.course.title}</span>
+                </span>
+              </div>
+              <button
+                onClick={() => navigate(`/courses/${newlyImportedCourse.course.id}/lessons/${newlyImportedCourse.firstLessonId}`)}
+                className="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-extrabold text-xs transition cursor-pointer flex-shrink-0 flex items-center gap-1"
+              >
+                <span>Start Lesson 1 →</span>
+              </button>
+            </div>
+          )}
         </div>
 
         {/* 2-Column Symmetrical Split Layout */}

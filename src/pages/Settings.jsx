@@ -1,18 +1,40 @@
 import React, { useState } from 'react';
-import { Download, Upload, Trash2, ShieldAlert, RotateCcw } from 'lucide-react';
+import { Download, Upload, ShieldAlert, RotateCcw, Key, CheckCircle2 } from 'lucide-react';
 import { clearProgressAndNotes, exportBackup, importBackup } from '../services/dataCommands';
 
 /**
  * Settings & Console Management Component.
- * Implements backup JSON export, schema-validated JSON import,
- * and data wiping actions.
- * @returns {React.JSX.Element}
+ * Supports:
+ * - Local backup JSON export and import
+ * - YouTube API Key management (custom key support)
+ * - Watch progress and notes clearing
  */
 export default function Settings() {
   const [statusMsg, setStatusMsg] = useState({ text: '', type: 'info' });
   const [showConfirmReset, setShowConfirmReset] = useState(false);
-  const [resetType, setResetType] = useState('progress'); // 'progress' | 'full'
   const [isImporting, setIsImporting] = useState(false);
+
+  // Custom YouTube API Key state
+  const [customKey, setCustomKey] = useState(() => 
+    localStorage.getItem('focusflow_custom_youtube_api_key') || ''
+  );
+  const [keySaved, setKeySaved] = useState(false);
+
+  const handleSaveApiKey = (e) => {
+    e.preventDefault();
+    const trimmed = customKey.trim();
+    if (trimmed) {
+      localStorage.setItem('focusflow_custom_youtube_api_key', trimmed);
+    } else {
+      localStorage.removeItem('focusflow_custom_youtube_api_key');
+    }
+    setKeySaved(true);
+    setStatusMsg({ text: trimmed ? 'Custom YouTube API key saved successfully.' : 'Reverted to default built-in YouTube API key.', type: 'success' });
+    setTimeout(() => {
+      setKeySaved(false);
+      setStatusMsg({ text: '', type: 'info' });
+    }, 3000);
+  };
 
   const handleExport = async () => {
     setStatusMsg({ text: 'Generating backup file...', type: 'info' });
@@ -82,10 +104,10 @@ export default function Settings() {
   };
 
   return (
-    <div className="p-8 max-w-4xl mx-auto space-y-10 animate-page-entry">
+    <div className="p-4 sm:p-8 max-w-4xl mx-auto space-y-8 animate-page-entry">
       <div>
-        <h1 className="text-3xl font-extrabold text-white tracking-tight">Settings & Management</h1>
-        <p className="text-zinc-400 text-xs mt-1">Manage local database backups and learning data progress.</p>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Settings & Management</h1>
+        <p className="text-zinc-400 text-xs mt-1">Manage local database backups, YouTube API configuration, and learning progress.</p>
       </div>
 
       {statusMsg.text && (
@@ -98,10 +120,65 @@ export default function Settings() {
         </div>
       )}
 
+      {/* YouTube API Configuration */}
+      <div className="glass-panel rounded-2xl p-5 sm:p-6 space-y-4">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center border border-primary/20 flex-shrink-0">
+            <Key size={18} />
+          </div>
+          <div>
+            <h2 className="text-base font-bold text-white">YouTube API Configuration (Optional)</h2>
+            <p className="text-zinc-500 text-xs">
+              FocusFlow includes a built-in shared key. You can also provide your personal Google Cloud YouTube Data API v3 key to avoid daily quota limits.
+            </p>
+          </div>
+        </div>
+
+        <form onSubmit={handleSaveApiKey} className="space-y-3 pt-1">
+          <div>
+            <label className="block text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-1.5">
+              Personal API Key
+            </label>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <input
+                type="password"
+                value={customKey}
+                onChange={(e) => setCustomKey(e.target.value)}
+                placeholder="AIzaSy... (Leave empty to use built-in shared key)"
+                className="flex-1 px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-border text-white text-xs font-mono focus:outline-none focus:border-primary placeholder:text-zinc-600 transition"
+              />
+              <button
+                type="submit"
+                className="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary/90 text-white text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow flex-shrink-0"
+              >
+                {keySaved ? <CheckCircle2 size={14} className="text-white" /> : null}
+                <span>{keySaved ? 'Saved!' : 'Save Key'}</span>
+              </button>
+            </div>
+          </div>
+          <div className="flex items-center justify-between text-[11px] text-zinc-400 pt-1">
+            <span>Status: <strong className={customKey.trim() ? 'text-emerald-400' : 'text-primary'}>{customKey.trim() ? 'Personal Key Active' : 'Default Built-in Key Active'}</strong></span>
+            {customKey.trim() && (
+              <button
+                type="button"
+                onClick={() => {
+                  setCustomKey('');
+                  localStorage.removeItem('focusflow_custom_youtube_api_key');
+                  setStatusMsg({ text: 'Reverted to default built-in API key.', type: 'info' });
+                }}
+                className="text-zinc-400 hover:text-red-400 transition underline cursor-pointer"
+              >
+                Clear & Reset
+              </button>
+            )}
+          </div>
+        </form>
+      </div>
+
       {/* Local Data Backups */}
-      <div className="glass-panel rounded-2xl p-6 space-y-6">
+      <div className="glass-panel rounded-2xl p-5 sm:p-6 space-y-6">
         <div>
-          <h2 className="text-lg font-bold text-white mb-1">Local Data Backups</h2>
+          <h2 className="text-base font-bold text-white mb-1">Local Data Backups</h2>
           <p className="text-zinc-500 text-xs leading-relaxed">
             FocusFlow is a local-first application. Your watch progress and notes are stored entirely in your browser.
             We recommend exporting periodic backups to keep your data secure.
@@ -112,15 +189,15 @@ export default function Settings() {
           {/* Export button */}
           <button
             onClick={handleExport}
-            className="flex items-center justify-center gap-3 px-5 py-4 bg-zinc-900 border border-border hover:bg-zinc-800 transition rounded-xl font-bold text-white text-sm cursor-pointer"
+            className="flex items-center justify-center gap-3 px-5 py-3.5 bg-zinc-900 border border-border hover:bg-zinc-800 transition rounded-xl font-bold text-white text-xs sm:text-sm cursor-pointer"
           >
-            <Download size={18} />
+            <Download size={16} />
             <span>Export Backup JSON</span>
           </button>
 
           {/* Import button wrapper */}
-          <label className={`flex items-center justify-center gap-3 px-5 py-4 bg-zinc-900 border border-border hover:bg-zinc-800 transition rounded-xl font-bold text-white text-sm ${isImporting ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}`}>
-            <Upload size={18} />
+          <label className={`flex items-center justify-center gap-3 px-5 py-3.5 bg-zinc-900 border border-border hover:bg-zinc-800 transition rounded-xl font-bold text-white text-xs sm:text-sm ${isImporting ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}`}>
+            <Upload size={16} />
             <span>{isImporting ? 'Restoring Backup...' : 'Import Backup JSON'}</span>
             <input 
               type="file" 
@@ -134,11 +211,11 @@ export default function Settings() {
       </div>
 
       {/* Progress Data Management */}
-      <div className="glass-panel rounded-2xl p-6 border-zinc-800 space-y-6">
+      <div className="glass-panel rounded-2xl p-5 sm:p-6 border-zinc-800 space-y-4">
         <div>
-          <h2 className="text-lg font-bold text-white mb-1">Progress & Notes Reset</h2>
+          <h2 className="text-base font-bold text-white mb-1">Progress & Notes Reset</h2>
           <p className="text-zinc-500 text-xs leading-relaxed">
-            Reset your watch times, checkmarks, and notes to zero. Your course catalogs (both default and imported playlists) will stay safe and untouched. To delete a specific course, use the Delete button on its card in the Dashboard.
+            Reset your watch times, checkmarks, and notes to zero. Your course catalogs (both default and imported playlists) will stay safe and untouched.
           </p>
         </div>
 
@@ -147,7 +224,7 @@ export default function Settings() {
             onClick={() => setShowConfirmReset(true)}
             className="px-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 transition text-xs font-bold flex items-center gap-2 cursor-pointer"
           >
-            <RotateCcw size={15} />
+            <RotateCcw size={14} />
             <span>Clear Watch Progress & Notes</span>
           </button>
         ) : (

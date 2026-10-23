@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Loader2, CheckCircle2, AlertCircle, Link2, X } from 'lucide-react';
-import { extractPlaylistId, fetchYouTubePlaylistData } from '../services/youtubeApi';
+import { fetchYouTubePlaylistData } from '../services/youtubeApi';
 import { importCourse } from '../services/dataCommands';
 import Dialog from './ui/Dialog';
 
@@ -17,9 +17,8 @@ export default function ImportPlaylistModal({ isOpen, onClose }) {
     setErrorMsg('');
     setSuccessMsg('');
 
-    const playlistId = extractPlaylistId(urlInput);
-    if (!playlistId) {
-      setErrorMsg('Invalid YouTube Playlist URL or ID. Please check the link and try again.');
+    if (!urlInput.trim()) {
+      setErrorMsg('Please paste a valid YouTube Playlist URL or video link.');
       return;
     }
 
@@ -27,7 +26,7 @@ export default function ImportPlaylistModal({ isOpen, onClose }) {
 
     try {
       // Fetch playlist & lessons from YouTube Data API
-      const { course, lessons } = await fetchYouTubePlaylistData(playlistId);
+      const { course, lessons } = await fetchYouTubePlaylistData(urlInput.trim());
 
       // Save into Dexie.js (IndexedDB)
       await importCourse(course, lessons);
@@ -99,7 +98,7 @@ export default function ImportPlaylistModal({ isOpen, onClose }) {
               type="text"
               value={urlInput}
               onChange={(e) => setUrlInput(e.target.value)}
-              placeholder="e.g. https://www.youtube.com/playlist?list=PLu71SKxNbfo..."
+              placeholder="e.g. https://www.youtube.com/playlist?list=... or video tutorial"
               disabled={loading}
               className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-border text-white text-xs sm:text-sm focus:outline-none focus:border-primary placeholder:text-zinc-600 transition"
             />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function WatchDetails({ course, lesson, lessonId }) {
+export function WatchDetails({ course, lesson }) {
   return (
     <div className="px-6 py-4 space-y-3 max-w-7xl w-full mx-auto border-b border-border/50">
       <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{lesson.title}</h1>
