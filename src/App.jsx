@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
+﻿import React, { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { Menu, Search, X } from 'lucide-react';
+import { Menu, Search, X, Sun, Moon } from 'lucide-react';
 import PomodoroTimer from './components/PomodoroTimer';
 import ErrorBoundary from './components/ErrorBoundary';
 import CommandPalette from './components/CommandPalette';
 import { useUIStore } from './hooks/useUIStore';
+import { useTheme } from './hooks/useTheme';
 import { isNavigationActive, navigationItems } from './components/shell/navigation';
 
 // Lazy-loaded page components with instant hover preloading
@@ -22,6 +23,7 @@ const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), [tabindex]:not([tab
  */
 function AppContent() {
   const { commandPaletteOpen, openCommandPalette, closeCommandPalette } = useUIStore();
+  const { isDark, toggleTheme } = useTheme();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const menuButtonRef = useRef(null);
   const commandPaletteReturnFocusRef = useRef(null);
@@ -109,23 +111,23 @@ function AppContent() {
   }, [commandPaletteOpen, openCommandPalette, closeCommandPalette, navigate]);
 
   return (
-    <div className="relative flex min-h-screen bg-background text-foreground">
+    <div className="relative flex min-h-screen bg-background text-foreground transition-colors duration-150">
       {/* Mobile Backdrop Overlay when Drawer is Open */}
       {mobileSidebarOpen && (
         <div
           data-testid="navigation-backdrop"
           aria-hidden="true"
           onClick={closeMobileSidebar}
-          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
         />
       )}
 
-      {/* Mobile Glass Header Bar (Fixed Top Bar for Mobile Screens) */}
-      <header className="safe-area-header fixed inset-x-0 top-0 z-40 flex min-h-14 items-center justify-between border-b border-border bg-zinc-950/95 px-3.5 shadow-md backdrop-blur-xl lg:hidden">
+      {/* Mobile Glass Header Bar */}
+      <header className="safe-area-header fixed inset-x-0 top-0 z-40 flex min-h-14 items-center justify-between border-b border-border bg-background/90 px-3.5 shadow-sm backdrop-blur-xl lg:hidden">
         <button
           ref={menuButtonRef}
           onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-          className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-zinc-900 text-white transition hover:bg-zinc-800 cursor-pointer"
+          className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-card text-foreground transition hover:bg-muted cursor-pointer"
           aria-label={mobileSidebarOpen ? 'Close navigation' : 'Open navigation'}
           aria-expanded={mobileSidebarOpen}
           aria-controls="mobile-navigation"
@@ -135,39 +137,50 @@ function AppContent() {
 
         <Link to="/" onMouseEnter={preloadDashboard} className="flex items-center gap-2">
           <img src="/logo.svg" alt="FocusFlow" className="w-6 h-6 flex-shrink-0" />
-          <span className="font-extrabold text-white text-xs tracking-tight">FocusFlow OS</span>
+          <span className="font-bold text-foreground text-xs tracking-normal">FocusFlow OS</span>
         </Link>
 
-        <button
-          onClick={(event) => {
-            event.currentTarget.focus();
-            commandPaletteReturnFocusRef.current = event.currentTarget;
-            openCommandPalette();
-          }}
-          className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-zinc-900 text-zinc-400 transition hover:text-white cursor-pointer"
-          aria-label="Open command palette"
-        >
-          <Search size={16} />
-        </button>
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={toggleTheme}
+            aria-label={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-card text-muted-foreground transition hover:text-foreground hover:bg-muted cursor-pointer"
+            title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          >
+            {isDark ? <Sun size={17} className="text-amber-400" /> : <Moon size={17} className="text-zinc-700" />}
+          </button>
+
+          <button
+            onClick={(event) => {
+              event.currentTarget.focus();
+              commandPaletteReturnFocusRef.current = event.currentTarget;
+              openCommandPalette();
+            }}
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-card text-muted-foreground transition hover:text-foreground hover:bg-muted cursor-pointer"
+            aria-label="Open command palette"
+          >
+            <Search size={16} />
+          </button>
+        </div>
       </header>
 
-      {/* Desktop Floating Vertical Glass Navigation Dock (Performance Optimized) */}
-      <aside data-testid="desktop-navigation" aria-label="Primary navigation" className="fixed left-3.5 top-1/2 z-50 hidden -translate-y-1/2 flex-col items-center space-y-3.5 rounded-2xl border border-white/10 bg-zinc-950/95 p-2.5 shadow-[0_15px_35px_rgba(0,0,0,0.6)] backdrop-blur-md lg:flex">
-        {/* Integrated Brand Logo Icon at Top of Dock */}
+      {/* Desktop Floating Vertical Glass Navigation Dock */}
+      <aside data-testid="desktop-navigation" aria-label="Primary navigation" className="fixed left-3.5 top-1/2 z-50 hidden -translate-y-1/2 flex-col items-center space-y-3 rounded-2xl border border-border bg-card/95 p-2 shadow-xl backdrop-blur-md lg:flex">
+        {/* Brand Logo Icon */}
         <Link 
           to="/" 
           onMouseEnter={preloadDashboard}
-          className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary/20 via-zinc-900 to-accent/20 border border-primary/40 flex items-center justify-center shadow-lg hover:scale-105 transition cursor-pointer group relative"
+          className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/25 flex items-center justify-center shadow-sm hover:scale-105 transition cursor-pointer group relative"
           title="FocusFlow Home Dashboard"
         >
-          <img src="/logo.svg" alt="FocusFlow" className="w-6 h-6 flex-shrink-0 group-hover:scale-110 transition" />
-          <span className="absolute left-full ml-3 px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-white text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none shadow-xl z-50">
+          <img src="/logo.svg" alt="FocusFlow" className="w-5 h-5 flex-shrink-0 group-hover:scale-110 transition" />
+          <span className="absolute left-full ml-3 px-2.5 py-1 rounded-lg bg-popover border border-border text-popover-foreground text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none shadow-lg z-50">
             FocusFlow Home
           </span>
         </Link>
 
         {/* Subtle Divider */}
-        <div className="w-6 h-[1px] bg-zinc-800/80 my-0.5" />
+        <div className="w-5 h-[1px] bg-border my-0.5" />
 
         {/* Navigation Dock Items */}
         {navigationItems.map((item) => {
@@ -183,20 +196,39 @@ function AppContent() {
               onMouseEnter={handleHover}
               aria-label={item.name}
               aria-current={isActive ? 'page' : undefined}
-              className={`relative w-11 h-11 rounded-xl transition duration-200 flex items-center justify-center cursor-pointer group ${
+              className={`relative w-10 h-10 rounded-xl transition duration-200 flex items-center justify-center cursor-pointer group ${
                 isActive 
-                  ? 'bg-primary/20 text-primary border border-primary/40 shadow-md' 
-                  : 'text-zinc-400 hover:text-white hover:bg-zinc-900/90'
+                  ? 'bg-primary/15 text-primary border border-primary/30 shadow-sm' 
+                  : 'text-muted-foreground hover:text-foreground hover:bg-muted'
               }`}
             >
-              <Icon size={20} className={isActive ? 'text-primary' : 'text-zinc-400 group-hover:text-white'} />
-              {/* Floating Tooltip Label */}
-              <span className="absolute left-full ml-3 px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-white text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none shadow-xl z-50">
+              <Icon size={19} className={isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-foreground'} />
+              <span className="absolute left-full ml-3 px-2.5 py-1 rounded-lg bg-popover border border-border text-popover-foreground text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none shadow-lg z-50">
                 {item.name}
               </span>
             </Link>
           );
         })}
+
+        {/* Subtle Divider */}
+        <div className="w-5 h-[1px] bg-border my-0.5" />
+
+        {/* Desktop Theme Switcher Button */}
+        <button
+          onClick={toggleTheme}
+          aria-label={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          className="relative w-10 h-10 rounded-xl transition duration-200 flex items-center justify-center cursor-pointer group text-muted-foreground hover:text-foreground hover:bg-muted"
+          title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        >
+          {isDark ? (
+            <Sun size={18} className="text-amber-400 group-hover:rotate-45 transition-transform" />
+          ) : (
+            <Moon size={18} className="text-zinc-700 group-hover:-rotate-12 transition-transform" />
+          )}
+          <span className="absolute left-full ml-3 px-2.5 py-1 rounded-lg bg-popover border border-border text-popover-foreground text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none shadow-lg z-50">
+            {isDark ? 'Light Mode' : 'Dark Mode'}
+          </span>
+        </button>
       </aside>
 
       {/* Mobile Drawer Navigation (Slide-out) */}
@@ -209,17 +241,26 @@ function AppContent() {
         aria-hidden={!mobileSidebarOpen}
         inert={!mobileSidebarOpen}
         tabIndex={-1}
-        className={`safe-area-drawer fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col justify-between border-r border-border bg-zinc-950/98 p-4 backdrop-blur-2xl transition-transform duration-300 lg:hidden ${
+        className={`safe-area-drawer fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col justify-between border-r border-border bg-card p-4 backdrop-blur-2xl transition-transform duration-300 lg:hidden ${
           mobileSidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
         }`}
       >
         <div className="space-y-6 pt-12">
-          <div className="flex items-center gap-3 px-2">
-            <img src="/logo.svg" alt="FocusFlow" className="w-8 h-8" />
-            <span className="font-extrabold text-white text-base">FocusFlow</span>
+          <div className="flex items-center justify-between px-2">
+            <div className="flex items-center gap-3">
+              <img src="/logo.svg" alt="FocusFlow" className="w-7 h-7" />
+              <span className="font-bold text-foreground text-base">FocusFlow</span>
+            </div>
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-xl border border-border bg-muted/50 text-muted-foreground hover:text-foreground cursor-pointer"
+              title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {isDark ? <Sun size={16} className="text-amber-400" /> : <Moon size={16} className="text-zinc-700" />}
+            </button>
           </div>
 
-          <nav className="space-y-2">
+          <nav className="space-y-1.5">
             {navigationItems.map((item) => {
               const isActive = isNavigationActive(location.pathname, item.path);
               const Icon = item.icon;
@@ -229,10 +270,10 @@ function AppContent() {
                   to={item.path}
                   onClick={closeMobileSidebar}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`flex min-h-11 items-center gap-3.5 rounded-xl px-4 py-3 text-xs font-bold transition ${
+                  className={`flex min-h-11 items-center gap-3.5 rounded-xl px-4 py-3 text-xs font-semibold transition ${
                     isActive 
-                      ? 'bg-primary/20 text-primary border border-primary/30' 
-                      : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'
+                      ? 'bg-primary/15 text-primary border border-primary/25' 
+                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                   }`}
                 >
                   <Icon size={18} />
@@ -242,18 +283,23 @@ function AppContent() {
             })}
           </nav>
         </div>
+
+        <div className="px-2 pb-4 text-[11px] text-muted-foreground">
+          <span>Theme: </span>
+          <span className="font-semibold text-foreground capitalize">{isDark ? 'Dark Mode' : 'Light Mode'}</span>
+        </div>
       </aside>
 
       {/* Main Content View Container */}
       <main className={`safe-area-main min-w-0 flex-1 pb-4 ${
         location.pathname.includes('/lessons/') 
-          ? 'safe-area-main-watch lg:pt-0 lg:pl-22 xl:pl-24 px-2 sm:px-4'
-          : 'pt-16 lg:pt-4 lg:pl-22 xl:pl-24 px-3.5 sm:px-6'
+          ? 'safe-area-main-watch lg:pt-0 lg:pl-20 xl:pl-22 px-2 sm:px-4'
+          : 'pt-16 lg:pt-4 lg:pl-20 xl:pl-22 px-3.5 sm:px-6'
       }`}>
         <ErrorBoundary>
           <Suspense fallback={
             <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
-              <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
+              <div className="animate-spin w-8 h-8 border-3 border-primary border-t-transparent rounded-full" />
             </div>
           }>
             <AnimatePresence mode="wait" initial={false}>
@@ -277,9 +323,9 @@ function AppContent() {
           </Suspense>
         </ErrorBoundary>
 
-        {/* One-Line Minimal Global Footer (Tightened top spacing) */}
-        <footer className="mt-6 mb-2 py-3 border-t border-border/30 text-center text-[11px] text-zinc-500 font-medium">
-          FocusFlow OS • Built by <span className="text-zinc-300 font-bold">Sameed Siddiqui</span> • Local-First Developer Workspace
+        {/* One-Line Minimal Global Footer */}
+        <footer className="mt-8 mb-2 py-3 border-t border-border/40 text-center text-[12px] text-muted-foreground font-medium">
+          FocusFlow OS • Built by <span className="text-foreground font-semibold">Sameed Siddiqui</span> • Local-First Developer Workspace
         </footer>
       </main>
 

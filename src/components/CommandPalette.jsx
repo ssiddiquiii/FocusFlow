@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, BookOpen, Settings, X } from 'lucide-react';
 import Dialog from './ui/Dialog';
@@ -6,6 +6,7 @@ import Dialog from './ui/Dialog';
 /**
  * Command Palette & Global Search Modal (Ctrl + K or ⌘K)
  * Allows power learners to jump to pages and see shortcuts.
+ * Theme-aware and lightweight.
  */
 export default function CommandPalette({ isOpen, onClose, returnFocusRef }) {
   const [query, setQuery] = useState('');
@@ -37,25 +38,25 @@ export default function CommandPalette({ isOpen, onClose, returnFocusRef }) {
       titleId="command-palette-title"
       placement="top"
       returnFocusRef={returnFocusRef}
-      className="max-h-[calc(100dvh-5rem)] w-full max-w-2xl overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 shadow-2xl"
+      className="max-h-[calc(100dvh-5rem)] w-full max-w-2xl overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
     >
       <h2 id="command-palette-title" className="sr-only">Command palette</h2>
       {/* Search Header */}
-      <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border/80 bg-zinc-900/60">
-        <Search size={18} className="text-zinc-400 flex-shrink-0" />
+      <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border bg-muted/40">
+        <Search size={18} className="text-muted-foreground flex-shrink-0" />
         <input
           aria-label="Search commands and pages"
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Type a command or page name... (Press Esc to close)"
-          className="w-full bg-transparent text-white text-sm font-medium focus:outline-none placeholder:text-zinc-500"
+          className="w-full bg-transparent text-foreground text-sm font-medium focus:outline-none placeholder:text-muted-foreground"
           autoFocus
         />
         <button 
           onClick={onClose}
           aria-label="Close command palette"
-          className="min-h-11 min-w-11 rounded-lg text-zinc-400 transition hover:bg-zinc-800 hover:text-white cursor-pointer flex items-center justify-center"
+          className="min-h-11 min-w-11 rounded-lg text-muted-foreground transition hover:bg-muted hover:text-foreground cursor-pointer flex items-center justify-center"
         >
           <X size={16} />
         </button>
@@ -66,38 +67,38 @@ export default function CommandPalette({ isOpen, onClose, returnFocusRef }) {
         {/* Quick Navigation Commands */}
         <div className="space-y-3">
           <div className="space-y-1">
-            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest px-2">Quick Navigation</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest px-2">Quick Navigation</span>
             <button
               onClick={() => handleSelectRoute('/')}
-              className="w-full text-left px-3 py-2.5 rounded-xl hover:bg-zinc-900 border border-transparent hover:border-border transition flex items-center justify-between cursor-pointer group"
+              className="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-muted border border-transparent hover:border-border transition flex items-center justify-between cursor-pointer group"
             >
               <div className="flex items-center gap-3">
                 <BookOpen size={16} className="text-primary" />
-                <span className="text-xs font-bold text-white">Dashboard & Masterclasses</span>
+                <span className="text-xs font-semibold text-foreground">Dashboard & Masterclasses</span>
               </div>
-              <span className="text-[10px] font-mono text-zinc-500">Alt + D</span>
+              <span className="text-[10px] font-mono text-muted-foreground">Alt + D</span>
             </button>
 
             <button
               onClick={() => handleSelectRoute('/settings')}
-              className="w-full text-left px-3 py-2.5 rounded-xl hover:bg-zinc-900 border border-transparent hover:border-border transition flex items-center justify-between cursor-pointer group"
+              className="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-muted border border-transparent hover:border-border transition flex items-center justify-between cursor-pointer group"
             >
               <div className="flex items-center gap-3">
-                <Settings size={16} className="text-zinc-400" />
-                <span className="text-xs font-bold text-white">Settings & Data Backup</span>
+                <Settings size={16} className="text-muted-foreground" />
+                <span className="text-xs font-semibold text-foreground">Settings & Preferences</span>
               </div>
-              <span className="text-[10px] font-mono text-zinc-500">Alt + S</span>
+              <span className="text-[10px] font-mono text-muted-foreground">Alt + S</span>
             </button>
           </div>
 
           {/* Keyboard Shortcuts Cheat Sheet */}
-          <div className="p-3 rounded-xl bg-zinc-900/60 border border-border/50 space-y-2">
-            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">⌨️ Power Learner Shortcuts</span>
-            <div className="grid grid-cols-2 gap-2 text-[11px] text-zinc-400">
-              <div><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-200 font-mono">Ctrl + K</kbd> Command Palette</div>
-              <div><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-200 font-mono">Space</kbd> Play / Pause Video</div>
-              <div><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-200 font-mono">Alt + D</kbd> Dashboard</div>
-              <div><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-200 font-mono">Alt + S</kbd> Settings</div>
+          <div className="p-3.5 rounded-xl bg-muted/40 border border-border space-y-2">
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">⌨️ Power Learner Shortcuts</span>
+            <div className="grid grid-cols-2 gap-2 text-[11px] text-muted-foreground">
+              <div><kbd className="px-1.5 py-0.5 rounded bg-card border border-border text-foreground font-mono">Ctrl + K</kbd> Command Palette</div>
+              <div><kbd className="px-1.5 py-0.5 rounded bg-card border border-border text-foreground font-mono">Space</kbd> Play / Pause Video</div>
+              <div><kbd className="px-1.5 py-0.5 rounded bg-card border border-border text-foreground font-mono">Alt + D</kbd> Dashboard</div>
+              <div><kbd className="px-1.5 py-0.5 rounded bg-card border border-border text-foreground font-mono">Alt + S</kbd> Settings</div>
             </div>
           </div>
         </div>

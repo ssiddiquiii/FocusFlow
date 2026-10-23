@@ -16,7 +16,7 @@ export function NotesPanel({ notes, noteState, onSeek }) {
           value={noteState.draft}
           onChange={event => noteState.setDraft(event.target.value)}
           placeholder="Type a timestamped note…"
-          className="h-[70px] w-full resize-y rounded-xl border border-border bg-zinc-900 p-3 text-xs text-white placeholder-zinc-500 transition focus:outline-none focus:border-primary"
+          className="h-[70px] w-full resize-y rounded-xl border border-border bg-muted/60 p-3 text-xs text-foreground placeholder:text-muted-foreground transition focus:outline-none focus:border-primary"
           onKeyDown={event => {
             if (event.key === 'Enter' && !event.shiftKey) {
               event.preventDefault();
@@ -31,7 +31,7 @@ export function NotesPanel({ notes, noteState, onSeek }) {
         >
           <Plus size={15} /><span>{isSaving ? 'Saving Note…' : 'Save Note at current time'}</span>
         </button>
-        <p className="text-[11px] text-zinc-500">The current player timestamp is captured only when you save.</p>
+        <p className="text-[11px] text-muted-foreground">The current player timestamp is captured only when you save.</p>
       </form>
 
       {noteState.error && (
@@ -42,7 +42,7 @@ export function NotesPanel({ notes, noteState, onSeek }) {
 
       <div className="space-y-3 pt-2" aria-busy={isSaving}>
         {notes.length === 0 ? (
-          <p className="py-6 text-center text-xs text-zinc-500">No notes written for this video yet.</p>
+          <p className="py-6 text-center text-xs text-muted-foreground">No notes written for this video yet.</p>
         ) : notes.map(note => {
           const isEditing = noteState.editingId === note.id;
           return (
@@ -58,22 +58,22 @@ export function NotesPanel({ notes, noteState, onSeek }) {
                 </button>
                 <div className="flex items-center gap-1">
                   {!isEditing && (
-                    <button type="button" onClick={() => noteState.beginEdit(note)} aria-label={`Edit note at ${formatSeconds(note.timestamp)}`} className="min-h-11 min-w-11 rounded-lg p-2 text-zinc-400 hover:bg-zinc-800 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><Pencil size={15} /></button>
+                    <button type="button" onClick={() => noteState.beginEdit(note)} aria-label={`Edit note at ${formatSeconds(note.timestamp)}`} className="min-h-11 min-w-11 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><Pencil size={15} /></button>
                   )}
-                  <button type="button" title="Delete note" onClick={() => noteState.setDeleteCandidate(note)} aria-label={`Delete note at ${formatSeconds(note.timestamp)}`} className="min-h-11 min-w-11 rounded-lg p-2 text-zinc-400 hover:bg-red-500/10 hover:text-red-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><Trash2 size={15} /></button>
+                  <button type="button" title="Delete note" onClick={() => noteState.setDeleteCandidate(note)} aria-label={`Delete note at ${formatSeconds(note.timestamp)}`} className="min-h-11 min-w-11 rounded-lg p-2 text-muted-foreground hover:bg-red-500/10 hover:text-red-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><Trash2 size={15} /></button>
                 </div>
               </div>
               {isEditing ? (
                 <form onSubmit={noteState.saveEdit} className="space-y-2">
                   <label htmlFor={`edit-note-${note.id}`} className="sr-only">Edit note</label>
-                  <textarea id={`edit-note-${note.id}`} value={noteState.editDraft} onChange={event => noteState.setEditDraft(event.target.value)} className="min-h-20 w-full resize-y rounded-lg border border-border bg-zinc-950 p-2 text-xs text-white focus:outline-none focus:border-primary" />
+                  <textarea id={`edit-note-${note.id}`} value={noteState.editDraft} onChange={event => noteState.setEditDraft(event.target.value)} className="min-h-20 w-full resize-y rounded-lg border border-border bg-card p-2 text-xs text-foreground focus:outline-none focus:border-primary" />
                   <div className="flex gap-2">
                     <button type="submit" disabled={!noteState.editDraft.trim() || isSaving} className="flex min-h-11 flex-1 items-center justify-center gap-1 rounded-lg bg-primary px-3 text-xs font-bold text-white disabled:opacity-50"><Check size={14} />Save changes</button>
-                    <button type="button" onClick={noteState.cancelEdit} disabled={isSaving} className="flex min-h-11 flex-1 items-center justify-center gap-1 rounded-lg border border-border px-3 text-xs font-bold text-zinc-300"><X size={14} />Cancel</button>
+                    <button type="button" onClick={noteState.cancelEdit} disabled={isSaving} className="flex min-h-11 flex-1 items-center justify-center gap-1 rounded-lg border border-border px-3 text-xs font-bold text-foreground"><X size={14} />Cancel</button>
                   </div>
                 </form>
               ) : (
-                <p className="min-w-0 whitespace-pre-wrap break-words text-xs leading-relaxed text-zinc-200">{note.content}</p>
+                <p className="min-w-0 whitespace-pre-wrap break-words text-xs leading-relaxed text-foreground/90">{note.content}</p>
               )}
             </article>
           );
@@ -86,12 +86,12 @@ export function NotesPanel({ notes, noteState, onSeek }) {
         titleId="delete-note-title"
         closeOnBackdrop={!isSaving}
         closeOnEscape={!isSaving}
-        className="w-full max-w-sm rounded-2xl border border-border bg-zinc-950 p-5 shadow-2xl"
+        className="w-full max-w-sm rounded-2xl border border-border bg-card p-5 shadow-2xl"
       >
-        <h2 id="delete-note-title" className="text-base font-bold text-white">Delete this note?</h2>
-        <p className="mt-2 text-sm text-zinc-400">This action removes the note permanently.</p>
+        <h2 id="delete-note-title" className="text-base font-bold text-foreground">Delete this note?</h2>
+        <p className="mt-2 text-sm text-muted-foreground">This action removes the note permanently.</p>
         <div className="mt-5 flex gap-2">
-          <button type="button" onClick={() => noteState.setDeleteCandidate(null)} disabled={isSaving} className="min-h-11 flex-1 rounded-xl border border-border text-sm font-bold text-zinc-300">Cancel</button>
+          <button type="button" onClick={() => noteState.setDeleteCandidate(null)} disabled={isSaving} className="min-h-11 flex-1 rounded-xl border border-border text-sm font-bold text-foreground">Cancel</button>
           <button type="button" onClick={noteState.confirmDelete} disabled={isSaving} className="min-h-11 flex-1 rounded-xl bg-red-600 text-sm font-bold text-white disabled:opacity-50">{isSaving ? 'Deleting…' : 'Delete note'}</button>
         </div>
       </Dialog>

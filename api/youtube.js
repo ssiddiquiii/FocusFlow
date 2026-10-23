@@ -186,7 +186,7 @@ export default async function handler(request, response) {
   }
 
   // 1. IP Rate Limiting (Defense against DoS & scraper abuse)
-  const clientIp = request.headers['x-forwarded-for']?.split(',')[0]?.trim() || request.socket?.remoteAddress || 'unknown';
+  const clientIp = request.headers?.['x-forwarded-for']?.split(',')[0]?.trim() || request.socket?.remoteAddress || 'unknown';
   if (isRateLimited(clientIp)) {
     response.setHeader('Retry-After', '60');
     return response.status(429).json({ 

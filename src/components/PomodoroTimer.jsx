@@ -104,7 +104,7 @@ export default function PomodoroTimer() {
         osc.start(ctx.currentTime + i * 0.12);
         osc.stop(ctx.currentTime + i * 0.12 + 0.65);
       });
-    } catch (_) {}
+    } catch {}
   }, [soundEnabled]);
 
   // Main countdown interval
@@ -261,7 +261,7 @@ export default function PomodoroTimer() {
     <>
       {/* ☕ SMOOTH REST TIME RECOVERY OVERLAY */}
       {strictLockActive && (
-        <div className="fixed inset-0 z-[100] bg-zinc-950/98 backdrop-blur-2xl flex flex-col items-center justify-center p-6 text-center space-y-6 animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-2xl flex flex-col items-center justify-center p-6 text-center space-y-6 animate-in fade-in duration-300">
           <div className="w-20 h-20 rounded-full bg-emerald-500/15 border-2 border-emerald-500/40 text-emerald-400 flex items-center justify-center shadow-xl shadow-emerald-500/20">
             <Coffee size={38} className="animate-pulse" />
           </div>
@@ -270,21 +270,21 @@ export default function PomodoroTimer() {
             <span className="px-3 py-1 text-[11px] font-extrabold uppercase tracking-widest rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
               ☕ Rest & Re-energize
             </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-normal">
               Focus Sprint Complete!
             </h1>
-            <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+            <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
               Step away from the screen, stretch, take a sip of water, and rest your eyes. Your next study session will be sharper!
             </p>
           </div>
 
           {/* Smooth Dynamic Countdown Display */}
-          <div className="glass-panel px-8 py-5 rounded-3xl border border-emerald-500/30 space-y-1 bg-zinc-900/60 shadow-2xl">
-            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block">Rest Time Remaining</span>
+          <div className="glass-panel px-8 py-5 rounded-3xl border border-emerald-500/30 space-y-1 bg-card border-border shadow-2xl">
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block">Rest Time Remaining</span>
             <div className="text-4xl sm:text-5xl font-extrabold font-mono text-emerald-400 tracking-wider">
               {formatTime(timeLeft)}
             </div>
-            <div className="text-[11px] text-zinc-400">
+            <div className="text-[11px] text-muted-foreground">
               {isRunning ? 'Counting down smoothly...' : 'Timer paused'}
             </div>
           </div>
@@ -293,7 +293,7 @@ export default function PomodoroTimer() {
           <div className="flex flex-wrap items-center justify-center gap-3">
             <button
               onClick={toggleStartPause}
-              className="px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-700 hover:border-zinc-500 text-zinc-200 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-muted/50 border border-border hover:bg-muted text-foreground text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer"
             >
               {isRunning ? <Pause size={13} /> : <Play size={13} />}
               <span>{isRunning ? 'Pause Rest' : 'Resume Countdown'}</span>
@@ -301,7 +301,7 @@ export default function PomodoroTimer() {
 
             <button
               onClick={handleAddMinuteBreak}
-              className="px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-700 hover:border-zinc-500 text-zinc-200 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-muted/50 border border-border hover:bg-muted text-foreground text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer"
             >
               <Plus size={13} />
               <span>+1 Min Rest</span>
@@ -329,7 +329,7 @@ export default function PomodoroTimer() {
                 ? mode === 'focus'
                   ? 'bg-primary/25 border-primary/60 text-white shadow-primary/20 animate-pulse'
                   : 'bg-emerald-500/25 border-emerald-500/60 text-emerald-300 shadow-emerald-500/20 animate-pulse'
-                : 'bg-zinc-950/90 border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700'
+                : 'bg-card border-border text-foreground hover:bg-muted hover:border-border/80'
             }`}
           >
             {mode === 'focus' ? (
@@ -349,31 +349,31 @@ export default function PomodoroTimer() {
           </button>
         ) : (
           /* Expanded Floating Panel */
-          <div className="w-80 glass-panel rounded-2xl p-4 sm:p-5 border border-primary/30 shadow-2xl space-y-4 animate-in zoom-in-95 duration-200 bg-zinc-950/98 backdrop-blur-xl">
+          <div className="w-80 glass-panel rounded-2xl p-4 sm:p-5 border border-primary/30 shadow-2xl space-y-4 animate-in zoom-in-95 duration-200 bg-card/98 backdrop-blur-xl">
             {/* Header */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Flame size={17} className="text-primary fill-primary" />
-                <h3 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">Focus & Rest Timer</h3>
+                <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider">Focus & Rest Timer</h3>
               </div>
               <div className="flex items-center gap-1.5">
                 <button
                   onClick={() => setIsEditing(!isEditing)}
-                  className="text-zinc-500 hover:text-primary transition p-1.5 rounded-lg hover:bg-zinc-900 cursor-pointer"
+                  className="text-muted-foreground hover:text-primary transition p-1.5 rounded-lg hover:bg-muted cursor-pointer"
                   title="Customize Durations"
                 >
                   <Edit3 size={14} />
                 </button>
                 <button
                   onClick={() => setSoundEnabled(!soundEnabled)}
-                  className="text-zinc-500 hover:text-zinc-300 transition p-1.5 rounded-lg hover:bg-zinc-900 cursor-pointer"
+                  className="text-muted-foreground hover:text-foreground transition p-1.5 rounded-lg hover:bg-muted cursor-pointer"
                   title={soundEnabled ? 'Chime Sound Enabled' : 'Sound Muted'}
                 >
                   {soundEnabled ? <Volume2 size={14} className="text-primary" /> : <VolumeX size={14} />}
                 </button>
                 <button
                   onClick={() => setIsExpanded(false)}
-                  className="text-zinc-500 hover:text-white transition p-1.5 rounded-lg hover:bg-zinc-900 cursor-pointer"
+                  className="text-muted-foreground hover:text-foreground transition p-1.5 rounded-lg hover:bg-muted cursor-pointer"
                 >
                   <X size={15} />
                 </button>
@@ -382,29 +382,29 @@ export default function PomodoroTimer() {
 
             {/* Custom Duration Editor */}
             {isEditing ? (
-              <div className="p-3 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-3">
+              <div className="p-3 rounded-xl bg-muted/40 border border-border space-y-3">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-primary block">Customize Minutes:</span>
                 <div className="grid grid-cols-2 gap-2.5 text-xs">
                   <div>
-                    <label className="text-[10px] text-zinc-400 block mb-1">Focus (min):</label>
+                    <label className="text-[10px] text-muted-foreground block mb-1">Focus (min):</label>
                     <input
                       type="number"
                       min="1"
                       max="120"
                       value={focusMins}
                       onChange={(e) => setFocusMins(parseInt(e.target.value, 10) || 1)}
-                      className="w-full bg-zinc-950 border border-zinc-700 rounded-lg p-2 text-white font-bold focus:outline-none focus:border-primary text-center"
+                      className="w-full bg-card border border-border rounded-lg p-2 text-foreground font-bold focus:outline-none focus:border-primary text-center"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] text-zinc-400 block mb-1">Break (min):</label>
+                    <label className="text-[10px] text-muted-foreground block mb-1">Break (min):</label>
                     <input
                       type="number"
                       min="1"
                       max="60"
                       value={breakMins}
                       onChange={(e) => setBreakMins(parseInt(e.target.value, 10) || 1)}
-                      className="w-full bg-zinc-950 border border-zinc-700 rounded-lg p-2 text-white font-bold focus:outline-none focus:border-primary text-center"
+                      className="w-full bg-card border border-border rounded-lg p-2 text-foreground font-bold focus:outline-none focus:border-primary text-center"
                     />
                   </div>
                 </div>
@@ -418,7 +418,7 @@ export default function PomodoroTimer() {
               </div>
             ) : (
               /* Mode Selector Tabs */
-              <div className="grid grid-cols-2 gap-1 bg-zinc-900/90 p-1 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-zinc-800">
+              <div className="grid grid-cols-2 gap-1 bg-muted/50 p-1 rounded-xl text-[10px] font-bold uppercase tracking-wider border border-border">
                 <button
                   onClick={() => {
                     setMode('focus');
@@ -427,7 +427,7 @@ export default function PomodoroTimer() {
                     setTimeLeft(focusMins * 60);
                   }}
                   className={`py-1.5 rounded-lg transition cursor-pointer text-center ${
-                    mode === 'focus' ? 'bg-primary text-white shadow' : 'text-zinc-500 hover:text-zinc-300'
+                    mode === 'focus' ? 'bg-primary text-white shadow' : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
                   Focus ({focusMins}m)
@@ -440,7 +440,7 @@ export default function PomodoroTimer() {
                     setTimeLeft(breakMins * 60);
                   }}
                   className={`py-1.5 rounded-lg transition cursor-pointer text-center ${
-                    mode === 'break' ? 'bg-emerald-600 text-white shadow' : 'text-zinc-500 hover:text-zinc-300'
+                    mode === 'break' ? 'bg-emerald-600 text-white shadow' : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
                   Break ({breakMins}m)
@@ -450,12 +450,12 @@ export default function PomodoroTimer() {
 
             {/* Countdown Clock Display */}
             <div className="text-center py-1 space-y-2">
-              <div className="text-4xl sm:text-5xl font-extrabold font-mono text-white tracking-wider">
+              <div className="text-4xl sm:text-5xl font-extrabold font-mono text-foreground tracking-wider">
                 {formatTime(timeLeft)}
               </div>
 
               {/* Smooth Progress Bar */}
-              <div className="w-full bg-zinc-900 h-1.5 rounded-full overflow-hidden border border-zinc-800">
+              <div className="w-full bg-muted h-1.5 rounded-full overflow-hidden border border-border">
                 <div
                   className={`h-full transition-all duration-300 ${
                     mode === 'focus' ? 'bg-gradient-to-r from-primary to-accent' : 'bg-emerald-400'
@@ -483,7 +483,7 @@ export default function PomodoroTimer() {
 
               <button
                 onClick={handleReset}
-                className="p-2.5 rounded-xl bg-zinc-900 border border-border text-zinc-400 hover:text-white transition cursor-pointer"
+                className="p-2.5 rounded-xl bg-muted/50 border border-border text-muted-foreground hover:text-foreground transition cursor-pointer"
                 title="Reset Timer"
               >
                 <RotateCcw size={14} />
@@ -491,12 +491,12 @@ export default function PomodoroTimer() {
             </div>
 
             {/* Sessions Counter Footer */}
-            <div className="pt-2 border-t border-zinc-900 flex items-center justify-between text-[11px] text-zinc-400">
+            <div className="pt-2 border-t border-border flex items-center justify-between text-[11px] text-muted-foreground">
               <span className="flex items-center gap-1 font-semibold">
                 <Flame size={13} className="text-amber-400" />
                 <span>Today's Focus Cycles:</span>
               </span>
-              <span className="font-extrabold text-white">{sessionsCompleted} Finished</span>
+              <span className="font-bold text-foreground">{sessionsCompleted} Finished</span>
             </div>
           </div>
         )}

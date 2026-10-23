@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
-import { Download, Upload, ShieldAlert, RotateCcw, Key, CheckCircle2 } from 'lucide-react';
+﻿import React, { useState } from 'react';
+import { Download, Upload, ShieldAlert, RotateCcw, Key, CheckCircle2, Sun, Moon } from 'lucide-react';
 import { clearProgressAndNotes, exportBackup, importBackup } from '../services/dataCommands';
+import { useTheme } from '../hooks/useTheme';
 
 /**
  * Settings & Console Management Component.
  * Supports:
+ * - Theme selection (Light / Dark mode)
  * - Local backup JSON export and import
  * - YouTube API Key management (custom key support)
  * - Watch progress and notes clearing
  */
 export default function Settings() {
+  const { isDark, setTheme } = useTheme();
   const [statusMsg, setStatusMsg] = useState({ text: '', type: 'info' });
   const [showConfirmReset, setShowConfirmReset] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
@@ -71,7 +74,7 @@ export default function Settings() {
       let parsedData;
       try {
         parsedData = JSON.parse(text);
-      } catch (_) {
+      } catch {
         throw new SyntaxError('Invalid JSON file format. Please select a valid JSON backup file.');
       }
 
@@ -106,37 +109,88 @@ export default function Settings() {
   return (
     <div className="p-4 sm:p-8 max-w-4xl mx-auto space-y-8 animate-page-entry">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Settings & Management</h1>
-        <p className="text-zinc-400 text-xs mt-1">Manage local database backups, YouTube API configuration, and learning progress.</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-normal">Settings & Preferences</h1>
+        <p className="text-muted-foreground text-xs sm:text-sm mt-1 leading-relaxed">Customize your theme appearance, local database backups, and YouTube API configuration.</p>
       </div>
 
       {statusMsg.text && (
         <div className={`p-4 rounded-xl text-xs font-semibold border ${
-          statusMsg.type === 'success' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' :
-          statusMsg.type === 'error' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
-          'bg-zinc-900 text-zinc-300 border-border'
+          statusMsg.type === 'success' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
+          statusMsg.type === 'error' ? 'bg-destructive/10 text-destructive border-destructive/20' :
+          'bg-muted text-muted-foreground border-border'
         }`}>
           {statusMsg.text}
         </div>
       )}
 
+      {/* Theme Appearance Selector */}
+      <div className="glass-panel rounded-2xl p-5 sm:p-6 space-y-4 bg-card border border-border shadow-sm">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center border border-primary/20 flex-shrink-0">
+              {isDark ? <Moon size={18} /> : <Sun size={18} />}
+            </div>
+            <div>
+              <h2 className="text-base font-semibold text-foreground tracking-normal">Interface Theme</h2>
+              <p className="text-muted-foreground text-xs leading-relaxed">
+                Choose between Option 1 "Obsidian Studio" dark mode and clean "Warm Paper" light mode.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 pt-1">
+          <button
+            type="button"
+            onClick={() => setTheme('light')}
+            className={`p-3.5 rounded-xl border flex items-center justify-between text-xs font-semibold transition cursor-pointer ${
+              !isDark
+                ? 'border-primary bg-primary/10 text-primary shadow-sm'
+                : 'border-border bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Sun size={16} className="text-amber-500" />
+              <span>Light Mode (Warm Paper)</span>
+            </div>
+            {!isDark && <CheckCircle2 size={16} className="text-primary" />}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setTheme('dark')}
+            className={`p-3.5 rounded-xl border flex items-center justify-between text-xs font-semibold transition cursor-pointer ${
+              isDark
+                ? 'border-primary bg-primary/10 text-primary shadow-sm'
+                : 'border-border bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Moon size={16} className="text-orange-400" />
+              <span>Dark Mode (Obsidian)</span>
+            </div>
+            {isDark && <CheckCircle2 size={16} className="text-primary" />}
+          </button>
+        </div>
+      </div>
+
       {/* YouTube API Configuration */}
-      <div className="glass-panel rounded-2xl p-5 sm:p-6 space-y-4">
+      <div className="glass-panel rounded-2xl p-5 sm:p-6 space-y-4 bg-card border border-border shadow-sm">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center border border-primary/20 flex-shrink-0">
             <Key size={18} />
           </div>
           <div>
-            <h2 className="text-base font-bold text-white">YouTube API Configuration (Optional)</h2>
-            <p className="text-zinc-500 text-xs">
-              FocusFlow includes a built-in shared key. You can also provide your personal Google Cloud YouTube Data API v3 key to avoid daily quota limits.
+            <h2 className="text-base font-semibold text-foreground tracking-normal">YouTube API Configuration (Optional)</h2>
+            <p className="text-muted-foreground text-xs leading-relaxed">
+              FocusFlow includes an automatic proxy with zero-key fallback. You can also provide a personal Google Cloud YouTube Data API v3 key.
             </p>
           </div>
         </div>
 
         <form onSubmit={handleSaveApiKey} className="space-y-3 pt-1">
           <div>
-            <label className="block text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-1.5">
               Personal API Key
             </label>
             <div className="flex flex-col sm:flex-row gap-2">
@@ -144,29 +198,29 @@ export default function Settings() {
                 type="password"
                 value={customKey}
                 onChange={(e) => setCustomKey(e.target.value)}
-                placeholder="AIzaSy... (Leave empty to use built-in shared key)"
-                className="flex-1 px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-border text-white text-xs font-mono focus:outline-none focus:border-primary placeholder:text-zinc-600 transition"
+                placeholder="AIzaSy... (Leave empty to use built-in proxy)"
+                className="flex-1 px-4 py-2.5 rounded-xl bg-muted/60 border border-border text-foreground text-xs font-mono focus:outline-none focus:border-primary placeholder:text-muted-foreground transition"
               />
               <button
                 type="submit"
-                className="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary/90 text-white text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow flex-shrink-0"
+                className="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-semibold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-sm flex-shrink-0"
               >
-                {keySaved ? <CheckCircle2 size={14} className="text-white" /> : null}
+                {keySaved ? <CheckCircle2 size={14} /> : null}
                 <span>{keySaved ? 'Saved!' : 'Save Key'}</span>
               </button>
             </div>
           </div>
-          <div className="flex items-center justify-between text-[11px] text-zinc-400 pt-1">
-            <span>Status: <strong className={customKey.trim() ? 'text-emerald-400' : 'text-primary'}>{customKey.trim() ? 'Personal Key Active' : 'Default Built-in Key Active'}</strong></span>
+          <div className="flex items-center justify-between text-[11px] text-muted-foreground pt-1">
+            <span>Status: <strong className={customKey.trim() ? 'text-emerald-500' : 'text-primary'}>{customKey.trim() ? 'Personal Key Active' : 'Automatic Proxy Active'}</strong></span>
             {customKey.trim() && (
               <button
                 type="button"
                 onClick={() => {
                   setCustomKey('');
                   localStorage.removeItem('focusflow_custom_youtube_api_key');
-                  setStatusMsg({ text: 'Reverted to default built-in API key.', type: 'info' });
+                  setStatusMsg({ text: 'Reverted to default built-in proxy.', type: 'info' });
                 }}
-                className="text-zinc-400 hover:text-red-400 transition underline cursor-pointer"
+                className="text-muted-foreground hover:text-destructive transition underline cursor-pointer"
               >
                 Clear & Reset
               </button>
@@ -176,34 +230,34 @@ export default function Settings() {
       </div>
 
       {/* Local Data Backups */}
-      <div className="glass-panel rounded-2xl p-5 sm:p-6 space-y-6">
+      <div className="glass-panel rounded-2xl p-5 sm:p-6 space-y-5 bg-card border border-border shadow-sm">
         <div>
-          <h2 className="text-base font-bold text-white mb-1">Local Data Backups</h2>
-          <p className="text-zinc-500 text-xs leading-relaxed">
+          <h2 className="text-base font-semibold text-foreground tracking-normal mb-1">Local Data Backups</h2>
+          <p className="text-muted-foreground text-xs leading-relaxed">
             FocusFlow is a local-first application. Your watch progress and notes are stored entirely in your browser.
             We recommend exporting periodic backups to keep your data secure.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           {/* Export button */}
           <button
             onClick={handleExport}
-            className="flex items-center justify-center gap-3 px-5 py-3.5 bg-zinc-900 border border-border hover:bg-zinc-800 transition rounded-xl font-bold text-white text-xs sm:text-sm cursor-pointer"
+            className="flex items-center justify-center gap-2.5 px-5 py-3 bg-muted/40 border border-border hover:bg-muted transition rounded-xl font-semibold text-foreground text-xs sm:text-sm cursor-pointer shadow-sm"
           >
-            <Download size={16} />
+            <Download size={16} className="text-muted-foreground" />
             <span>Export Backup JSON</span>
           </button>
 
           {/* Import button wrapper */}
-          <label className={`flex items-center justify-center gap-3 px-5 py-3.5 bg-zinc-900 border border-border hover:bg-zinc-800 transition rounded-xl font-bold text-white text-xs sm:text-sm ${isImporting ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}`}>
-            <Upload size={16} />
+          <label className={`flex items-center justify-center gap-2.5 px-5 py-3 bg-muted/40 border border-border hover:bg-muted transition rounded-xl font-semibold text-foreground text-xs sm:text-sm shadow-sm ${isImporting ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}`}>
+            <Upload size={16} className="text-muted-foreground" />
             <span>{isImporting ? 'Restoring Backup...' : 'Import Backup JSON'}</span>
             <input 
               type="file" 
               accept=".json" 
-              onChange={handleImport}
-              disabled={isImporting}
+              onChange={handleImport} 
+              disabled={isImporting} 
               className="hidden" 
             />
           </label>
@@ -211,42 +265,42 @@ export default function Settings() {
       </div>
 
       {/* Progress Data Management */}
-      <div className="glass-panel rounded-2xl p-5 sm:p-6 border-zinc-800 space-y-4">
+      <div className="glass-panel rounded-2xl p-5 sm:p-6 border border-border space-y-4 bg-card shadow-sm">
         <div>
-          <h2 className="text-base font-bold text-white mb-1">Progress & Notes Reset</h2>
-          <p className="text-zinc-500 text-xs leading-relaxed">
-            Reset your watch times, checkmarks, and notes to zero. Your course catalogs (both default and imported playlists) will stay safe and untouched.
+          <h2 className="text-base font-semibold text-foreground tracking-normal mb-1">Progress & Notes Reset</h2>
+          <p className="text-muted-foreground text-xs leading-relaxed">
+            Reset your watch times, checkmarks, and notes to zero. Your course catalogs will stay safe and untouched.
           </p>
         </div>
 
         {!showConfirmReset ? (
           <button
             onClick={() => setShowConfirmReset(true)}
-            className="px-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 transition text-xs font-bold flex items-center gap-2 cursor-pointer"
+            className="px-4 py-2.5 rounded-xl bg-muted/40 border border-border text-foreground hover:bg-muted transition text-xs font-semibold flex items-center gap-2 cursor-pointer"
           >
-            <RotateCcw size={14} />
+            <RotateCcw size={14} className="text-muted-foreground" />
             <span>Clear Watch Progress & Notes</span>
           </button>
         ) : (
-          <div className="p-4 rounded-xl bg-amber-500/5 border border-amber-500/20 space-y-4">
-            <div className="flex items-start gap-3 text-amber-400 text-xs">
+          <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/25 space-y-4">
+            <div className="flex items-start gap-3 text-amber-600 dark:text-amber-400 text-xs">
               <ShieldAlert size={18} className="flex-shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold block mb-1">Confirm Reset Progress & Notes</span>
-                <span>Are you sure? All completed checkmarks, watch progress, and notes will be cleared. All course catalogs will remain untouched.</span>
+                <span className="leading-relaxed">Are you sure? All completed checkmarks, watch progress, and notes will be cleared. All course catalogs will remain untouched.</span>
               </div>
             </div>
 
             <div className="flex gap-3">
               <button
                 onClick={handleExecuteReset}
-                className="px-4 py-2 text-xs font-bold rounded-lg bg-amber-600 hover:bg-amber-700 text-white transition cursor-pointer"
+                className="px-4 py-2 text-xs font-semibold rounded-xl bg-amber-600 hover:bg-amber-700 text-white transition cursor-pointer shadow-sm"
               >
                 Yes, Clear Progress & Notes
               </button>
               <button
                 onClick={() => setShowConfirmReset(false)}
-                className="px-4 py-2 text-xs font-bold rounded-lg bg-zinc-800 border border-border text-white hover:bg-zinc-700 transition cursor-pointer"
+                className="px-4 py-2 text-xs font-semibold rounded-xl bg-card border border-border text-foreground hover:bg-muted transition cursor-pointer"
               >
                 Cancel
               </button>
