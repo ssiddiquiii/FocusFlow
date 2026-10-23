@@ -241,11 +241,103 @@ async function fetchSingleVideoDirectClient(videoId, apiKey) {
 }
 
 /**
+ * Zero-Key Client Fallback: Fetches single video details via public YouTube oEmbed.
+ */
+async function fetchZeroKeyVideoClient(videoId) {
+  const oembedUrl = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&format=json`;
+  const res = await fetch(oembedUrl, { signal: AbortSignal.timeout(6000) });
+  if (!res.ok) throw new Error('Public oEmbed unavailable.');
+
+  const data = await res.json();
+  const course = {
+    id: videoId,
+    title: data.title || 'YouTube Crash Course',
+    description: `Full Tutorial by ${data.author_name || 'YouTube Creator'}. Study with notes, progress tracking, and zero ads.`,
+    thumbnailUrl: data.thumbnail_url || `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+    channelName: data.author_name || 'YouTube Creator',
+    type: 'youtube',
+    udemyUrl: ''
+  };
+
+  const lessons = [
+    {
+      id: videoId,
+      courseId: videoId,
+      title: data.title || 'Full Crash Course',
+      description: 'Comprehensive single-video tutorial with notes and progress tracking.',
+      thumbnailUrl: data.thumbnail_url || `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+      duration: '0:00',
+      index: 1,
+      type: 'youtube'
+    }
+  ];
+
+  return { course, lessons };
+}
+
+/**
+ * Zero-Key Client Fallback: Fetches playlist videos via public YouTube Atom/RSS feed.
+ */
+async function fetchZeroKeyPlaylistClient(playlistId) {
+  const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${encodeURIComponent(playlistId)}`;
+  const res = await fetch(rssUrl, { signal: AbortSignal.timeout(8000) });
+  if (!res.ok) throw new Error('Public RSS feed unavailable.');
+
+  const xml = await res.text();
+  const feedTitleMatch = xml.match(/<feed[^>]*>[\s\S]*?<title>([\s\S]*?)<\/title>/);
+  const feedAuthorMatch = xml.match(/<author>[\s\S]*?<name>([\s\S]*?)<\/name>/);
+  
+  const title = feedTitleMatch ? feedTitleMatch[1].replace(/<!\[CDATA\[|\]\]>/g, '').trim() : 'YouTube Playlist';
+  const author = feedAuthorMatch ? feedAuthorMatch[1].replace(/<!\[CDATA\[|\]\]>/g, '').trim() : 'YouTube Creator';
+
+  const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
+  let match;
+  const lessons = [];
+  let index = 1;
+
+  while ((match = entryRegex.exec(xml)) !== null) {
+    const entryXml = match[1];
+    const videoIdMatch = entryXml.match(/<yt:videoId>(.*?)<\/yt:videoId>/);
+    const videoTitleMatch = entryXml.match(/<title>(.*?)<\/title>/);
+    const thumbMatch = entryXml.match(/<media:thumbnail[^>]*url=["'](.*?)["']/);
+    const descMatch = entryXml.match(/<media:description>([\s\S]*?)<\/media:description>/);
+
+    if (videoIdMatch) {
+      const vId = videoIdMatch[1].trim();
+      lessons.push({
+        id: vId,
+        courseId: playlistId,
+        title: videoTitleMatch ? videoTitleMatch[1].replace(/<!\[CDATA\[|\]\]>/g, '').trim() : `Lesson ${index}`,
+        description: descMatch ? descMatch[1].trim() : '',
+        thumbnailUrl: thumbMatch ? thumbMatch[1] : `https://i.ytimg.com/vi/${vId}/hqdefault.jpg`,
+        duration: '0:00',
+        index: index++,
+        type: 'youtube'
+      });
+    }
+  }
+
+  if (lessons.length === 0) throw new Error('No public videos found in RSS feed.');
+
+  const course = {
+    id: playlistId,
+    title,
+    description: `YouTube Playlist Course (${lessons.length} lectures)`,
+    thumbnailUrl: lessons[0].thumbnailUrl,
+    channelName: author,
+    type: 'youtube',
+    udemyUrl: ''
+  };
+
+  return { course, lessons };
+}
+
+/**
  * Primary Unified YouTube Course Fetcher.
  * Accepts:
  * - Playlist URL or Playlist ID
  * - Single Video URL or Video ID
- * Tries serverless proxy first, automatically falls back to direct client API.
+ * Tries serverless proxy first, automatically falls back to direct client API and Zero-Key public feeds.
  * @param {string} inputUrlOrId 
  * @returns {Promise<{ course: object, lessons: Array<object> }>}
  */
@@ -272,17 +364,52 @@ export async function fetchYouTubePlaylistData(inputUrlOrId) {
         }
       }
     } catch (_) {
-      // Fallback to direct client API
+      // Fallback
     }
 
-    // 2. Client-side fallback
-    return await fetchPlaylistDirectClient(playlistId, apiKey);
+    // 2. Client-side API fallback (if custom key is available)
+    if (apiKey) {
+      try {
+        return await fetchPlaylistDirectClient(playlistId, apiKey);
+      } catch (_) {
+        // Fallback to Zero-Key RSS
+      }
+    }
+
+    // 3. Zero-Key Public RSS Fallback (Zero quota, zero key required)
+    return await fetchZeroKeyPlaylistClient(playlistId);
   }
 
   // If it's a single video tutorial (e.g. 1-hour to 12-hour crash courses)
   const videoId = extractVideoId(inputUrlOrId);
   if (videoId) {
-    return await fetchSingleVideoDirectClient(videoId, apiKey);
+    // 1. Try serverless proxy
+    try {
+      const endpointUrl = `/api/youtube?videoId=${encodeURIComponent(videoId)}`;
+      const response = await fetch(endpointUrl, { signal: AbortSignal.timeout(6000) });
+      const contentType = response.headers.get('content-type') || '';
+
+      if (response.ok && contentType.includes('application/json')) {
+        const data = await response.json();
+        if (data.course && Array.isArray(data.lessons)) {
+          return { course: data.course, lessons: data.lessons };
+        }
+      }
+    } catch (_) {
+      // Fallback
+    }
+
+    // 2. Client-side API fallback (if custom key is available)
+    if (apiKey) {
+      try {
+        return await fetchSingleVideoDirectClient(videoId, apiKey);
+      } catch (_) {
+        // Fallback to Zero-Key oEmbed
+      }
+    }
+
+    // 3. Zero-Key Public oEmbed Fallback (Zero quota, zero key required)
+    return await fetchZeroKeyVideoClient(videoId);
   }
 
   throw new Error('Please enter a valid YouTube playlist URL or video tutorial link.');

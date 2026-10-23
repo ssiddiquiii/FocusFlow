@@ -9,10 +9,44 @@ import { VitePWA } from 'vite-plugin-pwa'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+// Local Dev Server Middleware for /api/youtube
+function youtubeApiDevPlugin() {
+  return {
+    name: 'youtube-api-dev-server',
+    configureServer(server) {
+      server.middlewares.use('/api/youtube', async (req, res) => {
+        try {
+          const { default: handler } = await import('./api/youtube.js');
+          const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+          const query = Object.fromEntries(parsedUrl.searchParams.entries());
+          
+          req.query = query;
+          res.status = (code) => {
+            res.statusCode = code;
+            return res;
+          };
+          res.json = (data) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(data));
+            return res;
+          };
+
+          await handler(req, res);
+        } catch (err) {
+          res.statusCode = 500;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: err.message }));
+        }
+      });
+    }
+  };
+}
+
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    youtubeApiDevPlugin(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png', 'logo.png', 'logo.svg'],
