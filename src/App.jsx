@@ -5,6 +5,8 @@ import { Menu, Search, X, Sun, Moon } from 'lucide-react';
 import PomodoroTimer from './components/PomodoroTimer';
 import ErrorBoundary from './components/ErrorBoundary';
 import CommandPalette from './components/CommandPalette';
+import FeedbackModal from './components/FeedbackModal';
+import { MessageSquarePlus } from 'lucide-react';
 import { useUIStore } from './hooks/useUIStore';
 import { useTheme } from './hooks/useTheme';
 import { isNavigationActive, navigationItems } from './components/shell/navigation';
@@ -22,7 +24,7 @@ const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), [tabindex]:not([tab
  * Inner shell wrapper to access React Router location hooks.
  */
 function AppContent() {
-  const { commandPaletteOpen, openCommandPalette, closeCommandPalette } = useUIStore();
+  const { commandPaletteOpen, openCommandPalette, closeCommandPalette, feedbackModalOpen, openFeedbackModal, closeFeedbackModal } = useUIStore();
   const { isDark, toggleTheme } = useTheme();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const menuButtonRef = useRef(null);
@@ -333,6 +335,14 @@ function AppContent() {
             <span>Built by <span className="font-semibold text-foreground">Sameed Siddiqui</span></span>
             <span className="mx-2 text-muted-foreground/40">•</span>
             <span>Local-First Workspace</span>
+            <span className="mx-2 text-muted-foreground/40">•</span>
+            <button 
+              type="button" 
+              onClick={openFeedbackModal} 
+              className="hover:text-primary transition underline cursor-pointer"
+            >
+              Feedback & Support
+            </button>
           </footer>
         )}
       </main>
@@ -345,6 +355,26 @@ function AppContent() {
       />
 
       <PomodoroTimer />
+
+      {/* Global Feedback & Bug Report Modal */}
+      <FeedbackModal 
+        isOpen={feedbackModalOpen} 
+        onClose={closeFeedbackModal} 
+      />
+
+      {/* Floating Feedback Trigger Button (Mobile & Desktop) */}
+      {!location.pathname.includes('/lessons/') && (
+        <button
+          type="button"
+          onClick={openFeedbackModal}
+          aria-label="Send Feedback or Report Bug"
+          className="fixed bottom-5 right-5 z-40 hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full border border-border/80 bg-card/90 text-foreground hover:text-primary hover:border-primary/50 text-xs font-semibold shadow-lg backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer"
+          title="Found a bug or have an idea? Click to send feedback!"
+        >
+          <MessageSquarePlus size={15} className="text-primary" />
+          <span>Feedback</span>
+        </button>
+      )}
     </div>
   );
 }

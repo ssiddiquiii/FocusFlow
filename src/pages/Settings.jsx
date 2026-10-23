@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Download, Upload, ShieldAlert, RotateCcw, Key, CheckCircle2, Sun, Moon } from 'lucide-react';
 import { clearProgressAndNotes, exportBackup, importBackup } from '../services/dataCommands';
 import { useTheme } from '../hooks/useTheme';
+import { useUIStore } from '../hooks/useUIStore';
+import { MessageSquarePlus } from 'lucide-react';
 
 /**
  * Settings & Console Management Component.
@@ -13,6 +15,7 @@ import { useTheme } from '../hooks/useTheme';
  */
 export default function Settings() {
   const { isDark, setTheme } = useTheme();
+  const { openFeedbackModal } = useUIStore();
   const [statusMsg, setStatusMsg] = useState({ text: '', type: 'info' });
   const [showConfirmReset, setShowConfirmReset] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
@@ -312,6 +315,27 @@ export default function Settings() {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Community & Feedback Section */}
+      <div className="glass-panel rounded-2xl p-5 sm:p-6 space-y-4 bg-card border border-border shadow-sm">
+        <div>
+          <h2 className="text-base font-semibold text-foreground tracking-normal mb-1">Feedback & Error Reporting</h2>
+          <p className="text-muted-foreground text-xs leading-relaxed">
+            Spotted an issue, missing video duration, or have a suggestion to make FocusFlow better?
+            We read every single piece of feedback!
+          </p>
+        </div>
+        <div className="pt-1">
+          <button
+            type="button"
+            onClick={openFeedbackModal}
+            className="px-4 py-2.5 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 text-xs font-semibold transition flex items-center gap-2 cursor-pointer shadow-sm"
+          >
+            <MessageSquarePlus size={16} />
+            <span>Send Feedback or Report Bug</span>
+          </button>
+        </div>
       </div>
     </div>
   );

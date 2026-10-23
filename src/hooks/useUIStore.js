@@ -11,6 +11,11 @@ export const useUIStore = create((set, get) => ({
   seekRequestTime: null, // Set to a timestamp in seconds to trigger player seek
   activePlayerCommands: null,
   
+  // Feedback Modal global state
+  feedbackModalOpen: false,
+  openFeedbackModal: () => set({ feedbackModalOpen: true }),
+  closeFeedbackModal: () => set({ feedbackModalOpen: false }),
+
   // Command Palette global state
   commandPaletteOpen: false,
   openCommandPalette: () => set({ commandPaletteOpen: true }),
