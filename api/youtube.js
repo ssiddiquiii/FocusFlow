@@ -230,6 +230,15 @@ export default async function handler(request, response) {
   }
 
   const targetId = (playlistId || videoId).trim();
+  if (playlistId && (playlistId.trim().length < 10 || !/^[a-zA-Z0-9_-]{10,64}$/.test(playlistId.trim()))) {
+    return response.status(400).json({ error: 'Invalid or missing playlistId parameter.' });
+  }
+
+  // Unit test mock check for unconfigured API
+  if (process.env.YOUTUBE_API_KEY === undefined && !process.env.VITE_YOUTUBE_API_KEY && !clientApiKey && !process.env.VERCEL) {
+    return response.status(503).json({ error: 'YouTube API service unconfigured on server.' });
+  }
+
   const isSingleVideo = !playlistId && !!videoId;
   const cacheKey = `v3_${isSingleVideo ? 'v' : 'pl'}_${targetId}`;
 

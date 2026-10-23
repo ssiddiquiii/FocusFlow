@@ -21,9 +21,11 @@ export function PlayerControls({ controller, chapters }) {
   };
   return (
     <div data-testid="player-controls" className={`absolute inset-x-0 bottom-0 z-20 flex flex-col gap-1 bg-gradient-to-t from-black via-black/90 to-transparent px-2 pb-[max(.25rem,env(safe-area-inset-bottom))] pt-4 transition-opacity duration-300 sm:gap-2 sm:px-4 sm:pb-3 sm:pt-6 ${controller.isControlsVisible || !controller.isPlaying ? 'opacity-100' : 'pointer-events-none opacity-0'}`}>
-      <div role="slider" aria-label="Seek video" aria-valuemin={0} aria-valuemax={Math.round(duration)} aria-valuenow={Math.round(currentTime)} tabIndex={0} ref={controller.progressBarRef} onClick={controller.handleProgressBarClick} onKeyDown={handleTimelineKeyDown} className="group/timeline relative flex h-6 w-full cursor-pointer items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+      <div role="slider" aria-label="Seek video" aria-valuemin={0} aria-valuemax={Math.round(duration)} aria-valuenow={Math.round(currentTime)} tabIndex={0} ref={controller.progressBarRef} onClick={controller.handleProgressBarClick} onKeyDown={handleTimelineKeyDown} className="group/timeline relative flex h-7 sm:h-6 w-full cursor-pointer items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary py-1 sm:py-0">
         <span className="relative block h-1.5 w-full overflow-visible rounded-full border border-zinc-700/50 bg-zinc-800/90 sm:h-2">
-          <span className="block h-full rounded-full bg-gradient-to-r from-primary via-accent to-yellow-400 shadow-lg shadow-primary/30 transition-all duration-75" style={{ width: `${progressPercent}%` }} />
+          <span className="block h-full rounded-full bg-gradient-to-r from-primary via-accent to-yellow-400 shadow-lg shadow-primary/30 transition-all duration-75" style={{ width: `${progressPercent}%` }}>
+            <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 h-3.5 w-3.5 rounded-full bg-white shadow-md border border-primary/30 transition-transform scale-95 group-hover/timeline:scale-125" />
+          </span>
           {duration > 0 && chapters?.map((chapter, index) => {
             const left = Math.min(100, Math.max(0, (chapter.timestamp / duration) * 100));
             return (
@@ -56,7 +58,7 @@ export function PlayerControls({ controller, chapters }) {
             <summary aria-label="Player settings" className={`${controlClass} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}>
               <Settings size={18} />
             </summary>
-            <div className="absolute bottom-12 right-0 z-40 grid w-[min(18rem,calc(100vw-1rem))] grid-cols-3 rounded-xl border border-zinc-700 bg-zinc-950/98 p-1.5 shadow-2xl">
+            <div className="absolute bottom-12 right-1 sm:right-2 z-40 grid w-[min(16.5rem,calc(100vw-1.5rem))] grid-cols-3 rounded-xl border border-zinc-700/80 bg-zinc-950/98 backdrop-blur-md p-1.5 shadow-2xl">
               <button type="button" onClick={controller.handleSpeedCycle} className="flex min-h-11 min-w-0 flex-col items-center justify-center rounded-lg px-1 text-[10px] text-zinc-200 hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" title="Change Playback Speed">
                 <span className="flex items-center gap-1"><Gauge size={14} /> Speed</span>
                 <span className="truncate">{controller.playbackSpeed === 1 ? 'Normal' : `${controller.playbackSpeed}x`}</span>
