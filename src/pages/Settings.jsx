@@ -15,7 +15,7 @@ import { MessageSquarePlus } from 'lucide-react';
  */
 export default function Settings() {
   const { isDark, setTheme } = useTheme();
-  const { openFeedbackModal } = useUIStore();
+  const { openFeedbackModal, openBetaModal } = useUIStore();
   const [statusMsg, setStatusMsg] = useState({ text: '', type: 'info' });
   const [showConfirmReset, setShowConfirmReset] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
@@ -315,6 +315,54 @@ export default function Settings() {
             </div>
           </div>
         )}
+      </div>
+
+      {/* System Status & Beta Architecture Section */}
+      <div className="glass-panel rounded-2xl p-5 sm:p-6 space-y-4 bg-card border border-border shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <h2 className="text-base font-semibold text-foreground tracking-normal">About FocusFlow OS</h2>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Public Beta v1.0
+              </span>
+            </div>
+            <p className="text-muted-foreground text-xs leading-relaxed">
+              Actively maintained learning environment. The core local storage, markdown notes, and distraction-free YouTube player are stable and reliable for daily use.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={openBetaModal}
+            className="px-3.5 py-2 rounded-xl bg-muted/60 hover:bg-muted border border-border text-foreground text-xs font-semibold transition cursor-pointer flex-shrink-0 self-start sm:self-auto"
+          >
+            Beta Details & Architecture
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+          <div className="p-3 rounded-xl bg-muted/30 border border-border/70 space-y-1">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block">Storage Model</span>
+            <span className="text-xs font-semibold text-foreground block">Client-Side IndexedDB</span>
+            <span className="text-[11px] text-muted-foreground">100% private on your machine</span>
+          </div>
+
+          <div className="p-3 rounded-xl bg-muted/30 border border-border/70 space-y-1">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block">Core Stability</span>
+            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              Stable & Battle-Tested
+            </span>
+            <span className="text-[11px] text-muted-foreground">Safe for continuous study</span>
+          </div>
+
+          <div className="p-3 rounded-xl bg-muted/30 border border-border/70 space-y-1">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block">Release Cycle</span>
+            <span className="text-xs font-semibold text-foreground block">Continuous Ship</span>
+            <span className="text-[11px] text-muted-foreground">Weekly improvements</span>
+          </div>
+        </div>
       </div>
 
       {/* Community & Feedback Section */}

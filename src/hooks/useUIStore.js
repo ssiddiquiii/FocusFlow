@@ -12,6 +12,10 @@ export const useUIStore = create((set, get) => ({
   activePlayerCommands: null,
   
   // Feedback Modal global state
+  betaModalOpen: false,
+  openBetaModal: () => set({ betaModalOpen: true }),
+  closeBetaModal: () => set({ betaModalOpen: false }),
+
   feedbackModalOpen: false,
   openFeedbackModal: () => set({ feedbackModalOpen: true }),
   closeFeedbackModal: () => set({ feedbackModalOpen: false }),

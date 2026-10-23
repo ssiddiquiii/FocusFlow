@@ -6,6 +6,7 @@ import PomodoroTimer from './components/PomodoroTimer';
 import ErrorBoundary from './components/ErrorBoundary';
 import CommandPalette from './components/CommandPalette';
 import FeedbackModal from './components/FeedbackModal';
+import BetaModal from './components/BetaModal';
 import { MessageSquarePlus } from 'lucide-react';
 import { useUIStore } from './hooks/useUIStore';
 import { useTheme } from './hooks/useTheme';
@@ -24,7 +25,7 @@ const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), [tabindex]:not([tab
  * Inner shell wrapper to access React Router location hooks.
  */
 function AppContent() {
-  const { commandPaletteOpen, openCommandPalette, closeCommandPalette, feedbackModalOpen, openFeedbackModal, closeFeedbackModal } = useUIStore();
+  const { commandPaletteOpen, openCommandPalette, closeCommandPalette, feedbackModalOpen, openFeedbackModal, closeFeedbackModal, betaModalOpen, openBetaModal, closeBetaModal } = useUIStore();
   const { isDark, toggleTheme } = useTheme();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const menuButtonRef = useRef(null);
@@ -137,10 +138,21 @@ function AppContent() {
           {mobileSidebarOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
 
-        <Link to="/" onMouseEnter={preloadDashboard} className="flex items-center gap-2">
-          <img src="/logo.svg" alt="FocusFlow" className="w-6 h-6 flex-shrink-0" />
-          <span className="font-bold text-foreground text-xs tracking-normal">FocusFlow OS</span>
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link to="/" onMouseEnter={preloadDashboard} className="flex items-center gap-2">
+            <img src="/logo.svg" alt="FocusFlow" className="w-6 h-6 flex-shrink-0" />
+            <span className="font-bold text-foreground text-xs tracking-normal">FocusFlow OS</span>
+          </Link>
+          <button
+            type="button"
+            onClick={openBetaModal}
+            className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 text-[9px] font-bold uppercase tracking-wider cursor-pointer transition"
+            title="FocusFlow is in Public Beta. Click for details."
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Beta</span>
+          </button>
+        </div>
 
         <div className="flex items-center gap-1.5">
           <button
@@ -180,6 +192,20 @@ function AppContent() {
             FocusFlow Home
           </span>
         </Link>
+
+        {/* Beta Version Badge */}
+        <button
+          type="button"
+          onClick={openBetaModal}
+          className="px-1.5 py-0.5 rounded-md bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 text-[8px] font-bold uppercase tracking-wider transition cursor-pointer flex items-center gap-1 group relative"
+          title="FocusFlow is in Public Beta. Click for details."
+        >
+          <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
+          <span>Beta</span>
+          <span className="absolute left-full ml-3 px-2.5 py-1 rounded-lg bg-popover border border-border text-popover-foreground text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none shadow-lg z-50">
+            Public Beta v1.0 • Stable & Offline Ready
+          </span>
+        </button>
 
         {/* Subtle Divider */}
         <div className="w-5 h-[1px] bg-border my-0.5" />
@@ -251,7 +277,22 @@ function AppContent() {
           <div className="flex items-center justify-between px-2">
             <div className="flex items-center gap-3">
               <img src="/logo.svg" alt="FocusFlow" className="w-7 h-7" />
-              <span className="font-bold text-foreground text-base">FocusFlow</span>
+              <div>
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold text-foreground text-base">FocusFlow</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      closeMobileSidebar();
+                      openBetaModal();
+                    }}
+                    className="px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 text-[9px] font-bold uppercase tracking-wider"
+                  >
+                    Beta
+                  </button>
+                </div>
+                <span className="text-[10px] text-muted-foreground block">Stable • Local-First OS</span>
+              </div>
             </div>
             <button
               onClick={toggleTheme}
@@ -330,11 +371,19 @@ function AppContent() {
         {/* Minimal Studio Footer */}
         {!location.pathname.includes('/lessons/') && (
           <footer className="mt-6 py-4 border-t border-border/40 text-[11px] text-muted-foreground w-full text-center">
-            <span>FocusFlow OS</span>
+            <button
+              type="button"
+              onClick={openBetaModal}
+              className="inline-flex items-center gap-1.5 hover:text-foreground transition cursor-pointer font-medium"
+              title="Click to view Public Beta details"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>FocusFlow v1.0 <span className="text-emerald-600 dark:text-emerald-400 font-semibold">(Public Beta)</span></span>
+            </button>
+            <span className="mx-2 text-muted-foreground/40">•</span>
+            <span>Stable & Local-First</span>
             <span className="mx-2 text-muted-foreground/40">•</span>
             <span>Built by <span className="font-semibold text-foreground">Sameed Siddiqui</span></span>
-            <span className="mx-2 text-muted-foreground/40">•</span>
-            <span>Local-First Workspace</span>
             <span className="mx-2 text-muted-foreground/40">•</span>
             <button 
               type="button" 
@@ -360,6 +409,12 @@ function AppContent() {
       <FeedbackModal 
         isOpen={feedbackModalOpen} 
         onClose={closeFeedbackModal} 
+      />
+
+      {/* Global Beta Status Modal */}
+      <BetaModal
+        isOpen={betaModalOpen}
+        onClose={closeBetaModal}
       />
 
       {/* Floating Feedback Trigger Button (Mobile & Desktop) */}
