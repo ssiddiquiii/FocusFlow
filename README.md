@@ -135,23 +135,3 @@ npm run dev
 Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
-
-## Keyboard Shortcuts
-
-| Shortcut | Scope | Action |
-|---|---|---|
-| Ctrl + K / Cmd + K | Global | Open Command Palette & Search |
-| Alt + D | Global | Navigate to Dashboard |
-| Alt + S | Global | Navigate to Settings & Backup |
-| Space / K | Video Player | Play / Pause |
-| Left Arrow / J | Video Player | Seek backward 5 seconds |
-| Right Arrow / L | Video Player | Seek forward 5 seconds |
-| M | Video Player | Mute / Unmute |
-| F | Video Player | Toggle Fullscreen |
-| Esc | Modals | Close open dialog or palette |
-
----
-
-## License
-
-FocusFlow is open-source software licensed under the [MIT License](LICENSE).
