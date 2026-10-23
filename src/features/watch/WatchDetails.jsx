@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { CheckCircle2, ChevronDown, ChevronLeft, ChevronRight, Circle } from 'lucide-react';
+import React from 'react';
+import { CheckCircle2, ChevronLeft, ChevronRight, Circle } from 'lucide-react';
 
 export function WatchDetails({
   course,
@@ -12,18 +12,15 @@ export function WatchDetails({
   nextLessonId,
   onNavigate
 }) {
-  const [showFullDesc, setShowFullDesc] = useState(false);
-  const hasDesc = Boolean(lesson.description?.trim());
-
   return (
-    <div className="px-3 sm:px-6 py-3 sm:py-4 space-y-3 max-w-7xl w-full mx-auto border-b border-border/50">
+    <div className="px-3 sm:px-6 py-3 max-w-7xl w-full mx-auto border-b border-border/50">
       {/* Title */}
       <h1 className="text-base sm:text-lg md:text-xl font-bold text-foreground tracking-tight leading-snug">
         {lesson.title}
       </h1>
 
-      {/* Meta & Quick Action Buttons (YouTube Mobile Portrait Style) */}
-      <div className="flex flex-wrap items-center justify-between gap-2.5 text-xs text-muted-foreground pt-0.5">
+      {/* Meta & Quick Action Buttons */}
+      <div className="flex flex-wrap items-center justify-between gap-2.5 text-xs text-muted-foreground pt-1">
         <div className="flex items-center gap-2 min-w-0">
           <span className="font-semibold text-foreground truncate max-w-[180px] sm:max-w-xs">{course.channelName || 'YouTube Creator'}</span>
           <span className="text-muted-foreground/40">•</span>
@@ -74,26 +71,6 @@ export function WatchDetails({
           )}
         </div>
       </div>
-
-      {/* Collapsible Description Drawer */}
-      {hasDesc && (
-        <div className="p-3 sm:p-4 rounded-xl bg-card/60 border border-border/80 text-xs text-foreground/90 space-y-1.5 mt-2 transition">
-          <div className="flex items-center justify-between text-muted-foreground font-semibold text-[10px] sm:text-[11px] uppercase tracking-wider">
-            <span>Video Description</span>
-            <button
-              type="button"
-              onClick={() => setShowFullDesc(!showFullDesc)}
-              className="text-primary hover:underline flex items-center gap-0.5 cursor-pointer lowercase font-medium"
-            >
-              <span>{showFullDesc ? 'show less' : '...more'}</span>
-              <ChevronDown size={13} className={`transition-transform duration-200 ${showFullDesc ? 'rotate-180' : ''}`} />
-            </button>
-          </div>
-          <p className={`leading-relaxed whitespace-pre-wrap text-muted-foreground ${showFullDesc ? '' : 'line-clamp-2'}`}>
-            {lesson.description}
-          </p>
-        </div>
-      )}
     </div>
   );
 }

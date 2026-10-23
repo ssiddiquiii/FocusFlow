@@ -1,37 +1,55 @@
 import React from 'react';
-import { Check, Clock, Pencil, Plus, Trash2, X } from 'lucide-react';
+import { Check, Clock, Pencil, Trash2, X } from 'lucide-react';
 import Dialog from '../../components/ui/Dialog';
 import { formatSeconds } from './watchConstants';
+import { usePlayerTime } from './playerTimeStore';
 
-export function NotesPanel({ notes, noteState, onSeek }) {
+const DEFAULT_FALLBACK_STORE = {
+  subscribe: () => () => {},
+  getSnapshot: () => ({ currentTime: 0, duration: 0 })
+};
+
+export function NotesPanel({ notes = [], noteState, onSeek, timeStore }) {
   globalThis.__focusFlowRenderProbe?.('NotesPanel');
   const isSaving = noteState.status === 'saving';
 
+  // Live dynamic timestamp subscription from player
+  const playerTime = usePlayerTime(timeStore || DEFAULT_FALLBACK_STORE);
+  const currentSeconds = playerTime?.currentTime || 0;
+  const dynamicTimestamp = formatSeconds(currentSeconds);
+
   return (
-    <div className="min-w-0 space-y-4" data-testid="notes-workspace">
-      <form onSubmit={noteState.saveNew} className="space-y-2">
-        <label htmlFor="new-lesson-note" className="sr-only">New timestamped note</label>
-        <textarea
-          id="new-lesson-note"
-          value={noteState.draft}
-          onChange={event => noteState.setDraft(event.target.value)}
-          placeholder="Type a timestamped note…"
-          className="h-[70px] w-full resize-y rounded-xl border border-border bg-muted/60 p-3 text-xs text-foreground placeholder:text-muted-foreground transition focus:outline-none focus:border-primary"
-          onKeyDown={event => {
-            if (event.key === 'Enter' && !event.shiftKey) {
-              event.preventDefault();
-              noteState.saveNew(event);
-            }
-          }}
-        />
+    <div className="min-w-0 space-y-3" data-testid="notes-workspace">
+      {/* Inline Note Creation: Input with compact dynamic timestamp button side-by-side */}
+      <form onSubmit={noteState.saveNew} className="flex items-center gap-2">
+        <label htmlFor="new-lesson-note" className="sr-only">Take a timestamped note</label>
+        <div className="relative flex-1 min-w-0">
+          <input
+            id="new-lesson-note"
+            type="text"
+            value={noteState.draft}
+            onChange={event => noteState.setDraft(event.target.value)}
+            placeholder="Take a timestamped note… (or press Enter)"
+            className="w-full rounded-xl border border-border bg-muted/50 px-3.5 py-2 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground transition focus:outline-none focus:border-primary"
+            onKeyDown={event => {
+              if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                noteState.saveNew(event);
+              }
+            }}
+          />
+        </div>
+
+        {/* Compact Inline Save Button with Dynamic Live Timestamp */}
         <button
           type="submit"
           disabled={!noteState.draft.trim() || isSaving}
-          className="flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-primary py-2.5 text-xs font-bold text-white shadow-md transition hover:bg-primary/95 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          className="px-3.5 py-2 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer disabled:opacity-50 flex-shrink-0 shadow-xs"
+          title={`Save note at current time ${dynamicTimestamp}`}
         >
-          <Plus size={15} /><span>{isSaving ? 'Saving Note…' : 'Save Note at current time'}</span>
+          <Clock size={12} className="flex-shrink-0" />
+          <span>{isSaving ? 'Saving…' : `Save (${dynamicTimestamp})`}</span>
         </button>
-        <p className="text-[11px] text-muted-foreground">The current player timestamp is captured only when you save.</p>
       </form>
 
       {noteState.error && (
@@ -40,46 +58,89 @@ export function NotesPanel({ notes, noteState, onSeek }) {
         </p>
       )}
 
-      <div className="space-y-3 pt-2" aria-busy={isSaving}>
+      {/* Saved Notes Feed */}
+      <div className="space-y-2 pt-0.5" aria-busy={isSaving}>
         {notes.length === 0 ? (
-          <p className="py-6 text-center text-xs text-muted-foreground">No notes written for this video yet.</p>
+          <p className="py-2 text-xs text-muted-foreground">No notes written for this video yet.</p>
         ) : notes.map(note => {
           const isEditing = noteState.editingId === note.id;
           return (
-            <article key={note.id} className="glass-panel min-w-0 space-y-2 rounded-xl border border-border p-3.5">
+            <article key={note.id} className="min-w-0 space-y-1.5 rounded-xl border border-border bg-card p-3 shadow-2xs">
               <div className="flex items-center justify-between gap-2">
                 <button
                   type="button"
                   onClick={() => onSeek(note.timestamp)}
                   aria-label={`Seek to note at ${formatSeconds(note.timestamp)}`}
-                  className="flex min-h-11 items-center gap-1 rounded border border-accent/30 bg-accent/20 px-2.5 py-1 text-[10px] font-bold text-accent transition hover:bg-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="flex items-center gap-1 rounded-md border border-primary/30 bg-primary/10 px-2 py-0.5 text-[11px] font-mono font-bold text-primary transition hover:bg-primary/20 cursor-pointer"
+                  title="Click to jump to this moment in video"
                 >
-                  <Clock size={10} /><span>{formatSeconds(note.timestamp)}</span>
+                  <Clock size={10} />
+                  <span>{formatSeconds(note.timestamp)}</span>
                 </button>
                 <div className="flex items-center gap-1">
                   {!isEditing && (
-                    <button type="button" onClick={() => noteState.beginEdit(note)} aria-label={`Edit note at ${formatSeconds(note.timestamp)}`} className="min-h-11 min-w-11 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><Pencil size={15} /></button>
+                    <button
+                      type="button"
+                      onClick={() => noteState.beginEdit(note)}
+                      aria-label={`Edit note at ${formatSeconds(note.timestamp)}`}
+                      className="p-1 rounded text-muted-foreground hover:text-foreground hover:bg-muted transition cursor-pointer"
+                      title="Edit note"
+                    >
+                      <Pencil size={13} />
+                    </button>
                   )}
-                  <button type="button" title="Delete note" onClick={() => noteState.setDeleteCandidate(note)} aria-label={`Delete note at ${formatSeconds(note.timestamp)}`} className="min-h-11 min-w-11 rounded-lg p-2 text-muted-foreground hover:bg-red-500/10 hover:text-red-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><Trash2 size={15} /></button>
+                  <button
+                    type="button"
+                    title="Delete note"
+                    onClick={() => noteState.setDeleteCandidate(note)}
+                    aria-label={`Delete note at ${formatSeconds(note.timestamp)}`}
+                    className="p-1 rounded text-muted-foreground hover:text-red-500 hover:bg-red-500/10 transition cursor-pointer"
+                  >
+                    <Trash2 size={13} />
+                  </button>
                 </div>
               </div>
+
               {isEditing ? (
-                <form onSubmit={noteState.saveEdit} className="space-y-2">
+                <form onSubmit={noteState.saveEdit} className="space-y-2 pt-1">
                   <label htmlFor={`edit-note-${note.id}`} className="sr-only">Edit note</label>
-                  <textarea id={`edit-note-${note.id}`} value={noteState.editDraft} onChange={event => noteState.setEditDraft(event.target.value)} className="min-h-20 w-full resize-y rounded-lg border border-border bg-card p-2 text-xs text-foreground focus:outline-none focus:border-primary" />
+                  <textarea
+                    id={`edit-note-${note.id}`}
+                    value={noteState.editDraft}
+                    onChange={event => noteState.setEditDraft(event.target.value)}
+                    className="min-h-16 w-full resize-y rounded-lg border border-border bg-card p-2 text-xs text-foreground focus:outline-none focus:border-primary"
+                  />
                   <div className="flex gap-2">
-                    <button type="submit" disabled={!noteState.editDraft.trim() || isSaving} className="flex min-h-11 flex-1 items-center justify-center gap-1 rounded-lg bg-primary px-3 text-xs font-bold text-white disabled:opacity-50"><Check size={14} />Save changes</button>
-                    <button type="button" onClick={noteState.cancelEdit} disabled={isSaving} className="flex min-h-11 flex-1 items-center justify-center gap-1 rounded-lg border border-border px-3 text-xs font-bold text-foreground"><X size={14} />Cancel</button>
+                    <button
+                      type="submit"
+                      disabled={!noteState.editDraft.trim() || isSaving}
+                      className="flex items-center justify-center gap-1 rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-50 cursor-pointer"
+                    >
+                      <Check size={13} />
+                      <span>Save</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={noteState.cancelEdit}
+                      disabled={isSaving}
+                      className="flex items-center justify-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-muted cursor-pointer"
+                    >
+                      <X size={13} />
+                      <span>Cancel</span>
+                    </button>
                   </div>
                 </form>
               ) : (
-                <p className="min-w-0 whitespace-pre-wrap break-words text-xs leading-relaxed text-foreground/90">{note.content}</p>
+                <p className="min-w-0 whitespace-pre-wrap break-words text-xs leading-relaxed text-foreground/90">
+                  {note.content}
+                </p>
               )}
             </article>
           );
         })}
       </div>
 
+      {/* Delete Confirmation Dialog */}
       <Dialog
         isOpen={Boolean(noteState.deleteCandidate)}
         onClose={() => { if (!isSaving) noteState.setDeleteCandidate(null); }}
@@ -89,10 +150,24 @@ export function NotesPanel({ notes, noteState, onSeek }) {
         className="w-full max-w-sm rounded-2xl border border-border bg-card p-5 shadow-2xl"
       >
         <h2 id="delete-note-title" className="text-base font-bold text-foreground">Delete this note?</h2>
-        <p className="mt-2 text-sm text-muted-foreground">This action removes the note permanently.</p>
-        <div className="mt-5 flex gap-2">
-          <button type="button" onClick={() => noteState.setDeleteCandidate(null)} disabled={isSaving} className="min-h-11 flex-1 rounded-xl border border-border text-sm font-bold text-foreground">Cancel</button>
-          <button type="button" onClick={noteState.confirmDelete} disabled={isSaving} className="min-h-11 flex-1 rounded-xl bg-red-600 text-sm font-bold text-white disabled:opacity-50">{isSaving ? 'Deleting…' : 'Delete note'}</button>
+        <p className="mt-2 text-xs text-muted-foreground">This note will be permanently removed.</p>
+        <div className="mt-4 flex gap-2">
+          <button
+            type="button"
+            onClick={() => noteState.setDeleteCandidate(null)}
+            disabled={isSaving}
+            className="flex-1 py-2 rounded-xl border border-border text-xs font-semibold text-foreground hover:bg-muted cursor-pointer"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={noteState.confirmDelete}
+            disabled={isSaving}
+            className="flex-1 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-xs font-semibold text-white disabled:opacity-50 cursor-pointer"
+          >
+            {isSaving ? 'Deleting…' : 'Delete'}
+          </button>
         </div>
       </Dialog>
     </div>
