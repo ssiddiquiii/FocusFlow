@@ -57,7 +57,6 @@ focus-flow/
 │   ├── index.css           # Modern design system & Tailwind tokens
 │   └── main.jsx            # Application entrypoint
 ├── api/                    # Vercel serverless proxy (api/youtube.js)
-├── docs/                   # Architecture evaluation & technical roadmap
 ├── package.json
 └── vite.config.js
 ```
