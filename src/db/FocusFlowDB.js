@@ -1,7 +1,5 @@
 import Dexie from 'dexie';
-import { CourseSchema, LessonSchema, BackupSchema, parseBackupForImport } from '../types/schemas';
-
-const loadSeedData = async () => (await import('./seedData.json')).default;
+import { BackupSchema, parseBackupForImport } from '../types/schemas';
 
 /**
  * FocusFlow Local-First Browser Database
@@ -50,30 +48,8 @@ class FocusFlowDB extends Dexie {
    * @returns {Promise<void>}
    */
   async seedIfEmpty() {
-    const seedData = await loadSeedData();
-    return this.transaction(
-      'rw',
-      [this.courses, this.lessons, this.progress, this.notes, this.practiceProgress],
-      async () => {
-        const counts = await Promise.all([
-          this.courses.count(),
-          this.lessons.count(),
-          this.progress.count(),
-          this.notes.count(),
-          this.practiceProgress.count()
-        ]);
-
-        if (counts.some(count => count > 0)) {
-          return false;
-        }
-
-        const courses = seedData.courses.map(course => CourseSchema.parse(course));
-        const lessons = seedData.lessons.map(lesson => LessonSchema.parse(lesson));
-        await this.courses.bulkAdd(courses);
-        await this.lessons.bulkAdd(lessons);
-        return true;
-      }
-    );
+    // Clean-slate onboarding: New public users start with a clean workspace (no default playlists seeded)
+    return false;
   }
 
   /**
@@ -89,19 +65,16 @@ class FocusFlowDB extends Dexie {
   }
 
   /**
-   * Resets all progress, notes, and restores default courses (Full Factory Reset).
+   * Resets all progress, notes, and clears courses to a clean slate.
    * @returns {Promise<void>}
    */
   async resetDatabase() {
-    const seedData = await loadSeedData();
     await this.transaction('rw', [this.courses, this.lessons, this.progress, this.notes, this.practiceProgress], async () => {
       await this.courses.clear();
       await this.lessons.clear();
       await this.progress.clear();
       await this.notes.clear();
       await this.practiceProgress.clear();
-      await this.courses.bulkAdd(seedData.courses.map(course => CourseSchema.parse(course)));
-      await this.lessons.bulkAdd(seedData.lessons.map(lesson => LessonSchema.parse(lesson)));
     });
   }
 

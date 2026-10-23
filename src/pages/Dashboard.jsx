@@ -241,10 +241,10 @@ export default function Dashboard() {
             </div>
             <div className="min-w-0 flex-1">
               <h2 className="text-sm sm:text-base font-extrabold text-white tracking-tight truncate">
-                {continueCourse ? continueCourse.title : 'Ready to dive back in?'}
+                {continueCourse ? continueCourse.title : 'Ready to dive in?'}
               </h2>
               <p className="text-[11px] text-zinc-400 truncate">
-                {continueCourse ? 'Pick up right where you left off' : 'Select any course below to begin'}
+                {continueCourse ? 'Pick up right where you left off' : 'Import your first course above to begin'}
               </p>
             </div>
           </div>
@@ -256,7 +256,7 @@ export default function Dashboard() {
               className="w-full px-4 py-2.5 rounded-xl font-extrabold text-xs bg-primary hover:bg-primary/90 text-white transition duration-200 active:scale-95 shadow-md shadow-primary/25 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Play size={13} fill="currentColor" />
-              <span>Resume Next Lesson</span>
+              <span>{continuePath ? 'Resume Next Lesson' : 'Awaiting First Course'}</span>
             </button>
           </div>
         </div>
@@ -322,98 +322,134 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {/* Courses Responsive Grid */}
-        <div className="flex md:grid overflow-x-auto md:overflow-visible gap-4 md:gap-6 pb-4 md:pb-0 snap-x snap-mandatory scrollbar-none md:grid-cols-2 lg:grid-cols-3 -mx-3.5 px-3.5 sm:mx-0 sm:px-0">
-          {sortedCourses.map((course) => {
-            const progress = courseProgressMap[course.id] || 0;
+        {/* Courses Responsive Grid or Clean Onboarding Guide */}
+        {sortedCourses.length === 0 ? (
+          <div className="glass-panel p-6 sm:p-10 rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 via-zinc-950 to-zinc-950 text-center max-w-2xl mx-auto space-y-5 my-2 shadow-xl animate-in fade-in">
+            <div className="w-14 h-14 rounded-2xl bg-primary/20 text-primary border border-primary/30 flex items-center justify-center mx-auto shadow-lg shadow-primary/25">
+              <Play size={24} fill="currentColor" />
+            </div>
 
-            return (
-              <div 
-                key={course.id}
-                className="glass-panel rounded-2xl overflow-hidden flex flex-col hover:border-primary/30 transition duration-300 group flex-shrink-0 w-[85vw] sm:w-[340px] md:w-auto snap-center"
-              >
-                {/* Course Header Thumbnail */}
-                <div className="h-32 sm:h-36 relative bg-zinc-900 overflow-hidden">
-                  <img 
-                    src={course.thumbnailUrl} 
-                    alt={course.title} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
-                  
-                  {/* Top-Right Action Buttons: Sync Playlist & Delete Course */}
-                  <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20">
-                    {course.type === 'youtube' && (
-                      <button
-                        onClick={(e) => { e.preventDefault(); handleSyncCourse(course); }}
-                        disabled={syncingCourseId === course.id}
-                        className="p-2 rounded-xl bg-black/70 hover:bg-black/90 text-zinc-300 hover:text-white border border-zinc-700/50 backdrop-blur transition cursor-pointer disabled:opacity-50"
-                        title="Sync Playlist with YouTube"
-                      >
-                        {syncingCourseId === course.id ? (
-                          <Loader2 size={14} className="animate-spin text-primary" />
-                        ) : (
-                          <RefreshCw size={14} />
-                        )}
-                      </button>
-                    )}
+            <div className="space-y-1.5">
+              <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-tight">
+                Welcome to FocusFlow! No Courses Yet
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto leading-relaxed">
+                Your workspace starts clean with zero distractions. Follow these 3 easy steps to import your favorite YouTube course:
+              </p>
+            </div>
 
-                    <button
-                      onClick={(e) => { e.preventDefault(); setCourseToDelete(course); }}
-                      className="min-h-11 min-w-11 rounded-xl bg-black/70 hover:bg-red-950/90 text-zinc-300 hover:text-red-400 border border-zinc-700/50 backdrop-blur transition cursor-pointer flex items-center justify-center"
-                      title="Delete Course"
-                    >
-                      <Trash2 size={14} />
-                    </button>
-                  </div>
-
-                  <span className="absolute bottom-3 left-3 px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase rounded bg-black/70 text-zinc-300 border border-zinc-700/50 shadow-md">
-                    {course.type === 'youtube' ? 'YouTube' : 'Udemy'}
-                  </span>
-                </div>
-
-                {/* Course Content */}
-                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-1.5">
-                    <h3 className="text-base font-bold text-white tracking-tight leading-snug group-hover:text-primary transition line-clamp-1">
-                      {course.title}
-                    </h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed line-clamp-2">
-                      {course.description}
-                    </p>
-                  </div>
-
-                  {/* Progress bar gauge */}
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs font-semibold">
-                      <span className="text-zinc-500">Progress</span>
-                      <span className="text-white font-bold">{progress}%</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden border border-border">
-                      <div 
-                        className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-300"
-                        style={{ width: `${progress}%` }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Actions footer */}
-                  <div className="flex items-center justify-between pt-2 border-t border-border/50">
-                    <span className="text-[10px] font-semibold text-zinc-500 truncate max-w-[140px]">
-                      {course.channelName}
-                    </span>
-                    <Link
-                      to={`/courses/${course.id}`}
-                      className="px-3.5 py-1.5 text-xs font-bold rounded-lg border border-border bg-zinc-900/50 text-white hover:bg-zinc-900 hover:border-primary/50 transition"
-                    >
-                      Open Syllabus →
-                    </Link>
-                  </div>
-                </div>
+            {/* 3 Step Instruction Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 text-left">
+              <div className="p-3.5 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-1">
+                <span className="text-[10px] font-extrabold text-primary uppercase tracking-wider block">Step 1</span>
+                <p className="text-xs font-bold text-zinc-200">Copy Link</p>
+                <p className="text-[11px] text-zinc-400 leading-snug">Copy any playlist or video URL from YouTube.</p>
               </div>
-            );
-          })}
-        </div>
+              <div className="p-3.5 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-1">
+                <span className="text-[10px] font-extrabold text-primary uppercase tracking-wider block">Step 2</span>
+                <p className="text-xs font-bold text-zinc-200">Paste in Box</p>
+                <p className="text-[11px] text-zinc-400 leading-snug">Paste it into the "Import YouTube Course" input above.</p>
+              </div>
+              <div className="p-3.5 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-1">
+                <span className="text-[10px] font-extrabold text-primary uppercase tracking-wider block">Step 3</span>
+                <p className="text-xs font-bold text-zinc-200">Click Import</p>
+                <p className="text-[11px] text-zinc-400 leading-snug">Enjoy studying with timestamps, notes, and 0 ads!</p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="flex md:grid overflow-x-auto md:overflow-visible gap-4 md:gap-6 pb-4 md:pb-0 snap-x snap-mandatory scrollbar-none md:grid-cols-2 lg:grid-cols-3 -mx-3.5 px-3.5 sm:mx-0 sm:px-0">
+            {sortedCourses.map((course) => {
+              const progress = courseProgressMap[course.id] || 0;
+
+              return (
+                <div 
+                  key={course.id}
+                  className="glass-panel rounded-2xl overflow-hidden flex flex-col hover:border-primary/30 transition duration-300 group flex-shrink-0 w-[85vw] sm:w-[340px] md:w-auto snap-center"
+                >
+                  {/* Course Header Thumbnail */}
+                  <div className="h-32 sm:h-36 relative bg-zinc-900 overflow-hidden">
+                    <img 
+                      src={course.thumbnailUrl} 
+                      alt={course.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+                    
+                    {/* Top-Right Action Buttons: Sync Playlist & Delete Course */}
+                    <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20">
+                      {course.type === 'youtube' && (
+                        <button
+                          onClick={(e) => { e.preventDefault(); handleSyncCourse(course); }}
+                          disabled={syncingCourseId === course.id}
+                          className="p-2 rounded-xl bg-black/70 hover:bg-black/90 text-zinc-300 hover:text-white border border-zinc-700/50 backdrop-blur transition cursor-pointer disabled:opacity-50"
+                          title="Sync Playlist with YouTube"
+                        >
+                          {syncingCourseId === course.id ? (
+                            <Loader2 size={14} className="animate-spin text-primary" />
+                          ) : (
+                            <RefreshCw size={14} />
+                          )}
+                        </button>
+                      )}
+
+                      <button
+                        onClick={(e) => { e.preventDefault(); setCourseToDelete(course); }}
+                        className="min-h-11 min-w-11 rounded-xl bg-black/70 hover:bg-red-950/90 text-zinc-300 hover:text-red-400 border border-zinc-700/50 backdrop-blur transition cursor-pointer flex items-center justify-center"
+                        title="Delete Course"
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </div>
+
+                    <span className="absolute bottom-3 left-3 px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase rounded bg-black/70 text-zinc-300 border border-zinc-700/50 shadow-md">
+                      {course.type === 'youtube' ? 'YouTube' : 'Udemy'}
+                    </span>
+                  </div>
+
+                  {/* Course Content */}
+                  <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-1.5">
+                      <h3 className="text-base font-bold text-white tracking-tight leading-snug group-hover:text-primary transition line-clamp-1">
+                        {course.title}
+                      </h3>
+                      <p className="text-xs text-zinc-400 leading-relaxed line-clamp-2">
+                        {course.description}
+                      </p>
+                    </div>
+
+                    {/* Progress bar gauge */}
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between text-xs font-semibold">
+                        <span className="text-zinc-500">Progress</span>
+                        <span className="text-white font-bold">{progress}%</span>
+                      </div>
+                      <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden border border-border">
+                        <div 
+                          className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-300"
+                          style={{ width: `${progress}%` }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Actions footer */}
+                    <div className="flex items-center justify-between pt-2 border-t border-border/50">
+                      <span className="text-[10px] font-semibold text-zinc-500 truncate max-w-[140px]">
+                        {course.channelName}
+                      </span>
+                      <Link
+                        to={`/courses/${course.id}`}
+                        className="px-3.5 py-1.5 text-xs font-bold rounded-lg border border-border bg-zinc-900/50 text-white hover:bg-zinc-900 hover:border-primary/50 transition"
+                      >
+                        Open Syllabus →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       <DeleteCourseDialog 
