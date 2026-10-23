@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDashboardData } from '../hooks/useDashboardData';
 import { useUIStore } from '../hooks/useUIStore';
@@ -212,7 +212,7 @@ export default function Dashboard() {
         <div className="my-auto py-6 sm:py-12 max-w-2xl w-full mx-auto space-y-8 animate-page-entry text-left">
           {/* Header */}
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-[11px] font-semibold">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-primary/10 border border-primary/25 text-primary text-[11px] font-semibold">
               <Sparkles size={12} />
               <span>Distraction-Free YouTube Studio</span>
             </div>
@@ -311,7 +311,7 @@ export default function Dashboard() {
                 </h1>
                 <button
                   onClick={() => setIsStreakModalOpen(true)}
-                  className="px-2.5 py-1 rounded-full bg-primary/10 border border-primary/25 hover:border-primary/50 text-primary text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition shadow-xs"
+                  className="px-2.5 py-1 rounded bg-primary/10 border border-primary/25 hover:border-primary/50 text-primary text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition shadow-xs"
                   title="View 30-Day Activity Heatmap"
                 >
                   <Flame size={13} className="fill-primary animate-pulse" />

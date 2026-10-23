@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -47,9 +47,16 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-xs: 5px;
+  --radius-sm: 5px;
+  --radius-md: 5px;
+  --radius-lg: 5px;
+  --radius-xl: 5px;
+  --radius-2xl: 5px;
+  --radius-3xl: 5px;
+  --radius-4xl: 5px;
+  --radius-full: 5px;
+  --radius: 5px;
 }
 
 :root {
@@ -85,7 +92,7 @@
   --input: #e4e4e7;
   --ring: #ea580c;
   
-  --radius: 0.875rem;
+  --radius: 5px;
 
   --sidebar: #f8fafc;
   --sidebar-foreground: #64748b;
@@ -131,7 +138,7 @@
   --input: #27272a;
   --ring: #ea580c;
   
-  --radius: 0.875rem;
+  --radius: 5px;
 
   --sidebar: #0d0d10;
   --sidebar-foreground: #a1a1aa;
@@ -196,6 +203,20 @@ code, pre, kbd, samp, .font-mono {
   }
   html {
     @apply font-sans;
+  }
+
+  /* Universal 5px border-radius across all interactive elements, cards, inputs, and dialogs */
+  button:not(.animate-spin),
+  input,
+  textarea,
+  select,
+  dialog,
+  .glass-panel {
+    border-radius: 5px;
+  }
+
+  .animate-spin {
+    border-radius: 9999px !important;
   }
 }
 

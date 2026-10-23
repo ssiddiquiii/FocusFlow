@@ -147,7 +147,7 @@ function AppContent() {
           <button
             type="button"
             onClick={openBetaModal}
-            className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 text-[9px] font-bold uppercase tracking-wider cursor-pointer transition"
+            className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 text-[9px] font-bold uppercase tracking-wider cursor-pointer transition"
             title="FocusFlow is in Public Beta. Click for details."
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -287,7 +287,7 @@ function AppContent() {
                       closeMobileSidebar();
                       openBetaModal();
                     }}
-                    className="px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 text-[9px] font-bold uppercase tracking-wider"
+                    className="px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 text-[9px] font-bold uppercase tracking-wider"
                   >
                     Beta
                   </button>
@@ -424,7 +424,7 @@ function AppContent() {
           type="button"
           onClick={openFeedbackModal}
           aria-label="Send Feedback or Report Bug"
-          className="fixed bottom-5 right-5 z-40 hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full border border-border/80 bg-card/90 text-foreground hover:text-primary hover:border-primary/50 text-xs font-semibold shadow-lg backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer"
+          className="fixed bottom-5 right-5 z-40 hidden sm:flex items-center gap-2 px-3.5 py-2 rounded border border-border/80 bg-card/90 text-foreground hover:text-primary hover:border-primary/50 text-xs font-semibold shadow-lg backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer"
           title="Found a bug or have an idea? Click to send feedback!"
         >
           <MessageSquarePlus size={15} className="text-primary" />
