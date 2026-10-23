@@ -1,7 +1,9 @@
 ﻿import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useCourseDetail } from '../hooks/useCourseDetail';
-import { ArrowLeft, Play, CheckCircle2, Circle, Clock, RotateCcw } from 'lucide-react';
+import { ArrowLeft, Play, CheckCircle2, Circle, Clock, RotateCcw, RefreshCw } from 'lucide-react';
+import { fetchYouTubePlaylistData } from '../services/youtubeApi';
+import { importCourse } from '../services/dataCommands';
 
 /**
  * Course Detail & Syllabus View.
@@ -23,6 +25,26 @@ export default function CourseDetail() {
     resumeLesson
   } = useCourseDetail(courseId);
   const [expandedDesc, setExpandedDesc] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncStatus, setSyncStatus] = useState(null);
+
+  const handleSyncPlaylist = async () => {
+    if (course?.type !== 'youtube' || isSyncing) return;
+    setIsSyncing(true);
+    setSyncStatus('Fetching all lectures from YouTube...');
+    try {
+      const { course: updatedCourse, lessons: updatedLessons } = await fetchYouTubePlaylistData(course.id);
+      await importCourse(updatedCourse, updatedLessons);
+      setSyncStatus(`Synced ${updatedLessons.length} lectures successfully!`);
+      setTimeout(() => setSyncStatus(null), 3500);
+    } catch (err) {
+      console.error(err);
+      setSyncStatus(`Sync failed: ${err.message}`);
+      setTimeout(() => setSyncStatus(null), 4000);
+    } finally {
+      setIsSyncing(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -118,7 +140,23 @@ export default function CourseDetail() {
 
       {/* Syllabus checklist */}
       <div className="space-y-4 pt-2">
-        <h2 className="text-xl font-bold text-foreground tracking-normal">Syllabus Curriculum</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-bold text-foreground tracking-normal">Syllabus Curriculum</h2>
+          {course.type === 'youtube' && (
+            <button
+              onClick={handleSyncPlaylist}
+              disabled={isSyncing}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-border bg-card hover:bg-muted text-xs font-semibold text-foreground transition cursor-pointer disabled:opacity-50 shadow-xs"
+              title="Sync complete lecture catalog from YouTube"
+            >
+              <RefreshCw size={13} className={isSyncing ? "animate-spin text-primary" : "text-muted-foreground"} />
+              <span>{isSyncing ? "Syncing..." : "Sync Lectures"}</span>
+            </button>
+          )}
+        </div>
+        {syncStatus && (
+          <p className="text-xs text-primary font-medium animate-in fade-in">{syncStatus}</p>
+        )}
         {courseLessons.length === 0 && (
           <div className="rounded-xl border border-dashed border-border p-8 text-center text-sm text-muted-foreground">This course does not contain any lessons yet.</div>
         )}

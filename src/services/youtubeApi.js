@@ -8,10 +8,10 @@
  */
 
 // Fallback Google Cloud YouTube Data API v3 Key
-const DEFAULT_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY || 'AIzaSyD4eD8BPi4NPRemy4L9UwrXamaGiEHcN-U';
+const DEFAULT_API_KEY = import.meta.env?.VITE_YOUTUBE_API_KEY || 'AIzaSyD4eD8BPi4NPRemy4L9UwrXamaGiEHcN-U';
 
 export function getActiveApiKey() {
-  const customKey = localStorage.getItem('focusflow_custom_youtube_api_key');
+  const customKey = typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function' ? localStorage.getItem('focusflow_custom_youtube_api_key') : null;
   if (customKey && customKey.trim().length > 10) {
     return customKey.trim();
   }
@@ -90,11 +90,9 @@ export function parseISODuration(durationISO) {
  * Direct client-side fetch for YouTube Playlist using YouTube Data API v3.
  */
 async function fetchPlaylistDirectClient(playlistId, apiKey) {
-  const fetchOptions = { signal: AbortSignal.timeout(15000) };
-
   // 1. Fetch Playlist Info
   const playlistUrl = `https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=${encodeURIComponent(playlistId)}&key=${apiKey}`;
-  const playlistRes = await fetch(playlistUrl, fetchOptions);
+  const playlistRes = await fetch(playlistUrl, { signal: AbortSignal.timeout(10000) });
 
   if (!playlistRes.ok) {
     if (playlistRes.status === 403 || playlistRes.status === 429) {
@@ -127,11 +125,11 @@ async function fetchPlaylistDirectClient(playlistId, apiKey) {
   let nextPageToken = '';
   let hasNextPage = true;
   let index = 1;
-  const MAX_ITEMS = 200;
+  const MAX_ITEMS = 500;
 
   while (hasNextPage) {
     const itemsUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=50&playlistId=${encodeURIComponent(playlistId)}&key=${apiKey}${nextPageToken ? `&pageToken=${nextPageToken}` : ''}`;
-    const itemsRes = await fetch(itemsUrl, fetchOptions);
+    const itemsRes = await fetch(itemsUrl, { signal: AbortSignal.timeout(10000) });
     if (!itemsRes.ok) {
       break;
     }
@@ -175,7 +173,7 @@ async function fetchPlaylistDirectClient(playlistId, apiKey) {
     const batchIds = videoIds.slice(i, i + 50).join(',');
     const videosUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${batchIds}&key=${apiKey}`;
     try {
-      const videosRes = await fetch(videosUrl, fetchOptions);
+      const videosRes = await fetch(videosUrl, { signal: AbortSignal.timeout(10000) });
       if (videosRes.ok) {
         const videosData = await videosRes.json();
         if (videosData.items) {
@@ -379,12 +377,12 @@ export async function fetchYouTubePlaylistData(inputUrlOrId) {
     // 1. Try serverless proxy if running in serverless environment (e.g. Vercel production)
     try {
       const endpointUrl = `/api/youtube?playlistId=${encodeURIComponent(playlistId)}`;
-      const response = await fetch(endpointUrl, { signal: AbortSignal.timeout(6000) });
+      const response = await fetch(endpointUrl, { signal: AbortSignal.timeout(25000) });
       const contentType = response.headers.get('content-type') || '';
 
       if (response.ok && contentType.includes('application/json')) {
         const data = await response.json();
-        if (data.course && Array.isArray(data.lessons)) {
+        if (data.course && Array.isArray(data.lessons) && data.lessons.length > 15) {
           return { course: data.course, lessons: data.lessons };
         }
       }

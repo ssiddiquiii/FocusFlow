@@ -227,11 +227,11 @@ export default async function handler(request, response) {
 
   const targetId = (playlistId || videoId).trim();
   const isSingleVideo = !playlistId && !!videoId;
-  const cacheKey = `${isSingleVideo ? 'v' : 'pl'}_${targetId}`;
+  const cacheKey = `v2_${isSingleVideo ? 'v' : 'pl'}_${targetId}`;
 
   // 2. Check Cache First (Saves 95%+ YouTube API quota)
   const cachedResult = getCached(cacheKey);
-  if (cachedResult) {
+  if (cachedResult && (!cachedResult.lessons || cachedResult.lessons.length > 15)) {
     response.setHeader('X-Cache', 'HIT');
     response.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=604800');
     return response.status(200).json(cachedResult);
@@ -308,11 +308,9 @@ export default async function handler(request, response) {
 
   if (apiKey && !isCircuitBreakerOpen()) {
     try {
-      const fetchOptions = { signal: AbortSignal.timeout(10000) };
-
       // Fetch Playlist Snippet
       const plUrl = `https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=${encodeURIComponent(targetId)}&key=${apiKey}`;
-      const plRes = await fetch(plUrl, fetchOptions);
+      const plRes = await fetch(plUrl, { signal: AbortSignal.timeout(8000) });
 
       if (plRes.ok) {
         const plData = await plRes.json();
@@ -333,11 +331,11 @@ export default async function handler(request, response) {
           let nextPageToken = '';
           let hasNextPage = true;
           let index = 1;
-          const MAX_ITEMS = 200;
+          const MAX_ITEMS = 500;
 
           while (hasNextPage) {
             const itemsUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=50&playlistId=${encodeURIComponent(targetId)}&key=${apiKey}${nextPageToken ? `&pageToken=${nextPageToken}` : ''}`;
-            const itemsRes = await fetch(itemsUrl, fetchOptions);
+            const itemsRes = await fetch(itemsUrl, { signal: AbortSignal.timeout(8000) });
 
             if (!itemsRes.ok) break;
 
@@ -372,7 +370,7 @@ export default async function handler(request, response) {
             for (let i = 0; i < videoIds.length; i += 50) {
               const batchIds = videoIds.slice(i, i + 50).join(',');
               const vUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${batchIds}&key=${apiKey}`;
-              const vRes = await fetch(vUrl, fetchOptions);
+              const vRes = await fetch(vUrl, { signal: AbortSignal.timeout(8000) });
               if (vRes.ok) {
                 const vData = await vRes.json();
                 if (vData.items) {
@@ -408,7 +406,7 @@ export default async function handler(request, response) {
     const result = await fetchZeroKeyPlaylist(targetId, apiKey);
     setCache(cacheKey, result);
     response.setHeader('X-Cache', 'FALLBACK-RSS');
-    response.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=604800');
+    response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     return response.status(200).json(result);
   } catch (err) {
     return response.status(404).json({ error: `Playlist not found or private: ${err.message}` });
