@@ -20,17 +20,17 @@ export function NotesPanel({ notes = [], noteState, onSeek, timeStore }) {
 
   return (
     <div className="min-w-0 space-y-3" data-testid="notes-workspace">
-      {/* Inline Note Creation: Input with compact dynamic timestamp button side-by-side */}
-      <form onSubmit={noteState.saveNew} className="flex items-center gap-2">
+      {/* Inline Note Creation: Spacious Textarea with compact dynamic timestamp button side-by-side */}
+      <form onSubmit={noteState.saveNew} className="flex items-start gap-2 sm:gap-2.5">
         <label htmlFor="new-lesson-note" className="sr-only">Take a timestamped note</label>
         <div className="relative flex-1 min-w-0">
-          <input
+          <textarea
             id="new-lesson-note"
-            type="text"
+            rows={3}
             value={noteState.draft}
             onChange={event => noteState.setDraft(event.target.value)}
-            placeholder="Take a timestamped note… (or press Enter)"
-            className="w-full rounded-xl border border-border bg-muted/50 px-3.5 py-2 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground transition focus:outline-none focus:border-primary"
+            placeholder="Take a timestamped note… (Shift + Enter for new line, Enter to save)"
+            className="w-full rounded border border-border bg-muted/40 p-3 sm:p-3.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground transition focus:outline-none focus:border-primary resize-y min-h-[90px] sm:min-h-[105px] leading-relaxed"
             onKeyDown={event => {
               if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault();
@@ -44,10 +44,10 @@ export function NotesPanel({ notes = [], noteState, onSeek, timeStore }) {
         <button
           type="submit"
           disabled={!noteState.draft.trim() || isSaving}
-          className="px-3.5 py-2 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer disabled:opacity-50 flex-shrink-0 shadow-xs"
+          className="px-3.5 sm:px-4 py-2.5 sm:py-3 rounded bg-primary hover:bg-primary/90 text-primary-foreground text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 flex-shrink-0 shadow-xs self-start"
           title={`Save note at current time ${dynamicTimestamp}`}
         >
-          <Clock size={12} className="flex-shrink-0" />
+          <Clock size={13} className="flex-shrink-0" />
           <span>{isSaving ? 'Saving…' : `Save (${dynamicTimestamp})`}</span>
         </button>
       </form>

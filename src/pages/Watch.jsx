@@ -110,7 +110,7 @@ export default function Watch() {
             </h2>
           </div>
           <span className="text-[11px] text-muted-foreground">
-            Current time syncs live • Press <kbd className="px-1.5 py-0.5 rounded bg-muted text-[10px] font-mono border border-border">Enter</kbd> to save
+            Current time syncs live • <kbd className="px-1.5 py-0.5 rounded bg-muted text-[10px] font-mono border border-border">Enter</kbd> to save • <kbd className="px-1.5 py-0.5 rounded bg-muted text-[10px] font-mono border border-border">Shift + Enter</kbd> for new line
           </span>
         </div>
 
