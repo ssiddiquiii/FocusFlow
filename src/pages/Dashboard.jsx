@@ -74,9 +74,9 @@ export default function Dashboard() {
     exportNotesToMarkdown(notes, 'FocusFlow_Mastery_Notes');
   };
 
-  const handleDirectImport = async (e, customUrl) => {
+  const handleDirectImport = async (e) => {
     if (e) e.preventDefault();
-    const urlToUse = (customUrl || directUrl).trim();
+    const urlToUse = directUrl.trim();
     if (!urlToUse) return;
 
     setIsDirectImporting(true);
@@ -186,25 +186,20 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* 🚀 DIRECT YOUTUBE PLAYLIST & COURSE IMPORTER (Hero Centerpiece) */}
-      <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 via-zinc-950 to-zinc-950 shadow-xl space-y-3.5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center flex-shrink-0">
-              <Play size={15} fill="currentColor" />
-            </div>
-            <div>
-              <h2 className="text-sm sm:text-base font-extrabold text-white tracking-tight">
-                Import Any YouTube Playlist or Course
-              </h2>
-              <p className="text-[11px] text-zinc-400">
-                Paste any link to start studying with timestamped notes, progress tracking, and zero ads.
-              </p>
-            </div>
+      {/* 🚀 DIRECT YOUTUBE PLAYLIST & COURSE IMPORTER (Clean & Simple) */}
+      <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-zinc-950 to-zinc-950 shadow-xl space-y-3.5">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center flex-shrink-0">
+            <Play size={15} fill="currentColor" />
           </div>
-          <span className="self-start sm:self-auto px-2.5 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/30">
-            Instant Study
-          </span>
+          <div>
+            <h2 className="text-sm sm:text-base font-extrabold text-white tracking-tight">
+              Import Any YouTube Playlist or Course
+            </h2>
+            <p className="text-[11px] text-zinc-400">
+              Paste any playlist or video link to study with timestamped notes, progress tracking, and zero ads.
+            </p>
+          </div>
         </div>
 
         {/* Input & Import Button Form */}
@@ -214,7 +209,7 @@ export default function Dashboard() {
               type="text"
               value={directUrl}
               onChange={(e) => setDirectUrl(e.target.value)}
-              placeholder="Paste YouTube playlist or video tutorial link (e.g. https://www.youtube.com/playlist?list=...)"
+              placeholder="Paste YouTube playlist or video link (e.g. https://www.youtube.com/playlist?list=...)"
               disabled={isDirectImporting}
               className="w-full bg-zinc-900/90 border border-zinc-700/80 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-medium transition"
             />
@@ -237,49 +232,6 @@ export default function Dashboard() {
             )}
           </button>
         </form>
-
-        {/* Quick 1-Click Curated Starters */}
-        <div className="flex flex-wrap items-center gap-2 pt-0.5">
-          <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1 mr-1">
-            ⚡ Quick Starters:
-          </span>
-          <button
-            type="button"
-            disabled={isDirectImporting}
-            onClick={() => handleDirectImport(null, 'https://www.youtube.com/playlist?list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37')}
-            className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-yellow-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
-          >
-            <span className="text-yellow-400">💛</span>
-            <span>Chai aur JavaScript</span>
-          </button>
-          <button
-            type="button"
-            disabled={isDirectImporting}
-            onClick={() => handleDirectImport(null, 'https://www.youtube.com/playlist?list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige')}
-            className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-blue-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
-          >
-            <span className="text-cyan-400">⚛️</span>
-            <span>Chai aur React</span>
-          </button>
-          <button
-            type="button"
-            disabled={isDirectImporting}
-            onClick={() => handleDirectImport(null, 'https://www.youtube.com/watch?v=kqtD5dpn9C8')}
-            className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
-          >
-            <span className="text-emerald-400">🐍</span>
-            <span>Python 1-Hr Tutorial</span>
-          </button>
-          <button
-            type="button"
-            disabled={isDirectImporting}
-            onClick={() => handleDirectImport(null, 'https://www.youtube.com/playlist?list=PLu71SKxNbfoDBNF5s-WHQu9khAU40bKGd')}
-            className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-orange-500/50 hover:bg-zinc-850 text-zinc-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5"
-          >
-            <span className="text-orange-400">🌐</span>
-            <span>Git & GitHub</span>
-          </button>
-        </div>
 
         {/* Newly Imported Course Quick Launch Banner */}
         {newlyImportedCourse && (
