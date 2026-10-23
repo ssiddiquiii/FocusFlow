@@ -323,10 +323,54 @@ function AppContent() {
           </Suspense>
         </ErrorBoundary>
 
-        {/* One-Line Minimal Global Footer */}
-        <footer className="mt-8 mb-2 py-3 border-t border-border/40 text-center text-[12px] text-muted-foreground font-medium">
-          FocusFlow OS • Built by <span className="text-foreground font-semibold">Sameed Siddiqui</span> • Local-First Developer Workspace
-        </footer>
+        {/* ?? Redesigned Studio Footer with Catchy Statement */}
+        {!location.pathname.includes('/lessons/') ? (
+          <footer className="mt-14 pt-8 pb-6 border-t border-border/70 text-xs text-muted-foreground">
+            <div className="max-w-6xl mx-auto px-2 sm:px-4 flex flex-col md:flex-row items-center justify-between gap-5">
+              {/* Left: Brand Identity & Catchy Statement */}
+              <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+                <div className="flex items-center gap-2">
+                  <img src="/logo.svg" alt="FocusFlow" className="w-5 h-5 flex-shrink-0" />
+                  <span className="font-bold text-foreground text-sm tracking-normal">FocusFlow OS</span>
+                </div>
+                <span className="hidden sm:inline text-muted-foreground/40">&bull;</span>
+                <p className="text-muted-foreground text-xs font-normal">
+                  Engineered for deep work &mdash; <span className="text-foreground font-semibold">less noise, more mastery.</span>
+                </p>
+              </div>
+
+              {/* Right: Local-First Status & Creator Tag */}
+              <div className="flex flex-wrap items-center justify-center gap-4 text-[11px]">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-semibold shadow-xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>100% Local-First & Ad-Free</span>
+                </div>
+
+                <div className="text-muted-foreground font-medium">
+                  Crafted with precision by <span className="text-foreground font-semibold">Sameed Siddiqui</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Catchy Bottom Quote & Privacy Pledge */}
+            <div className="max-w-6xl mx-auto px-2 sm:px-4 mt-5 pt-3.5 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-[11px] text-muted-foreground">
+              <span className="italic font-normal text-muted-foreground/90">
+                &ldquo;Stop scrolling the algorithm. Build your craft in peace.&rdquo;
+              </span>
+              <div className="flex items-center gap-3 font-mono text-[10px] text-muted-foreground/75">
+                <span>Zero Cookies</span>
+                <span>&bull;</span>
+                <span>Zero Tracking</span>
+                <span>&bull;</span>
+                <span>IndexedDB Storage</span>
+              </div>
+            </div>
+          </footer>
+        ) : (
+          <footer className="mt-6 mb-2 py-2 border-t border-border/30 text-center text-[11px] text-muted-foreground">
+            FocusFlow OS &bull; Engineered for deep work by <span className="text-foreground font-semibold">Sameed Siddiqui</span>
+          </footer>
+        )}
       </main>
 
       {/* Global Command Palette (Ctrl + K / Search) */}
