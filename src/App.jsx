@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Menu, Search, X, Sun, Moon } from 'lucide-react';
@@ -32,6 +32,7 @@ function AppContent() {
   const commandPaletteReturnFocusRef = useRef(null);
   const drawerRef = useRef(null);
   const location = useLocation();
+  const isWatchPage = location.pathname.includes('/lessons/');
   const navigate = useNavigate();
   const reduceMotion = useReducedMotion();
 
@@ -114,7 +115,7 @@ function AppContent() {
   }, [commandPaletteOpen, openCommandPalette, closeCommandPalette, navigate]);
 
   return (
-    <div className="relative flex min-h-screen bg-background text-foreground transition-colors duration-150">
+    <div className={`relative flex bg-background text-foreground transition-colors duration-150 ${isWatchPage ? 'h-screen xl:h-dvh overflow-hidden' : 'min-h-screen'}`}>
       {/* Mobile Backdrop Overlay when Drawer is Open */}
       {mobileSidebarOpen && (
         <div
@@ -334,12 +335,12 @@ function AppContent() {
       </aside>
 
       {/* Main Content View Container */}
-      <main className={`min-w-0 flex-1 flex flex-col justify-between ${
-        location.pathname.includes('/lessons/') 
-          ? 'lg:pl-20 xl:pl-22 p-0'
-          : 'safe-area-main pt-16 lg:pt-5 lg:pl-20 xl:pl-22 px-3.5 sm:px-6'
+      <main className={`min-w-0 flex-1 flex flex-col ${
+        isWatchPage 
+          ? 'lg:pl-20 xl:pl-22 p-0 h-full overflow-hidden'
+          : 'safe-area-main pt-16 lg:pt-5 lg:pl-20 xl:pl-22 px-3.5 sm:px-6 justify-between'
       }`}>
-        <div className="flex-1 w-full min-w-0 flex flex-col">
+        <div className={`w-full min-w-0 flex flex-col ${isWatchPage ? 'h-full overflow-hidden' : 'flex-1'}`}>
           <ErrorBoundary>
             <Suspense fallback={
               <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
@@ -353,7 +354,7 @@ function AppContent() {
                   animate={{ opacity: 1 }}
                   exit={reduceMotion ? undefined : { opacity: 0 }}
                   transition={{ duration: reduceMotion ? 0 : 0.1, ease: 'easeOut' }}
-                  className="flex-1 min-w-0 w-full flex flex-col"
+                  className={`min-w-0 w-full flex flex-col ${isWatchPage ? 'h-full overflow-hidden' : 'flex-1'}`}
                 >
                   <Routes location={location}>
                     <Route path="/" element={<Dashboard />} />
