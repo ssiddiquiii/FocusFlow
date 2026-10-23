@@ -325,32 +325,14 @@ function AppContent() {
           </ErrorBoundary>
         </div>
 
-        {/* Compact Single-Tier Studio Footer */}
+        {/* Minimal Studio Footer */}
         {!location.pathname.includes('/lessons/') && (
-          <footer className="mt-8 py-5 border-t border-border/60 text-xs text-muted-foreground w-full">
-            <div className="max-w-6xl mx-auto px-2 sm:px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-              {/* Left: Brand Identity */}
-              <div className="flex items-center gap-2.5 text-center sm:text-left">
-                <img src="/logo.svg" alt="FocusFlow" className="w-4 h-4 flex-shrink-0" />
-                <span className="font-bold text-foreground text-xs tracking-tight">FocusFlow OS</span>
-                <span className="text-muted-foreground/40">•</span>
-                <span className="text-muted-foreground text-xs font-normal">
-                  Less noise, more mastery.
-                </span>
-              </div>
-
-              {/* Right: Local-First Status & Creator Tag */}
-              <div className="flex flex-wrap items-center justify-center gap-3 text-[11px]">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-medium">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>100% Local-First & Ad-Free</span>
-                </div>
-                <span className="text-muted-foreground/40 hidden sm:inline">•</span>
-                <div className="text-muted-foreground">
-                  Crafted by <span className="text-foreground font-semibold">Sameed Siddiqui</span>
-                </div>
-              </div>
-            </div>
+          <footer className="mt-6 py-4 border-t border-border/40 text-[11px] text-muted-foreground w-full text-center">
+            <span>FocusFlow OS</span>
+            <span className="mx-2 text-muted-foreground/40">•</span>
+            <span>Built by <span className="font-semibold text-foreground">Sameed Siddiqui</span></span>
+            <span className="mx-2 text-muted-foreground/40">•</span>
+            <span>Local-First Workspace</span>
           </footer>
         )}
       </main>
