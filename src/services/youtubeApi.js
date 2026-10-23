@@ -8,7 +8,7 @@
  */
 
 // Fallback Google Cloud YouTube Data API v3 Key
-const DEFAULT_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY || '';
+const DEFAULT_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY || 'AIzaSyD4eD8BPi4NPRemy4L9UwrXamaGiEHcN-U';
 
 export function getActiveApiKey() {
   const customKey = localStorage.getItem('focusflow_custom_youtube_api_key');
@@ -318,6 +318,31 @@ async function fetchZeroKeyPlaylistClient(playlistId) {
   }
 
   if (lessons.length === 0) throw new Error('No public videos found in RSS feed.');
+
+  // If an active API key is available, batch fetch durations for RSS lessons
+  const activeKey = getActiveApiKey();
+  if (activeKey && lessons.length > 0) {
+    try {
+      const videoIds = lessons.map(l => l.id).filter(Boolean);
+      for (let i = 0; i < videoIds.length; i += 50) {
+        const batchIds = videoIds.slice(i, i + 50).join(',');
+        const videosUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${batchIds}&key=${activeKey}`;
+        const videosRes = await fetch(videosUrl, { signal: AbortSignal.timeout(5000) });
+        if (videosRes.ok) {
+          const videosData = await videosRes.json();
+          if (videosData.items) {
+            const map = {};
+            videosData.items.forEach(v => {
+              map[v.id] = parseISODuration(v.contentDetails?.duration);
+            });
+            lessons.forEach(l => {
+              if (map[l.id]) l.duration = map[l.id];
+            });
+          }
+        }
+      }
+    } catch (_) {}
+  }
 
   const course = {
     id: playlistId,

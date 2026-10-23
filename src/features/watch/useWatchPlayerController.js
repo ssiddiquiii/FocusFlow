@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useUIStore } from '../../hooks/useUIStore';
-import { saveProgress } from '../../services/dataCommands';
+import { saveProgress, updateLessonDuration } from '../../services/dataCommands';
 import { QUALITY_OPTIONS, SPEED_OPTIONS } from './watchConstants';
 import { createPlaybackPersistenceSession, getBoundedResumeSeconds, PROGRESS_SAVE_INTERVAL_MS } from './playbackPersistence';
 import { createPlayerTimeStore } from './playerTimeStore';
@@ -109,6 +109,7 @@ export function useWatchPlayerController({ courseId, lessonId, lesson, progressL
         try {
           const time = player.getCurrentTime();
           const duration = player.getDuration();
+          if (duration && duration > 0 && (!activeLesson.duration || activeLesson.duration === '0:00')) updateLessonDuration(lessonId, duration);
           const step = Math.floor(time * 4);
           if (step !== lastStep) {
             lastStep = step;
@@ -149,6 +150,7 @@ export function useWatchPlayerController({ courseId, lessonId, lesson, progressL
       };
       registerPlayerCommands(playerCommands);
       const duration = player.getDuration();
+      if (duration && duration > 0) updateLessonDuration(lessonId, duration);
       timeStore.set(player.getCurrentTime?.() || 0, duration);
       setPlayerMuted(player.isMuted());
       player.setPlaybackRate(1);

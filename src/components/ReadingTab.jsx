@@ -33,8 +33,8 @@ export default function ReadingTab({ lessonId }) {
           <BookOpen size={18} />
         </div>
         <div className="min-w-0">
-          <h3 className="text-sm font-bold text-white tracking-tight">{conceptLabel} — Study Guide</h3>
-          <p className="text-[10px] text-zinc-400 mt-0.5">In-app concept breakdown, code cheat sheet & docs</p>
+          <h3 className="text-sm font-bold text-foreground tracking-tight">{conceptLabel} — Study Guide</h3>
+          <p className="text-[10px] text-muted-foreground mt-0.5">In-app concept breakdown, code cheat sheet & docs</p>
         </div>
       </div>
       <p className="rounded-xl border border-blue-500/20 bg-blue-500/10 p-3 text-[11px] leading-relaxed text-blue-200">
@@ -43,7 +43,7 @@ export default function ReadingTab({ lessonId }) {
 
       {/* 📖 IN-APP DIAGNOSED STUDY ARTICLE / CHEAT SHEET */}
       {summaryArticle && (
-        <div className="glass-panel rounded-2xl p-4 sm:p-5 border border-primary/25 bg-gradient-to-b from-primary/5 via-zinc-950 to-zinc-950 space-y-4">
+        <div className="rounded-2xl p-4 sm:p-5 border border-primary/25 bg-card space-y-4">
           
           {/* Article Header */}
           <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider">
@@ -53,7 +53,7 @@ export default function ReadingTab({ lessonId }) {
 
           {/* Overview Paragraph */}
           {summaryArticle.overview && (
-            <p className="break-words text-xs text-zinc-300 leading-relaxed font-medium">
+            <p className="break-words text-xs text-foreground/90 leading-relaxed font-medium">
               {summaryArticle.overview}
             </p>
           )}
@@ -61,10 +61,10 @@ export default function ReadingTab({ lessonId }) {
           {/* Key Takeaways List */}
           {summaryArticle.keyPoints && summaryArticle.keyPoints.length > 0 && (
             <div className="space-y-2 pt-1">
-              <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider block">Key Rules & Syntax:</span>
+              <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider block">Key Rules & Syntax:</span>
               <div className="space-y-1.5">
                 {summaryArticle.keyPoints.map((point, idx) => (
-                  <div key={idx} className="flex items-start gap-2 text-xs text-zinc-300">
+                  <div key={idx} className="flex items-start gap-2 text-xs text-foreground/90">
                     <CheckCircle2 size={13} className="text-emerald-400 flex-shrink-0 mt-0.5" />
                     <span className="min-w-0 break-words leading-snug">{point}</span>
                   </div>
@@ -76,11 +76,11 @@ export default function ReadingTab({ lessonId }) {
           {/* Code Snippet Box */}
           {summaryArticle.codeSnippet && (
             <div className="space-y-1.5 pt-1">
-              <div className="flex items-center justify-between text-[10px] text-zinc-500 font-bold uppercase tracking-wider">
+              <div className="flex items-center justify-between text-[10px] text-muted-foreground font-bold uppercase tracking-wider">
                 <span className="flex items-center gap-1"><Code size={12} /> Code Example</span>
                 <span>JavaScript</span>
               </div>
-              <pre className="max-w-full overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950 p-3.5 font-mono text-[11px] leading-relaxed text-emerald-300 shadow-inner">
+              <pre className="max-w-full overflow-x-auto rounded-xl border border-border bg-muted/70 p-3.5 font-mono text-[11px] leading-relaxed text-foreground dark:text-emerald-300 shadow-inner">
                 <code>{summaryArticle.codeSnippet}</code>
               </pre>
             </div>
@@ -104,7 +104,7 @@ export default function ReadingTab({ lessonId }) {
       {/* 🔗 EXTERNAL DOCUMENTATION & TUTORIAL LINKS */}
       {readingMaterials && readingMaterials.length > 0 && (
         <div className="space-y-3">
-          <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider block">External References & Docs:</span>
+          <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider block">External References & Docs:</span>
           
           <div className="space-y-2.5">
             {readingMaterials.map((item, index) => {
@@ -127,14 +127,14 @@ export default function ReadingTab({ lessonId }) {
                   className="group glass-panel block min-w-0 space-y-2 overflow-hidden rounded-xl border border-border p-3.5 transition duration-200 hover:border-blue-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <h4 className="min-w-0 break-all text-xs font-semibold leading-snug text-white transition group-hover:text-blue-400">
+                    <h4 className="min-w-0 break-all text-xs font-semibold leading-snug text-foreground transition group-hover:text-primary">
                       {item.title}
                     </h4>
-                    <ExternalLink size={13} className="text-zinc-500 group-hover:text-blue-400 transition flex-shrink-0 mt-0.5" />
+                    <ExternalLink size={13} className="text-muted-foreground group-hover:text-primary transition flex-shrink-0 mt-0.5" />
                   </div>
 
                   {item.description && (
-                    <p className="text-[11px] text-zinc-400 leading-relaxed line-clamp-2">
+                    <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">
                       {item.description}
                     </p>
                   )}
@@ -145,7 +145,7 @@ export default function ReadingTab({ lessonId }) {
                       {item.source || 'Doc'}
                     </span>
                     {item.readTime && (
-                      <span className="text-zinc-500 font-medium flex items-center gap-1">
+                      <span className="text-muted-foreground font-medium flex items-center gap-1">
                         <Clock size={10} />
                         <span>{item.readTime}</span>
                       </span>

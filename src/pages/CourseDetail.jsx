@@ -167,10 +167,16 @@ export default function CourseDetail() {
                   {isLastWatched && (
                     <span className="text-[10px] font-bold text-primary uppercase tracking-wider">In Progress</span>
                   )}
-                  <span className="flex items-center gap-1 font-mono">
-                    <Clock size={12} />
-                    <span>{lesson.duration}</span>
-                  </span>
+                  {lesson.duration && lesson.duration !== '0:00' ? (
+                    <span className="flex items-center gap-1 font-mono">
+                      <Clock size={12} />
+                      <span>{lesson.duration}</span>
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-muted text-muted-foreground">
+                      Lecture
+                    </span>
+                  )}
                 </div>
               </Link>
             );

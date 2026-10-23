@@ -103,6 +103,35 @@ export function deleteNote(noteId) {
   return db.notes.delete(noteId);
 }
 
+
+/**
+ * Persists discovered video duration back into IndexedDB.
+ * Converts raw seconds to digital duration string (e.g. 14:22 or 1:04:12).
+ */
+export async function updateLessonDuration(lessonId, seconds) {
+  if (!lessonId || typeof seconds !== 'number' || seconds <= 0 || !isFinite(seconds)) return;
+  const totalSecs = Math.round(seconds);
+  const hours = Math.floor(totalSecs / 3600);
+  const minutes = Math.floor((totalSecs % 3600) / 60);
+  const remainingSecs = totalSecs % 60;
+
+  const formatted = hours > 0
+    ? `${hours}:${minutes.toString().padStart(2, '0')}:${remainingSecs.toString().padStart(2, '0')}`
+    : `${minutes}:${remainingSecs.toString().padStart(2, '0')}`;
+
+  try {
+    const existing = await db.lessons.get(lessonId);
+    if (existing && (!existing.duration || existing.duration === '0:00')) {
+      await db.lessons.update(lessonId, { 
+        duration: formatted,
+        durationSeconds: totalSecs
+      });
+    }
+  } catch (err) {
+    console.warn('Failed to update lesson duration in DB:', err);
+  }
+}
+
 export const exportNotes = () => db.notes.toArray();
 export const exportBackup = () => db.exportBackup();
 export const importBackup = backup => db.importBackup(backup);

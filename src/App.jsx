@@ -293,8 +293,8 @@ function AppContent() {
       {/* Main Content View Container */}
       <main className={`safe-area-main min-w-0 flex-1 pb-4 ${
         location.pathname.includes('/lessons/') 
-          ? 'safe-area-main-watch lg:pt-0 lg:pl-20 xl:pl-22 px-2 sm:px-4'
-          : 'pt-16 lg:pt-4 lg:pl-20 xl:pl-22 px-3.5 sm:px-6'
+          ? 'lg:pl-20 xl:pl-22 p-0'
+          : 'pt-16 lg:pt-4 lg:pl-20 xl:pl-22 px-3.5 sm:px-6 pb-4'
       }`}>
         <ErrorBoundary>
           <Suspense fallback={
@@ -323,8 +323,8 @@ function AppContent() {
           </Suspense>
         </ErrorBoundary>
 
-        {/* ?? Redesigned Studio Footer with Catchy Statement */}
-        {!location.pathname.includes('/lessons/') ? (
+        {/* Redesigned Studio Footer with Catchy Statement (shown only outside watch studio) */}
+        {!location.pathname.includes('/lessons/') && (
           <footer className="mt-14 pt-8 pb-6 border-t border-border/70 text-xs text-muted-foreground">
             <div className="max-w-6xl mx-auto px-2 sm:px-4 flex flex-col md:flex-row items-center justify-between gap-5">
               {/* Left: Brand Identity & Catchy Statement */}
@@ -365,10 +365,6 @@ function AppContent() {
                 <span>IndexedDB Storage</span>
               </div>
             </div>
-          </footer>
-        ) : (
-          <footer className="mt-6 mb-2 py-2 border-t border-border/30 text-center text-[11px] text-muted-foreground">
-            FocusFlow OS &bull; Engineered for deep work by <span className="text-foreground font-semibold">Sameed Siddiqui</span>
           </footer>
         )}
       </main>

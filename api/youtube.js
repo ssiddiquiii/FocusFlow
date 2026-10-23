@@ -114,7 +114,7 @@ async function fetchZeroKeyVideo(videoId) {
 /**
  * Zero-Key Fallback: Fetches playlist videos via public YouTube Atom/RSS feed.
  */
-async function fetchZeroKeyPlaylist(playlistId) {
+async function fetchZeroKeyPlaylist(playlistId, apiKey = '') {
   const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${encodeURIComponent(playlistId)}`;
   const res = await fetch(rssUrl, { signal: AbortSignal.timeout(8000) });
   if (!res.ok) throw new Error('Public RSS feed unavailable.');
@@ -154,6 +154,30 @@ async function fetchZeroKeyPlaylist(playlistId) {
   }
 
   if (lessons.length === 0) throw new Error('No public videos found in RSS feed.');
+
+  // If apiKey is available, batch fetch real durations
+  if (apiKey && lessons.length > 0) {
+    try {
+      const videoIds = lessons.map(l => l.id).filter(Boolean);
+      for (let i = 0; i < videoIds.length; i += 50) {
+        const batchIds = videoIds.slice(i, i + 50).join(',');
+        const vUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${batchIds}&key=${apiKey}`;
+        const vRes = await fetch(vUrl, { signal: AbortSignal.timeout(5000) });
+        if (vRes.ok) {
+          const vData = await vRes.json();
+          if (vData.items) {
+            const durationMap = {};
+            vData.items.forEach(v => {
+              durationMap[v.id] = parseISODuration(v.contentDetails?.duration);
+            });
+            lessons.forEach(l => {
+              if (durationMap[l.id]) l.duration = durationMap[l.id];
+            });
+          }
+        }
+      }
+    } catch (_) {}
+  }
 
   const course = {
     id: playlistId,
@@ -215,7 +239,7 @@ export default async function handler(request, response) {
 
   // 3. Handle Single Video Crash Courses
   if (isSingleVideo) {
-    const apiKey = process.env.YOUTUBE_API_KEY;
+    const apiKey = process.env.YOUTUBE_API_KEY || process.env.VITE_YOUTUBE_API_KEY || 'AIzaSyD4eD8BPi4NPRemy4L9UwrXamaGiEHcN-U';
 
     // If API key is available and circuit breaker is closed, try official Google API
     if (apiKey && !isCircuitBreakerOpen()) {
@@ -280,7 +304,7 @@ export default async function handler(request, response) {
   }
 
   // 4. Handle Playlist Imports
-  const apiKey = process.env.YOUTUBE_API_KEY;
+  const apiKey = process.env.YOUTUBE_API_KEY || process.env.VITE_YOUTUBE_API_KEY || 'AIzaSyD4eD8BPi4NPRemy4L9UwrXamaGiEHcN-U';
 
   if (apiKey && !isCircuitBreakerOpen()) {
     try {
@@ -381,7 +405,7 @@ export default async function handler(request, response) {
 
   // 5. Zero-Key Fallback for Playlists (RSS Atom Feed)
   try {
-    const result = await fetchZeroKeyPlaylist(targetId);
+    const result = await fetchZeroKeyPlaylist(targetId, apiKey);
     setCache(cacheKey, result);
     response.setHeader('X-Cache', 'FALLBACK-RSS');
     response.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=604800');
