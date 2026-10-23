@@ -63,6 +63,11 @@ export default function Dashboard() {
     [progressList, practiceProgressList]
   );
 
+  const continueCourse = useMemo(() => {
+    if (!continuePath?.courseId) return null;
+    return sortedCourses.find(c => c.id === continuePath.courseId) || null;
+  }, [sortedCourses, continuePath]);
+
   const handleContinueLearning = () => {
     if (continuePath) {
       navigate(`/courses/${continuePath.courseId}/lessons/${continuePath.lessonId}`);
@@ -186,89 +191,91 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* 🚀 DIRECT YOUTUBE PLAYLIST & COURSE IMPORTER (Clean & Simple) */}
-      <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-zinc-950 to-zinc-950 shadow-xl space-y-3.5">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center flex-shrink-0">
-            <Play size={15} fill="currentColor" />
+      {/* 🚀 HORIZONTAL ACTION ROW: DIRECT IMPORTER + RESUME SESSION */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Left: YouTube Course Importer */}
+        <div className="glass-panel p-5 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-zinc-950 to-zinc-950 shadow-md flex flex-col justify-between gap-3.5">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center flex-shrink-0">
+              <Play size={15} fill="currentColor" />
+            </div>
+            <div>
+              <h2 className="text-sm sm:text-base font-extrabold text-white tracking-tight">
+                Import YouTube Course
+              </h2>
+              <p className="text-[11px] text-zinc-400">
+                Paste any playlist or video tutorial link
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-sm sm:text-base font-extrabold text-white tracking-tight">
-              Import Any YouTube Playlist or Course
-            </h2>
-            <p className="text-[11px] text-zinc-400">
-              Paste any playlist or video link to study with timestamped notes, progress tracking, and zero ads.
-            </p>
-          </div>
-        </div>
 
-        {/* Input & Import Button Form */}
-        <form onSubmit={handleDirectImport} className="flex flex-col sm:flex-row gap-2.5">
-          <div className="relative flex-1">
+          <form onSubmit={handleDirectImport} className="flex gap-2">
             <input
               type="text"
               value={directUrl}
               onChange={(e) => setDirectUrl(e.target.value)}
-              placeholder="Paste YouTube playlist or video link (e.g. https://www.youtube.com/playlist?list=...)"
+              placeholder="Paste YouTube playlist or video link..."
               disabled={isDirectImporting}
-              className="w-full bg-zinc-900/90 border border-zinc-700/80 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-medium transition"
+              className="flex-1 min-w-0 bg-zinc-900/90 border border-zinc-700/80 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-medium transition"
             />
-          </div>
-          <button
-            type="submit"
-            disabled={isDirectImporting || !directUrl.trim()}
-            className="px-6 py-3 rounded-xl bg-primary hover:bg-primary/90 text-white font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-primary/25 cursor-pointer disabled:opacity-50 flex-shrink-0"
-          >
-            {isDirectImporting ? (
-              <>
-                <Loader2 size={15} className="animate-spin" />
-                <span>Importing...</span>
-              </>
-            ) : (
-              <>
-                <Sparkles size={15} />
-                <span>Import Course</span>
-              </>
-            )}
-          </button>
-        </form>
-
-        {/* Newly Imported Course Quick Launch Banner */}
-        {newlyImportedCourse && (
-          <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-between gap-3 animate-in fade-in">
-            <div className="flex items-center gap-2.5 min-w-0">
-              <CheckCircle2 size={18} className="text-emerald-400 flex-shrink-0" />
-              <span className="text-xs font-bold text-white truncate">
-                Ready to study: <span className="text-emerald-300 font-extrabold">{newlyImportedCourse.course.title}</span>
-              </span>
-            </div>
             <button
-              onClick={() => navigate(`/courses/${newlyImportedCourse.course.id}/lessons/${newlyImportedCourse.firstLessonId}`)}
-              className="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-extrabold text-xs transition cursor-pointer flex-shrink-0 flex items-center gap-1"
+              type="submit"
+              disabled={isDirectImporting || !directUrl.trim()}
+              className="px-4 py-2.5 rounded-xl bg-primary hover:bg-primary/90 text-white font-extrabold text-xs transition flex items-center justify-center gap-1.5 shadow-md shadow-primary/25 cursor-pointer disabled:opacity-50 flex-shrink-0"
             >
-              <span>Start Lesson 1 →</span>
+              {isDirectImporting ? (
+                <Loader2 size={14} className="animate-spin" />
+              ) : (
+                <Sparkles size={14} />
+              )}
+              <span>Import</span>
+            </button>
+          </form>
+        </div>
+
+        {/* Right: Active Learning Session */}
+        <div className="glass-panel p-5 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-zinc-950 to-zinc-950 shadow-md flex flex-col justify-between gap-3.5">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-primary/20 text-primary border border-primary/30 flex items-center justify-center flex-shrink-0">
+              <Flame size={15} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-sm sm:text-base font-extrabold text-white tracking-tight truncate">
+                {continueCourse ? continueCourse.title : 'Ready to dive back in?'}
+              </h2>
+              <p className="text-[11px] text-zinc-400 truncate">
+                {continueCourse ? 'Pick up right where you left off' : 'Select any course below to begin'}
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <button
+              onClick={handleContinueLearning}
+              disabled={!continuePath}
+              className="w-full px-4 py-2.5 rounded-xl font-extrabold text-xs bg-primary hover:bg-primary/90 text-white transition duration-200 active:scale-95 shadow-md shadow-primary/25 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Play size={13} fill="currentColor" />
+              <span>Resume Next Lesson</span>
             </button>
           </div>
-        )}
+        </div>
       </div>
 
-      {/* 🎯 RESUME LEARNING HERO (Only shows when user has an active course in progress) */}
-      {continuePath && (
-        <div className="glass-panel p-4 sm:p-5 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/10 via-zinc-950 to-zinc-950 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-lg">
-          <div className="space-y-1">
-            <span className="px-2.5 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/30">
-              Active Learning Session
+      {/* Newly Imported Course Quick Launch Banner */}
+      {newlyImportedCourse && (
+        <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-between gap-3 animate-in fade-in">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <CheckCircle2 size={18} className="text-emerald-400 flex-shrink-0" />
+            <span className="text-xs font-bold text-white truncate">
+              Ready to study: <span className="text-emerald-300 font-extrabold">{newlyImportedCourse.course.title}</span>
             </span>
-            <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
-              Ready to dive back in? Pick up where you left off.
-            </h3>
           </div>
           <button
-            onClick={handleContinueLearning}
-            className="px-5 py-2.5 rounded-xl font-extrabold text-xs bg-primary hover:bg-primary/90 text-white transition duration-200 active:scale-95 shadow-lg shadow-primary/25 flex items-center justify-center gap-2 cursor-pointer self-start sm:self-auto"
+            onClick={() => navigate(`/courses/${newlyImportedCourse.course.id}/lessons/${newlyImportedCourse.firstLessonId}`)}
+            className="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-extrabold text-xs transition cursor-pointer flex-shrink-0 flex items-center gap-1"
           >
-            <Play size={14} fill="currentColor" />
-            <span>Resume Next Lesson</span>
+            <span>Start Lesson 1 →</span>
           </button>
         </div>
       )}
