@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useWatchData } from '../hooks/useWatchData';
 import { setLessonCompletion } from '../services/dataCommands';
 import { ChaptersPanel } from '../features/watch/ChaptersPanel';
-import { CourseSyllabus } from '../features/watch/CourseSyllabus';
 import { PlayerSurface } from '../features/watch/PlayerSurface';
 import { WatchDetails } from '../features/watch/WatchDetails';
 import { WatchHeader } from '../features/watch/WatchHeader';
@@ -12,6 +11,8 @@ import { WatchWorkspaceShell } from '../features/watch/WatchWorkspaceShell';
 import { useDesktopWatchWorkspace } from '../features/watch/useDesktopWatchWorkspace';
 import { useLessonNotes } from '../features/watch/useLessonNotes';
 import { useWatchPlayerController } from '../features/watch/useWatchPlayerController';
+import { NotesPanel } from '../features/watch/NotesPanel';
+import { FileText } from 'lucide-react';
 
 export default function Watch() {
   const { courseId, lessonId } = useParams();
@@ -95,15 +96,36 @@ export default function Watch() {
         nextLessonId={nextLesson?.id}
         onNavigate={handleNavigate}
       />
+
+      {/* Mobile Inline Switcher (Notes vs Lectures on Mobile, No Reading Tab) */}
       <MobileWatchWorkspace {...workspaceProps} />
+
+      {/* Desktop Direct Notes Section Under Video (Shown on xl screens) */}
+      <div className="hidden xl:block px-4 sm:px-6 lg:px-8 py-6 max-w-7xl w-full mx-auto space-y-4">
+        <div className="flex items-center justify-between pb-2 border-b border-border/60">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary border border-primary/20 flex items-center justify-center flex-shrink-0">
+              <FileText size={16} />
+            </div>
+            <div>
+              <h2 className="text-sm sm:text-base font-bold text-foreground tracking-tight">
+                Notes & Timestamped Insights
+              </h2>
+              <span className="text-[11px] text-muted-foreground block">
+                {lessonNotes.length} {lessonNotes.length === 1 ? 'note' : 'notes'} captured for this video
+              </span>
+            </div>
+          </div>
+          <span className="text-[11px] text-muted-foreground">
+            Current time syncs automatically • Press <kbd className="px-1.5 py-0.5 rounded bg-muted text-[10px] font-mono border border-border">Enter</kbd> to save
+          </span>
+        </div>
+
+        <NotesPanel notes={lessonNotes} noteState={noteState} onSeek={player.triggerPlayerSeek} />
+      </div>
+
+      {/* Chapters Panel if available */}
       <ChaptersPanel key={lessonId} chapters={lesson.chapters} onSelect={player.triggerPlayerSeek} />
-      <CourseSyllabus
-        courseId={courseId}
-        lessonId={lessonId}
-        lessons={courseLessons}
-        progressList={progressList}
-        onNavigate={handleNavigate}
-      />
     </>
   );
 
